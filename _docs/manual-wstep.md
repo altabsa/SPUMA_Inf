@@ -6,14 +6,21 @@ last_modified_at: 2021-10-26T08:48:05-04:00
 categories:
   - Blog
 tags:
-  - temat1
-  - readability
-  - standard
+  - intro
 toc: true
 ---
 
-Minimal Mistakes has been developed as a [Gem-based theme](http://jekyllrb.com/docs/themes/) for easier use, and 100% compatible with GitHub Pages when used as a remote theme.
+# Wstęp
+Krótki opis założeń dla systemu SAKOL. 
+> do uzupełnienia
 
-kaczka
+# Platforma Low-Code
+Opis z Wiki itp
+> do uzupełnienia
 
-**If you enjoy this theme, please consider [sponsoring me](https://github.com/sponsors/mmistakes) to continue developing and maintaining it.**
+# Przyklady zastosowań
+Napisac że WMS , produkcja, rcp, szybka rejestracja, mobilni sprzedawcy itp
+
+# Linki
+Link do [Instrukcja instalacji](docs/install)
+Link do [Podręcznik administartora / projektanta systemu](docs/admin_intro)
