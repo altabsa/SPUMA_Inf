@@ -4,35 +4,35 @@ permalink: /
 hidden: true
 header:
   overlay_color: "#5e616c"
-  overlay_image: /assets/images/sakolhdr.jpg
+  overlay_image: /assets/images/sakolhdr.png
   actions:
     - label: "<i class='fas fa-download'></i> "
       url: "/docs/quick-start-guide/"
 excerpt: >
   Platforma Low-Code do zastosowań biznesowych<br />
-  <small><a href="https://github.com/mmistakes/minimal-mistakes/releases/tag/4.24.0">Najnowsze wydanie v3.2</a></small>
+  <small>Najnowsze wydanie v3.2</a></small>
 feature_row:
   - image_path: /assets/images/mm-customizable-feature.png
-    alt: "customizable"
-    title: "Super customizable"
-    excerpt: "Everything from the menus, sidebars, comments, and more can be configured or set with YAML Front Matter."
+    alt: "gettingstarted"
+    title: "Wstęp i instalacja"
+    excerpt: "Informacje ogólne o platformie SAKOL oraz podręcznik instalacji systemu"
     url: "/docs/configuration/"
     btn_class: "btn--primary"
-    btn_label: "Learn more"
+    btn_label: "Więcej"
   - image_path: /assets/images/mm-responsive-feature.png
-    alt: "fully responsive"
-    title: "Responsive layouts"
-    excerpt: "Built with HTML5 + CSS3. All layouts are fully responsive with helpers to augment your content."
+    alt: "administartion"
+    title: "Administracja"
+    excerpt: "Podręcznik dla administratora i dewelopera rozwiązań"
     url: "/docs/layouts/"
     btn_class: "btn--primary"
-    btn_label: "Learn more"
+    btn_label: "Więcej"
   - image_path: /assets/images/mm-free-feature.png
-    alt: "100% free"
-    title: "100% free"
-    excerpt: "Free to use however you want under the MIT License. Clone it, fork it, customize it... whatever!"
+    alt: "samples"
+    title: "PRzykłady"
+    excerpt: "Zbiór przykładów  aplikacji stworzonych przy użyciu platformy SAKOL"
     url: "/docs/license/"
     btn_class: "btn--primary"
-    btn_label: "Learn more"      
+    btn_label: "Więcej more"      
 ---
 
 {% include feature_row %}
