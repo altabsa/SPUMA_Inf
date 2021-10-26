@@ -8,6 +8,6 @@ main:
   - title: "About"
     url: /about/
   - title: "Helpq"
-    url: /help/    
+    url: /docs/manual-wstep/
   - title: "Instrukcja"
-    url: /docs/manual-wstep/    
+    url: /docs/manual-wstep/
