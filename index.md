@@ -4,13 +4,10 @@ permalink: /
 hidden: true
 header:
   overlay_color: "#5e616c"
-  overlay_image: /assets/images/sakolhdr.png
-  actions:
-    - label: "<i class='fas fa-download'></i> "
-      url: "/docs/quick-start-guide/"
+  overlay_image: /assets/images/sakolhdr.jpg
 excerpt: >
   Platforma Low-Code do zastosowań biznesowych<br />
-  <small>Najnowsze wydanie v3.2</a></small>
+  <small>Wydanie v3.2<</small>
 feature_row:
   - image_path: /assets/images/mm-customizable-feature.png
     alt: "gettingstarted"
@@ -20,7 +17,7 @@ feature_row:
     btn_class: "btn--primary"
     btn_label: "Więcej"
   - image_path: /assets/images/mm-responsive-feature.png
-    alt: "administartion"
+    alt: "administration"
     title: "Administracja"
     excerpt: "Podręcznik dla administratora i dewelopera rozwiązań"
     url: "/docs/layouts/"
@@ -28,11 +25,10 @@ feature_row:
     btn_label: "Więcej"
   - image_path: /assets/images/mm-free-feature.png
     alt: "samples"
-    title: "PRzykłady"
+    title: "Przykłady"
     excerpt: "Zbiór przykładów  aplikacji stworzonych przy użyciu platformy SAKOL"
     url: "/docs/license/"
     btn_class: "btn--primary"
-    btn_label: "Więcej more"      
+    btn_label: "Więcej"
 ---
-
 {% include feature_row %}
