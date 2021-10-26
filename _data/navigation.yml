@@ -9,3 +9,5 @@ main:
     url: /about/
   - title: "Help"
     url: /help/    
+  - title: "Portfolio"
+    url: /portfolio/    
