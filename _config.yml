@@ -65,7 +65,7 @@ author:
   avatar : "/assets/images/altab.jpg"
   bio    : "Oprogramowanie dla biznesu"
   links:
-    - label: "altab.pl/"
+    - label: "altab.pl"
       icon: "fas fa-fw fa-link"
       url: "https://"
     - label: "Twitter"
