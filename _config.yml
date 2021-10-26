@@ -56,7 +56,10 @@ plugins:
   - jekyll-feed
   - jemoji
   - jekyll-include-cache
-
+collections:
+  portfolio:
+    output: true
+    permalink: /:collection/:path/
 author:
   name   : "First Lastname"
   avatar : "/assets/images/bio-photo.jpg"
@@ -105,8 +108,7 @@ defaults:
       type: pages
     values:
       layout: single
-      author_profile: false
-      
+      author_profile: false      
   # _portfolio
   - scope:
       path: ""
@@ -122,7 +124,3 @@ category_archive:
 tag_archive:
   type: liquid
   path: /tags/
-collections:
-  portfolio:
-    output: true
-    permalink: /:collection/:path/
