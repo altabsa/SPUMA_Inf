@@ -7,7 +7,7 @@ header:
   overlay_image: /assets/images/sakolhdr.jpg
 excerpt: >
   Platforma Low-Code do zastosowań biznesowych<br />
-  <small>Wydanie v3.2<</small>
+  <small>Wydanie v3.2</small>
 feature_row:
   - image_path: /assets/images/mm-customizable-feature.png
     alt: "gettingstarted"
