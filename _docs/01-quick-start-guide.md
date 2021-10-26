@@ -1,6 +1,6 @@
 ---
 title: "Wstęp"
-permalink: /docs/manual_wstep/
+permalink: /docs/manual-wstep/
 excerpt: "Dokumetacja SAKOL - platformy Low-Code dla Twojego biznesu"
 last_modified_at: 2021-10-26T08:48:05-04:00
 toc: true
