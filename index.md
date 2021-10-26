@@ -4,7 +4,7 @@ permalink: /
 hidden: true
 header:
   overlay_color: "#5e616c"
-  overlay_image: /assets/images/sakolhdr.jpg
+  overlay_image: /assets/images/sakolhdr2.jpg
 excerpt: >
   Platforma Low-Code do zastosowań biznesowych<br />
   <small>Wydanie v3.2</small>
