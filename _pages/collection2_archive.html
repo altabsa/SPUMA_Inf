@@ -9,7 +9,7 @@ author_profile: false
   kolekcjaitm
 {% endfor %}
 <h2>tagi start3</h2>
-{% assign tags =  site.note | map: 'tags' | join: ','  | split: ',' | uniq %}
+{% assign tags =  site.collections  | map: 'tags' | join: ','  | split: ',' | uniq %}
 {% for tag in tags %}
 test
 {% endfor %}
