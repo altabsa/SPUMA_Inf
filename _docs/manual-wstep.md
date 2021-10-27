@@ -19,8 +19,8 @@ Napisac że WMS , produkcja, rcp, szybka rejestracja, mobilni sprzedawcy itp
 # Architektura platformy
 Opis struktury aplikacji wchodzących w sklad systemu SAKOL
 
-# Baza Danych
-[Opis bazy danych](./docs/manual-dbhelp/)
+# Baza Danych 1
+[Opis bazy danych](../manual-dbhelp/)
 
 # Instalacja
 [Instrukcja instalacji](/docs/manual-install/)
