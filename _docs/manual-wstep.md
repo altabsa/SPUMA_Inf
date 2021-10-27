@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Informacje ogólne"
 permalink: /docs/manual-intro/
 excerpt: "Dokumetacja SAKOL - platformy Low-Code dla Twojego biznesu"
 ---
@@ -23,7 +23,7 @@ Opis struktury aplikacji wchodzących w sklad systemu SAKOL
 [Opis bazy danych](../manual-dbhelp/)
 
 # Instalacja
-[Instrukcja instalacji](/docs/manual-install/)
+[Instrukcja instalacji](../manual-install/)
 
 # Projektowanie aplikacji
 - opis proccesu projektowania aplikacji.
@@ -34,4 +34,4 @@ Opis struktury aplikacji wchodzących w sklad systemu SAKOL
 - opis projektu aplikacji którą będziemy robić w całym helpie.
 
 # Funkcjonalności 
-[Podręcznik funkcji systemu](/docs/manual-reference/)
+[Podręcznik funkcji systemu](../manual-reference/)
