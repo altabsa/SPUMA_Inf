@@ -19,15 +19,15 @@ feature_row:
   - image_path: /assets/images/mm-responsive-feature.png
     alt: "administration"
     title: "Administracja"
-    excerpt: "Podręcznik dla administratora i dewelopera rozwiązań"
-    url: "/docs/layouts/"
+    excerpt: "Podręcznik dla administratora i projektanta rozwiązań"
+    url: "/docs/manual/"
     btn_class: "btn--primary"
     btn_label: "Więcej"
   - image_path: /assets/images/mm-free-feature.png
     alt: "samples"
     title: "Przykłady"
     excerpt: "Zbiór przykładów  aplikacji stworzonych przy użyciu platformy SAKOL"
-    url: "/docs/license/"
+    url: "/docs/samples/"
     btn_class: "btn--primary"
     btn_label: "Więcej"
 ---
