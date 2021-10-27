@@ -2,6 +2,7 @@
 title: "Instalacja"
 permalink: /docs/manual-install/
 excerpt: "Dokumetacja SAKOL - instrukcja instalacji"
+layout: splash
 categories:
   - Blog
 tags:
