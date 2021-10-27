@@ -8,7 +8,7 @@ author_profile: false
 {% capture written_label %}'None'{% endcapture %}
 
 {% assign tags =  site.note | map: 'tags' | join: ','  | split: ',' | uniq %}
-{% for tag in tags %}
+{% for tag in site.tags %}
   <h3>{{ tag }}</h3>
   <ul>
   {% for note in site.note %}
