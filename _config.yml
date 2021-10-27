@@ -135,7 +135,8 @@ defaults:
       share: false
       comments: false      
       author_profile: false
-      
+      toc: true
+      toc_sticky: true      
 category_archive:
   type: liquid
   path: /categories/
