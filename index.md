@@ -20,7 +20,7 @@ feature_row:
     alt: "administration"
     title: "Administracja"
     excerpt: "Podręcznik dla administratora i projektanta rozwiązań"
-    url: "/docs/manual-admin/"
+    url: "/docs/manual-reference/"
     btn_class: "btn--primary"
     btn_label: "Więcej"
   - image_path: /assets/images/mm-free-feature.png
