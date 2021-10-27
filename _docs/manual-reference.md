@@ -7,6 +7,7 @@ excerpt: "Dokumetacja SAKOL - spis funkcji systemu"
 # Opis funkcjonalności 
 Tutaj ma sie pojawic spis do ktorego bedziemy sie odwoływac z aplikacji administarcyjnej.
 
+
 ## Uzytkownicy <a name="hlp_users"></a>
 `hlp_users`
 - Opis 
