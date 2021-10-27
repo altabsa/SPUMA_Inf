@@ -10,8 +10,12 @@ author_profile: false
 {% endfor %}
 
 <h2>tagi start5</h2>
-{% assign itm = site.collections | uniq %}
-{% for tag in itm %}
-test
+{% assign itms = site.collections | uniq %}
+{% for itm in itms %}
+test<br>
+<h4>tagi</h4>
+  {% for tag in itm.tags %}
+    tag {{ tag }}<br> 
+  {% endfor %}
 {% endfor %}
-tagi koniec
+<h3>tagi koniec</h3>
