@@ -4,14 +4,14 @@ title: "Posts by Collection/Tags"
 permalink: /collection2/
 author_profile: false
 ---
-<h2>kolekcje start4</h2>
+<h2>kolekcje start5</h2>
 {% for collection in site.collections %}
   kolekcjaitm
 {% endfor %}
 
-<h2>tagi start4</h2>
-
-{% for tag in site.note %}
+<h2>tagi start5</h2>
+{% assign itm = site.collections | uniq %}
+{% for tag in itm %}
 test
 {% endfor %}
 tagi koniec
