@@ -82,7 +82,7 @@ author:
 footer:
   links:
     - label: "WWW"
-      icon: "fab fa-fw fa-home"
+      icon: "fab fa-fw fa-globe"
       url: "https://altab.pl/"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
