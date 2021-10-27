@@ -4,11 +4,12 @@ title: "Posts by Collection/Tags"
 permalink: /collection2/
 author_profile: false
 ---
-<h2>kolekcje start</h2>
+<h2>kolekcje start2</h2>
 {% for collection in site.collections %}
   kolekcjaitm
 {% endfor %}
-<h2>tagi start3</h2>
+
+<h2>tagi start2</h2>
 {% assign tags =  site.collections  | map: 'tags' | join: ','  | split: ',' | uniq %}
 {% for tag in tags %}
 test
