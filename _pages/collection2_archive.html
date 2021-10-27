@@ -11,7 +11,7 @@ author_profile: false
 
 <h2>start6</h2>
 <hr/>
-{% assign itms = site.collections  %}
+{% assign itms = site.collections | map: 'tags' | join: ','  | split: ',' | uniq  %}
 {% for itm in itms %}
   test: {{ itm }} <br>
   <h4>tagi</h4>
