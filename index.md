@@ -27,7 +27,7 @@ feature_row:
     alt: "samples"
     title: "Przykłady"
     excerpt: "Zbiór przykładów  aplikacji stworzonych przy użyciu platformy SAKOL"
-    url: "/docs/manual-samples/"
+    url: "/samples/"
     btn_class: "btn--primary"
     btn_label: "Więcej"
 ---
