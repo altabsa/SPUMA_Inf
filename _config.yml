@@ -61,6 +61,9 @@ collections:
   docs:
     output: true
     permalink: /:collection/:path/
+  samples:
+    output: true
+    permalink: /:collection/:path/
 author:
   name   : "Altab S.A."
   avatar : "/assets/images/altab.jpg"
@@ -118,6 +121,18 @@ defaults:
   - scope:
       path: ""
       type: docs
+    values:
+      layout: single
+      read_time: false
+      share: false
+      comments: false      
+      author_profile: false
+      toc: true
+      toc_sticky: true      
+  # _samples
+  - scope:
+      path: ""
+      type: samples
     values:
       layout: single
       read_time: false
