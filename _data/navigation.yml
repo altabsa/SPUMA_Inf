@@ -1,9 +1,10 @@
 main:
+  - title: "Wstęp"
+    url: /docs/manual-intro/
   - title: "Instalacja"
     url: /docs/manual-install/
-  - title: "Administracja"
-    url: /docs/manual-intro/
+  - title: "Funkcje"
+    url: /docs/manual-reference/
   - title: "Przykłady"
     url: /samples/
-  - title: "Lista"
-    url: /collection2/
+ 
