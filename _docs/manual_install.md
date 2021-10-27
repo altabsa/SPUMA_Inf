@@ -13,3 +13,6 @@ excerpt: "Dokumetacja SAKOL - instrukcja instalacji"
 
 # Klient WWW
 > Jak zainstalowac na IIS
+
+# Sprawdzenie instalacji
+**proszę** tu dodac tekst
