@@ -33,5 +33,5 @@ Opis struktury aplikacji wchodzących w sklad systemu SAKOL
 # Projekt "ZZ-PZ - Przyjęcie z Zamówienia"
 - opis projektu aplikacji którą będziemy robić w całym helpie.
 
-## Funkcjonalności 
+# Funkcjonalności 
 [Podręcznik funkcji systemu](docs/manual-reference/)
