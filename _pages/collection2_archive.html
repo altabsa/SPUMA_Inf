@@ -5,7 +5,8 @@ permalink: /collection2/
 author_profile: false
 ---
 tagi start
-{% for tag in site.tags %}
+{% assign tags =  site.note | map: 'tags' | join: ','  | split: ',' | uniq %}
+{% for tag in tags %}
 test
 {% endfor %}
 tagi koniec
