@@ -2,10 +2,6 @@
 title: "Instalacja"
 permalink: /docs/manual-install/
 excerpt: "Dokumetacja SAKOL - instrukcja instalacji"
-categories:
-  - Blog
-tags:
-  - instalacja
 ---
 
 # Architektura aplikacji
