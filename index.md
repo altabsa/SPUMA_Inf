@@ -11,14 +11,14 @@ excerpt: >
 feature_row:
   - image_path: /assets/images/mm-customizable-feature.png
     alt: "gettingstarted"
-    title: "Wstęp i instalacja"
+    title: "Informacje ogólne"
     excerpt: "Informacje ogólne o platformie SAKOL oraz podręcznik instalacji systemu"
     url: "/docs/manual-intro/"
     btn_class: "btn--primary"
     btn_label: "Więcej"
   - image_path: /assets/images/mm-responsive-feature.png
-    alt: "administration"
-    title: "Administracja"
+    alt: "functions"
+    title: "Manual"
     excerpt: "Podręcznik dla administratora i projektanta rozwiązań"
     url: "/docs/manual-reference/"
     btn_class: "btn--primary"
