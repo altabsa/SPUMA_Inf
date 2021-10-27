@@ -20,10 +20,10 @@ Napisac że WMS , produkcja, rcp, szybka rejestracja, mobilni sprzedawcy itp
 Opis struktury aplikacji wchodzących w sklad systemu SAKOL
 
 # Baza Danych
-[Opis bazy danych](docs/manual-dbhelp/)
+[Opis bazy danych](/docs/manual-dbhelp/)
 
 # Instalacja
-[Instrukcja instalacji](docs/manual-install/)
+[Instrukcja instalacji](/docs/manual-install/)
 
 # Projektowanie aplikacji
 - opis proccesu projektowania aplikacji.
@@ -34,4 +34,4 @@ Opis struktury aplikacji wchodzących w sklad systemu SAKOL
 - opis projektu aplikacji którą będziemy robić w całym helpie.
 
 # Funkcjonalności 
-[Podręcznik funkcji systemu](docs/manual-reference/)
+[Podręcznik funkcji systemu](/docs/manual-reference/)
