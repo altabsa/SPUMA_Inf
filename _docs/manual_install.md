@@ -6,7 +6,6 @@ categories:
   - Blog
 tags:
   - instalacja
-toc: true
 ---
 
 # Architektura aplikacji
