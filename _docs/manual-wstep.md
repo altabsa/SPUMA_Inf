@@ -2,7 +2,6 @@
 title: "Wstęp"
 permalink: /docs/manual-intro/
 excerpt: "Dokumetacja SAKOL - platformy Low-Code dla Twojego biznesu"
-last_modified_at: 2021-10-26T08:48:05-04:00
 categories:
   - Blog
 tags:
