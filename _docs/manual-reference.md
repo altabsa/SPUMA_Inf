@@ -7,85 +7,106 @@ excerpt: "Dokumetacja SAKOL - spis funkcji systemu"
 # Opis funkcjonalności 
 Tutaj ma sie pojawic spis do ktorego bedziemy sie odwoływac z aplikacji administarcyjnej.
 
-## Uzytkownicy `hlp_users`<a name="hlp_users"></a>
+## Uzytkownicy <a name="hlp_users"></a>
+`hlp_users`
 - Opis 
 - Projekt
 
 
-## Klasy `hlp_class`<a name="hlp_class"></a>
+## Klasy <a name="hlp_class"></a>
+`hlp_class`
 ### Zastosowanie
   Do czego służy
 ### Lista własnosci
   Kolejno opisane własności 
-### Pola klas `hlp_class_fld` <a name="hlp_class_fld"></a>
+### Pola klas <a name="hlp_class_fld"></a>
+`hlp_class_fld`
   Lista własności 
 ### Projekt
   Przykład dla projektu
   
-## Formatki`hlp_forms` <a name="hlp_forms"></a>
+## Formatki  <a name="hlp_forms"></a>
+`hlp_forms`
 ### Zastosowanie
 - Do czego służy
 - Jak tworzyć
 ### Lista własnosci
   Kolejno opisane własności 
-### Pola formatki `hlp_forms_fld` <a name="hlp_forms_fld"></a>
+### Pola formatki  <a name="hlp_forms_fld"></a>
+`hlp_forms_fld`
 Lista własności 
 ### Projekt
 Przykład dla projektu
-## Słowniki `hlp_dicts` <a name="hlp_dicts"></a>
+## Słowniki <a name="hlp_dicts"></a>
+`hlp_dicts`
 ### Zastosowanie
 -Do dczego służy
 - edycja danych
 - Jak tworzyć
 ### Lista własnosci
   Kolejno opisane własności  
-### Pola słownika `hlp_dicts_fld` <a name="hlp_dicts_fld"></a>
+### Pola słownika <a name="hlp_dicts_fld"></a>
+`hlp_dicts_fld`
   Opis wszytskich własnosci
 ### Projekt
 Przykład dla projektu
 
-## Addony `hlp_addons` <a name="hlp_addons"></a>
+## Addony <a name="hlp_addons"></a>
+`hlp_addons`
 ### Zastosowanie
  Do dczego służy
-### Eventy `hlp_addons_evts` <a name="hlp_addons_evts"></a>
+### Eventy <a name="hlp_addons_evts"></a>
+`hlp_addons_evts`
   Opis wszytskich eventów
 ### Specjalne
   Przerwanie formularza
-### Warunki `hlp_addons_conds` <a name="hlp_addons_conds"></a>
+### Warunki  <a name="hlp_addons_conds"></a>
+`hlp_addons_conds`
   Jak tworzyć warunki
-### Akcje `hlp_addons_actions` <a name="hlp_addons_actions"></a>
+### Akcje  <a name="hlp_addons_actions"></a>
+`hlp_addons_actions`
   #### Opis
-  #### Akcja SQLOp `hlp_addons_sql` <a name="hlp_addons_sql"></a>
+  #### Akcja SQLOp  <a name="hlp_addons_sql"></a>
+  `hlp_addons_sql`
   - Opis 
   - Lista własnosci
-  #### Akcja SQLOp (wewnętrzny)  `hlp_addons_sqli` <a name="hlp_addons_sqli"></a>
+  #### Akcja SQLOp (wewnętrzny)   <a name="hlp_addons_sqli"></a>
+  `hlp_addons_sqli`
   - Opis 
   - Lista własnosci
-  #### Akcja MsgBoxOp `hlp_addons_msgbox` <a name="hlp_addons_msgbox"></a>
+  #### Akcja MsgBoxOp  <a name="hlp_addons_msgbox"></a>
+  `hlp_addons_msgbox`
   - Opis 
   - Lista własności
-  #### Akcja DocOp `hlp_addons_doc` <a name="hlp_addons_doc"></a>
+  #### Akcja DocOp  <a name="hlp_addons_doc"></a>
+  `hlp_addons_doc`
   - Opis 
   - Lista własności
-  #### Akcja ExCallOp `hlp_addons_excall` <a name="hlp_addons_excall"></a>
+  #### Akcja ExCallOp  <a name="hlp_addons_excall"></a>
+  `hlp_addons_excall`
   - Opis 
   - Lista własności
-  #### Akcja FormOp `hlp_addons_form` <a name="hlp_addons_form"></a>
+  #### Akcja FormOp  <a name="hlp_addons_form"></a>
+  `hlp_addons_form`
   - Opis 
   - Lista własności
-  #### Akcja UserTableOp `hlp_addons_usertable` <a name="hlp_addons_usertable"></a>
+  #### Akcja UserTableOp  <a name="hlp_addons_usertable"></a>
+  `hlp_addons_usertable`
   - Opis 
   - Lista własności
 
 ### Projekt
 Przykład dla projektu
 
-## Dokumenty `hlp_docs` <a name="hlp_docs"></a>
+## Dokumenty  <a name="hlp_docs"></a>
+`hlp_docs`
  Opis
 
-## Import / Eksport `hlp_impex`<a name="hlp_impex"></a>
+## Import / Eksport <a name="hlp_impex"></a>
+`hlp_impex`
  Opis
 
-## Sesje `hlp_sess`<a name="hlp_sess"></a>
+## Sesje <a name="hlp_sess"></a>
+`hlp_sess`
  Opis
 
