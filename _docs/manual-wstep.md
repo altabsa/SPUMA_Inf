@@ -2,6 +2,7 @@
 title: "Informacje ogólne"
 permalink: /docs/manual-intro/
 excerpt: "Dokumetacja SAKOL - platformy Low-Code dla Twojego biznesu"
+remove: true
 ---
 
 # Wstęp
