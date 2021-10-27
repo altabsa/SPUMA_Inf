@@ -109,5 +109,5 @@ Przykład dla projektu
 
 ## Sesje <a name="hlp_sess"></a>
 `hlp_sess`
- Opis
+ Opis1
 
