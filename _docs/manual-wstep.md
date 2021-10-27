@@ -7,7 +7,6 @@ categories:
   - Blog
 tags:
   - intro
-toc: true
 ---
 
 # Wstęp
@@ -22,5 +21,5 @@ Opis z Wiki itp
 Napisac że WMS , produkcja, rcp, szybka rejestracja, mobilni sprzedawcy itp
 
 # Linki
-Link do [Instrukcja instalacji](docs/install)
-Link do [Podręcznik administartora / projektanta systemu](docs/admin_intro)
+Link do [Instrukcja instalacji](docs/manual-install/)
+Link do [Podręcznik administartora / projektanta systemu](docs/manual-intro/)
