@@ -4,8 +4,6 @@ main:
   - title: "Administracja"
     url: /docs/manual-admin/
   - title: "Przykłady"
-    url: /docs/manual-samples/
-  - title: "Lista"
     url: /samples/
-  - title: "Lista2"
+  - title: "Lista"
     url: /collection2/
