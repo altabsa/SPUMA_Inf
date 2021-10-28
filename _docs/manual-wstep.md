@@ -85,7 +85,7 @@ Aplikacje DMS bardzo często wykorzystują narzędzia OCR (Optical Character Rec
 
 
 
-# Baza Danych 1
+# Baza Danych
 [Opis bazy danych](../manual-dbhelp/)
 
 # Instalacja
