@@ -9,6 +9,7 @@ Dodatkowo zawiera  instalacje opcjonalne
 -  mechanizmy OCR
 -  połączenia z SAP Business One (SAP)
 -  dane DEMO
+
 # Wymagania
 ## Serwer
 - System operacyjne Windows 7 i wyżej (32 lub 64 bit) lub system serwerowy Windows serwer 2003 i wyżej
@@ -73,6 +74,62 @@ Password=plaintextpass
 DBName=SPUMA
 ```
 ❗ Hasło do bazy podajemy niezaszyfrowane. Serwis zaszyfruje je przy pierwszym uruchomieniu. ❗
+
+## Konfiguracja wstępna
+
+Wstępna konfiguracja odbywa się przez program `SPUMA_Admin`. 
+![SPUMA Admin login form](https://lh3.googleusercontent.com/Ag2PytwDwvE_CnJrLeDo8qMCpI1ndrfQj2SWleuFTAoyPkVm3chn-yQ6z7a-EjZzTiCdarQI1lg)
+ Bez podawania loginu i hasła naciskamy Zaloguj. Pojawią się ustawienia inicjalne
+ ![enter image description here](https://lh3.googleusercontent.com/YqAuY_Ld-rq8bIHuyfWnCcOjHfvPIXuwX7IEVEXeuYhtPTDYTKaAymzIehLrkkSmBPRvprKrgAg)
+  
+
+> **Uwaga:** Konfiguracja usługi OCR (SOS) ustawiona jest na serwer testowy. Proszę po starcie zmienić wg danych otrzymanych od sprzedawcy systemu
+
+Teraz należy dokończyć konfiguracje bezpośrednio w programie `SPUMA_Admin`. 
+
+### Konfiguracja
+
+Należy wybrać zakładkę konfiguracja i wybrać pierwszy wpis (config)
+W tym momencie aplikacja stworzy domyślne wpisy konfiguracyjne.
+
+> Kompletny opis konfiguracji opisany jest w innej części tego dokumentu.
+
+Poniżej ustawienia na które powinno się zwrócić uwagę przed startem serwisu SPUMA_DataService 
+<a id='konfiguracja1' href='konfiguracja1' hidden='true'></a>
+#### Zakładka OGÓLNE
+`Client ID` – id klienta dla serwera OCR (patrz instalacja OCR)
+
+#### Zakładka DATASERVICE
+`POLICYPORT` –port zasad do otwarcia połączenia TCP (dla danych binarnych)
+
+> **Uwaga:**  Gdy zainstalowanych jest  więcej niż jedna usługa w pozostałych instalacjach ustawić 0
+
+`POLICYALLOWEDPORTS` – porty które mogą być przydzielane  w ramach  zasad 
+
+> **Uwaga:**  Gdy zainstalowanych jest  więcej niż jedna usługa, wpis  ma znaczenie tylko w instalacji gdzie ustawiony jest POLICYPORT
+
+`PORT` – port dla danych binarnych,  na którym usługa obsługuje klienta Silverlight oraz klienta mobilnego  (otworzyć na firewalll’u)
+`HTTPPORT`  – Port na którym usługa obsługuje klienta WWW (otworzyć na firewalll’u)
+`REQTIMEOUT` – czas oczekiwania na usługę (w sek.)
+`MAXTHREADS` – ilość jednoczesnych wątków serwisu  (najlepiej zostawić 10)
+
+
+#### Zakładka SBOBUSINESSPARTNER
+Patrz  [Konfiguracja SBOBUSINESSPARTNER](#konf_sbobusinesspartner)
+
+####  Zakładka SAPB1UTILS
+patrz  [konfiguracja SAPB1Utils](#konf_sapb1utils)
+### <a id='firmy1' href='firmy1' hidden='true'></a>Firmy
+Należy wybrać zakładkę `Firmy` i wybrać domyślny wpis (OEC Computers)
+
+####  Zakładka OGÓLNE
+`NAZWA`–  Nazwa firmy jaka będzie widoczna w katalogu
+`BAZA` – Nazwa bazy SAP
+
+####  Zakładka PARTNERZY HANDLOWI
+TYP POŁĄCZENIA
+- `zewnętrzny SOAP` – Klient (PH) pobierane i aktualizowane w sap (zostawić jak instalacja z SAP)
+- `baza wewnętrzna` – PH w bazie SPUMY (instalacja bez SAP)
 
 # Sprawdzenie instalacji
 **proszę** tu dodac tekst
