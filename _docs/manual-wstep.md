@@ -71,6 +71,13 @@ Aplikacje DMS bardzo często wykorzystują narzędzia OCR (Optical Character Rec
 	 - Definiowanie operacji automatycznych (np księgowania do sytemu ERP)
 	 - Powiązania z systemem ERP (baza klientów , podgląd dekretów)
 	 - Definiowanie zastępstw
+# Słownik i Skróty
+Skróty i określenia stosowane w instrukcji
+ - **SDS** - Spuma DataService
+ - **SOS** - Spuma OCRService
+ - **Aplikacja** - aplikacja WWW (klient)
+ - **SADM**  - aplikacja administarcyjna .exe (SPUMA_Admin)
+ 
 
 # Architektura platformy
 ![s1](https://user-images.githubusercontent.com/13116051/139230518-bdcea49a-f026-44f9-8741-7542914e810e.png)
