@@ -773,17 +773,17 @@ Istnieją następujące typy punktów startu:
    
 **Przykłady:**
 - Po każdej akcji wyzwalanej punktem `startu` przechodzi się do `kroku A`
-```mermaid
+<div class="mermaid">
 graph LR;
 start((Start))-->A(Krok A)
 A-->stop((Stop))
-```
+</div>
 - Do `kroku A` przechodzi się tylko pod `Warunkiem 1`. W innym przypadku algorytm jest przerywany
-```mermaid
+<div class="mermaid">
 graph LR;
 start((Start))-->|Warunek 1|A(Krok A)
 A-->stop((Stop))
-```
+</div>
 - Bezwarunkowo uruchamiane są równolegle dwa algorytmy (ścieżki)
 <div class="mermaid">
 graph LR;
@@ -791,16 +791,16 @@ start((Start))-->A(Krok A)
 A-->stop((Stop))
 start2((Start))-->A2(Krok B)
 A2-->stop2((Stop))
-<div>
+</div>
 	
 - Algorytm reaguje warunkowo  na 2 wyzwalacze( np naciśnięcie przycisku lub zmianę wartości)
-```mermaid
+<div class="mermaid">
 graph LR;
 start((<center><b>Start</b><br/><span style='font-size:.8em' >po kliknięciu</span></center>))-->|Warunek 1|A(Krok A)
 A-->stop((Stop))
 start2((<center><b>Start</b><br/><span style='font-size:.8em' >Zmiana wart.</span></center>))-->|Warunek 2|A
+</div>
 
-```
 ### Zmienne 
 Zmienne są tablicami dwuwymiarowymi które są globalne w ramach całego procesu. Przy definiowaniu instrukcji możemy podać istniejącą zmienna lub utworzyć nową.
 #### Właściwości 
