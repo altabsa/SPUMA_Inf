@@ -10,9 +10,10 @@ System SPUMA konfigurowany jest głównie w dwóch miejscach:
 - procedury i funkcję serwera SQL (opcjonalne)
 
 ```mermaid
-graph LR;
-start((Start))-->A(Krok A)
-A-->stop((Stop))
+graph LR
+  A --> B;
+  B --> C;
+  C --> A;
 ```
 
 gitGraph:
