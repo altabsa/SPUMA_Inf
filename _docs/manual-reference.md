@@ -87,24 +87,22 @@ Spuma ma możliwość zautomatyzowania dodawania dokumentów do sekretariatu. W 
     `Subject=.+SPUMA.+; Extension=(PDF|JPG)`
 
 - `Tworzenie, Klasa` - Informacja o metodzie tworzenia w SPUMIE dokumentów z maila 
-**Załączniki jako strony**
-> Treść maila oraz jego  załączniki zaczytywane są jako strony jednego
-> dokumentu (PDF) o określonej klasie (ustawienie `Klasa`)
 
-**Załączniki jako dokumenty**
-> Treść maila zapisywana jest jako dokument  o określonej klasie
-> (ustawienie `Klasa`) .
----
-`Dodaj wiadomość bez załączników` - Czy dodawać też wiadomości które nie maja załączników (sama treść)
+    **Załączniki jako strony**
+    > Treść maila oraz jego  załączniki zaczytywane są jako strony jednego dokumentu (PDF) o określonej klasie (ustawienie `Klasa`).
 
----
-`Monitored path, Archive path` - ścieżki na serwerze skąd SPUMA pobierać będzie nowe dokumenty do wczytania (Monitored path) i po pomyślnym imporcie źródłowe pliki przenosić do archiwum (Archive path)
+    **Załączniki jako dokumenty**
+    > Treść maila zapisywana jest jako dokument  o określonej klasie (ustawienie `Klasa`).
+
+- `Dodaj wiadomość bez załączników` - Czy dodawać też wiadomości które nie maja załączników (sama treść)
+
+- `Monitored path, Archive path` - ścieżki na serwerze skąd SPUMA pobierać będzie nowe dokumenty do wczytania (Monitored path) i po pomyślnym imporcie źródłowe pliki przenosić do archiwum (Archive path)
 
 ### Bezpieczeństwo
 Ustawienia dotyczące bezpieczeństwa systemu 
 
-`Security key, Security IV` - Klucz i sól do szyfrowania AES (podawane jako ciąg bajtów), 
-`Ważność sygnatury` - czas ( w godzinach) ważności sygnatury pozwalającej na autologowanie z odnośnika z powiadomienia  email
+- `Security key, Security IV` - Klucz i sól do szyfrowania AES (podawane jako ciąg bajtów), 
+- `Ważność sygnatury` - czas ( w godzinach) ważności sygnatury pozwalającej na autologowanie z odnośnika z powiadomienia  email
 
 
 ### Funkcje JS
