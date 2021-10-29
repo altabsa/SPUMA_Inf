@@ -335,21 +335,23 @@ O tym, czy taki załącznik jest przetwarzany przez mechanizm OCR, decyduje usta
 > **Przykład:** Klasa  `faktura kosztowa` ma określone wyrażenie regularne `\bfaktura\b`  w polu `Dopasowanie`. W związku z tym, każdy dokument, który będzie mieć po rozpoznaniu OCR , w warstwie tekstowej słowo `faktura` zostanie zakwalifikowany jako klasa  `faktura kosztowa`
 
 `Format nazwy` - Ciąg znaków określających jak tworzone będzie nazewnictwo (numer kancelaryjny) dokumentu danej klasy. W nawiasach klamrowych określone są słowa kluczowe które pobierają do nazwy własności dokumentu:
- | Słowo kluczowe | Opis |
- | --- | --- | 
- |`CLASSNAME` | Nazwa klasy |  
- |`CARDCODE` | Kod atrybutu własnego [Patrz Atrybuty](#atrybuty) |  
- |`DOCNUM` | Numer dokumentu |  
- |`ID` | Id dokumentu (z bazy) |  
- |`UNIQID` | Unikatowe Id dokumentu w ramach klasy  |  
- |`CMPNAME` | Nazwa firmy |  
- |`USERNAME` | login użytkownika |  
- |`DOCDATE` | Data dokumentu |  
- |`DD_DD`, `DD_MM`, `DD_YY`, `DD_YYYY` | Dzień, miesiąc lub rok  z daty dokumentu  
- |`ENTERDATE` | Data wpływu |  
- |`ED_DD`, `ED_MM`, `ED_YY`, `ED_YYYY` | Dzień, miesiąc lub rok  z daty wpływu  
- |`CREATEDATE` | Data utworzenia dokumentu |  
- |`CD_DD`, `CD_MM`, `CD_YY`, `CD_YYYY` | Dzień, miesiąc lub rok  z daty utworzenia dokumentu  
+
+| Słowo kluczowe | Opis |
+| --- | --- | 
+|`CLASSNAME` | Nazwa klasy |  
+|`CARDCODE` | Kod atrybutu własnego [Patrz Atrybuty](#atrybuty) |  
+|`DOCNUM` | Numer dokumentu |  
+|`ID` | Id dokumentu (z bazy) |  
+|`UNIQID` | Unikatowe Id dokumentu w ramach klasy  |  
+|`CMPNAME` | Nazwa firmy |  
+|`USERNAME` | login użytkownika |  
+|`DOCDATE` | Data dokumentu |  
+|`DD_DD`, `DD_MM`, `DD_YY`, `DD_YYYY` | Dzień, miesiąc lub rok  z daty dokumentu  
+|`ENTERDATE` | Data wpływu |  
+|`ED_DD`, `ED_MM`, `ED_YY`, `ED_YYYY` | Dzień, miesiąc lub rok  z daty wpływu  
+|`CREATEDATE` | Data utworzenia dokumentu |  
+|`CD_DD`, `CD_MM`, `CD_YY`, `CD_YYYY` | Dzień, miesiąc lub rok  z daty utworzenia dokumentu  
+
 > **Uwaga:** Można również podstawiać wartości atrybutów własnych. Należy wtedy użyć konstrukcji `{{NAZWA_ATRYBUTU}}` 
 
 `Własny schemat` - Możliwość definiowania własnego schematu autoryzacji
@@ -573,10 +575,12 @@ Więcej informacji na temat schematów autoryzacji ([patrz Schematy autoryzacji]
 `Opis` - Opis grupy - widoczny tylko w panelu administracyjnym .
 
 `Rola` - Rola grupy.
+
 | Rola | Opis |
 | ------- | ---- |
 | Ogólna| Domyślna grupa stosowana przy definicji uprawnień)  |
 | Twórcy | Grupa techniczna. Niedostępna dla definicji uprawnień. Członkowie tej grupy mogą widzieć nawzajem swoje dokumenty kiedy opuszczą one sekretariat oraz dzielą uprawnienia typu `(owner)`. |
+
 
  > **Przykład:**  Użytkownik `A` i użytkownik `B` są członkami grupy `sekretariat` (typ `twórcy`). `A` dodaje dokument i wysyła go w obieg. Przez cały przebieg autoryzacji dokument widoczny jest dla `A` i `B`. Po ew. odrzuceniu, poprawić dokument może zarówno użytkownik `A` jak  i `B`.
 
