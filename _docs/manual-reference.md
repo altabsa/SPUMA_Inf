@@ -9,16 +9,8 @@ System SPUMA konfigurowany jest głównie w dwóch miejscach:
 - aplikacje `SPUMA_ADMIN`
 - procedury i funkcję serwera SQL (opcjonalne)
 
-<div class="mermaid">
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-</div>
-
-
 Konfiguracja docelowo zapisywana jest w całości w bazie SQL (baza SPUMA).  
+
 # Aplikacja SPUMA_Admin
 
 Do aplikacji logujemy się użytkownikiem który ma zaznaczoną rolę administratora. Zaraz po instalacji jest to domyślnie użytkownik admin
@@ -27,76 +19,74 @@ Do aplikacji logujemy się użytkownikiem który ma zaznaczoną rolę administra
 ## Konfiguracja
 Konfiguracja ta została częściowo opisana w rozdziale dot [instalacji](../manual-install)
 
-### OGÓLNE
-`Profil` – Nazwa profilu konfiguracyjnego. 
-`Aktywny` - Czy profil jest aktywny
+### Ogólne
+- `Profil` – Nazwa profilu konfiguracyjnego. 
+- `Aktywny` - Czy profil jest aktywny
 
-> System może posiadać kilka profili konfiguracyjnych. Dlatego istnieje możliwość dezaktywowania nieużywanego profilu
+    > System może posiadać kilka profili konfiguracyjnych. Dlatego istnieje możliwość dezaktywowania nieużywanego profilu
 
-`SMTP address, SMTP user, SMTP port, SMTP password` - domyślne ustawienia konta email do wysyłki powiadomień. 
+- `SMTP address, SMTP user, SMTP port, SMTP password` - domyślne ustawienia konta email do wysyłki powiadomień. 
 
-> Ustawienie może nadpisać konfiguracja użytkownika
+    > Ustawienie może nadpisać konfiguracja użytkownika
 
-`Session file` - lokalizacja pliku na serwerze z  plikiem sesji
-`Client ID` - unikatowy ID klienta SPUMY 
-> ID Klienta ustalane jest na etapie zakupu aplikacji. Używane jest m&#46;in. w mechanizmie OCR do identyfikacji własnych schematów rozpoznawania
+- `Session file` - lokalizacja pliku na serwerze z  plikiem sesji
+- `Client ID` - unikatowy ID klienta SPUMY 
+    > ID Klienta ustalane jest na etapie zakupu aplikacji. Używane jest m&#46;in. w mechanizmie OCR do identyfikacji własnych schematów rozpoznawania
 
-`Skala inicjalna` - Skala powiększenia z jaką domyślnie wczytuje się podgląd dokumentów. (0 - na cały ekran)
+- `Skala inicjalna` - Skala powiększenia z jaką domyślnie wczytuje się podgląd dokumentów. (0 - na cały ekran)
 
-`Długość cache` - Ilość dokumentów przechowywanych w historii
+- `Długość cache` - Ilość dokumentów przechowywanych w historii
 
 ### OCR
 Konfiguracja mechanizmu OCR
 
-`Ocr Task Mode` - Informacja o metodzie rozpoznawania dokumentów:
+- `Ocr Task Mode` - Informacja o metodzie rozpoznawania dokumentów:
 
-**Zewnętrzny Web service** -  Ustawienie domyślne. Program korzysta z usługi SPUMA OCR Service (SOS).
+    - **Zewnętrzny Web service** -  Ustawienie domyślne. Program korzysta z usługi SPUMA OCR Service (SOS).
+    - **Dysk** - (nierozwijane) Ustawienie stosowane z innymi niż  SOS mechanizmami rozpoznawania. Wymiana odbywa się poprzez dwa  katalogi - wejściowy `OCR input` i wyjściowy `OCR output`.
 
-**Dysk** - (nierozwijane) Ustawienie stosowane z innymi niż  SOS mechanizmami rozpoznawania. Wymiana odbywa się poprzez dwa  katalogi - wejściowy `OCR input` i wyjściowy `OCR output`.
+- `SOS address`, `SOS port` - Adres i port  usługi SOS
 
-`SOS address`, `SOS port` - Adres i port  usługi SOS
+    > Istnieje możliwość korzystania z zewnętrznego serwisu OCR, udostępnianego przez  dostawcę oprogramowania.
 
-> Istnieje możliwość korzystania z zewnętrznego serwisu OCR, udostępnianego przez  dostawcę oprogramowania.
-
-`OCR input path` -  (tylko dla opcji  Dysk) Katalog na serwerze do którego trafiać będą dokumenty do rozpoznania 
-
-`OCR output path` -  (tylko dla opcji  Dysk)  Katalog na serwerze z którego pobierane będą dane rozpoznane
+- `OCR input path` -  (tylko dla opcji  Dysk) Katalog na serwerze do którego trafiać będą dokumenty do rozpoznania 
+- `OCR output path` -  (tylko dla opcji  Dysk)  Katalog na serwerze z którego pobierane będą dane rozpoznane
 
 ### Automatyzacja
 
 Spuma ma możliwość zautomatyzowania dodawania dokumentów do sekretariatu. W tym celu, można monitorować  skrzynkę mailową lub katalog sieciowy. Dokumenty / maile które się tam pojawia i  spełnią określone warunki, zostaną automatycznie zaciągnięte do systemu
 
-`Interwał` - Co ile sekund mechanizm ma sprawdzać czy są nowe dokumenty
+- `Interwał` - Co ile sekund mechanizm ma sprawdzać czy są nowe dokumenty
 
-> Aby zmienić ustawienia automatyzacji należy najpierw wybrać  `SPUMA Company` (firma) oraz  `SPUMA user id` (użytkownik)
+  > Aby zmienić ustawienia automatyzacji należy najpierw wybrać  `SPUMA Company` (firma) oraz  `SPUMA user id` (użytkownik)
 
-`Mail host, Mail user , Mail password, Mail port, Use SSL` - ustawienia skrzynki pocztowej która będzie monitorowana 
+- `Mail host`, `Mail user` , `Mail password`, `Mail port`, `Use SSL` - ustawienia skrzynki pocztowej która będzie monitorowana 
 
-`Wzór` - Wyrażenia regularne z którym będzie porównany specjalny ciąg. Jeśli wyrażenie będzie się zgadzać mail zostanie zaciągnięty do systemu. Specjalny ciąg ma określoną strukturę:
+- `Wzór` - Wyrażenia regularne z którym będzie porównany specjalny ciąg. Jeśli wyrażenie będzie się zgadzać mail zostanie zaciągnięty do systemu. Specjalny ciąg ma określoną strukturę:
 
-```
-Subject=Temat;Extension=Rozszerzenie_załącznika;FileName=Nazwa_pliku_załącznika
-```
-Przykład:
+    ```
+    Subject=Temat;Extension=Rozszerzenie_załącznika;FileName=Nazwa_pliku_załącznika
+    ```
 
+    Przykład:
+    ```
     Subject=Faktura od kowalskiego;Extension=PDF;FileName=Faktura.pdf
+    ```
+    > Ciąg generowany jest dla każdego załącznika (lub tylko raz gdy mail nie ma załączników)
 
-> Ciąg generowany jest dla każdego załącznika (lub tylko raz gdy mail nie
-ma załączników)
 
+    **Przykłady wzorców dopasowania:**
 
-**Przykłady wzorców dopasowania:**
+    - Tylko dla wybranego rozszerzenia:  
+    `Extension=PDF`
+    - Dla wybranej grupy plików:  
+    `Extension=(PDF|BMP|HTML|JPG)`
+    - Dla plików o określonej nazwie (zawiera słowo faktura) i rozszerzeniu, niezależnie od tematu maila:
+    `Extension=(PDF|HTML|JPG|PNG);FileName=.+Faktura.+`
+    - Dla maili o określonym słowie kluczowym w tematu oraz rozszerzeniu załącznika:  
+    `Subject=.+SPUMA.+; Extension=(PDF|JPG)`
 
-- Tylko dla wybranego rozszerzenia:  
-`Extension=PDF`
-- Dla wybranej grupy plików:  
-`Extension=(PDF|BMP|HTML|JPG`
--	Dla plików o określonej nazwie (zawiera słowo faktura) i rozszerzeniu, niezależnie od tematu maila:
-`Extension=(PDF|HTML|JPG|PNG);FileName=.+Faktura.+`
-- Dla maili o określonym słowie kluczowym w tematu oraz rozszerzeniu załącznika:  
-`Subject=.+SPUMA.+; Extension=(PDF|JPG)`
---- 
-`Tworzenie, Klasa` - Informacja o metodzie tworzenia w SPUMIE dokumentów z maila 
+- `Tworzenie, Klasa` - Informacja o metodzie tworzenia w SPUMIE dokumentów z maila 
 **Załączniki jako strony**
 > Treść maila oraz jego  załączniki zaczytywane są jako strony jednego
 > dokumentu (PDF) o określonej klasie (ustawienie `Klasa`)
@@ -218,6 +208,7 @@ Definiowanie uprawnień na firmie (patrz [Uprawnienia](#uprawnienia))
 Definiowanie sposobu rejestracji atrybutu typu  `Własny` przechowującego informacje o kliencie
 
 `Typ połączenia` - Rodzaj połączenia z bazą klientów
+
 | Typ połączenia| Opis |
 | ------- | ---- |
 | Zewnętrzny&nbsp;SOAP| Dane pobierane i zapisywane bezpośrednio w bazie ERP (patrz [Konfiguracja/SBOBUSINESSPARTNER](#konf_sbobusinesspartner))  |
@@ -794,13 +785,14 @@ start((Start))-->|Warunek 1|A(Krok A)
 A-->stop((Stop))
 ```
 - Bezwarunkowo uruchamiane są równolegle dwa algorytmy (ścieżki)
-```mermaid
+<div class="mermaid">
 graph LR;
 start((Start))-->A(Krok A)
 A-->stop((Stop))
 start2((Start))-->A2(Krok B)
 A2-->stop2((Stop))
-```
+<div>
+	
 - Algorytm reaguje warunkowo  na 2 wyzwalacze( np naciśnięcie przycisku lub zmianę wartości)
 ```mermaid
 graph LR;
