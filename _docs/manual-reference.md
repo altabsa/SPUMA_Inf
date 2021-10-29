@@ -9,6 +9,29 @@ System SPUMA konfigurowany jest głównie w dwóch miejscach:
 - aplikacje `SPUMA_ADMIN`
 - procedury i funkcję serwera SQL (opcjonalne)
 
+```mermaid
+graph LR;
+start((Start))-->A(Krok A)
+A-->stop((Stop))
+```
+
+gitGraph:
+options
+{
+    "nodeSpacing": 150,
+    "nodeRadius": 10
+}
+end
+commit
+branch newbranch
+checkout newbranch
+commit
+commit
+checkout master
+commit
+commit
+merge newbranch
+
 
 Konfiguracja docelowo zapisywana jest w całości w bazie SQL (baza SPUMA).  
 # Aplikacja SPUMA_Admin
