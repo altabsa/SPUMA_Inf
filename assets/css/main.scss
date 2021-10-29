@@ -3,11 +3,7 @@
 ---
 
 @charset "utf-8";
-$link-color: red;
+$right-sidebar-width: 0px !default;
+
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
-
-article
-{
-  background-color:red;
-}
