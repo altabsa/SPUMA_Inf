@@ -78,9 +78,11 @@ DBName=SPUMA
 ## Konfiguracja wstępna
 
 Wstępna konfiguracja odbywa się przez program `SPUMA_Admin`.
+
 ![SPUMA Admin login form](https://user-images.githubusercontent.com/13116051/139413759-fb4a04b2-110f-4285-b15e-c6909f805317.png)
 
 Bez podawania loginu i hasła naciskamy Zaloguj. Pojawią się ustawienia inicjalne
+
 ![i3](https://user-images.githubusercontent.com/13116051/139413809-bc673f28-7e01-43a2-b766-743802c260a5.png)
   
 
@@ -168,8 +170,8 @@ Zamieniamy adres i port na zgodny z konfiguracja serwera ( Zakładka `DATASERVIC
 - Dodaj Katalog Wirtulany (Add Virtual Directory)
 	- Alias SPUMA
 	- Ścieżka fizyczna - podać ścieżkę do katalogu MAIN
-![IIS Configuration](https://lh3.googleusercontent.com/-7Tb5xxUso3iL0BvMzuxhtJGHo-v9VyV3gJTjuZTu8m5tJw6rlPrKU_Gx_q1ZJWUJ0zbpJYOq44 )
 
+![IIS Configuration](https://user-images.githubusercontent.com/13116051/139416855-ea95b877-9f57-4f11-82bc-b4583f81c9a4.png)
 
 > **Uwaga:**  Jeśli jeż już zainstalowana aplikacja o nazwie SPUMA można zmienić nazwę na dowolną inna.
 Poprawność instalacji należy sprawdzić przez wpisanie w przeglądarkę adresu `http://localhost/SPUMA/`
