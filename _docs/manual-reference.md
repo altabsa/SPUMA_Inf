@@ -34,29 +34,24 @@ Konfiguracja ta została częściowo opisana w rozdziale dot [instalacji](../man
 > ID Klienta ustalane jest na etapie zakupu aplikacji. Używane jest m&#46;in. w mechanizmie OCR do identyfikacji własnych schematów rozpoznawania
 
 `Skala inicjalna` - Skala powiększenia z jaką domyślnie wczytuje się podgląd dokumentów. (0 - na cały ekran)
+
 `Długość cache` - Ilość dokumentów przechowywanych w historii
 
 ### OCR
 Konfiguracja mechanizmu OCR
 
 `Ocr Task Mode` - Informacja o metodzie rozpoznawania dokumentów:
-**Zewnętrzny Web service**
 
-> Ustawienie domyślne. Program korzysta z usługi SPUMA OCR Service
- (SOS).
- 
-**Dysk**
-> (nierozwijane) Ustawienie stosowane z innymi niż  SOS mechanizmami
-> rozpoznawania. Wymiana odbywa się poprzez dwa  katalogi.
+**Zewnętrzny Web service** -  Ustawienie domyślne. Program korzysta z usługi SPUMA OCR Service (SOS).
 
-`SOS address, SOS port` - Adres i port  usługi SOS
+**Dysk** - (nierozwijane) Ustawienie stosowane z innymi niż  SOS mechanizmami rozpoznawania. Wymiana odbywa się poprzez dwa  katalogi - wejściowy `OCR input` i wyjściowy `OCR output`.
 
-> Istnieje możliwość korzystania z zewnętrznego serwisu OCR,
-> udostępnianego przez  dostawcę oprogramowania.
----
+`SOS address`, `SOS port` - Adres i port  usługi SOS
+
+> Istnieje możliwość korzystania z zewnętrznego serwisu OCR, udostępnianego przez  dostawcę oprogramowania.
+
 `OCR input path` -  (tylko dla opcji  Dysk) Katalog na serwerze do którego trafiać będą dokumenty do rozpoznania 
 
----
 `OCR output path` -  (tylko dla opcji  Dysk)  Katalog na serwerze z którego pobierane będą dane rozpoznane
 
 ### Automatyzacja
@@ -66,13 +61,11 @@ Spuma ma możliwość zautomatyzowania dodawania dokumentów do sekretariatu. W 
 `Interwał` - Co ile sekund mechanizm ma sprawdzać czy są nowe dokumenty
 
 > Aby zmienić ustawienia automatyzacji należy najpierw wybrać  `SPUMA Company` (firma) oraz  `SPUMA user id` (użytkownik)
----
+
 `Mail host, Mail user , Mail password, Mail port, Use SSL` - ustawienia skrzynki pocztowej która będzie monitorowana 
 
----
-`Wzór` - Wyrażenia regularne z którym będzie porównany specjalny ciąg.
-Jeśli wyrażenie będzie się zgadzać mail zostanie zaciągnięty do systemu
-Specjalny ciąg ma określoną strukturę:
+`Wzór` - Wyrażenia regularne z którym będzie porównany specjalny ciąg. Jeśli wyrażenie będzie się zgadzać mail zostanie zaciągnięty do systemu. Specjalny ciąg ma określoną strukturę:
+
 ```
 Subject=Temat;Extension=Rozszerzenie_załącznika;FileName=Nazwa_pliku_załącznika
 ```
