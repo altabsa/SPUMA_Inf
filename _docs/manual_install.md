@@ -77,10 +77,11 @@ DBName=SPUMA
 
 ## Konfiguracja wstępna
 
-Wstępna konfiguracja odbywa się przez program `SPUMA_Admin`. 
-![SPUMA Admin login form](https://lh3.googleusercontent.com/Ag2PytwDwvE_CnJrLeDo8qMCpI1ndrfQj2SWleuFTAoyPkVm3chn-yQ6z7a-EjZzTiCdarQI1lg)
- Bez podawania loginu i hasła naciskamy Zaloguj. Pojawią się ustawienia inicjalne
- ![enter image description here](https://lh3.googleusercontent.com/YqAuY_Ld-rq8bIHuyfWnCcOjHfvPIXuwX7IEVEXeuYhtPTDYTKaAymzIehLrkkSmBPRvprKrgAg)
+Wstępna konfiguracja odbywa się przez program `SPUMA_Admin`.
+![SPUMA Admin login form](https://user-images.githubusercontent.com/13116051/139413759-fb4a04b2-110f-4285-b15e-c6909f805317.png)
+
+Bez podawania loginu i hasła naciskamy Zaloguj. Pojawią się ustawienia inicjalne
+![i3](https://user-images.githubusercontent.com/13116051/139413809-bc673f28-7e01-43a2-b766-743802c260a5.png)
   
 
 > **Uwaga:** Konfiguracja usługi OCR (SOS) ustawiona jest na serwer testowy. Proszę po starcie zmienić wg danych otrzymanych od sprzedawcy systemu
@@ -96,10 +97,10 @@ W tym momencie aplikacja stworzy domyślne wpisy konfiguracyjne.
 
 Poniżej ustawienia na które powinno się zwrócić uwagę przed startem serwisu SPUMA_DataService 
 <a id='konfiguracja1' href='konfiguracja1' hidden='true'></a>
-#### Zakładka OGÓLNE
+#### OGÓLNE
 `Client ID` – id klienta dla serwera OCR (patrz instalacja OCR)
 
-#### Zakładka DATASERVICE
+#### DATASERVICE
 `POLICYPORT` –port zasad do otwarcia połączenia TCP (dla danych binarnych)
 
 > **Uwaga:**  Gdy zainstalowanych jest  więcej niż jedna usługa w pozostałych instalacjach ustawić 0
@@ -114,22 +115,71 @@ Poniżej ustawienia na które powinno się zwrócić uwagę przed startem serwis
 `MAXTHREADS` – ilość jednoczesnych wątków serwisu  (najlepiej zostawić 10)
 
 
-#### Zakładka SBOBUSINESSPARTNER
+#### SBOBUSINESSPARTNER
 Patrz  [Konfiguracja SBOBUSINESSPARTNER](#konf_sbobusinesspartner)
 
-####  Zakładka SAPB1UTILS
+#### SAPB1UTILS
 patrz  [konfiguracja SAPB1Utils](#konf_sapb1utils)
 ### <a id='firmy1' href='firmy1' hidden='true'></a>Firmy
 Należy wybrać zakładkę `Firmy` i wybrać domyślny wpis (OEC Computers)
 
-####  Zakładka OGÓLNE
+#### OGÓLNE
 `NAZWA`–  Nazwa firmy jaka będzie widoczna w katalogu
 `BAZA` – Nazwa bazy SAP
 
-####  Zakładka PARTNERZY HANDLOWI
+#### PARTNERZY HANDLOWI
 TYP POŁĄCZENIA
 - `zewnętrzny SOAP` – Klient (PH) pobierane i aktualizowane w sap (zostawić jak instalacja z SAP)
 - `baza wewnętrzna` – PH w bazie SPUMY (instalacja bez SAP)
 
-# Sprawdzenie instalacji
-**proszę** tu dodac tekst
+## Instalacja SPUMA_DATASERVICE
+
+Serwis instaluje się przez wywołanie pliku `installAndRun_release.bat`
+
+> **Uwaga:**  Jeśli istnieje już jeden serwis SPUMA_DATASERVICE przed uruchomieniem należy wyedytować pliki:
+> 
+>     installAndRun_release.bat
+>     startDataService.bat
+>     stopDataService.bat
+>     uninstall.bat
+> 
+> oraz nadać unikatową nazwę serwisowi w polu `/ServiceName=????` oraz
+zastąpić tą nazwą startowanie i zatrzymywania usługi przy poleceniach **start** i **stop**
+
+Wynikiem działania powinna być uruchomiona usługa SPUMA_DATASERVICE. Aby to sprawdzić należy uruchomić panel usług (Start/Uruchom – wpisać `services.msc`)
+
+> **Uwaga:**  W razie problemów informacje o błędach będą widoczne w pliku `servicelog.txt`
+
+
+# Instalacja aplikacji klienckiej
+## Aplikacja WWW
+Po przegraniu wymaganych plików do katalogu `Main` należy ustawić w aplikacji prawidłowy port   serwisu danych w pliku   `assets\config\config.json`. 
+
+Wpisy do zmiany:
+
+    "DATASERVICE_ADR": "localhost:4801"
+
+Zamieniamy adres i port na zgodny z konfiguracja serwera ( Zakładka `DATASERVICE/HTTPPORT`) .
+
+
+## Konfiguracja IIS
+- Uruchomić Menedżer IIS
+- PPM :computer_mouse: na Default Web Site
+- Dodaj Katalog Wirtulany (Add Virtual Directory)
+	- Alias SPUMA
+	- Ścieżka fizyczna - podać ścieżkę do katalogu MAIN
+![IIS Configuration](https://lh3.googleusercontent.com/-7Tb5xxUso3iL0BvMzuxhtJGHo-v9VyV3gJTjuZTu8m5tJw6rlPrKU_Gx_q1ZJWUJ0zbpJYOq44 )
+
+
+> **Uwaga:**  Jeśli jeż już zainstalowana aplikacja o nazwie SPUMA można zmienić nazwę na dowolną inna.
+Poprawność instalacji należy sprawdzić przez wpisanie w przeglądarkę adresu `http://localhost/SPUMA/`
+
+# Czynności po instalacji
+Czynności które opcjonalnie można wykonać po instalacji systemu:
+- Zainstalować OCR (odrębny dokument)
+- Zainstalować DTSSERVICE (odrębny dokument)
+- W konfiguracji podpiąć się pod OCR Altab (adres `dc.serwis-altab.pl` port `1099`) 
+
+> Ważny jest tu identyfikator klienta z zakładki `Konfiguracja/Ogólne/Client ID`
+
+- Wczytanie danych demo  (odrębny dokument)
