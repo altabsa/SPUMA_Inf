@@ -7,13 +7,13 @@
 $right-sidebar-width-narrow: 200px !default;
 $right-sidebar-width: 300px !default;
 $right-sidebar-width-wide: 400px !default;
-$max-width:90%;
+$max-width:95%;
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
 .page
 {
-   width:90%;
+   width:95%;
    padding-right: 300px;
 }
