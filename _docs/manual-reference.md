@@ -1,3 +1,9 @@
+---
+title: "Spis funkcji"
+permalink: /docs/manual-reference/
+excerpt: "Dokumetacja SPUMA - podręcznik administratora"
+---
+
 # Wstęp
 System SPUMA konfigurowany jest głównie w dwóch miejscach:
 - aplikacje `SPUMA_ADMIN`
