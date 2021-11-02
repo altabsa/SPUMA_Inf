@@ -673,15 +673,12 @@ Procesy UI w Systemie SPUMA,  odpowiadają za:
 - Importy i Eksportu danych do systemów zewnętrznych 
 
 ### Ogólne
-`Organizacja` - Do jakiej organizacji należy proces. Ustawienie `(Wszystkie)` określa, że procesu są aktywne dla użytkowników wszystkich organizacji.
-
-`Nazwa` - Nazwa (kod) procesu
-> **Uwaga:** Nazwa musi być unikatowa w ramach  całej bazy. Nie wolno stosować znaków narodowych i specjalnych. Zakres dozwolony to `A-Z` i znaki  `_-` 
-
-`Opis` - Opis procesu - widoczny tylko w panelu administracyjnym.
-
-`Klasa` - Powiązanie procesu z dana klasą. (opcjonalne)
->Uwaga: Proces może być uniwersalny (uruchamiany dla wielu klas) lub dedykowany 
+- `Organizacja` - Do jakiej organizacji należy proces. Ustawienie `(Wszystkie)` określa, że procesu są aktywne dla użytkowników wszystkich organizacji.
+- `Nazwa` - Nazwa (kod) procesu
+    > **Uwaga:** Nazwa musi być unikatowa w ramach  całej bazy. Nie wolno stosować znaków narodowych i specjalnych. Zakres dozwolony to `A-Z` i znaki  `_-` 
+- `Opis` - Opis procesu - widoczny tylko w panelu administracyjnym.
+- `Klasa` - Powiązanie procesu z dana klasą. (opcjonalne)
+    >Uwaga: Proces może być uniwersalny (uruchamiany dla wielu klas) lub dedykowany 
 
 ### Proces
 W tym miejscu definiuje się diagram (algorytm) procesu.
@@ -722,18 +719,21 @@ Istnieją następujące typy punktów startu:
    
 **Przykłady:**
 - Po każdej akcji wyzwalanej punktem `startu` przechodzi się do `kroku A`
+
 <div class="mermaid">
 graph LR;
 start((Start))-->A(Krok A)
 A-->stop((Stop))
 </div>
 - Do `kroku A` przechodzi się tylko pod `Warunkiem 1`. W innym przypadku algorytm jest przerywany
+
 <div class="mermaid">
 graph LR;
 start((Start))-->|Warunek 1|A(Krok A)
 A-->stop((Stop))
 </div>
 - Bezwarunkowo uruchamiane są równolegle dwa algorytmy (ścieżki)
+
 <div class="mermaid">
 graph LR;
 start((Start))-->A(Krok A)
@@ -743,11 +743,12 @@ A2-->stop2((Stop))
 </div>
 	
 - Algorytm reaguje warunkowo  na 2 wyzwalacze( np naciśnięcie przycisku lub zmianę wartości)
+
 <div class="mermaid">
 graph LR;
-start((<center><b>Start</b><br/><span style='font-size:.8em' >po kliknięciu</span></center>))-->|Warunek 1|A(Krok A)
+start((po kliknięciu))-->|Warunek 1|A(Krok A)
 A-->stop((Stop))
-start2((<center><b>Start</b><br/><span style='font-size:.8em' >Zmiana wart.</span></center>))-->|Warunek 2|A
+start2((Zmiana wart.))-->|Warunek 2|A
 </div>
 
 ### Zmienne 
