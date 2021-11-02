@@ -1352,14 +1352,14 @@ Etapami schematu mogą być:
 
   - **Rozwiązanie 2:**  
 
-  Typ: Wszyscy z
+    Typ: Wszyscy z
   
-  Etapy:
+    Etapy:
     
-  | Etap | Rodzaj | Obiekt |
-  | --- | --- | --- |
-  | 0 | Schemat|  `*HR`
-  | 1 | użytkownik  |  `user1`
+    | Etap | Rodzaj | Obiekt |
+    | --- | --- | --- |
+    | 0 | Schemat|  `*HR`
+    | 1 | użytkownik  |  `user1`
 
 ## <a id='procesy' href='procesy' hidden='true'></a> Procesy autoryzacji
 
@@ -1389,35 +1389,36 @@ Każdy proces musi mieć:
 
 Punkty łączy się za pomocą strzałek jednokierunkowych. O tym , czy proces przejdzie z punktu A do punktu B  decyduje zdefiniowany na strzałce warunek
 
-![proces](https://docs.google.com/uc?id=15s0bzOeaPZ8uIeLugUUEGs7c3NgFDlgM)
+![proces](https://user-images.githubusercontent.com/13116051/139843755-61004c86-fcb0-4d57-ad68-1e98dcbc850d.png)
 
 #### Autoryzacja prosta
 Wymusza autoryzacje dokumentu w tym kroku. 
 
-`Nazwa` - Nazwa (kod) etapu autoryzacji.
-> **Uwaga:** Nazwa musi być unikatowa w ramach całego procesu
+- `Nazwa` - Nazwa (kod) etapu autoryzacji.
+  > **Uwaga:** Nazwa musi być unikatowa w ramach całego procesu
+- `Opis` - Opis etapu -  widoczny tylko w panelu administracyjnym (na diagramie)
+- `Typ` - Typ etapu -  jaki rodzaj autoryzacji musi zostać wykonany w tym kroku
 
-`Opis` - Opis etapu -  widoczny tylko w panelu administracyjnym (na diagramie)
-`Typ` - Typ etapu -  jaki rodzaj autoryzacji musi zostać wykonany w tym kroku
- - `Uzytkownik zdefiniowany` - użytkownik SPUMA 
- - `Schemat zdefiniowany` -  jeden ze predefiniowanych schematów autoryzacji
- - `Użytkownik` - Użytkownik określony w poprzednich krokach 
- - `Schemat` - Schemat określony w poprzednich krokach
- - `Schemat własny` - Schemat własny utworzony w poprzednich krokach
+  | Typ | Opis |
+  | ------- | ---- |
+  | **Użytkownik zdefiniowany**| użytkownik SPUMA |
+  | **Schemat zdefiniowany**| jeden ze predefiniowanych schematów autoryzacji |
+  | **Użytkownik**| Użytkownik określony w poprzednich krokach |
+  | **Schemat**| Schemat określony w poprzednich krokach |
+  | **Schemat własny**| Schemat własny utworzony w poprzednich krokach |
+  
+- `Obiekt` - Określa obiekt dla powyższej własności .  Zależnie od typu:
+  - użytkowników,
+  - schematy autoryzacji,
+  - zmienne.
+- `Zmienna` - Dodaje zmienną lub wybiera już istniejąca. W zmiennej przechowywany będzie kod użytkownika którego decyzja  spowodowała zakończenie (zatwierdzenie lub odrzucenie) etapu
 
-`Obiekt` - Określa obiekt dla powyższej własności .  Zależnie od typu:
-- użytkowników,
-- schematy autoryzacji,
-- zmienne.
+  > **Przykład:** 
+  > Na etapie określony jest typ `Schemat zdefiniowany`. Wybrany obiekt  to `*DZIAL1`, czyli `wszyscy z działu 1`. Są to 3 osoby. A,B,i C. 
+  >  - Jeśli etap będzie zatwierdzany w tej kolejności:A,C,B  to zmienna przechowywać będzie kod użytkownika B
+  >  - Jeśli etap zostanie odrzucony przez użytkownika C to jego kod będzie zwrócony w zmiennej.
 
-`Zmienna` - Dodaje zmienną lub wybiera już istniejąca. W zmiennej przechowywany będzie kod użytkownika którego decyzja  spowodowała zakończenie (zatwierdzenie lub odrzucenie) etapu
-
-> **Przykład:** 
-> Na etapie określony jest typ `Schemat zdefiniowany`. Wybrany obiekt  to `*DZIAL1`, czyli `wszyscy z działu 1`. Są to 3 osoby. A,B,i C. 
->  - Jeśli etap będzie zatwierdzany w tej kolejności:A,C,B  to zmienna przechowywać będzie kod użytkownika B
->  - Jeśli etap zostanie odrzucony przez użytkownika C to jego kod będzie zwrócony w zmiennej.
-
-`Dodatkowe informacje` - tekst który jest widoczny na oknie zatwierdzania w aplikacji WWW. 
+- `Dodatkowe informacje` - tekst który jest widoczny na oknie zatwierdzania w aplikacji WWW. 
 
 #### Autoryzacja z parametrami 
 Wymusza autoryzacje dokumentu w tym kroku oraz umożliwia zdefiniowanie dodatkowych parametrów.
