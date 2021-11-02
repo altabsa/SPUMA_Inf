@@ -1029,65 +1029,67 @@ Raporty umożliwiają wykonanie analizy zarówno na bazie SPUMA jak i bazie syst
 Istnieje również możliwość wykonywania raportów zagnieżdżonych. 
 
 #### Własności
-`Organizacja` - Do jakiej organizacji należy raport. Ustawienie `(Wszystkie)` określa, że raport może być używany we  wszystkich organizacjach.
+- `Organizacja` - Do jakiej organizacji należy raport. Ustawienie `(Wszystkie)` określa, że raport może być używany we  wszystkich organizacjach.
+- `Nazwa` - Nazwa (kod) raportu
+    > **Uwaga:** Nazwa musi być unikatowa w ramach całej bazy 
+- `Opis` - Opis słownika - widoczny tylko w panelu administracyjnym .
+- `Etykieta` -  Nazwa raportu widoczna w aplikacji WWW
+- `Widoczność` -  czy raport jest widoczny w menu aplikacji WWW. 
+    > Uwaga: Ukrywania raportów stosuję się dla podraportów.
+- `Typ` -  Rodzaj połączenia z bazą danych.
+- `DBNAME` -  Nazwa bazy danych. Podstawiana w zapytaniu do zmiennej ```$DBNAME``` 
+- `Ciąg połączenia` -  Ciąg połączeniowy (ODBC) z bazą danych (dane z baz zewnętrznych)
+- `Skrypt` -  Zapytanie SQL generujące raport . W zapytaniu można używać zdefiniowanych parametrów. Opcjonalnie można  formatować kolumny przez nadanie im specjalnej nazwy. 
 
-`Nazwa` - Nazwa (kod) raportu
-> **Uwaga:** Nazwa musi być unikatowa w ramach całej bazy 
+    ```sql
+    nazwa_kolumny$xyz
+    ```
+    gdzie:
+    - `x` - czy kolumn jest widoczna (1 - tak, 0 nie)
+    - `y` - poziom grupowania (0 - nie grupuj, 1 - pierwszy poziom, 2- drugi itd.)
+    - `z` - domyślne sortowanie - tylko dla kolumn grupowanych  (0 - malejąco, 1 - rosnąco)
+    
+    > Przykład: Zapytanie zwracające listę klientów z SAP.  
+    > ```sql
+    > select 
+    > 	  CardCode
+    > 	 , CardName
+    > 	 , Address+' '+ZipCode +' '+City as Adres
+    > 	 , CardType as Typ$010
+    > 	 , City as Miasto$121
+    > from [$DBNAME]..OCRD
+    >  ```
+    >      
+    > Grupowanie odbywa się najpierw po polu `CardType` (sortowane malejąco) , potem po polu `City` (sortowane rosnąco).  
 
-`Opis` - Opis słownika - widoczny tylko w panelu administracyjnym .
+- `Parametry` -  Lista parametrów wykorzystywanych w zapytaniu SQL. Są tego samego typu co atrybuty: Własności ważne przy zapytaniu:
 
-`Etykieta` -  Nazwa raportu widoczna w aplikacji WWW
+    | Własność | Opis|
+    | --- | --- |
+    | Nazwa | Nazwa parametru (w zapytaniu SQL stosowana jako `@nazwa`) 
+    | Etykieta | Wyświetlana w  aplikacji WWW) 
+    | Typ | Typ parametru  |
+    | Auto&nbsp;wyliczanie | Algorytm JS do pobierania danych z własności/atrybutów obiektu nadrzędnego |
+    
+    > **Uwaga:** Parametry wyświetlane  są w kliencie WWW.
 
-`Widoczność` -  czy raport jest widoczny w menu aplikacji WWW. 
-> Uwaga: Ukrywania raportów stosuję się dla podraportów.
+- `Ustawienia kolumn` -  Lista wpisów konfigurujących kolumny zapytania.
+    - `Nazwa kolumny` - nazwa kolumny z raportu która będzie konfigurowana. 
+    - `Etykieta` - Ustawienie nawy kolumny.
+    - `Sortowanie` - Włączenie/ Wyłączenie opcji sortowania na kolumnie.
+    - `Typ odnośnika` - Zdefiniowanie kolumny jako  link
+    
+        | Typ odnośnika| Opis |
+        | ------- | ---- |
+        | Podraport| link do innego raportu. Podraport określamy w polu `Klasa odnośnika` |
+        | Dokument | link do dokumentu. Kolumna musi zawierać id podlinkowanego dokumentu |
+	| Wpis dziennika | link do dokumentu. Kolumna musi zawierać id podlinkowanego dokumentu |
 
-`Typ` -  Rodzaj połączenia z bazą danych.
-
-`DBNAME` -  Nazwa bazy danych. Podstawiana w zapytaniu do zmiennej ```$DBNAME``` 
-
-`Ciąg połączenia` -  Ciąg połączeniowy (ODBC) z bazą danych (dane z baz zewnętrznych)
-
-`Skrypt` -  Zapytanie SQL generujące raport . W zapytaniu można używać zdefiniowanych parametrów. Opcjonalnie można  formatować kolumny przez nadanie im specjalnej nazwy. 
-```sql
-nazwa_kolumny$xyz
-```
-gdzie:
-- `x` - czy kolumn jest widoczna (1 - tak, 0 nie)
-- `y` - poziom grupowania (0 - nie grupuj, 1 - pierwszy poziom, 2- drugi itd.)
-- `z` - domyślne sortowanie - tylko dla kolumn grupowanych  (0 - malejąco, 1 - rosnąco)
-> Przykład: Zapytanie zwracające listę klientów z SAP.  
-> ```sql
-> select 
-> 	  CardCode
-> 	 , CardName
-> 	 , Address+' '+ZipCode +' '+City as Adres
-> 	 , CardType as Typ$010
-> 	 , City as Miasto$121
-> from [$DBNAME]..OCRD
->  ```
-> Grupowanie odbywa się najpierw po polu `CardType` (sortowane malejąco) , potem po polu `City` (sortowane rosnąco).  
-
-`Parametry` -  Lista parametrów wykorzystywanych w zapytaniu SQL. Są tego samego typu co atrybuty: Własności ważne przy zapytaniu:
-| Własność | Opis|
-| --- | --- |
-| Nazwa | Nazwa parametru (w zapytaniu SQL stosowana jako `@nazwa`) 
-| Etykieta | Wyświetlana w  aplikacji WWW) 
-| Typ | Typ parametru  |
-| Auto&nbsp;wyliczanie | Algorytm JS do pobierania danych z własności/atrybutów obiektu nadrzędnego |
-> **Uwaga:** Parametry wyświetlane  są w kliencie WWW.
-
-`Ustawienia kolumn` -  Lista wpisów konfigurujących kolumny zapytania.
-- `Nazwa kolumny` - nazwa kolumny z raportu która będzie konfigurowana. 
-- `Etykieta` - Ustawienie nawy kolumny.
-- `Sortowanie` - Włączenie/ Wyłączenie opcji sortowania na kolumnie.
-- `Typ odnośnika` - Zdefiniowanie kolumny jako  link
-	- `Podraport` - link do innego raportu. Podraport określamy w polu `Klasa odnośnika`
-	- `Dokument` - link do dokumentu. Kolumna musi zawierać id podlinkowanego dokumentu
-	- `Wpis dziennika` - link do wpisu dziennika korespondencji. Kolumna musi zawierać id podlinkowanego wpisu
-- `Mapowanie parametrów` - Definiowane dla typu `Podraport`. Zawiera  pary wpisów:
+     - `Mapowanie parametrów` - Definiowane dla typu `Podraport`. Zawiera  pary wpisów:
 	- 1 kolumna - nazwa kolumny raportu
 	- 2 kolumna - nazwa parametru podraportu
-  Przy uruchamianiu  podraportu przez link, system automatycznie  wypełni parametr wartością kolumny.
+	
+    Przy uruchamianiu  podraportu przez link, system automatycznie  wypełni parametr wartością kolumny.
  
 #### Przykłady
 **Zadanie:** Wykonać raport listujący klientów z bazy ERP wraz z liczbą dokumentów jakie maja zarejestrowane w systemie SPUMA. Po naciśnięciu w liczbę z dokumentami powinien pojawić się podraport z zestawieniem tych dokumentów i możliwością ich podglądu.
@@ -1100,105 +1102,104 @@ gdzie:
 - `Etykieta`: Dokumenty per klient
 - `Widoczność`: tak
 - `Skrypt`:
-```sql
-select 
-  a.CardCode as cc
- ,a.CardName as "Nazwa"
- ,isnull(cast(b.doccnt as nvarchar),'') as  cntdoc
- ,a.Address+' '+a.ZipCode +' '+a.City as Adres
- ,case 
-	when a.CardType = 'S' then 'Dostawca'
-	when a.CardType = 'C' then 'Odbiorca'
-	when a.CardType = 'L' then 'Prospekt'
-	else a.CardType 
-  end as "Typ$01"
-from [$DBNAME]..OCRD a 
-left join (
-  select cc,count(did) as doccnt
-  from (
+    ```sql
     select 
-	  case 
-	    when charindex('<!>',dp.[value]) > 0 then 
-		  substring(dp.[value],1,charindex('<!>',dp.[value])-1) 
-		else dp.[value]
-	  end as cc
-	 ,dp.documents_id as did
-	from DOCUMENTS_PROPERTIES dp 
-	join CLASSATTRIBS ca on 
-	  dp.attribs_id = ca.id and 
-	  ca.objtype = 0 and 
-	  ca.iscolumn=0
-	join [dbo].[AFN_USERDOCS](@user_id) ud on ud.id = dp.documents_id
-    where ca.[name] like 'ph'
-  ) grp GROUP by cc
-) b on a.CardCode = b.cc collate SQL_Latin1_General_CP850_CI_AS
-where  
-  a.CardCode +' '+a.CardName like '%'+isnull(@Search,'')+'%' 
-  and a.CardType like  isnull(@Typ,'%')
-```
+      a.CardCode as cc
+     ,a.CardName as "Nazwa"
+     ,isnull(cast(b.doccnt as nvarchar),'') as  cntdoc
+     ,a.Address+' '+a.ZipCode +' '+a.City as Adres
+     ,case 
+    	when a.CardType = 'S' then 'Dostawca'
+    	when a.CardType = 'C' then 'Odbiorca'
+    	when a.CardType = 'L' then 'Prospekt'
+    	else a.CardType 
+      end as "Typ$01"
+    from [$DBNAME]..OCRD a 
+    left join (
+      select cc,count(did) as doccnt
+      from (
+        select 
+    	  case 
+    	    when charindex('<!>',dp.[value]) > 0 then 
+    		  substring(dp.[value],1,charindex('<!>',dp.[value])-1) 
+    		else dp.[value]
+    	  end as cc
+    	 ,dp.documents_id as did
+    	from DOCUMENTS_PROPERTIES dp 
+    	join CLASSATTRIBS ca on 
+    	  dp.attribs_id = ca.id and 
+    	  ca.objtype = 0 and 
+    	  ca.iscolumn=0
+    	join [dbo].[AFN_USERDOCS](@user_id) ud on ud.id = dp.documents_id
+        where ca.[name] like 'ph'
+      ) grp GROUP by cc
+    ) b on a.CardCode = b.cc collate SQL_Latin1_General_CP850_CI_AS
+    where  
+      a.CardCode +' '+a.CardName like '%'+isnull(@Search,'')+'%' 
+      and a.CardType like  isnull(@Typ,'%')
+    ```
 - `Parametry`
  
-| Nazwa| Etykieta | Typ | Wartości |
-| --- | --- | --- | --- |
-| **search**| Fragment nazwy | Text |  |
-| **typ**| Typ klienta | Słownik użytkownika | % - wszyscy<br/>C - Odbiocy <br /> L - Prospekci <br/>S - Dostawcy
- |
+    | Nazwa| Etykieta | Typ | Wartości |
+    | --- | --- | --- | --- |
+    | **search**| Fragment nazwy | Text |  |
+    | **typ**| Typ klienta | Słownik użytkownika | % - wszyscy<br/>C - Odbiocy <br /> L - Prospekci <br/>S - Dostawcy |
+
 - `Ustawienia kolumn`
 
-| Nazwa kolumny | Etykieta | Typ odnośnika | Klasa odnośnika | Mapowanie |
-| --- | --- | --- | --- | --- |
-| **cntdoc** | Ilość dokumentów | Podraport | `Dokumenty` | `cc` - `ph` |
-| **cc** | Kod klienta |  |  |  |
+    | Nazwa kolumny | Etykieta | Typ odnośnika | Klasa odnośnika | Mapowanie |
+    | --- | --- | --- | --- | --- |
+    | **cntdoc** | Ilość dokumentów | Podraport | `Dokumenty` | `cc` - `ph` |
+    | **cc** | Kod klienta |  |  |  |
 
 **Podraport:**
 - `Nazwa`: Dokumenty
 - `Etykieta`: Dokumenty klienta
 - `Widoczność`: nie
 - `Skrypt`:
-```sql
-select 
-   a.id
-  ,a.[name]
-  ,c.username as 'Wprowadził'	
-  ,case 
-    when a.authstatus = 1 then 'Zatwierdzony'
-	when a.authstatus = 2 then 'Odrzucony'
-	when a.authstatus = 0 then 'Oczekuje'
-	else cast(a.authstatus as nvarchar)
-  end as Autoryzacja
-from DOCUMENTS a
-join 
-(
-  select 
-	case 
-      when charindex('<!>',dp.[value]) > 0 
-        then substring(dp.[value],1,charindex('<!>',dp.[value])-1) 
-	  else dp.[value]
-    end as cc
-   ,dp.documents_id as did
-  from DOCUMENTS_PROPERTIES dp 
-  join CLASSATTRIBS ca on 
-    dp.attribs_id = ca.id and 
-    ca.objtype = 0 and 
-    ca.iscolumn=0		
-  where ca.[name] like 'ph'
-) b on a.id = b.did
-join USERS c on a.users_id = c.id
-join [dbo].[AFN_USERDOCS](@user_id) d on d.id = a.id 
-where 
-  b.cc = @ph and a.docstatus = 3
-```
+    ```sql
+    select 
+       a.id
+      ,a.[name]
+      ,c.username as 'Wprowadził'	
+      ,case 
+        when a.authstatus = 1 then 'Zatwierdzony'
+    	when a.authstatus = 2 then 'Odrzucony'
+    	when a.authstatus = 0 then 'Oczekuje'
+    	else cast(a.authstatus as nvarchar)
+      end as Autoryzacja
+    from DOCUMENTS a
+    join 
+    (
+      select 
+    	case 
+          when charindex('<!>',dp.[value]) > 0 
+            then substring(dp.[value],1,charindex('<!>',dp.[value])-1) 
+    	  else dp.[value]
+        end as cc
+       ,dp.documents_id as did
+      from DOCUMENTS_PROPERTIES dp 
+      join CLASSATTRIBS ca on 
+        dp.attribs_id = ca.id and 
+        ca.objtype = 0 and 
+        ca.iscolumn=0		
+      where ca.[name] like 'ph'
+    ) b on a.id = b.did
+    join USERS c on a.users_id = c.id
+    join [dbo].[AFN_USERDOCS](@user_id) d on d.id = a.id 
+    where 
+      b.cc = @ph and a.docstatus = 3
+    ```
 - `Parametry`
- 
-| Nazwa| Etykieta | Typ | Wartości |
-| --- | --- | --- | --- |
-| **ph**| Kod klienta | Text |  |
+    | Nazwa| Etykieta | Typ | Wartości |
+    | --- | --- | --- | --- |
+    | **ph**| Kod klienta | Text |  |
 
 - `Ustawienia kolumn`
 
-| Nazwa kolumny | Etykieta | Typ odnośnika | Klasa odnośnika | Mapowanie |
-| --- | --- | --- | --- | --- |
-| **id** | # dokumentu | Dokument|  |  |
+    | Nazwa kolumny | Etykieta | Typ odnośnika | Klasa odnośnika | Mapowanie |
+    | --- | --- | --- | --- | --- |
+    | **id** | # dokumentu | Dokument|  |  |
 
 > **Uwagi:**
 > - W skrypcie SQL w podraporcie podlinkowana została (join) funkcja `AFN_USERDOCS` która zwraca identyfikatory dokumentów  do których użytkownik ma dostęp. Zapewnia to zachowanie systemu uprawnień. 
