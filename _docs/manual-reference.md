@@ -961,10 +961,10 @@ Bezpośrednio wpisana wartość (zawsze w cudzysłowie)
 
 <div class="mermaid">
 graph LR;
-start((<center><b>Start</b><br/><span style='font-size:.8em' >po kliknięciu</span></center>))-->|"Warunek 1"|A(<strong>HDR</strong> <br/> Pobranie danych nagłówka)
-A--> B(<b>LINES</b><br/>Pobranie danych linii)
-B-->C[<b>SQL</b><br />Pobranie ceny]
-C-->|"Warunek 2"| D(<b>SETLINES</b><br/>Aktualizacja linii)
+start((Start<br>po kliknięciu))-->|"Warunek 1"|A(HDR<br/> Pobranie danych nagłówka)
+A--> B(LINES<br/>Pobranie danych linii)
+B-->C[SQL<br />Pobranie ceny]
+C-->|"Warunek 2"| D(SETLINES<br/>Aktualizacja linii)
 D-->stop((Stop))
 style A fill:#FFFDAA;
 style B fill:#FFFDAA;
@@ -973,53 +973,51 @@ style C fill:#AAFFFF;
 </div>
 
 **Start:**
-`Rodzaj`: Wyzwalacz po kliknięciu
+- `Rodzaj`: Wyzwalacz po kliknięciu
 
 **HDR :**
-`Rodzaj`: Instrukcja obsługi dokumentu
-`Typ rozkazu`: Pobranie nagłówka
-`Zmienna wyjściowa`: `HDR`
+- `Rodzaj`: Instrukcja obsługi dokumentu
+- `Typ rozkazu`: Pobranie nagłówka
+- `Zmienna wyjściowa`: `HDR`
 
 **LINES:**
-`Rodzaj`: Instrukcja obsługi dokumentu
-`Typ rozkazu`: Pobranie linii
-`Zmienna wyjściowa`: `LINES`
+- `Rodzaj`: Instrukcja obsługi dokumentu
+- `Typ rozkazu`: Pobranie linii
+- `Zmienna wyjściowa`: `LINES`
 
 **SQL:**
-`Rodzaj`: Instrukcja obsługi skryptu
-`Skrypt`: 
-```sql
-declare 
-	@cc nvarchar(100),
-	@qty float,
-	@lineid int,
-	@item  nvarchar(100);
+- `Rodzaj`: Instrukcja obsługi skryptu
+- `Skrypt`: 
 
-select top 1 @cc=PH from #HDR
-select top 1 @cc =  SValue from dbo.strexplode('<!>',@cc)
-select @lineid = LINEID from [#EVENTARGS]
-select 
-	@item = TOWAR,
-	@qty = isnull(ilosc,0)
-from #LINES where SYS_LINEID = @lineid
+    ```sql
+    declare 
+    	@cc nvarchar(100),
+    	@qty float,
+    	@lineid int,
+    	@item  nvarchar(100);
 
-if @item is null begin
-	select -1 as SYS_LINEID,0 as CENA;
-	return;
-end;
-select 
-	@lineid as SYS_LINEID,
-    [$DBNAME].dbo.AFN_GetPrice(@item,@cc,@qty) as CENA
+    select top 1 @cc=PH from #HDR
+    select top 1 @cc =  SValue from dbo.strexplode('<!>',@cc)
+    select @lineid = LINEID from [#EVENTARGS]
+    select 
+    	@item = TOWAR,
+    	@qty = isnull(ilosc,0)
+    from #LINES where SYS_LINEID = @lineid
     
-```
-`Zmienna wyjściowa`: `SQL`
-
+    if @item is null begin
+    	select -1 as SYS_LINEID,0 as CENA;
+    	return;
+    end;
+    select 
+    	@lineid as SYS_LINEID,
+        [$DBNAME].dbo.AFN_GetPrice(@item,@cc,@qty) as CENA       
+    ```
+- `Zmienna wyjściowa`: `SQL`
 > **Uwaga:** Przykład właściwy tylko dla SAP Business One
 
 **Warunki**
 Warunek 1: `EVENTARGS[ITEMCODE] = "getprice_bt"`
 Warunek 2: `SQL[SYS_LINEID] >= "0"`
-
 
 ### Uwagi:
   - Własności dokumentu i zmiennych typu `Data`  maja zawsze wartość przekształconą na tekst 
