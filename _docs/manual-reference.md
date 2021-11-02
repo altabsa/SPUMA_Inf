@@ -754,14 +754,12 @@ start2((Zmiana wart.))-->|Warunek 2|A
 ### Zmienne 
 Zmienne są tablicami dwuwymiarowymi które są globalne w ramach całego procesu. Przy definiowaniu instrukcji możemy podać istniejącą zmienna lub utworzyć nową.
 #### Właściwości 
-`Nazwa` - Nazwa (kod) zmiennej
-> **Uwaga:** Nazwa musi być unikatowa w ramach procesu. Nie wolno stosować znaków narodowych i specjalnych. Zakres dozwolony to `A-Z` i znaki  `_-` 
+- `Nazwa` - Nazwa (kod) zmiennej
+    > **Uwaga:** Nazwa musi być unikatowa w ramach procesu. Nie wolno stosować znaków narodowych i specjalnych. Zakres dozwolony to `A-Z` i znaki  `_-` 
+- `Opis` - Opis zmiennej- widoczny tylko w panelu administracyjnym.
+- `Typ` - Typ zadeklarowanej zmiennej
 
-`Opis` - Opis zmiennej- widoczny tylko w panelu administracyjnym.
-
-`Typ` - Typ zadeklarowanej zmiennej
-
-   | typ | Użycie w instrukcjach |
+   | Typ | Użycie w instrukcjach |
    | --- | --- |
    | `Int` | Komunikat |
    | `Tabela` | Dokument, Skrypt, Wykonanie DLL |
@@ -775,12 +773,11 @@ Instrukcje są czynnościami które wykonujemy w danym kroku. Są 4 rodzaje inst
 
 Instrukcje pobierają lub wpisują dane do podanych zmiennych (zależnie od rodzaju lub typu rozkazu). 
 Wspólne, dla każdego rodzaju,  własności to:
-`Nazwa` - Nazwa (kod) procesu
-> **Uwaga:** Nazwa musi być unikatowa w ramach  całej bazy. Nie wolno stosować znaków narodowych i specjalnych. Zakres dozwolony to `A-Z` i znaki  `_-` 
 
-`Opis` - Opis procesu - widoczny tylko w panelu administracyjnym.
-
-`Zmienna  We/Wy` - Zmienna z której proces czyta lub do której zwraca dane.
+- `Nazwa` - Nazwa (kod) procesu
+    > **Uwaga:** Nazwa musi być unikatowa w ramach  całej bazy. Nie wolno stosować znaków narodowych i specjalnych. Zakres dozwolony to `A-Z` i znaki  `_-` 
+- `Opis` - Opis procesu - widoczny tylko w panelu administracyjnym.
+- `Zmienna  We/Wy` - Zmienna z której proces czyta lub do której zwraca dane.
 
 #### Instrukcja obsługi dokumentu
 Czynności wykonywane przez instrukcję zależą  od typu rozkazu.
@@ -792,6 +789,7 @@ w której rejestrowany jest numer linii
 ##### Aktualizacja linii 
 Zmiana lub dodanie nowej linii. Zmienna powinna być tablicą dwuwymiarowa z nazwami kolumn zgodnymi z atrybutami linii. Nie jest wymagane podanie wszystkich atrybutów. Wymagana jest   przynajmniej jedna kolumna o nazwie  `SYS_LINEID` gdzie rejestrowany jest numer aktualizowanej linii (numeracja od 0) lub wartość `-1` (przy dodawaniu nowej linii). 
 > **Przykład:** Aktualizacja 1 linii i dodanie nowej z ilością. Skrypt który tworzy zmienna:
+> 
 > ```sql
 > Select 0 as SYS_LINEID, 4 as ILOSC
 > union 
@@ -805,6 +803,7 @@ Instrukcja kasująca wybraną  linie. Numer linii w zmiennej w kolumnie `SYS_LIN
 
 ##### Pobranie nagłówka
 Pobranie do zmiennej dane z nagłówka dokumentu. Zmienna jest tablica z jednym wierszem. Kolumny maja takie nazwy jak atrybuty nagłówka. Dodatkowe informacje zarejestrowane są w kolumnach systemowych:
+
 | Kolumna systemowa | Opis |
 | --- | --- |
 | SYS_ID | Id dokumentu |
@@ -820,6 +819,7 @@ Pobranie do zmiennej dane z nagłówka dokumentu. Zmienna jest tablica z jednym 
 
 ##### Aktualizacja nagłówka
 Instrukcja zmienia wartości atrybutów nagłówka. Zmienna powinna być tablicą dwuwymiarowa z nazwami kolumn zgodnymi z atrybutami nagłówka. Nie jest wymagane podanie wszystkich własności , wystarczy  jedna kolumna. Oprócz atrybutów nagłówka można używać następujących własności systemowych:
+
 | Kolumna systemowa | Opis |
 | --- | --- |
 | SYS_NAME | Nazwa dokumentu  |
@@ -835,19 +835,17 @@ Instrukcja zapisująca zmiany na dokumencie. Nie wymaga podania zmiennej.
 Instrukcja wywołująca zapytanie SQL i zwracająca jego wynik do podanej zmiennej tabelarycznej. Zapytania SQL są stosowane do wykonywania obliczeń, przygotowywania danych do zmiennych do  
 
 ##### Własności:
-`Typ` - Rodzaj połączenia z bazą 
-`DBNAME` - Nazwa bazy alternatywnej (np systemu ERP). Nazwa ta podstawiana jest do skryptu  do wyrażenia `$DBNAME`
-`Skrypt` - Treść Zapytanie SQL.
+- `Typ` - Rodzaj połączenia z bazą 
+- `DBNAME` - Nazwa bazy alternatywnej (np systemu ERP). Nazwa ta podstawiana jest do skryptu  do wyrażenia `$DBNAME`
+- `Skrypt` - Treść Zapytanie SQL.
 
-Przy tworzeniu zapytania należy pamiętać, że mamy dostęp do zmiennych całego procesu. Przechowywane są one w tablicach tymczasowych o nazwie `#nazwa_zmennej` (patrz [przykład](#procesy_ui_p1)).
+    > Przy tworzeniu zapytania należy pamiętać, że mamy dostęp do zmiennych całego procesu. Przechowywane są one w tablicach tymczasowych o nazwie `#nazwa_zmennej` (patrz [przykład](#procesy_ui_p1)).
 
 #### Instrukcja komunikatu
 Instrukcja generuje okienko z informacja lub prośba o decyzję. W wyniku działania zapisuje w zmiennej typu `Int` numer wybranego przycisku
 ##### Własności:
 - `Komunikat` Tekst który zostanie wyświetlony. Można używać zmiennych w postaci `$nazwa_zmiennej` lub `$nazwa_zmiennej[kolumna]`
-
 - `Przycisk 1`, `Przycisk 2`, `Przycisk 3` : Etykiety na przyciskach. Jeśli wartość jest pusta przycisk się nie pojawi.
-
 
 #### Instrukcja DLL
 Instrukcja wywołuje funkcje podanej w parametrach biblioteki DLL. W wyniku jej działania, do zmiennej trafia  wygenerowany wynik. 
@@ -883,12 +881,13 @@ Ze standardowa instalacja systemu SPUMA dostarczana jest biblioteka `SAPB1Utils`
 
 ### Warunki
 Warunki definiuje się pomiędzy krokami algorytmu.
-```mermaid
+
+<div class="mermaid">
 graph LR;
 start((Start))-->|Warunek 1|A(Krok A)
 A-->stop((Stop))
+</div>
 
-```
 Gdy `Warunek 1` jest spełniony algorytm idzie do `kroku A`, w przeciwnym przypadku `krok A` nie jest wykonywany. Jeśli nie było innych ścieżek,  algorytm jest przerywany.
 
 Warunek składa się ze strony prawej , operatora i strony lewej
@@ -917,28 +916,22 @@ Własności dokumentu podaje się w formacie
 `nazwa_wlasosci` to nazwa atrybutu własnego nagłówka .
 > Przykład:
 > `DOC._DATA`  - wartość atrybutu nagłówka DATA
-
-> **Uwaga:** Nazwy własności należy pisać wielką literą
+> **Uwaga:** ❗ Nazwy własności należy pisać wielką literą
 
 #### Zmienne algorytmu
 Zmienne w algorytmie  są zawsze tablicami dwuwymiarowymi. Domyślnie wybierana jest pierwsza kolumna jeśli nie podamy jej nazwy. Do warunków pobierany jest zawsze  pierwszy wiersz zmiennej i nie ma możliwości odwołania się do innego. 
 
-   > **Przykład 1:** Zmienna `decyzja`  przypisana do instrukcji komunikatu  zwraca numer naciśniętego przycisku. Warunek  może wyglądać następująco:
-   > `decyzja = "1"` 
-   > Sprawdza to czy został naciśnięty pierwszy przycisk. Tak naprawdę warunek który jest sprawdzany to:
-   > `decyzja[0] = "1"`  
-   > 
-   > **Przykład 2:** Zmienna `sql`  przypisana do instrukcji skryptu i zwraca tylko jeden wiersz zawierający dwie kolumny: `kod` i `ilosc`. Warunek ma sprawdzić czy kolumna ilość jest większa od zera.
-   > `sql[ILOSC] > "0"` 
+   > **Przykład 1:** Zmienna `decyzja`  przypisana do instrukcji komunikatu  zwraca numer naciśniętego przycisku. Warunek  może wyglądać następująco: `decyzja = "1"`. Sprawdza to czy został naciśnięty pierwszy przycisk. Tak naprawdę warunek który jest sprawdzany to: `decyzja[0] = "1"`     
+   > **Przykład 2:** Zmienna `sql`  przypisana do instrukcji skryptu i zwraca tylko jeden wiersz zawierający dwie kolumny: `kod` i `ilosc`. Warunek ma sprawdzić czy kolumna ilość jest większa od zera: `sql[ILOSC] > "0"` 
 
 W warunkach można  zdefiniować również specjalną funkcje `count()` która poda ilość wierszy zwracanych w zmiennej.
-   > **Przykład 3:** Zmienna `sql`  przypisana do instrukcji skryptu i zwraca  wiersze  które przepisywane będą do  wierszy dokumentu. Warunek ma sprawdzić czy  skrypt zwraca wiersze. 
-   > `count(sql) > "0"` 
+   > **Przykład 3:** Zmienna `sql`  przypisana do instrukcji skryptu i zwraca  wiersze  które przepisywane będą do  wierszy dokumentu. Warunek ma sprawdzić czy  skrypt zwraca wiersze: `count(sql) > "0"` 
 
 #### Stałe
 Bezpośrednio wpisana wartość (zawsze w cudzysłowie)    
 
 #### Operatory:
+
 | operator | opis | typ argumentów|
 | --- | --- | --- |
 | `=` | równy| tekst, liczba |
@@ -965,7 +958,8 @@ Bezpośrednio wpisana wartość (zawsze w cudzysłowie)
 **Działania przygotowawcze:** Na klasie `Zamówienia` należy dodać wyzwalacz  na liniach o nazwie np. `getprice_bt` 
 
 **Diagram:**
-```mermaid
+
+<div class="mermaid">
 graph LR;
 start((<center><b>Start</b><br/><span style='font-size:.8em' >po kliknięciu</span></center>))-->|"Warunek 1"|A(<strong>HDR</strong> <br/> Pobranie danych nagłówka)
 A--> B(<b>LINES</b><br/>Pobranie danych linii)
@@ -976,8 +970,7 @@ style A fill:#FFFDAA;
 style B fill:#FFFDAA;
 style D fill:#FFFDAA;
 style C fill:#AAFFFF;
-
-```
+</div>
 
 **Start:**
 `Rodzaj`: Wyzwalacz po kliknięciu
