@@ -1899,7 +1899,6 @@ Note left of w: Okno <br/>mapowania <br/> kolumn
 deactivate w
 
 w->>d: Potwierdzenie mapowania
-  opt ZAPAMIETAJ
     activate d
     Note right of d: Procedura<br/>APR_FINDLINEVALUES 
     deactivate d
