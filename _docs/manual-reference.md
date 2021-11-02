@@ -1426,17 +1426,17 @@ Wymusza autoryzacje dokumentu w tym kroku oraz umożliwia zdefiniowanie dodatkow
 - `Parametry` - określenie parametrów które użytkownik musi określić na tym etapie autoryzacji.
   > **Uwaga:**  Należy podać przynajmniej jeden parametr.
 
-Parametry dodaje się do listy od razu określając ich typ:
+  Parametry dodaje się do listy od razu określając ich typ:
   
-| Typ | Opis |
-| ------- | ---- |
-| **Text** |  użytkownik wpisuje tekst |
-| **Int** |  użytkownik podaje liczbę całkowitą |
-| **Float** |  użytkownik podaje kwotę |
-| **Słownik użytkownika** |   użytkownik wybiera wartość z listy |
-| **Wybór użytkownika** |  użytkownik wybiera użytkownika z listy |
-| **Schemat** | użytkownik edytuje  własny schemat |
-| **Wybór schematu** |   użytkownik wybiera schemat z listy |
+  | Typ | Opis |
+  | ------- | ---- |
+  | **Text** |  użytkownik wpisuje tekst |
+  | **Int** |  użytkownik podaje liczbę całkowitą |
+  | **Float** |  użytkownik podaje kwotę |
+  | **Słownik użytkownika** |   użytkownik wybiera wartość z listy |
+  | **Wybór użytkownika** |  użytkownik wybiera użytkownika z listy |
+  | **Schemat** | użytkownik edytuje  własny schemat |
+  | **Wybór schematu** |   użytkownik wybiera schemat z listy |
 
 - **Własności ogólne parametrów** 
   - `Nazwa` - Nazwa (kod) parametru.
@@ -1480,29 +1480,31 @@ Część dotycząca linii pozwala na definiowanie uprawnień edycji dla poszczeg
 
 ### Przykłady
 
-**Przykład 1:** Decyzja + kwota
+- **Przykład 1:** Decyzja + kwota
 
-**Opis:** Na 1 etapie dokument ma trafić do określonej osoby A. Użytkownik A ma zadecydować który dział ma to dalej procesować. Założenie dodatkowe: Jeśli kwota dokumentu jest większa niż 5000, dokument ma przejść przez autoryzacje dyrektora finansowego (użytkownik B)
+  **Opis:** Na 1 etapie dokument ma trafić do określonej osoby A. Użytkownik A ma zadecydować który dział ma to dalej procesować. Założenie dodatkowe: Jeśli kwota dokumentu jest większa niż 5000, dokument ma przejść przez autoryzacje dyrektora finansowego (użytkownik B)
 
-**Diagram:**
-```mermaid
-graph LR;
-start((Start))-->A(<strong>Etap 1</strong> <br/> Wybranie schematu)
-A-->|Kwota dok >= 5000| E(<b>Etap 3</b><br/>Dyrektor Finansowy)
-A-->|Kwota dok < 5000| D(<b>Etap 2</b><br/>Autoryzacja wg schematu)
-E-->D
-D-->stop((Stop))
-style A fill:#FFFDAA;
-```
+  **Diagram:**
 
-**Etap 1:**
-`Rodzaj`: Autoryzacja z parametrami 
-`Typ`: Użytkownik zdefiniowany
-`Obiekt`: User A
-`Parametry`: 
-| Rodzaj | Typ | Obiekt | Zmienna
-| --- | --- | --- | --- |
-| Wybór schematu | Grupa własna | Lista schematów | `ETAP_1.PSCH`
+  <div class="mermaid">
+  graph LR;
+  start((Start))-->A(Etap 1<br/> Wybranie schematu)
+  A-->|Kwota dok >= 5000| E(Etap 3<br/>Dyrektor Finansowy)
+  A-->|Kwota dok < 5000| D(Etap 2<br/>Autoryzacja wg schematu)
+  E-->D
+  D-->stop((Stop))
+  style A fill:#FFFDAA;
+  </div>
+
+  - **Etap 1:**
+    - `Rodzaj`: Autoryzacja z parametrami 
+    - `Typ`: Użytkownik zdefiniowany
+    - `Obiekt`: User A
+    - `Parametry`: 
+    
+      | Rodzaj | Typ | Obiekt | Zmienna
+      | --- | --- | --- | --- |
+      | Wybór schematu | Grupa własna | Lista schematów | `ETAP_1.PSCH`
 
 **Etap 2:**
 `Rodzaj`: Autoryzacja prosta
