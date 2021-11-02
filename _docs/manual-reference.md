@@ -228,7 +228,8 @@ Definiowanie sposobu rejestracji atrybutu typu  `Własny` przechowującego infor
 
 ### Uprawnienia
 Uprawnienia ustawiane w tym miejscu różnią się od głównego mechanizmu uprawnień ([patrz Uprawnienia](#uprawnienia)). W tym miejscu możemy można ustawić globalny dostęp do danej firmy. Zarówno do tworzenia jak i podglądu  dokumentów. 
-| Uprawnieni| Opis |
+
+| Uprawnienie | Opis |
 | ------- | ---- |
 | Pełne| Użytkownik ma  domyślnie dostęp do każdej z firm. Uprawnienia szczegółowe brane są z głównego mechanizmu uprawnień ([patrz Uprawnienia](#uprawnienia))    |
 | Wybrane  | Użytkownik ma  dostęp tylko do wybranych firm (tabela `BUSINESSPARTNERDB`)
@@ -237,7 +238,7 @@ Uprawnienia ustawiane w tym miejscu różnią się od głównego mechanizmu upra
 
 ## <a id='klasy' href='klasy' hidden='true'></a> Klasy
 Klasa (używane zamiennie ze słowem Typ) jest podstawowym obiektem klasyfikującym dokumenty w firmie. Przy jej użyciu, można dla dokumentu:
- -  definiować politykę uprawnień,
+ - definiować politykę uprawnień,
  - określać zestaw atrybutów własnych i wyzwalaczy , 
  - przypisywać ścieżki autoryzacji,
  - nadawać numerację w określonym formacie,
@@ -245,201 +246,183 @@ Klasa (używane zamiennie ze słowem Typ) jest podstawowym obiektem klasyfikują
  - i wiele innych.
 
 ### Ogólne
-`Organizacja` - Do jakiej organizacji należy klasa. Ustawienie `(Wszystkie)` określa, że klasa i jej dokumenty widoczne są dla użytkowników wszystkich organizacji.
+- `Organizacja` - Do jakiej organizacji należy klasa. Ustawienie `(Wszystkie)` określa, że klasa i jej dokumenty widoczne są dla użytkowników wszystkich organizacji.
+- `Nazwa` - Kod (nazwa) klasy.
+    > **Uwaga:** Kod musi być unikatowy w ramach całej bazy. Nie wolno stosować znaków narodowych i specjalnych. Zakres dozwolony to `A-Z` i znaki  `_-` 
+- `Opis` - Opis klasy - widoczny  w panelu administracyjnym i w aplikacji WWW.
+- `Scieżka domyślna` - Własność służy do zdefiniowania ścieżki katalogów repozytorium do jakiej trafi dokument tej klasy po wyjściu  z sekretariatu. 
+    > Przykład: `Faktury\Dział A\{DOCDATE | yyyy-MM}`
+    W podanym powyżej przykładzie dokument z dnia 12.10.2017 zostanie przeniesiony do podkatalogu 
 
-`Nazwa` - Kod (nazwa) klasy.
-> **Uwaga:** Kod musi być unikatowy w ramach całej bazy. Nie wolno stosować znaków narodowych i specjalnych. Zakres dozwolony to `A-Z` i znaki  `_-` 
+    ```
+    ├── Faktury
+    │   ├── Dział A
+    │   │   └── 2017-10
+    ```
+    W definicji po nazwie po znaku `|`  możemy podać dodatkowe informacje formatujące zwracaną wartość
 
-`Opis` - Opis klasy - widoczny  w panelu administracyjnym i w aplikacji WWW.
+    > Przykłady: 
+    >    - `{DOCDATE | yyyy-MM}` data dokumentu w formacie yyyy-MM
+    >    -  `{USER | VALUE}` - login zalogowanego użytkownika 
+    >    
+    W definicji można używać następujących słów kluczowych
 
-`Scieżka domyślna` - Własność służy do zdefiniowania ścieżki katalogów repozytorium do jakiej trafi dokument tej klasy po wyjściu  z sekretariatu. 
+     | Słowo kluczowe | Opis | Informacje formatujące |
+     | --- | --- |  --- |
+     | `ID` | Id dokumentu |  |
+     | `USER` | Zalogowany użytkownik |  `CODE` = Id   <br/> `VALUE` = Login  | 
+     | `CLASS` | Klasa dokumentu |   `CODE` = Id   <br/> `VALUE` = Nazwa  | 
+     | `COMPANY` | Firma dokumentu |    `CODE` = Id   <br/> `VALUE` = Nazwa  | 
+     | `NAME` | Nazwa dokumentu |   |
+     | `DESCRIPTION` | Opis dokumentu |    |
+     | `TEMPLATEID` | Id szablonu |  |
+     | `ENTERDATE` | Data wpływu dokumentu |  wyrażenie formatujące datę  |
+     | `DOCDATE` | Data  dokumentu |  wyrażenie formatujące datę  |
+     | `GETDATE` | Bieżąca data |  wyrażenie formatujące datę  |
+    > Wyrażenie formatujące datę jest zgodne ze standardem Angular DatePipe https://angular.io/api/common/DatePipe
 
-> Przykład: `Faktury\Dział A\{DOCDATE | yyyy-MM}`
+- `Widoczność` -  Klasę można ukryć, aby nie była widoczna w aplikacji WWW. Użytkownik nie może dodawać dokumentów tej  klasy. Ukrywanie dotyczy najczęściej klas bazowych. 
+- `Kolor` - Określenie koloru klasy . Używane do wyróżnienia dokumentów na liście w aplikacji WWW.
+- `Klasa bazowa` - Wybranie innej klasy w systemie SPUMA która pełnić będzie rolę bazowej. W ten sposób odziedziczone zostaną wszystkie atrybuty (zarówno nagłówka jak i linii). 
+Klasy bazowe stosuje się jako szablony klas. Zapewniają one spójność nazewnictwa atrybutów
 
-W podanym powyżej przykładzie dokument z dnia 12.10.2017 zostanie przeniesiony do podkatalogu 
+    > **Przykład:** 
+    > Klasa `Faktura_bazowa` ma 2 atrybuty: `PH` i `Kwota`. 
+    > Definiujemy klasę `Faktura-Dzial-A` która ma ustawiona ja jako bazową i  dodajemy tylko 1 atrybut `Typ_plantosci`. 
+    > W efekcie klasa `Faktura-Dzial-A` ma 3 atrybuty: `PH` , `Kwota` i `Typ_plantosci`
 
-```
-├── Faktury
-│   ├── Dział A
-│   │   └── 2017-10
+- `Klasa zalącznika` , `załacznik do OCR`  -  Określenie klasy dla dokumentu rejestrowanego w aplikacji WWW jako załącznik. Umożliwia to dodawanie do istniejących dokumentów  dodatkowych załączników, bezpośrednio z plików, bez konieczności rejestrowania ich w sekretariacie. Załączniki te zostaną zarejestrowane jako osobny dokument i będą  automatycznie  przypięte do źródła.
+    > Przykład zastosowania: Paragony do dokumentu delegacji 
 
-```
-W definicja po nazwie po znaku `|`  możemy podać dodatkowe informacje formatujące zwracaną wartość
-> Przykłady: 
->    - `{DOCDATE | yyyy-MM}` data dokumentu w formacie yyyy-MM
->    -  `{USER | VALUE}` - login zalogowanego użytkownika 
->    
-W definicji można używać następujących słów kluczowych
+    O tym, czy taki załącznik jest przetwarzany przez mechanizm OCR, decyduje ustawienie `załacznik do OCR`
+    > **Uwaga:** Ustawienie wartości `(brak)`  wyłączy na danej klasie funkcjonalność dodawania załączników.
 
- | Wywołanie| Opis | Informacje formatujące |
- | --- | --- |  --- |
- |`ID` | Id dokumentu |  |
- |`USER` | Zalogowany użytkownik |  `CODE` = Id   <br/> `VALUE` = Login  | 
- |`CLASS` | Klasa dokumentu |   `CODE` = Id   <br/> `VALUE` = Nazwa  | 
- |`COMPANY` | Firma dokumentu |    `CODE` = Id   <br/> `VALUE` = Nazwa  | 
- |`NAME` | Nazwa dokumentu |   |
- |`DESCRIPTION` | Opis dokumentu |    |
- |`TEMPLATEID`| Id szablonu |  |
- |`ENTERDATE`| Data wpływu dokumentu |  wyrażenie formatujące datę  |
- |`DOCDATE`| Data  dokumentu |  wyrażenie formatujące datę  |
- |`GETDATE`| Bieżąca data |  wyrażenie formatujące datę  |
-> Wyrażenie formatujące datę jest zgodne ze standardem Angular DatePipe https://angular.io/api/common/DatePipe
-> 
-`Widoczność` -  Klasę można ukryć, aby nie była widoczna w aplikacji WWW. Użytkownik nie może dodawać dokumentów tej  klasy. Ukrywanie dotyczy najczęściej klas bazowych. 
+- `Dopasowanie` - Wyrażenie regularne sprawdzane dla warstwy tekstowej rozpoznanego dokumentu. Jeśli jest spełnione, dokument zmieniając status `Rozpoznawany` na `Do sprawdzenia` automatycznie określa się tą klasą.
+    > **Przykład:** Klasa  `faktura kosztowa` ma określone wyrażenie regularne `\bfaktura\b`  w polu `Dopasowanie`. W związku z tym, każdy dokument, który będzie mieć po rozpoznaniu OCR , w warstwie tekstowej słowo `faktura` zostanie zakwalifikowany jako klasa  `faktura kosztowa`
 
-`Kolor` - Określenie koloru klasy . Używane do wyróżnienia dokumentów na liście w aplikacji WWW.
+- `Format nazwy` - Ciąg znaków określających jak tworzone będzie nazewnictwo (numer kancelaryjny) dokumentu danej klasy. W nawiasach klamrowych określone są słowa kluczowe które pobierają do nazwy własności dokumentu:
 
-`Klasa bazowa` - Wybranie innej klasy w systemie SPUMA która pełnić będzie rolę bazowej. W ten sposób odziedziczone zostaną wszystkie atrybuty (zarówno nagłówka jak i linii). 
-Klasy bazowe stosuje się jako szablony klas. Zapewniają one  kompatybilność nazewnictwa atrybutów
+    | Słowo kluczowe | Opis |
+    | --- | --- | 
+    | `CLASSNAME` | Nazwa klasy |  
+    | `CARDCODE` | Kod atrybutu własnego [Patrz Atrybuty](#atrybuty) |  
+    | `DOCNUM` | Numer dokumentu |  
+    | `ID` | Id dokumentu (z bazy) |  
+    | `UNIQID` | Unikatowe Id dokumentu w ramach klasy  |  
+    | `CMPNAME` | Nazwa firmy |  
+    | `USERNAME` | login użytkownika |  
+    | `DOCDATE` | Data dokumentu |  
+    | `DD_DD`, `DD_MM`, `DD_YY`, `DD_YYYY` | Dzień, miesiąc lub rok  z daty dokumentu  
+    | `ENTERDATE` | Data wpływu |  
+    | `ED_DD`, `ED_MM`, `ED_YY`, `ED_YYYY` | Dzień, miesiąc lub rok  z daty wpływu  
+    | `CREATEDATE` | Data utworzenia dokumentu |  
+    | `CD_DD`, `CD_MM`, `CD_YY`, `CD_YYYY` | Dzień, miesiąc lub rok  z daty utworzenia dokumentu  
 
-> **Przykład:** 
-> Klasa `Faktura_bazowa` ma 2 atrybuty: `PH` i `Kwota`. 
-> Definiujemy klasę `Faktura-Dzial-A` która ma ustawiona ja jako bazową i  dodajemy tylko 1 atrybut `Typ_plantosci`. 
-> W efekcie klasa `Faktura-Dzial-A` ma 3 atrybuty: `PH` , `Kwota` i `Typ_plantosci`
+    > **Uwaga:** Można również podstawiać wartości atrybutów własnych. Należy wtedy użyć konstrukcji `{{NAZWA_ATRYBUTU}}` 
 
-`Klasa zalącznika` , `załacznik do OCR`  -  Określenie klasy dla dokumentu rejestrowanego w aplikacji WWW jako załącznik. Umożliwia to dodawanie do istniejących dokumentów  dodatkowych załączników, bezpośrednio z plików, bez konieczności rejestrowania ich w sekretariacie. Załączniki te zostaną zarejestrowane jako osobny dokument i będą  automatycznie  przypięte do źródła.
-> Przykład zastosowania: Paragony do dokumentu delegacji 
+- `Własny schemat` - Możliwość definiowania własnego schematu autoryzacji
+- `Schemat jest wymagany` - Określenie konieczności autoryzowania dokumentu. Nieaktywna opcja `bez autoryzacji`
+- `Schematy autoryzacji` - Zaznaczenie schematów i procesów  które można użyć do autoryzacji dokumentów  danej klasy
+- `Domyślny schemat` - który z wybranych  schematów lub procesów podpowie się jako domyślny
+- `Metoda kopiowania uprawnień` - Włączenie opcji kopiowania na uprawnienia dokumentu  uczestników wybranej autoryzacji. Opcje:
 
-O tym, czy taki załącznik jest przetwarzany przez mechanizm OCR, decyduje ustawienie `załacznik do OCR`
-> **Uwaga:** Ustawienie wartości `(brak)`  wyłączy na danej klasie funkcjonalność dodawania załączników.
+    | Metoda | Opis |
+    | ------- | ---- |
+    | ***Nigdy***| uprawnienia nie są kopiowane |
+    | ***Zawsze*** | uprawnienia są zawsze kopiowane |
+    | ***Pytaj*** | wyświetli się monit z pytaniem. |
 
-`Dopasowanie` - Wyrażenie regularne sprawdzane dla warstwy tekstowej rozpoznanego dokumentu. Jeśli jest spełnione, dokument zmieniając status `Rozpoznawany` na `Do sprawdzenia` automatycznie określa się tą klasą.
-> **Przykład:** Klasa  `faktura kosztowa` ma określone wyrażenie regularne `\bfaktura\b`  w polu `Dopasowanie`. W związku z tym, każdy dokument, który będzie mieć po rozpoznaniu OCR , w warstwie tekstowej słowo `faktura` zostanie zakwalifikowany jako klasa  `faktura kosztowa`
-
-`Format nazwy` - Ciąg znaków określających jak tworzone będzie nazewnictwo (numer kancelaryjny) dokumentu danej klasy. W nawiasach klamrowych określone są słowa kluczowe które pobierają do nazwy własności dokumentu:
-
-| Słowo kluczowe | Opis |
-| --- | --- | 
-|`CLASSNAME` | Nazwa klasy |  
-|`CARDCODE` | Kod atrybutu własnego [Patrz Atrybuty](#atrybuty) |  
-|`DOCNUM` | Numer dokumentu |  
-|`ID` | Id dokumentu (z bazy) |  
-|`UNIQID` | Unikatowe Id dokumentu w ramach klasy  |  
-|`CMPNAME` | Nazwa firmy |  
-|`USERNAME` | login użytkownika |  
-|`DOCDATE` | Data dokumentu |  
-|`DD_DD`, `DD_MM`, `DD_YY`, `DD_YYYY` | Dzień, miesiąc lub rok  z daty dokumentu  
-|`ENTERDATE` | Data wpływu |  
-|`ED_DD`, `ED_MM`, `ED_YY`, `ED_YYYY` | Dzień, miesiąc lub rok  z daty wpływu  
-|`CREATEDATE` | Data utworzenia dokumentu |  
-|`CD_DD`, `CD_MM`, `CD_YY`, `CD_YYYY` | Dzień, miesiąc lub rok  z daty utworzenia dokumentu  
-
-> **Uwaga:** Można również podstawiać wartości atrybutów własnych. Należy wtedy użyć konstrukcji `{{NAZWA_ATRYBUTU}}` 
-
-`Własny schemat` - Możliwość definiowania własnego schematu autoryzacji
-
-`Schemat jest wymagany` - Określenie konieczności autoryzowania dokumentu. Nieaktywna opcja `bez autoryzacji`
-
-`Schematy autoryzacji` - Zaznaczenie schematów i procesów  które można użyć do autoryzacji dokumentów  danej klasy
-
-`Domyślny schemat` - który z wybranych  schematów lub procesów podpowie się jako domyślny
-
-`Metoda kopiowania uprawnień` - Włączenie opcji kopiowania na uprawnienia dokumentu  uczestników wybranej autoryzacji. Opcje:
-- `Nigdy` - uprawnienia nie są kopiowane
-- `Zawsze` - uprawnienia są zawsze kopiowane
-- `Pytaj` - wyświetli się monit z pytaniem.
-
-`Kontrola unikalności nazwy` - sprawdzanie czy nazwa dokumentu jest unikalna w ramach całej bazy
-
-`Kontrola formatu nazwy` - Jak generowana jest nazwa dokumentu:
-- `Automatycznie` - Nazwa generowana jest automatycznie i nie można jej edytować. 
-- `Pozówl edytować` - Nazwa generuje się przez przycisk  i można ją zmieniać, ale musi spełniać wymagania formatu określonego we własności `Format nazwy`
-- `Nie sprawdzaj` - Nazwa generuje się przez przycisk  i można ją zmieniać dowolnie. 
+- `Kontrola unikalności nazwy` - sprawdzanie czy nazwa dokumentu jest unikalna w ramach całej bazy
+- `Kontrola formatu nazwy` - Jak generowana jest nazwa dokumentu:
+    | Metoda | Opis |
+    | ------- | ---- |
+    | ***Automatycznie***| Nazwa generowana jest automatycznie i nie można jej edytować. |
+    | ***Pozówl edytować*** | Nazwa generuje się przez przycisk  i można ją zmieniać, ale musi spełniać wymagania formatu określonego we własności `Format nazwy` |
+    | ***Nie sprawdzaj*** | Nazwa generuje się przez przycisk  i można ją zmieniać dowolnie. |
  
->**Uwaga:** Generowanie nazwy (przy ustawieniu `Automatycznie`) i sprawdzenie poprawności  wykonywane jest przy wyjściu dokumentu z sekretariatu w celu zapewnienia unikalności numeru UNIQID
+    >**Uwaga:** Generowanie nazwy (przy ustawieniu `Automatycznie`) i sprawdzenie poprawności  wykonywane jest przy wyjściu dokumentu z sekretariatu w celu zapewnienia unikalności numeru UNIQID
 
-`Kontrola unikalności numeru` - sprawdzanie czy numer dokumentu jest unikalny w ramach całej bazy
-
-`Numer dokumentu wymagany` - Dokumenty tej klasy wymagać będą podania numeru 
-
-`Automatyczne dodanie linii` - Przy dodawaniu linii w aplikacji WWW automatycznie po wypełnieniu ostatniej kolumny zostanie dodana nowa pusta linia.
+- `Kontrola unikalności numeru` - sprawdzanie czy numer dokumentu jest unikalny w ramach całej bazy
+- `Numer dokumentu wymagany` - Dokumenty tej klasy wymagać będą podania numeru 
+- `Automatyczne dodanie linii` - Przy dodawaniu linii w aplikacji WWW automatycznie po wypełnieniu ostatniej kolumny zostanie dodana nowa pusta linia.
 
 ### <a id='klasy_atrybuty' hidden='true'></a> Atrybuty
-Atrybuty klasy dzielą się  na atrybuty nagłówka i linii. Te pierwsze definiują jedną wartością per dokument. Atrybuty linii są kolumnami tabeli opisującej np. rozbite koszty  na działy, lub trasy wyjazdów (dla delegacji). 
+Atrybuty klasy dzielą się na atrybuty nagłówka i linii. Te pierwsze definiują jedną wartością per dokument. Atrybuty linii są kolumnami tabeli opisującej np. rozbite koszty  na działy, lub trasy wyjazdów (dla delegacji). 
 
 #### Własności
-`Nazwa` - Nazwa (kod) atrybutu
-> **Uwaga:** Nazwa musi być unikatowa w ramach klasy.  Nie jest to wymagane dla całej bazy. Często, powtórzenie nazwy  jest wskazane. Jeśli opisujemy atrybut typu  `własny` warto zawsze stosować tą sama nazwę (np. `ph`). W takim przypadku wyszukiwanie zwróci wyniki  z wielu klas.
+- `Nazwa` - Nazwa (kod) atrybutu
+    > **Uwaga:** Nazwa musi być unikatowa w ramach klasy.  Nie jest to wymagane dla całej bazy. Często, powtórzenie nazwy  jest wskazane. Jeśli opisujemy atrybut typu  `własny` warto zawsze stosować tą sama nazwę (np. `ph`). W takim przypadku wyszukiwanie zwróci wyniki  z wielu klas.
 
-`Opis` - Opis atrybutu - widoczny tylko w panelu administracyjnym .
-
-`Etykieta` -  Etykieta atrybutu,  widoczna w aplikacji WWW
-
-`Obowiązkowe` -  Czy podanie wartości atrybutu jest konieczne przed opuszczeniem sekretariatu przez dokument.
+- `Opis` - Opis atrybutu - widoczny tylko w panelu administracyjnym .
+- `Etykieta` -  Etykieta atrybutu,  widoczna w aplikacji WWW
+- `Obowiązkowe` -  Czy podanie wartości atrybutu jest konieczne przed opuszczeniem sekretariatu przez dokument.
 `Typ` - Rodzaj atrybutu:
-- `Int` - Pole może zawierać tylko liczby całkowite
-- `Float` - Pole może zawierać liczby rzeczywiste
-- `Text` - Pole może zawierać dowolny text
-- `DateTime` - Pole jest typu data. Dostępny jest kalendarz do jej wyboru.
-- `Własny` - Pole z danymi rozszerzonymi. W obecnej wersji programu przechowuje i zarządza danymi  Partnera Handlowego (patrz [Obsługa Partnerów Handlowych](#ph)).
-- `Słownik systemowy` - Pole typu "lista rozwijana". Dane  pobierane są ze słownika systemowego określonego per firma w tabelce `Słownik` (szczegóły patrz [Słowniki systemowe](#slowniki_systemowe)
-- `Słownik użytkownika` - Pole typu "lista rozwijana". Dane  pobierane są z  tabeli `Dozwolone wartości`  (szczegóły patrz [Słowniki użytkownika](#slowniki_uzytkownika)
-- 	`Słownik interaktywny` - Pole typu "lista rozwijana". Dane  pobierane są z określonego  słownika interaktywnego  (szczegóły patrz [Słowniki interaktywne](#slowniki_interaktywne)
-- `Słownik statyczny` - Pole typu "lista rozwijana". Dane  pobierane są z określonego  słownika statycznego(szczegóły patrz [Słowniki statyczne](#slowniki_statyczne)
-- `Długi tekst` - Pole typu "memo". Pozwala na wpisanie długiego tekstu. W aplikacji WWW uruchamia oddzielne okienko do wpisania / podglądu zawartości
 
-`Wzór` - Wyrażenie regularne , określające poprawny format wpisywanej wartości (tylko dla typy `text`). Jeśli zawartość pola nie spełni wyrażenia, dokument nie będzie zapisany.
-> **Przykłady**: 
->  - Wyrażenie definiujące kod pocztowy: `[0-9]{2}[-]?[0-9]{3}`
->  - Wyrażenie definiujące poprawna datę w formacie `yyyy-mm-dd` większą od 1900 roku i mniejszą od 3000: `(19[0-9]{2}|2[0-9]{3})-(0[1-9]|1[012])-([123]0|[012][1-9]|31)`
+    | Typ| Opis |
+    | ------- | ---- |
+    | Int |  Pole może zawierać tylko liczby całkowite |
+    | Float |  Pole może zawierać liczby rzeczywiste |
+    | Text |  Pole może zawierać dowolny text |
+    | DateTime |  Pole jest typu data. Dostępny jest kalendarz do jej wyboru. |
+    | Własny |  Pole z danymi rozszerzonymi. W obecnej wersji programu przechowuje i zarządza danymi  Partnera Handlowego (patrz [Obsługa Partnerów Handlowych](#ph)). |
+    | Słownik systemowy |  Pole typu "lista rozwijana". Dane  pobierane są ze słownika systemowego określonego per firma w tabelce `Słownik` (szczegóły patrz [Słowniki systemowe](#slowniki_systemowe) |
+    | Słownik użytkownika |  Pole typu "lista rozwijana". Dane  pobierane są z  tabeli `Dozwolone wartości`  (szczegóły patrz [Słowniki użytkownika](#slowniki_uzytkownika) |
+    | Słownik interaktywny |  Pole typu "lista rozwijana". Dane  pobierane są z określonego  słownika interaktywnego  (szczegóły patrz [Słowniki interaktywne](#slowniki_interaktywne) |
+    | Słownik statyczny |  Pole typu "lista rozwijana". Dane  pobierane są z określonego  słownika statycznego(szczegóły patrz [Słowniki statyczne](#slowniki_statyczne) |
+    | Długi tekst |  Pole typu "memo". Pozwala na wpisanie długiego tekstu. W aplikacji WWW uruchamia oddzielne okienko do wpisania / podglądu zawartości |
 
-`Pole schematu` - Nazwa pola OCR z którego wartości maja być przepisane po rozpoznaniu. 	Możliwe wartości zależą od użytego schematu OCR. Najczęściej używane to:
-- dla nagłówka:
+- `Wzór` - Wyrażenie regularne , określające poprawny format wpisywanej wartości (tylko dla typy `text`). Jeśli zawartość pola nie spełni wyrażenia, dokument nie będzie zapisany.
+    > **Przykłady**: 
+    >  - Wyrażenie definiujące kod pocztowy: `[0-9]{2}[-]?[0-9]{3}`
+    >  - Wyrażenie definiujące poprawna datę w formacie `yyyy-mm-dd` większą od 1900 roku i mniejszą od 3000: `(19[0-9]{2}|2[0-9]{3})-(0[1-9]|1[012])-([123]0|[012][1-9]|31)`
 
-| Nazwa pola | Zawartość | Uwagi |
-| --- | --- | --- |
-| `INVOICENUMBER` | Numer faktury | Używane w schemacie domyślnym `invDefault`
-| `INVOICEDATE` | Data wystawienia faktury | Używane w schemacie domyślnym `invDefault`
-| `DUEDATE` | Data płatności | Używane w schemacie domyślnym `invDefault`
-| `NIP` | Numer NIP sprzedawcy na fakturze | Używane w schemacie domyślnym `invDefault`
-| `TOTALAMOUNT` | Wartość brutto faktury   | Używane w schemacie domyślnym `invDefault`
-| `TOTALAMOUNTBEFTAX` | Wartość netto faktury   
-| `ACCOUNT` | Konto bankowe sprzedawcy 
-| `REFNUMBER` | Numer referencyjny (zam. zakupu itp) 
+- `Pole schematu` - Nazwa pola OCR z którego wartości maja być przepisane po rozpoznaniu. Możliwe wartości zależą od użytego schematu OCR. Najczęściej używane to:
+    - dla nagłówka:
 
-- dla linii:
+    | Nazwa pola | Zawartość | Uwagi |
+    | --- | --- | --- |
+    | `INVOICENUMBER` | Numer faktury | Używane w schemacie domyślnym `invDefault`
+    | `INVOICEDATE` | Data wystawienia faktury | Używane w schemacie domyślnym `invDefault`
+    | `DUEDATE` | Data płatności | Używane w schemacie domyślnym `invDefault`
+    | `NIP` | Numer NIP sprzedawcy na fakturze | Używane w schemacie domyślnym `invDefault`
+    | `TOTALAMOUNT` | Wartość brutto faktury   | Używane w schemacie domyślnym `invDefault`
+    | `TOTALAMOUNTBEFTAX` | Wartość netto faktury   
+    | `ACCOUNT` | Konto bankowe sprzedawcy 
+    | `REFNUMBER` | Numer referencyjny (zam. zakupu itp) 
 
-| Nazwa pola | Zawartość 
-| --- | --- | 
-| `CODE` | Kod towaru 
-| `NAME` | Opis towaru
-| `PRICE` | Cena netto 
-| `PRICEBEFDISC` | Cena netto przed rabatem 
-| `PRICEAFDISC` | Cena netto po rabacie
-| `QTY` | Ilość 
-| `UNIT` | Jednostka miary
-| `TAXPERCENT` | Procent podatku 
-| `TAX` | Wartość podatku
-| `TOTAL` | Wartość brutto
-| `TOTALNET` | Wartość netto
-| `TOTALBEFDISC` | Wartość brutto przed rabatem 
-| `TOTALBEFNET` | Wartość netto przed rabatem
+    - dla linii:
 
+    | Nazwa pola | Zawartość 
+    | --- | --- | 
+    | `CODE` | Kod towaru 
+    | `NAME` | Opis towaru
+    | `PRICE` | Cena netto 
+    | `PRICEBEFDISC` | Cena netto przed rabatem 
+    | `PRICEAFDISC` | Cena netto po rabacie
+    | `QTY` | Ilość 
+    | `UNIT` | Jednostka miary
+    | `TAXPERCENT` | Procent podatku 
+    | `TAX` | Wartość podatku
+    | `TOTAL` | Wartość brutto
+    | `TOTALNET` | Wartość netto
+    | `TOTALBEFDISC` | Wartość brutto przed rabatem 
+    | `TOTALBEFNET` | Wartość netto przed rabatem
 
-> **Przykład:**  Wpisanie tu wartości `DUEDATE` spowoduje przepisanie do tego pola daty płatności ze schematów OCR związanych z fakturami. 
-    
-
-`Pole ERP` - Nazwa pola w systemie ERP do którego przepisane zostana wartości atrybutu. 
-Własność używana jest   w aplikacja ERP lub dodatkach do nich (np w specjalnym addonie do SAP Business One -  SPUMA4SBO). Więcej szczegółów w opisie dokumentacji addonu.
-    
-`Kolejność` - Kolejność wyświetlania atrybutu w aplikacji WWW
-
-`Szerokość` - Szerokość kolumny reprezentującej atrybut w aplikacji WWW. Wartość `0` oznacza automatyczne dobieranie rozmiaru.
-> **Uwaga:** Własność tylko dla atrybutów linii
-
-`Auto wyliczanie` - Algorytm wyliczania wartości atrybutu. Szczegółowe informacje w rozdziale [Auto-wyliczanie i Funkcje JS](#funkcje_js)
-
-`Dowolne wartości` - pozwala na wpisanie wartości spoza słownika
-> **Uwaga:** Własność tylko dla atrybutów typu `Słownik`
-
-`Grupowanie` - Włącza możliwość grupowania wierszy  po atrybucie  
-> **Uwaga:** Własność tylko dla atrybutów linii
-
-`Sumator` - Włącza sumowanie linii dla danego atrybutu. Dodatkowo istnieje możliwość podania pola nagłówka  z którym dana suma jest porównywana. Jeśli takie pole zostanie podane, kolor podsumowania (zielony lub czerwony) będzie informował o zgodności powyższych wartości.
-> **Przykład:** Sumator dla atrybutu linii `wartosc` jest włączony i ustawiony na pole `Kwota`, która przechowuje wartość faktury. Tak długo jak suma wartości atrybutu `wartość` na wszystkich dodanych liniach nie będzie równa wartości atrybutu nagłówka `Kwota` kolor podsumowania będzie czerwony.
-
-> **Uwaga:** Własność tylko dla atrybutów linii typu Int i Float
-
+    > **Przykład:**  Wpisanie tu wartości `DUEDATE` spowoduje przepisanie do tego pola daty płatności ze schematów OCR związanych z fakturami. 
+   
+- `Pole ERP` - Nazwa pola w systemie ERP do którego przepisane zostana wartości atrybutu. 
+    Własność używana jest   w aplikacja ERP lub dodatkach do nich (np w specjalnym addonie do SAP Business One -  SPUMA4SBO). Więcej szczegółów w opisie dokumentacji addonu.  
+- `Kolejność` - Kolejność wyświetlania atrybutu w aplikacji WWW
+- `Szerokość` - Szerokość kolumny reprezentującej atrybut w aplikacji WWW. Wartość `0` oznacza automatyczne dobieranie rozmiaru.
+    > **Uwaga:** Własność tylko dla atrybutów linii
+- `Auto wyliczanie` - Algorytm wyliczania wartości atrybutu. Szczegółowe informacje w rozdziale [Auto-wyliczanie i Funkcje JS](#funkcje_js)
+- `Dowolne wartości` - pozwala na wpisanie wartości spoza słownika
+    > **Uwaga:** Własność tylko dla atrybutów typu `Słownik`
+- `Grupowanie` - Włącza możliwość grupowania wierszy  po atrybucie  
+    > **Uwaga:** Własność tylko dla atrybutów linii
+- `Sumator` - Włącza sumowanie linii dla danego atrybutu. Dodatkowo istnieje możliwość podania pola nagłówka  z którym dana suma jest porównywana. Jeśli takie pole zostanie podane, kolor podsumowania (zielony lub czerwony) będzie informował o zgodności powyższych wartości.
+    > **Przykład:** Sumator dla atrybutu linii `wartosc` jest włączony i ustawiony na pole `Kwota`, która przechowuje wartość faktury. Tak długo jak suma wartości atrybutu `wartość` na wszystkich dodanych liniach nie będzie równa wartości atrybutu nagłówka `Kwota` kolor podsumowania będzie czerwony.
+    > ❗ **Uwaga:** Własność tylko dla atrybutów linii typu Int i Float
 
 ### Uprawnienia
 Uprawnienia zdefiniowane na klasę przenoszą się na wszystkie dokumenty z nią związane.
@@ -448,82 +431,74 @@ Więcej o uprawnieniach w rozdziale [Uprawnienia](#uprawnienia)
 ### Wyzwalacze
 Wyzwalacze reprezentowane są w aplikacji WWW jako przyciski. Ich naciśnięcie wywołuje określone zdarzenia zdefiniowane  w procesach UI (patrz rozdział [Procesy UI](#procesy_ui)).
 #### Właściwości
-`Nazwa` - Nazwa (kod) wyzwalacza
-> **Uwaga:** Nazwa musi być unikatowa w ramach klasy.  Używana jest w algorytmach procesów UI
-
-`Opis` - Opis wyzwalacza - widoczny tylko w panelu administracyjnym .
-
-`Etykieta` -  Etykieta przycisku,  widoczna w aplikacji WWW
-
-`Pozycja` -  Miejsce gdzie ulokowany jest przycisk - nagłówek lub za wybrana kolumną (linie)
+- `Nazwa` - Nazwa (kod) wyzwalacza
+    > **Uwaga:** Nazwa musi być unikatowa w ramach klasy.  Używana jest w algorytmach procesów UI
+- `Opis` - Opis wyzwalacza - widoczny tylko w panelu administracyjnym .
+- `Etykieta` -  Etykieta przycisku,  widoczna w aplikacji WWW
+- `Pozycja` -  Miejsce gdzie ulokowany jest przycisk - nagłówek lub za wybrana kolumną (linie)
 
 ## <a id='dzienniki' href='dzienniki' hidden='true'></a> Dzienniki korespondencji
 Dzienniki korespondencji służą do rejestracji pism wychodzących i przychodzących  w postaci cyfrowej (plików) jak i analogowej (poczta). Wpisy w takim dzienniku odwzorowują na przykład:    
 - zdarzenie wysyłania paczki do klienta ,
--  otrzymanie pisma od urzędu, 
+- otrzymanie pisma od urzędu, 
 - odebranie maila od prawnika 
 - itp
 
 Definicja dziennika korespondencji określa jego wygląd (raport) , dodatkowe atrybuty wpisów oraz zakres uprawnień
 
 ### Ogólne  
-`Organizacja` - Do jakiej organizacji należy dziennik. Ustawienie `(Wszystkie)` określa, że dziennik i jego wpisy widoczne są dla użytkowników wszystkich organizacji.
+- `Organizacja` - Do jakiej organizacji należy dziennik. Ustawienie `(Wszystkie)` określa, że dziennik i jego wpisy widoczne są dla użytkowników wszystkich organizacji.
+- `Nazwa` - Nazwa (kod) dziennika
+    > **Uwaga:** Nazwa musi być unikatowa w ramach  całej bazy. Nie wolno stosować znaków narodowych i specjalnych. Zakres dozwolony to `A-Z` i znaki  `_-` 
+- `Opis` - Opis dziennika- widoczny  w aplikacji WWW na liście dostępnych dzienników.
+- `Aktywny` - Czy dziennik jest widoczny w aplikacji WWW
+- `Prefix` - 2 znakowy kod unikatowy dziennika, używany przy tworzeniu unikatowych identyfikatorów wpisów.
+    > **Uwaga:** Zmiana prefix'u nie zmieni numeracji dotychczasowych wpisów 
+- `Raport SQL, parametry SQL, Ustawienia kolumny` - Własny raport dziennika korespondencji. Zasady tworzenia raportu dla dziennika korespondencji są takie jak standardowych raportów (patrz [Raporty](#raporty)). 
+    > **Uwaga:** Jeśli dane są niewypełnione, używany jest  raport domyślny
 
-`Nazwa` - Nazwa (kod) dziennika
-> **Uwaga:** Nazwa musi być unikatowa w ramach  całej bazy. Nie wolno stosować znaków narodowych i specjalnych. Zakres dozwolony to `A-Z` i znaki  `_-` 
-
-`Opis` - Opis dziennika- widoczny  w aplikacji WWW na liście dostępnych dzienników.
-
-`Aktywny` - Czy dziennik jest widoczny w aplikacji WWW
-
-`Prefix` - 2 znakowy kod unikatowy dziennika, używany przy tworzeniu unikatowych identyfikatorów wpisów.
-> **Uwaga:** Zmiana prefix'u nie zmieni numeracji dotychczasowych wpisów 
-
-`Raport SQL, parametry SQL, Ustawienia kolumny` - Własny raport dziennika korespondencji. Zasady tworzenia raportu dla dziennika korespondencji są takie jak standardowych raportów (patrz [Raporty](#raporty)). 
-> **Uwaga:** Jeśli dane są niewypełnione, używany jest  raport domyślny
->
-Przykład zapytania SQL który generuje raport dziennika korespondencji:
-```sql
-declare @dailycorrid int = {0}
-select top 1000    
-  T0.id,
-  T0.docnum as sys_docnum,
-  T1.username as sys_usercode,
-  T0.[description] as sys_description,
-  case T0.optype
-	when 0 then 'In'
-	when 1 then 'Out'
-	else 'Other' 
-  end as sys_operation$01,
-  convert(nvarchar(10),T0.opdate,121) as SYS_OPERATIONJUSTDATE,
-  substring(convert(nvarchar(100),T0.opdate,121),11,6) as SYS_OPERATIONJUSTTIME,
-  isnull(T2.CC,0) as 'SYS_DOCCC'
-from DAILYCORRESPONDENCE T0 
-left join USERS T1 on (T0.users_id=T1.id)
-left join (
-  select dailycorr_id,count(*) as CC 
-  from DAILYCORR_REF 
-  group by dailycorr_id
-) T2 on (T0.id=T2.dailycorr_id)
-where T0.dailycorrclass_id=@dailycorrid    
-order by T0.opdate desc
-```
->**Uwagi:**
-> - Wymagana jest przynajmniej jedna kolumna o nazwie `SYS_DOCCC` która zawiera liczbę dokumentów SPUMA połączonych z wpisem dziennika
-> - Przed wykonaniem zapytania system  podstawia pod ciąg znaków `{0}` numer wybranego dziennika korespondencji
-> - kolumna o nawie `id` powinna zawierać numeryczny identyfikator wpisu (kolumna `id` z tabeli `DAILYCORRESPONDENCE`). Wtedy aplikacja WWW utworzy link do tego wpisu
-> - jeśli wymagane jest aby link reprezentował opisowy identyfikator wpisu (kolumna `docnum` z tabeli `DAILYCORRESPONDENCE`)  należy w zapytaniu zawrzeć dwie kolumny: 
->    - `id` - kolumna `id` z tabeli `DAILYCORRESPONDENCE`
->    - `SYS_DOCNUM` - kolumna `docnum` z tabeli `DAILYCORRESPONDENCE`
-> - Pola automatycznie ukrywane to `SYS_DOCCC`,`SYS_DOCNUM`
-> - Można używać specjalnych, systemowych nazw pól, które podlegają tłumaczeniu przez wbudowany mechanizm. Pola systemowe  podlegające tłumaczeniu  to:
->    - `SYS_DESCRIPTION`
->    - `SYS_OPERATION`     
->    - `SYS_CREATEDATE`
->    - `SYS_OPERATIONDATE`
->    - `SYS_OPERATIONJUSTDATE`
->    - `SYS_OPERATIONJUSTTIME`
->    - `SYS_USERCODE`
+    Przykład zapytania SQL który generuje raport dziennika korespondencji:
+    ```sql
+    declare @dailycorrid int = {0}
+    select top 1000    
+      T0.id,
+      T0.docnum as sys_docnum,
+      T1.username as sys_usercode,
+      T0.[description] as sys_description,
+      case T0.optype
+    	when 0 then 'In'
+    	when 1 then 'Out'
+    	else 'Other' 
+      end as sys_operation$01,
+      convert(nvarchar(10),T0.opdate,121) as SYS_OPERATIONJUSTDATE,
+      substring(convert(nvarchar(100),T0.opdate,121),11,6) as SYS_OPERATIONJUSTTIME,
+      isnull(T2.CC,0) as 'SYS_DOCCC'
+    from DAILYCORRESPONDENCE T0 
+    left join USERS T1 on (T0.users_id=T1.id)
+    left join (
+      select dailycorr_id,count(*) as CC 
+      from DAILYCORR_REF 
+      group by dailycorr_id
+    ) T2 on (T0.id=T2.dailycorr_id)
+    where T0.dailycorrclass_id=@dailycorrid    
+    order by T0.opdate desc
+    ```
+    >**Uwagi:**
+    > - Wymagana jest przynajmniej jedna kolumna o nazwie `SYS_DOCCC` która zawiera liczbę dokumentów SPUMA połączonych z wpisem dziennika
+    > - Przed wykonaniem zapytania system  podstawia pod ciąg znaków `{0}` numer wybranego dziennika korespondencji
+    > - kolumna o nawie `id` powinna zawierać numeryczny identyfikator wpisu (kolumna `id` z tabeli `DAILYCORRESPONDENCE`). Wtedy aplikacja WWW utworzy link do tego wpisu
+    > - jeśli wymagane jest aby link reprezentował opisowy identyfikator wpisu (kolumna `docnum` z tabeli `DAILYCORRESPONDENCE`)  należy w zapytaniu zawrzeć dwie kolumny: 
+    >    - `id` - kolumna `id` z tabeli `DAILYCORRESPONDENCE`
+    >    - `SYS_DOCNUM` - kolumna `docnum` z tabeli `DAILYCORRESPONDENCE`
+    > - Pola automatycznie ukrywane to `SYS_DOCCC`,`SYS_DOCNUM`
+    > - Można używać specjalnych, systemowych nazw pól, które podlegają tłumaczeniu przez wbudowany mechanizm. Pola systemowe  podlegające tłumaczeniu  to:
+    >    - `SYS_DESCRIPTION`
+    >    - `SYS_OPERATION`     
+    >    - `SYS_CREATEDATE`
+    >    - `SYS_OPERATIONDATE`
+    >    - `SYS_OPERATIONJUSTDATE`
+    >    - `SYS_OPERATIONJUSTTIME`
+    >    - `SYS_USERCODE`
  
 
 ## <a id='grupy' href='grupy' hidden='true'></a> Grupy użytkowników
@@ -539,28 +514,22 @@ Przy zakładaniu nowej grupy automatycznie tworzą się dwa systemowe schematy a
 Więcej informacji na temat schematów autoryzacji ([patrz Schematy autoryzacji](#schematy))
 
 ### Własności
-`Organizacja` - Do jakiej organizacji należy użytkownik. Ustawienie `(Wszystkie)` określa, że użytkownik ma dostęp do obiektów (klas, dokumentów itp ) wszystkich organizacji.
+- `Organizacja` - Do jakiej organizacji należy użytkownik. Ustawienie `(Wszystkie)` określa, że użytkownik ma dostęp do obiektów (klas, dokumentów itp ) wszystkich organizacji.
+- `Nazwa` - Kod grupy .
+    > **Uwaga:** Kod musi być unikatowy w ramach całej bazy. Nie wolno stosować znaków narodowych i specjalnych. Zakres dozwolony to `A-Z` i znaki  `_-` 
+- `Opis` - Opis grupy - widoczny tylko w panelu administracyjnym .
+- `Rola` - Rola grupy.
 
-`Nazwa` - Kod grupy .
-> **Uwaga:** Kod musi być unikatowy w ramach całej bazy. Nie wolno stosować znaków narodowych i specjalnych. Zakres dozwolony to `A-Z` i znaki  `_-` 
-
-`Opis` - Opis grupy - widoczny tylko w panelu administracyjnym .
-
-`Rola` - Rola grupy.
-
-| Rola | Opis |
-| ------- | ---- |
-| Ogólna| Domyślna grupa stosowana przy definicji uprawnień)  |
-| Twórcy | Grupa techniczna. Niedostępna dla definicji uprawnień. Członkowie tej grupy mogą widzieć nawzajem swoje dokumenty kiedy opuszczą one sekretariat oraz dzielą uprawnienia typu `(owner)`. |
+    | Rola | Opis |
+    | ------- | ---- |
+    | Ogólna| Domyślna grupa stosowana przy definicji uprawnień)  |
+    | Twórcy | Grupa techniczna. Niedostępna dla definicji uprawnień. Członkowie tej grupy mogą widzieć nawzajem swoje dokumenty kiedy opuszczą one sekretariat oraz dzielą uprawnienia typu `(owner)`. |
 
 
- > **Przykład:**  Użytkownik `A` i użytkownik `B` są członkami grupy `sekretariat` (typ `twórcy`). `A` dodaje dokument i wysyła go w obieg. Przez cały przebieg autoryzacji dokument widoczny jest dla `A` i `B`. Po ew. odrzuceniu, poprawić dokument może zarówno użytkownik `A` jak  i `B`.
+     > **Przykład:**  Użytkownik `A` i użytkownik `B` są członkami grupy `sekretariat` (typ `twórcy`). `A` dodaje dokument i wysyła go w obieg. Przez cały przebieg autoryzacji dokument widoczny jest dla `A` i `B`. Po ew. odrzuceniu, poprawić dokument może zarówno użytkownik `A` jak  i `B`.
 
-`Odbiorcy` - Lista członków grupy.
-
-> **Uwaga:** - grupa musi zawierać przynajmniej jednego użytkownika.
-
-
+- `Odbiorcy` - Lista członków grupy.
+    > **Uwaga:** - grupa musi zawierać przynajmniej jednego użytkownika.
 
 ## <a id='slowniki' href='slowniki' hidden='true'></a> Słowniki
 
@@ -579,45 +548,43 @@ Słowniki dynamiczne na bieżąco pobierają dane ze źródła (może to być ba
 > Przykład słownika dynamicznego - indeksy towarowe
 
 ### <a id='slowniki_statyczne' href='slowniki_statyczne' hidden='true'></a> Słowniki statyczne
-Słownike statyczne  predefiniowane. Edycja wartości tylko z panelu administracyjnego
-z zakładki `Słowniki statyczne` 
+Słowniki statyczne  predefiniowane. Edycja wartości tylko z panelu administracyjnego z zakładki `Słowniki statyczne` 
 
 #### Własności
-`Organizacja` - Do jakiej organizacji należy słownik. Ustawienie `(Wszystkie)` określa, że słownik może być używany w obiektach wszystkich organizacji.
-
-`Nazwa` - Nazwa (kod) słownika
-> **Uwaga:** Nazwa musi być unikatowa w ramach całej bazy 
-
-`Opis` - Opis słownika - widoczny tylko w panelu administracyjnym .
-`Dozwolone wartość` - Wartości słownika w postaci wpisów kod / wartość.
-> **Uwaga:** Kod musi być unikatowy
-> **Przykład**: Działy w firmie 
-> | Kod | Opis|
-> | --- | --- |
-> | ADM | Administracja |
-> | MAG | Magazyn  |
-> | PROD | Produkcja |
-> | ZARZ | Zarząd |
+- `Organizacja` - Do jakiej organizacji należy słownik. Ustawienie `(Wszystkie)` określa, że słownik może być używany w obiektach wszystkich organizacji.
+- `Nazwa` - Nazwa (kod) słownika
+    > **Uwaga:** Nazwa musi być unikatowa w ramach całej bazy 
+- `Opis` - Opis słownika - widoczny tylko w panelu administracyjnym .
+- `Dozwolone wartość` - Wartości słownika w postaci wpisów kod / wartość.
+    > **Uwaga:** Kod musi być unikatowy
+    > 
+    > **Przykład**: Działy w firmie 
+    > | Kod | Opis|
+    > | --- | --- |
+    > | ADM | Administracja |
+    > | MAG | Magazyn  |
+    > | PROD | Produkcja |
+    > | ZARZ | Zarząd |
 
 ### <a id='slowniki_uzytkownika' href='slowniki_uzytkownika' hidden='true'></a> Słowniki użytkownika
-Słowniki statyczne predefiniowane przypisany bezpośrednio do atrybutu / parametru. Edycja wartości tylko z panelu administracyjnego
-bezpośrednio na atrybucie klasy lub atrybucie raportu / dziennika.  
+Słowniki statyczne predefiniowane przypisany bezpośrednio do atrybutu / parametru. Edycja wartości tylko z panelu administracyjnego bezpośrednio na atrybucie klasy lub atrybucie raportu / dziennika.  
 
 #### Własności
-`Dozwolone wartość` - Wartości słownika w postaci wpisów kod / wartość.
-> **Uwaga:** Kod musi być unikatowy
-> **Przykład**: Stan maszyny
-> | Kod | Opis|
-> | --- | --- |
-> | ON | Uruchomiony |
-> | OFF | Wyłączony  |
-> | ERR | Awaria |
+- `Dozwolone wartość` - Wartości słownika w postaci wpisów kod / wartość.
+    > **Uwaga:** Kod musi być unikatowy
+    > 
+    > **Przykład**: Stan maszyny
+    > | Kod | Opis|
+    > | --- | --- |
+    > | ON | Uruchomiony |
+    > | OFF | Wyłączony  |
+    > | ERR | Awaria |
 
-> **Uwaga:** Atrybut pokazywany jest w kliencie WWW jako checkbox gdy słownik użytkownika ma tylko 2 kody (kolumna opisu nie ma znaczenia):
-> | Kod | Opis|
-> | --- | --- |
-> | Y| Tak |
-> | N | Nie  |
+    > **Uwaga:** Atrybut pokazywany jest w kliencie WWW jako checkbox gdy słownik użytkownika ma tylko 2 kody (kolumna opisu nie ma znaczenia):
+    > | Kod | Opis|
+    > | --- | --- |
+    > | Y| Tak |
+    > | N | Nie  |
 
 ### <a id='slowniki_systemowe' href='slowniki_systemowe' hidden='true'></a> Słowniki systemowe
 Słowniki dynamiczne. Wartości pobierane są poprzez zapytanie SQL. Służy do tego procedura  `APR_DICTIONARYVALUES` ([patrz Procedury SQL/APR_DICTIONARYVALUES](#proc_dictionaryvalues))
@@ -625,14 +592,14 @@ Słowniki dynamiczne. Wartości pobierane są poprzez zapytanie SQL. Służy do 
 Słowniki systemowe są wypełniane danymi podczas logowania do systemu SPUMA  (i tylko wtedy). Wartości przepisywane są do pamięci podręcznej co gwarantuje ich szybkie działanie. Dodatkowo słowniki mogą funkcjonować jako podpowiedzi przy edycji komentarzy i opisów.
 #### Własności
 
-`Nazwa` - Nazwa (kod) słownika
-> **Uwaga:** Nazwa musi być unikatowa w ramach całej bazy 
-
-`Opis` - Opis słownika - widoczny tylko w panelu administracyjnym .
-`Wzór` - Wyrażenie regularne określające słowa po wpisaniu których, pokaże się podpowiedź.
-`Jako podpowiedź` - Czy słownik ma być podpowiedzią.
+- `Nazwa` - Nazwa (kod) słownika
+    > **Uwaga:** Nazwa musi być unikatowa w ramach całej bazy 
+- `Opis` - Opis słownika - widoczny tylko w panelu administracyjnym .
+- `Wzór` - Wyrażenie regularne określające słowa po wpisaniu których, pokaże się podpowiedź.
+- `Jako podpowiedź` - Czy słownik ma być podpowiedzią.
 
 > **Przykład:** Słownik projektów w SAP:
+> 
 > Zapytanie (w procedurze  APR_DICTIONARYVALUES):
 > ```sql
 > select '' as [value],'BRAK' as [description] 
@@ -653,30 +620,24 @@ Słowniki dynamiczne. Wartości pobierane są poprzez zapytanie SQL wpisane bezp
 Słowniki interaktywne są wypełniane za każdym razem kiedy dane są potrzebne (lista rozwijana itp). Gwarantuje to zawsze aktualne wartości ale wymaga stałego połączenia z serwerem.  Dodatkowo zapytanie może korzystać z parametrów które pobierają wartości z obiektu nadrzędnego
 
 #### Własności
-`Organizacja` - Do jakiej organizacji należy słownik. Ustawienie `(Wszystkie)` określa, że słownik może być używany w obiektach wszystkich organizacji.
+- `Organizacja` - Do jakiej organizacji należy słownik. Ustawienie `(Wszystkie)` określa, że słownik może być używany w obiektach wszystkich organizacji.
+- `Nazwa` - Nazwa (kod) słownika
+    > **Uwaga:** Nazwa musi być unikatowa w ramach całej bazy 
+- `Opis` - Opis słownika - widoczny tylko w panelu administracyjnym .
+- `Typ` -  Rodzaj połączenia z bazą danych.
+- `DBNAME` -  Nazwa bazy danych. Podstawiana w zapytaniu do zmiennej ```$DBNAME``` 
+- `Ciąg połączenia` -  Ciąg połączeniowy (ODBC) z bazą danych (dane z baz zewnętrznych)
+- `Skrypt` -  Zapytanie SQL. Powinno zwrócić dwie kolumny `value` i `descr`. 
+- `Parametry` -  Lista parametrów wykorzystywanych w zapytaniu SQL. Są tego samego typu co atrybuty: Własności ważne przy zapytaniu:
 
-`Nazwa` - Nazwa (kod) słownika
-> **Uwaga:** Nazwa musi być unikatowa w ramach całej bazy 
-
-`Opis` - Opis słownika - widoczny tylko w panelu administracyjnym .
-
-`Typ` -  Rodzaj połączenia z bazą danych.
-
-`DBNAME` -  Nazwa bazy danych. Podstawiana w zapytaniu do zmiennej ```$DBNAME``` 
-
-`Ciąg połączenia` -  Ciąg połączeniowy (ODBC) z bazą danych (dane z baz zewnętrznych)
-
-`Skrypt` -  Zapytanie SQL. Powinno zwrócić dwie kolumny `value` i `descr`. 
-
-`Parametry` -  Lista parametrów wykorzystywanych w zapytaniu SQL. Są tego samego typu co atrybuty: Własności ważne przy zapytaniu:
-| Własność | Opis|
-| --- | --- |
-| Nazwa | Nazwa parametru (w zapytaniu SQL stosowana jako `@nazwa`) 
-| Typ | Typ parametru  |
-| Auto&nbsp;wyliczanie | Algorytm JS do pobierania danych z własności/atrybutów obiektu nadrzędnego |
-
+    | Własność | Opis|
+    | --- | --- |
+    | Nazwa | Nazwa parametru (w zapytaniu SQL stosowana jako `@nazwa`) 
+    | Typ | Typ parametru  |
+    | Auto&nbsp;wyliczanie | Algorytm JS do pobierania danych z własności/atrybutów obiektu nadrzędnego |
 
 > **Przykład:** Słownik Zamówień Zakupu z SAP, Używany w klasie która ma atrybut z klientem (PH)
+> 
 > **Skrypt:**
 > ```sql
 > select '' as value,'brak' as descr
