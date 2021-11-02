@@ -1254,33 +1254,31 @@ Etapami schematu mogą być:
 
 #### Przykłady
 
-**Przykład 1:** Cała grupa 
+- **Przykład 1:** Cała grupa
+  - **Cel:**  Dokument mają zatwierdzić w jednym kroku, 3 osoby należące do grupy `DZIAL1`. Wszyscy muszą się zgodzić.
+  - **Rozwiązanie 1:**
 
-**Cel:**  Dokument mają zatwierdzić w jednym kroku, 3 osoby należące do grupy `DZIAL1`. Wszyscy muszą się zgodzić.
-
-- **Rozwiązanie 1:**
-
-  Typ: Wszyscy z
-
-  Etapy:
-
-  | Etap | Rodzaj | Obiekt |
-  | --- | --- | --- |
-  | 0 | użytkownik  |  `user1`
-  | 0 | użytkownik  |  `user2`
-  | 0 | użytkownik  |  `user3`
+    Typ: Wszyscy z
+    Etapy:
+    
+    | Etap | Rodzaj | Obiekt |
+    | --- | --- | --- |
+    | 0 | użytkownik  |  `user1`
+    | 0 | użytkownik  |  `user2`
+    | 0 | użytkownik  |  `user3`
 
 
-- **Rozwiązanie 2:**
-  Typ: Wszyscy z
-  Etapy:
-  | Etap | Rodzaj | Obiekt |
-  | --- | --- | --- |
-  | 0 | grupa  |  `DZIAL1`
+  - **Rozwiązanie 2:**
+    Typ: Wszyscy z
+    Etapy:
+    
+    | Etap | Rodzaj | Obiekt |
+    | --- | --- | --- |
+    | 0 | grupa  |  `DZIAL1`
   
-  >**Uwaga:** W rozwiązaniu 2 nie ma znaczenia typ (`Jeden z` czy `Wszyscy z`) ponieważ jest tylko jeden etap złożony z grupy. W takim przypadku system zakłada, że wszyscy użytkownicy grupy muszą zatwierdzić dokument
+    >**Uwaga:** W rozwiązaniu 2 nie ma znaczenia typ (`Jeden z` czy `Wszyscy z`) ponieważ jest tylko jeden etap złożony z grupy. W takim przypadku system zakłada, że wszyscy użytkownicy grupy muszą zatwierdzić dokument
 
-**Przykład 2:** Najpierw użytkownik, potem jeden z grupy
+- **Przykład 2:** Najpierw użytkownik, potem jeden z grupy
 
 **Cel:**  Dokument ma trafić najpierw do managera (`user1`). Po jego akceptacji musi zatwierdzić dokument jedna osoba z księgowości (grupa `KSIEGOWOSC`) . 
 
