@@ -1224,30 +1224,30 @@ Etapami schematu mogą być:
 
 
 #### Własności
-`Organizacja` - Do jakiej organizacji należy autoryzacja. Ustawienie `(Wszystkie)` określa, że autoryzacja może być używana w obiektach wszystkich organizacji.
-
-`Nazwa` - Nazwa (kod) autoryzacji
-> **Uwaga:** Nazwa musi być unikatowa w ramach całej bazy. Należy pamiętać że w bazie istnieją już schematy związane z grupami użytkowników (patrz [Grupy użytkowników](#grupy)) o takiej samej nazwie
-
-`Opis` - Opis schematu - widoczny przy wyborze schematu z listy (aplikacja WWW).
-
-`Dodatkowe informacje` - tekst który jest widoczny na oknie zatwierdzania w aplikacji WWW. Widoczny tylko wtedy, jeśli schemat jest zdefiniowany jako etap w innym schemacie lub procesie. Ustawienie jest nadpisywane przez kolumnę `informacje dodatkowe` na definicji etapów.
-
-`Typ` - Informacja ile etapów należy potwierdzić aby  zatwierdzić cały schemat.
+- `Organizacja` - Do jakiej organizacji należy autoryzacja. Ustawienie `(Wszystkie)` określa, że autoryzacja może być używana w obiektach wszystkich organizacji.
+- `Nazwa` - Nazwa (kod) autoryzacji
+  > **Uwaga:** Nazwa musi być unikatowa w ramach całej bazy. Należy pamiętać że w bazie istnieją już schematy związane z grupami użytkowników (patrz [Grupy użytkowników](#grupy)) o takiej samej nazwie
+- `Opis` - Opis schematu - widoczny przy wyborze schematu z listy (aplikacja WWW).
+- `Dodatkowe informacje` - tekst który jest widoczny na oknie zatwierdzania w aplikacji WWW. Widoczny tylko wtedy, jeśli schemat jest zdefiniowany jako etap w innym schemacie lub procesie. Ustawienie jest nadpisywane przez kolumnę `informacje dodatkowe` na definicji etapów.
+- `Typ` - Informacja ile etapów należy potwierdzić aby  zatwierdzić cały schemat.
 	
-| Typ | Opis|
-| --- | --- |
-| Wszyscy&nbsp;z | Wszystkie etapy muszą zostać zatwierdzone| 
-| Jeden&nbsp;z | Wystarczy zatwierdzić na jednym etapie |
-| (N)&nbsp;z | Określona ilość etapów potrzebna do zatwierdzenia dokumentów  |
+  | Typ | Opis|
+  | --- | --- |
+  | Wszyscy&nbsp;z | Wszystkie etapy muszą zostać zatwierdzone| 
+  | Jeden&nbsp;z | Wystarczy zatwierdzić na jednym etapie |
+  | (N)&nbsp;z | Określona ilość etapów potrzebna do zatwierdzenia dokumentów  |
 
-`Limit etapów` - Ilość etapów  dla typu `(N) z` 
+- `Limit etapów` - Ilość etapów  dla typu `(N) z` 
 `Etapy` - definicja etapów 
 - `Etap`  - numer etapu
 - `Rodzaj` - Rodzaj etapu
-	- `Użytkownik` - określony użytkownik systemu
-	- `Grupa użytkowników` - określona grupa użytkowników 
-	- `Schemat` - inny schemat autoryzacji
+
+  | Rodzaj | Opis|
+  | --- | --- |
+  | ***Użytkownik*** | Określony użytkownik systemu | 
+  | ***Grupa użytkowników*** | Określona grupa użytkowników | 
+  | ***Schemat*** | inny schemat autoryzacji | 
+  
 - `Obiekt` - określenie użytkownika, grupy lub schematu
 - `Informacje dodatkowe` - tekst który jest widoczny na oknie zatwierdzania w aplikacji WWW w danym etapie.
 
@@ -1255,94 +1255,105 @@ Etapami schematu mogą być:
 #### Przykłady
 
 **Przykład 1:** Cała grupa 
+
 **Cel:**  Dokument mają zatwierdzić w jednym kroku, 3 osoby należące do grupy `DZIAL1`. Wszyscy muszą się zgodzić.
 
-**Rozwiązanie 1:**
-Typ: Wszyscy z
-Etapy:
-| Etap | Rodzaj | Obiekt |
-| --- | --- | --- |
-| 0 | użytkownik  |  `user1`
-| 0 | użytkownik  |  `user2`
-| 0 | użytkownik  |  `user3`
+- **Rozwiązanie 1:**
+
+  Typ: Wszyscy z
+
+  Etapy:
+
+  | Etap | Rodzaj | Obiekt |
+  | --- | --- | --- |
+  | 0 | użytkownik  |  `user1`
+  | 0 | użytkownik  |  `user2`
+  | 0 | użytkownik  |  `user3`
 
 
-
-**Rozwiązanie 2:**
-Typ: Wszyscy z
-Etapy:
-| Etap | Rodzaj | Obiekt |
-| --- | --- | --- |
-| 0 | grupa  |  `DZIAL1`
-
->**Uwaga:** W rozwiązaniu 2 nie ma znaczenia typ (`Jeden z` czy `Wszyscy z`) ponieważ jest tylko jeden etap złożony z grupy. W takim przypadku system zakłada, że wszyscy użytkownicy grupy muszą zatwierdzić dokument
+- **Rozwiązanie 2:**
+  Typ: Wszyscy z
+  Etapy:
+  | Etap | Rodzaj | Obiekt |
+  | --- | --- | --- |
+  | 0 | grupa  |  `DZIAL1`
+  
+  >**Uwaga:** W rozwiązaniu 2 nie ma znaczenia typ (`Jeden z` czy `Wszyscy z`) ponieważ jest tylko jeden etap złożony z grupy. W takim przypadku system zakłada, że wszyscy użytkownicy grupy muszą zatwierdzić dokument
 
 **Przykład 2:** Najpierw użytkownik, potem jeden z grupy
+
 **Cel:**  Dokument ma trafić najpierw do managera (`user1`). Po jego akceptacji musi zatwierdzić dokument jedna osoba z księgowości (grupa `KSIEGOWOSC`) . 
 
 **Rozwiązanie:**
-Typ: Wszyscy z
-Etapy:
-| Etap | Rodzaj | Obiekt |
-| --- | --- | --- |
-| 0 | użytkownik  |  `user1`
-| 1 | schemat  |  `KSIEGOWOSC`
+  Typ: Wszyscy z
+  Etapy:
 
-> **Uwagi:**
->  - Typ `Wszyscy z` mówi że autoryzacja musi przejść przez wszystkie zdefiniowane etapy. Gdyby ustawić `Jeden z` dokument został by już zatwierdzony po 1 kroku  (etap 0)
->   - Na etapie 1 użyty został systemowy schemat `KSIEGOWOSC` (typu `Jeden z`), utworzony wraz z  grupą `KSIEGOWOSC`   ([patrz Grupy użytkowników](#grupy))
->   - Gdyby zamiast schematu na etapie 1 podać grupę `KSIEGOWOSC`,  wymagałoby to zatwierdzenia dokumentu przez wszystkie osoby z ww. grupy
+  | Etap | Rodzaj | Obiekt |
+  | --- | --- | --- |
+  | 0 | użytkownik  |  `user1`
+  | 1 | schemat  |  `KSIEGOWOSC`
+
+  > **Uwagi:**
+  >  - Typ `Wszyscy z` mówi że autoryzacja musi przejść przez wszystkie zdefiniowane etapy. Gdyby ustawić `Jeden z` dokument został by już zatwierdzony po 1 kroku  (etap 0)
+  >   - Na etapie 1 użyty został systemowy schemat `KSIEGOWOSC` (typu `Jeden z`), utworzony wraz z  grupą `KSIEGOWOSC`   ([patrz Grupy użytkowników](#grupy))
+  >   - Gdyby zamiast schematu na etapie 1 podać grupę `KSIEGOWOSC`,  wymagałoby to zatwierdzenia dokumentu przez wszystkie osoby z ww. grupy
 
 **Przykład 3:** Najpierw użytkownik, potem obojętnie kto z 2 grup
+
 **Cel:**  Dokument ma trafić najpierw do managera (`user1`). Po jego akceptacji musi zatwierdzić dokument jedna osoba z księgowości (grupa `KSIEGOWOSC`)  lub działu HR (grupa  `HR` )
 
 **Rozwiązanie:**
-Najpierw należy utworzyć schemat pomocniczy:
+  Najpierw należy utworzyć schemat pomocniczy:
  
- Nazwa: `Pomocniczy`
- Typ: Jeden z
- Etapy:
- | Etap | Rodzaj | Obiekt |
- | --- | --- | --- |
- | 0 | schemat  |  `KSIEGOWOSC`
- | 0 | schemat  |  `HR`
+  Nazwa: `Pomocniczy`
+  Typ: Jeden z
+  Etapy:
  
- Schemat finalny
- Typ: Wszyscy z
- Etapy:
- | Etap | Rodzaj | Obiekt |
- | --- | --- | --- |
- | 0 | użytkownik  |  `user1`
- | 1 | schemat  |  `Pomocniczy`
+  | Etap | Rodzaj | Obiekt |
+  | --- | --- | --- |
+  | 0 | schemat  |  `KSIEGOWOSC`
+  | 0 | schemat  |  `HR`
  
-> **Uwagi:**
->  -  Gdyby założyć,  że na etapie 1 zatwierdzić ma jeden z grupy `KSIEGOWOSC` i jeden z grupy `HR` tworzenie pomocniczego schematu nie byłoby konieczne. 
->  
->    | Etap | Rodzaj | Obiekt |
->    | --- | --- | --- |
->    | 0 | użytkownik  |  `user1`
->    | 1 | schemat  |  `KSIEGOWOSC`
->    | 1 | schemat  |  `HR`
->    
+  Schemat finalny
+  Typ: Wszyscy z 
+  Etapy:
+  
+  | Etap | Rodzaj | Obiekt |
+  | --- | --- | --- |
+  | 0 | użytkownik  |  `user1`
+  | 1 | schemat  |  `Pomocniczy`
+ 
+  > **Uwagi:**
+  >  -  Gdyby założyć,  że na etapie 1 zatwierdzić ma jeden z grupy `KSIEGOWOSC` i jeden z grupy `HR` tworzenie pomocniczego schematu nie byłoby konieczne:
+  >  
+  >    | Etap | Rodzaj | Obiekt |
+  >    | --- | --- | --- |
+  >    | 0 | użytkownik  |  `user1`
+  >    | 1 | schemat  |  `KSIEGOWOSC`
+  >    | 1 | schemat  |  `HR`
+  >    
 
- **Przykład 4** Najpierw cała grupa, potem użytkownik
- **Cel:**  Dokument ma trafić najpierw do osób z HR (grupa  `HR` ) i po zatwierdzeniu przez każdego z nich ma być zaakceptowany przez managera (`user1`).
+**Przykład 4** Najpierw cała grupa, potem użytkownik
 
- **Rozwiązanie 1:**
- Typ: Wszyscy z
- Etapy:
- | Etap | Rodzaj | Obiekt |
- | --- | --- | --- |
- | 0 | Grupa  |  `HR`
- | 1 | użytkownik  |  `user1`
+**Cel:**  Dokument ma trafić najpierw do osób z HR (grupa  `HR` ) i po zatwierdzeniu przez każdego z nich ma być zaakceptowany przez managera (`user1`).
 
- **Rozwiązanie 2:**
- Typ: Wszyscy z
- Etapy:
- | Etap | Rodzaj | Obiekt |
- | --- | --- | --- |
- | 0 | Schemat|  `*HR`
- | 1 | użytkownik  |  `user1`
+  **Rozwiązanie 1:**
+  Typ: Wszyscy z  
+  Etapy:  
+  
+  | Etap | Rodzaj | Obiekt |
+  | --- | --- | --- |
+  | 0 | Grupa  |  `HR`
+  | 1 | użytkownik  |  `user1`
+
+  **Rozwiązanie 2:**  
+  Typ: Wszyscy z
+  Etapy:
+  
+  | Etap | Rodzaj | Obiekt |
+  | --- | --- | --- |
+  | 0 | Schemat|  `*HR`
+  | 1 | użytkownik  |  `user1`
 
 
 
