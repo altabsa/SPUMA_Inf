@@ -1424,40 +1424,49 @@ Wymusza autoryzacje dokumentu w tym kroku.
 Wymusza autoryzacje dokumentu w tym kroku oraz umożliwia zdefiniowanie dodatkowych parametrów.
 > **Uwaga:**  Własności  poza `Parametry`  działają jak w autoryzacji prostej
 
-`Parametry` - określenie parametrów które użytkownik musi określić na tym etapie autoryzacji.
-> **Uwaga:**  Należy podać przynajmniej jeden parametr.
+- `Parametry` - określenie parametrów które użytkownik musi określić na tym etapie autoryzacji.
+  > **Uwaga:**  Należy podać przynajmniej jeden parametr.
 
 Parametry dodaje się do listy od razu określając ich typ:
-- `Text` - użytkownik wpisuje tekst
-- `Int` - użytkownik podaje liczbę całkowitą
-- `Float` - użytkownik podaje kwotę
-- `Słownik użytkownika` -  użytkownik wybiera wartość z listy
-- `Wybór użytkownika` - użytkownik wybiera użytkownika z listy 
-- `Schemat`  - użytkownik edytuje  własny schemat.
-- `Wybór schematu`  - użytkownik wybiera schemat z listy.
+  
+| Typ | Opis |
+| ------- | ---- |
+| **Text** |  użytkownik wpisuje tekst |
+| **Int** |  użytkownik podaje liczbę całkowitą |
+| **Float** |  użytkownik podaje kwotę |
+| **Słownik użytkownika** |   użytkownik wybiera wartość z listy |
+| **Wybór użytkownika** |  użytkownik wybiera użytkownika z listy |
+| **Schemat** | użytkownik edytuje  własny schemat |
+| **Wybór schematu** |   użytkownik wybiera schemat z listy |
 
-**Własności ogólne parametrów** 
-`Nazwa` - Nazwa (kod) parametru.
-> **Uwaga:** Nazwa musi być unikatowa w ramach całego procesu
+- **Własności ogólne parametrów** 
+  - `Nazwa` - Nazwa (kod) parametru.
+  > **Uwaga:** Nazwa musi być unikatowa w ramach całego procesu
+  - `Opis` - Opis parametru -  widoczny tylko w panelu administracyjnym 
+  - `Zezwalaj null` - Informacja czy parametr może zostać pominięty 
+  - `Zmienna` - Dodaje zmienną lub wybiera już istniejąca. W zmiennej przechowywany będzie wartość parametru określona przez użytkownika. Rodzaj wartości zależny  jest od typu parametru. (int, text, float, schemat)
 
-`Opis` - Opis parametru -  widoczny tylko w panelu administracyjnym 
-`Zezwalaj null` - Informacja czy parametr może zostać pominięty 
-`Zmienna` - Dodaje zmienną lub wybiera już istniejąca. W zmiennej przechowywany będzie wartość parametru określona przez użytkownika. Rodzaj wartości zależny  jest od typu parametru. (int, text, float, schemat)
-Reszta  własności  zależy od typu parametru.
+  Reszta  własności  zależy od typu parametru.
 
-**Własności  parametrów dla typu `Słownik użytkownika`**
-`Dozwolone wartości` - lista wartości dla słownika
-
-**Własności  parametrów dla typu `Wybór użytkownika`**
-`Typ`  - rodzaj wyboru użytkownika
-- `Wszyscy` - można wybierać spośród wszystkich użytkowników
-- `Grupa zdefiniowana` - można wybierać spośród  członków grupy zdefiniowanej we własności `Obiekt` 
-- `Grupa własna` - można wybierać spośród  użytkowników z listy zdefiniowanej we własności `Dozwolone wartości` 
-
-**Własności  parametrów dla typu `Wybór schematu`**
-`Typ`  - rodzaj wyboru schematu
-- `Wszyscy` - można wybierać spośród wszystkich schematów
-- `Grupa własna` - można wybierać spośród  schematów z listy zdefiniowanej we własności `Dozwolone wartości` 
+- **Własności  parametrów dla typu `Słownik użytkownika`**
+  - `Dozwolone wartości` - lista wartości dla słownika
+- **Własności  parametrów dla typu `Wybór użytkownika`**
+  -`Typ`  - rodzaj wyboru użytkownika
+  
+  | Typ | Opis |
+  | ------- | ---- |
+  | **Wszyscy** | można wybierać spośród wszystkich użytkowników |
+  | **Grupa zdefiniowana** | można wybierać spośród  członków grupy zdefiniowanej we własności `Obiekt` |
+  | **Grupa własna** | można wybierać spośród  użytkowników z listy zdefiniowanej we własności `Dozwolone wartości` |
+  
+- **Własności  parametrów dla typu `Wybór schematu`**
+  - `Typ`  - rodzaj wyboru schematu
+  
+  | Typ | Opis |
+  | ------- | ---- |
+  | **Wszyscy** | można wybierać spośród wszystkich schematów |
+  | **Grupa własna** | można wybierać spośród schematów z listy zdefiniowanej we własności `Dozwolone wartości` |
+ 
 
 ### Uprawnienia specjalne
 Uprawnienia specjalne definiują uprawnienia na wybranym etapie autoryzacji.  Operując nimi, można uzyskać uprawnienia per etap dla : 
