@@ -559,6 +559,7 @@ Słowniki statyczne  predefiniowane. Edycja wartości tylko z panelu administrac
     > **Uwaga:** Kod musi być unikatowy
     > 
     > **Przykład**: Działy w firmie 
+    > 
     > | Kod | Opis|
     > | --- | --- |
     > | ADM | Administracja |
@@ -574,6 +575,7 @@ Słowniki statyczne predefiniowane przypisany bezpośrednio do atrybutu / parame
     > **Uwaga:** Kod musi być unikatowy
     > 
     > **Przykład**: Stan maszyny
+    > 
     > | Kod | Opis|
     > | --- | --- |
     > | ON | Uruchomiony |
@@ -581,6 +583,7 @@ Słowniki statyczne predefiniowane przypisany bezpośrednio do atrybutu / parame
     > | ERR | Awaria |
 
     > **Uwaga:** Atrybut pokazywany jest w kliencie WWW jako checkbox gdy słownik użytkownika ma tylko 2 kody (kolumna opisu nie ma znaczenia):
+    > 
     > | Kod | Opis|
     > | --- | --- |
     > | Y| Tak |
@@ -610,9 +613,13 @@ Słowniki systemowe są wypełniane danymi podczas logowania do systemu SPUMA  (
 > FROM
 >     [SBODEMO_PL]..[OPRJ] WHERE Locked = 'N' and Active='Y';
 > ```
-> Jako podpowiedź: Tak
-> Wzór: `projekt|project` 
-
+> **Parametry:**
+> 
+> | Własność | Wartość|
+> | --- | --- |
+> |  Jako podpowiedź | Tak |
+> | Wzór | `projekt|project` |
+> 
 
 ### <a id='slowniki_interaktywne' href='slowniki_interaktywne' hidden='true'></a> Słowniki interaktywne
 Słowniki dynamiczne. Wartości pobierane są poprzez zapytanie SQL wpisane bezpośrednio na definicji słownika 
@@ -650,6 +657,7 @@ Słowniki interaktywne są wypełniane za każdym razem kiedy dane są potrzebne
 > where  b.CardCode = @ph
 >```
 >**Parametry:**
+>
 > | Własność | Wartość|
 > | --- | --- |
 > | Nazwa | ph 
