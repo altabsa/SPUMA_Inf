@@ -1351,16 +1351,13 @@ Najpierw należy utworzyć schemat pomocniczy:
 Proces autoryzacji to  algorytm, opisujący etapy które musi przejść dokument  aby uzyskał status `Zatwierdzony`.
 Etapy mogą się zmieniać zależnie od atrybutów dokumentu, decyzji osób autoryzujących lub przebiegu dotychczasowej ścieżki autoryzacji.
 
-Procesy łączy się z klasami dokumentów poprzez wpis w  definicji klasy [patrz Klasy/Ogólne](#klasy_ogolne)
-
+Procesy łączy się z klasami dokumentów poprzez wpis w  definicji klasy [patrz Klasy/Ogólne](#klasy)
 
 ### Ogólne
-`Organizacja` - Do jakiej organizacji należy proces. Ustawienie `(Wszystkie)` określa, że proces może być używany w obiektach wszystkich organizacji.
-
-`Nazwa` - Nazwa (kod) procesu autoryzacji
-> **Uwaga:** Nazwa musi być unikatowa w ramach całej bazy. 
-
-`Opis` - Opis procesu - widoczny przy wyborze schematu/procesu z listy (aplikacja WWW).
+- `Organizacja` - Do jakiej organizacji należy proces. Ustawienie `(Wszystkie)` określa, że proces może być używany w obiektach wszystkich organizacji.
+- `Nazwa` - Nazwa (kod) procesu autoryzacji
+  > **Uwaga:** Nazwa musi być unikatowa w ramach całej bazy. 
+- `Opis` - Opis procesu - widoczny przy wyborze schematu/procesu z listy (aplikacja WWW).
 
 ### Proces
 W tym miejscu definiuje się diagram (algorytm) procesu.
