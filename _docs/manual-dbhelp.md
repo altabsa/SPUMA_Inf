@@ -27,7 +27,7 @@ Za pierwszym razem uruchamiana jest przed zapisaniem zmian do bazy (dane przed z
 	- `UB` - Przed zmianą
 	- `D` - Przed skasowaniem
 - `@users_id` -  id użytkownika dokonującego zmiany
-- `@objecttype` - Nazwa obiektu (patrz [Definicje / Obiekty](#definicje_obj))
+- `@objecttype` - Nazwa obiektu (patrz [Definicje / Obiekty](../manual-objects))
 - `@objectid` - id obiektu w którym odbywa się zmiana
 
 **Oczekiwane wyjście:**
