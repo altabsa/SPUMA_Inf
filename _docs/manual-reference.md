@@ -1074,22 +1074,21 @@ Istnieje również możliwość wykonywania raportów zagnieżdżonych.
     > **Uwaga:** Parametry wyświetlane  są w kliencie WWW.
 
 - `Ustawienia kolumn` -  Lista wpisów konfigurujących kolumny zapytania.
-    - `Nazwa kolumny` - nazwa kolumny z raportu która będzie konfigurowana. 
-    - `Etykieta` - Ustawienie nawy kolumny.
-    - `Sortowanie` - Włączenie/ Wyłączenie opcji sortowania na kolumnie.
-    - `Typ odnośnika` - Zdefiniowanie kolumny jako  link
+  - `Nazwa kolumny` - nazwa kolumny z raportu która będzie konfigurowana. 
+  - `Etykieta` - Ustawienie nawy kolumny.
+  - `Sortowanie` - Włączenie/ Wyłączenie opcji sortowania na kolumnie.
+  - `Typ odnośnika` - Zdefiniowanie kolumny jako  link
     
-        | Typ odnośnika| Opis |
-        | ------- | ---- |
-        | Podraport| link do innego raportu. Podraport określamy w polu `Klasa odnośnika` |
-        | Dokument | link do dokumentu. Kolumna musi zawierać id podlinkowanego dokumentu |
-	| Wpis dziennika | link do dokumentu. Kolumna musi zawierać id podlinkowanego dokumentu |
-
-     - `Mapowanie parametrów` - Definiowane dla typu `Podraport`. Zawiera  pary wpisów:
-	- 1 kolumna - nazwa kolumny raportu
-	- 2 kolumna - nazwa parametru podraportu
-	
-    Przy uruchamianiu  podraportu przez link, system automatycznie  wypełni parametr wartością kolumny.
+      | Typ odnośnika| Opis |
+      | ------- | ---- |
+      | Podraport| link do innego raportu. Podraport określamy w polu `Klasa odnośnika` |
+      | Dokument | link do dokumentu. Kolumna musi zawierać id podlinkowanego dokumentu |
+      | Wpis dziennika | link do dokumentu. Kolumna musi zawierać id podlinkowanego dokumentu |
+  - `Mapowanie parametrów` - Definiowane dla typu `Podraport`. Zawiera  pary wpisów:
+    - 1 kolumna - nazwa kolumny raportu
+    - 2 kolumna - nazwa parametru podraportu
+    
+  Przy uruchamianiu  podraportu przez link, system automatycznie  wypełni parametr wartością kolumny.
  
 #### Przykłady
 **Zadanie:** Wykonać raport listujący klientów z bazy ERP wraz z liczbą dokumentów jakie maja zarejestrowane w systemie SPUMA. Po naciśnięciu w liczbę z dokumentami powinien pojawić się podraport z zestawieniem tych dokumentów i możliwością ich podglądu.
@@ -1191,15 +1190,16 @@ Istnieje również możliwość wykonywania raportów zagnieżdżonych.
       b.cc = @ph and a.docstatus = 3
     ```
 - `Parametry`
-    | Nazwa| Etykieta | Typ | Wartości |
-    | --- | --- | --- | --- |
-    | **ph**| Kod klienta | Text |  |
+    
+  | Nazwa| Etykieta | Typ | Wartości |
+  | --- | --- | --- | --- |
+  | **ph**| Kod klienta | Text |  |
 
 - `Ustawienia kolumn`
 
-    | Nazwa kolumny | Etykieta | Typ odnośnika | Klasa odnośnika | Mapowanie |
-    | --- | --- | --- | --- | --- |
-    | **id** | # dokumentu | Dokument|  |  |
+  | Nazwa kolumny | Etykieta | Typ odnośnika | Klasa odnośnika | Mapowanie |
+  | --- | --- | --- | --- | --- |
+  | **id** | # dokumentu | Dokument|  |  |
 
 > **Uwagi:**
 > - W skrypcie SQL w podraporcie podlinkowana została (join) funkcja `AFN_USERDOCS` która zwraca identyfikatory dokumentów  do których użytkownik ma dostęp. Zapewnia to zachowanie systemu uprawnień. 
