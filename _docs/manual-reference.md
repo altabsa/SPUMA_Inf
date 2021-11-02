@@ -5,9 +5,9 @@ excerpt: "Dokumetacja SPUMA - podręcznik administratora"
 ---
 
 # Wstęp
-System SPUMA konfigurowany jest głównie w dwóch miejscach:
-- aplikacje `SPUMA_ADMIN`
-- procedury i funkcję serwera SQL (opcjonalne)
+System SPUMA konfigurowany jest na dwa sposoby :
+- przez aplikacje `SPUMA_ADMIN`
+- przez procedury i funkcję serwera SQL (opcjonalne)
 
 Konfiguracja docelowo zapisywana jest w całości w bazie SQL (baza SPUMA).  
 
@@ -42,8 +42,10 @@ Konfiguracja mechanizmu OCR
 
 - `Ocr Task Mode` - Informacja o metodzie rozpoznawania dokumentów:
 
-    - **Zewnętrzny Web service** -  Ustawienie domyślne. Program korzysta z usługi SPUMA OCR Service (SOS).
-    - **Dysk** - (nierozwijane) Ustawienie stosowane z innymi niż  SOS mechanizmami rozpoznawania. Wymiana odbywa się poprzez dwa  katalogi - wejściowy `OCR input` i wyjściowy `OCR output`.
+    | Ocr Task Mode| Opis |
+    | ------- | ---- |
+    | Zewnętrzny&nbsp;WebService| Ustawienie domyślne. Program korzysta z usługi SPUMA OCR Service (SOS). |
+    | Dysk | (nierozwijane) Ustawienie stosowane z innymi niż  SOS mechanizmami rozpoznawania. Wymiana odbywa się poprzez dwa  katalogi - wejściowy `OCR input` i wyjściowy `OCR output` |
 
 - `SOS address`, `SOS port` - Adres i port  usługi SOS
 
@@ -107,75 +109,70 @@ Ustawienia dotyczące bezpieczeństwa systemu
 
 ### Funkcje JS
 Zestaw funkcji (javascript) używanych w obliczeniach wartości atrybutów
-> Pola `Numer dokumentu`  i `LID` (# linii dokumentu) służą do wpisania
-> testowych wartości  potrzebnych do testowania poprawności funkcji
+> Pola `Numer dokumentu`  i `LID` (# linii dokumentu) służą do wpisania testowych wartości  potrzebnych do testowania poprawności funkcji
 
-Więcej informacji o wykorzystaniu funkcji JS 
+Zobacz [przykłady wykorzystania funkcji JS](../manual-samples).
 
 ###  DATASERVICE
 Konfiguracja połączenia pomiędzy klientem WWW a serwerem `SPUMA_DataService`
 
-`MAXTHREADS` – ilość jednoczesnych wątków serwisu  
-`PORT` – port dla danych binarnych,  na którym usługa obsługuje klienta Silverlight oraz klienta mobilnego  
-`REQTIMEOUT` – czas oczekiwania na usługę (w sek.)
-`POLICYPORT` –port zasad do otwarcia połączenia TCP (dla danych binarnych)
+- `MAXTHREADS` – ilość jednoczesnych wątków serwisu  
+- `PORT` – port dla danych binarnych,  na którym usługa obsługuje klienta Silverlight oraz klienta mobilnego  
+- `REQTIMEOUT` – czas oczekiwania na usługę (w sek.)
+- `POLICYPORT` –port zasad do otwarcia połączenia TCP (dla danych binarnych)
 
-> **Uwaga:**  Gdy zainstalowanych jest  więcej niż jedna usługa w pozostałych instalacjach ustawić 0
+    > **Uwaga:**  Gdy zainstalowanych jest  więcej niż jedna usługa w pozostałych instalacjach ustawić 0
 
-`POLICYALLOWEDPORTS` – porty które mogą być przydzielane  w ramach  zasad 
+- `POLICYALLOWEDPORTS` – porty które mogą być przydzielane  w ramach  zasad 
 
-> **Uwaga:**  Gdy zainstalowanych jest  więcej niż jedna usługa, wpis  ma znaczenie tylko w instalacji gdzie ustawiony jest POLICYPORT
-EX
+    > **Uwaga:**  Gdy zainstalowanych jest  więcej niż jedna usługa, wpis  ma znaczenie tylko w instalacji gdzie ustawiony jest POLICYPORT
 
-`EXRESOURCEPATH` (nierozwijana) Ścieżka do katalogu tymczasowego dla zasobów dla innych dokumentów (Word, Excel itp)
+- `EXRESOURCEPATH` (nierozwijana) Ścieżka do katalogu tymczasowego dla zasobów dla innych dokumentów (Word, Excel itp)
+- `FORCEPREVQUALITY` - Nadpisanie jakości w jakiej przesyłany jest do aplikacji WWW podgląd pliku (0 - nie zmieniaj jakości). 
+    > **Uwaga:** Należy zmieniać tą wartość tylko w przypadku stwierdzenia wolnego generowania podglądu w na stronie,
 
-`FORCEPREVQUALITY` - Nadpisanie jakości w jakiej przesyłany jest do aplikacji WWW podgląd pliku (0 - nie zmieniaj jakości). 
-> **Uwaga:** Należy zmieniać tą wartość tylko w przypadku stwierdzenia
-> wolnego generowania podglądu w na stronie,
+- `BUSINESSPARTNERIPC`: Port IPC po którym komunikujemy się z usługa dodawania PH do SAP
+    > **Uwaga:** Należy zmieniać tą wartość tylko w przypadku gdy port domyślny jest zajęty
+- `SPUMAHOSTIPC`: Port IPC po którym komunikujemy się z usługą wywoływania funkcji z zewnętrznych bibliotek (DLL)
+    > **Uwaga:** Należy zmieniać tą wartość tylko w przypadku gdy port domyślny jest zajęty
 
-`BUSINESSPARTNERIPC`: Port IPC po którym komunikujemy się z usługa dodawania PH do SAP
-> **Uwaga:** Należy zmieniać tą wartość tylko w przypadku gdy port domyślny jest zajęty
-
-`SPUMAHOSTIPC`: Port IPC po którym komunikujemy się z usługą wywoływania funkcji z zewnętrznych bibliotek (DLL)
-> **Uwaga:** Należy zmieniać tą wartość tylko w przypadku gdy port domyślny jest zajęty
-
-`MAXHTTPTHREADS` – ilość jednoczesnych otwartych  wątków dla klienta WWW
-`HTTPPORT`  – Port na którym usługa obsługuje klienta WWW 
-`HTTPUSESLL`  – Informacja czy klient WWW korzysta z SSL (konfiguracja strony na serwerze WWW)
+- `MAXHTTPTHREADS` – ilość jednoczesnych otwartych  wątków dla klienta WWW
+- `HTTPPORT`  – Port na którym usługa obsługuje klienta WWW 
+- `HTTPUSESLL`  – Informacja czy klient WWW korzysta z SSL (konfiguracja strony na serwerze WWW)
 
 ### ADMIN
 Konfiguracja ogólna funkcji zewnętrznych
 
-`ASSEMBLYPATH`  – ścieżka  gdzie przechowywane są biblioteki z funkcjami zewnętrznymi.
+- `ASSEMBLYPATH`  – ścieżka  gdzie przechowywane są biblioteki z funkcjami zewnętrznymi.
 
 ### <a id='konf_sbobusinesspartner' href='konf_sbobusinesspartner' hidden='true'></a>SBOBUSINESSPARTNER
 Konfiguracja  połączenia z  funkcjonalnością Partnerów Handlowych w systemie SAP Business One
 
-> Wpisy dotyczą sytuacji gdy na [konfiguracji firmy](#firmy1) mamy określony
-> `Typ połączenia` jako `Zewnętrzny`
+> Wpisy dotyczą sytuacji gdy na [konfiguracji firmy](#firmy1) mamy określony `Typ połączenia` jako `Zewnętrzny`
 
-`SBOLICENSESERVER` –  adres licencji SAP
-`SBODBTYPE` – wersja SQL serwera
-`DICREDENTIALS`  – loginy dla każdej z baz SAP połączonych z firmami w SPUMA. Każdy wpis reprezentuje jedną bazę 
-
+- `SBOLICENSESERVER` –  adres licencji SAP
+- `SBODBTYPE` – wersja SQL serwera
+- `DICREDENTIALS`  – loginy dla każdej z baz SAP połączonych z firmami w SPUMA. Każdy wpis reprezentuje jedną bazę 
+    ```
     nazwa_bazy:* | spuma_user:sap_user:sap_user_pass
-Przykład:
-
+    ```    
+    Przykład:
+    ```
     SBODEMO_PL:*:manager:1234;SBODEMO_US:*:manager:43231
+    ````
+    > **Uwaga:**  Kolejne wpisy oddzielane są średnikami. Nazwa bazy musi być taka jak w konfiguracji firmy
 
-> **Uwaga:**  Kolejne wpisy oddzielane są średnikami. Nazwa bazy musi być taka jak w konfiguracji firmy
-
-`SUGGESTCARDCODE` – Zapytanie SQL które proponuje nowy kod PH 
+- `SUGGESTCARDCODE` – Zapytanie SQL które proponuje nowy kod PH 
 
 
 ### <a id='konf_sapb1utils' href='konf_sapb1utils' hidden='true'></a>SAPB1Utils
 Konfiguracja zewnętrznej biblioteki DLL SAPB1Utils. Biblioteka odpowiada za import  danych do SAP Business One
 
-`LICENSESERVER`  – adres licencji SAP 
-`SERVERVERSION` – wersja SQL serwera 
-`SBOUSER` –użytkownik SAP
-`SBOPASSWORD` – hasło do SAP
-`SBOLANG` – język komunikatów biblioteki SAP DI
+- `LICENSESERVER`  – adres licencji SAP 
+- `SERVERVERSION` – wersja SQL serwera 
+- `SBOUSER` –użytkownik SAP
+- `SBOPASSWORD` – hasło do SAP
+- `SBOLANG` – język komunikatów biblioteki SAP DI
 
 ## Organizacje
 Organizacje reprezentują jednostki nadrzędne nad firmami. Mogą reprezentować kraj lub grupę firm.
@@ -188,14 +185,11 @@ Zdefiniowanie organizacji. skutkuje brakiem możliwości użycia/ wyboru  danego
 Na jednej instalacji systemu SPUMA można rejestrować dokumenty  kilku firm. Dostęp  do nich reguluje się uprawnieniami. Domyślnie wszyscy maja dostęp do dokumentów wszystkich firm. Firma w ramach jednej organizacji dziali wszystkie obiekty z innymi (klasy, słowniki, schematy itp)
 
 ### Ogólne
-`Organizacja` - Do jakiej organizacji należy firma. Ustawienie `(Wszystkie)` określa, że firma jest dostępna dla wszystkich obiektów.
-
-`Nazwa` - Nazwa firmy widoczna w systemie
-
-`Baza`  - nazwa bazy sytemu ERP połączonego z daną firmą. Ustawienie używane w zapytaniach SQL (procesy UI, słowniki interaktywne, raporty , dzienniki). Podstawiane pod zmienna `$DBNAME`. Ważne również dla konfiguracji połączenia z systemem ERP (patrz [Konfiguracja/SBOBUSINESSPARTNERS](#konf_sbobusinesspartner) , [Konfiguracja/SapB1Utils](#konf_sapb1utils))
-
-`Katalog domyślny` - Określenie domyślnego  katalogu w repozytorium do którego  trafiają dokumenty po wyjściu z sekretariatu. Opcja nadpisywana przez analogiczne ustawienie na klasie.
-> **Uwaga:** ustawienie `(Brak)`  oznacza, ze dokumenty trafiać będą do katalogu głównego ( z nazwą firmy)
+- `Organizacja` - Do jakiej organizacji należy firma. Ustawienie `(Wszystkie)` określa, że firma jest dostępna dla wszystkich obiektów.
+- `Nazwa` - Nazwa firmy widoczna w systemie
+- `Baza`  - nazwa bazy sytemu ERP połączonego z daną firmą. Ustawienie używane w zapytaniach SQL (procesy UI, słowniki interaktywne, raporty , dzienniki). Podstawiane pod zmienna `$DBNAME`. Ważne również dla konfiguracji połączenia z systemem ERP (patrz [Konfiguracja/SBOBUSINESSPARTNERS](#konf_sbobusinesspartner) , [Konfiguracja/SapB1Utils](#konf_sapb1utils))
+- `Katalog domyślny` - Określenie domyślnego  katalogu w repozytorium do którego  trafiają dokumenty po wyjściu z sekretariatu. Opcja nadpisywana przez analogiczne ustawienie na klasie.
+    > **Uwaga:** ustawienie `(Brak)`  oznacza, ze dokumenty trafiać będą do katalogu głównego ( z nazwą firmy)
 
 `Słowniki` - Lista słowników systemowych skojarzonych z firmą. (patrz [Słowniki/Słowniki systemowe](#slowniki_systemowe))
 
@@ -205,44 +199,32 @@ Definiowanie uprawnień na firmie (patrz [Uprawnienia](#uprawnienia))
 ### Partnerzy handlowi
 Definiowanie sposobu rejestracji atrybutu typu  `Własny` przechowującego informacje o kliencie
 
-`Typ połączenia` - Rodzaj połączenia z bazą klientów
+- `Typ połączenia` - Rodzaj połączenia z bazą klientów
 
-| Typ połączenia| Opis |
-| ------- | ---- |
-| Zewnętrzny&nbsp;SOAP| Dane pobierane i zapisywane bezpośrednio w bazie ERP (patrz [Konfiguracja/SBOBUSINESSPARTNER](#konf_sbobusinesspartner))  |
-| Baza&nbsp;wewnętrzna | Klienci rejestrowani są w bazie wewnętrznej SPUMA (tabela `BUSINESSPARTNERDB`)
+    | Typ połączenia| Opis |
+    | ------- | ---- |
+    | Zewnętrzny&nbsp;SOAP| Dane pobierane i zapisywane bezpośrednio w bazie ERP (patrz [Konfiguracja/SBOBUSINESSPARTNER](#konf_sbobusinesspartner))  |
+    | Baza&nbsp;wewnętrzna | Klienci rejestrowani są w bazie wewnętrznej SPUMA (tabela `BUSINESSPARTNERDB`)
 
 ## Użytkownicy
 ###  Ogólne
-`Organizacja` - Do jakiej organizacji należy użytkownik. Ustawienie `(Wszystkie)` określa, że użytkownik ma dostęp do obiektów (klas, dokumentów itp ) wszystkich organizacji.
+- `Organizacja` - Do jakiej organizacji należy użytkownik. Ustawienie `(Wszystkie)` określa, że użytkownik ma dostęp do obiektów (klas, dokumentów itp ) wszystkich organizacji.
+- `Nazwa` - Nazwa (login) użytkownika.
+    > **Uwaga:** Nazwa musi być unikatowa w ramach całej bazy 
 
-`Nazwa` - Nazwa (login) użytkownika.
-> **Uwaga:** Nazwa musi być unikatowa w ramach całej bazy 
-
-`Nowe hasło`,`Nowe hasło2` - Miejsce do zmiany/ założenia nowego  hasła.
-
-`Kolor komentarzy` - Określenie koloru tła komentarzy widocznych na dokumentach skanowanych.
-
-`SMTP address, SMTP user, SMTP port, SMTP password` - domyślne ustawienia konta email do wysyłki powiadomień. 
-
-`Odpowiedź na` - Określenie adresu email z którego wysyłane są powiadomienia do innych użytkowników oraz na który  przychodzą wiadomości.
-> **Uwaga:**  email musi być unikatowy  w ramach całej bazy 
-
-`Szablon e-mail` - Fragment tekstu dołączany do maili wysyłanych w powiadomieniach. Używany w procedurze `APR_FORMATEMAIL` [patrz Procedury SQL/APR_FORMATEMAIL](#proc_formatemail)
-
-`Informacje o zdarzeniach` - Ustawienie które wiadomości powinien użytkownik otrzymywać (kolumna `Wyślij`) i które po otrzymaniu zaznacza automatycznie  jako przeczytane (kolumna `Zaznacz jako przeczytane`)
-
-`Twórca` - Użytkownik który jest twórcą może dodawać nowe dokumenty w sekretariacie
-
-`Administrator` - Użytkownik może logować się do panelu administracyjnego 
-
-`Zablokowany` - Odebranie uprawnień do logowania się w systemie (np pracownik zwolniony)
- 
- `Imię i nazwisko` - Używane w szablonach dokumentów oraz auto-wyliczeniach 
-
- `Ostatnie dokumenty` - Ilość pamiętanych ostatnio otwieranych dokumentów. Dotyczy katalogu `Ostatni używane` w aplikacji WWW
-
- `Domyślny dziennik` - Który dziennik korespondencji proponowany jest domyślnie  dla danego użytkownika
+- `Nowe hasło`,`Nowe hasło2` - Miejsce do zmiany/ założenia nowego  hasła.
+- `Kolor komentarzy` - Określenie koloru tła komentarzy widocznych na dokumentach skanowanych.
+- `SMTP address, SMTP user, SMTP port, SMTP password` - domyślne ustawienia konta email do wysyłki powiadomień. 
+- `Odpowiedź na` - Określenie adresu email z którego wysyłane są powiadomienia do innych użytkowników oraz na który  przychodzą wiadomości.
+    > **Uwaga:**  email musi być unikatowy  w ramach całej bazy 
+- `Szablon e-mail` - Fragment tekstu dołączany do maili wysyłanych w powiadomieniach. Używany w procedurze `APR_FORMATEMAIL` [patrz Procedury SQL/APR_FORMATEMAIL](#proc_formatemail)
+- `Informacje o zdarzeniach` - Ustawienie które wiadomości powinien użytkownik otrzymywać (kolumna `Wyślij`) i które po otrzymaniu zaznacza automatycznie  jako przeczytane (kolumna `Zaznacz jako przeczytane`)
+- `Twórca` - Użytkownik który jest twórcą może dodawać nowe dokumenty w sekretariacie
+- `Administrator` - Użytkownik może logować się do panelu administracyjnego 
+- `Zablokowany` - Odebranie uprawnień do logowania się w systemie (np pracownik zwolniony)
+- `Imię i nazwisko` - Używane w szablonach dokumentów oraz auto-wyliczeniach 
+- `Ostatnie dokumenty` - Ilość pamiętanych ostatnio otwieranych dokumentów. Dotyczy katalogu `Ostatni używane` w aplikacji WWW
+- `Domyślny dziennik` - Który dziennik korespondencji proponowany jest domyślnie  dla danego użytkownika
 
 ### Uprawnienia
 Uprawnienia ustawiane w tym miejscu różnią się od głównego mechanizmu uprawnień ([patrz Uprawnienia](#uprawnienia)). W tym miejscu możemy można ustawić globalny dostęp do danej firmy. Zarówno do tworzenia jak i podglądu  dokumentów. 
