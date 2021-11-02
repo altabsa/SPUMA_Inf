@@ -782,70 +782,70 @@ Wspólne, dla każdego rodzaju,  własności to:
 #### Instrukcja obsługi dokumentu
 Czynności wykonywane przez instrukcję zależą  od typu rozkazu.
 
-##### Pobranie linii.
-Pobranie do zmiennej aktualne linie z dokumentu. Zmienna jest tablica dwuwymiarową. Kolumny maja takie nazwy jak atrybuty linii. Dodatkowo jest kolumna systemowa `SYS_LINEID`  
-w której rejestrowany jest numer linii 
+- **Pobranie linii**
+  Pobranie do zmiennej aktualne linie z dokumentu. Zmienna jest tablica dwuwymiarową. Kolumny maja takie nazwy jak atrybuty linii. Dodatkowo jest kolumna systemowa `SYS_LINEID` w której rejestrowany jest numer linii 
 
-##### Aktualizacja linii 
-Zmiana lub dodanie nowej linii. Zmienna powinna być tablicą dwuwymiarowa z nazwami kolumn zgodnymi z atrybutami linii. Nie jest wymagane podanie wszystkich atrybutów. Wymagana jest   przynajmniej jedna kolumna o nazwie  `SYS_LINEID` gdzie rejestrowany jest numer aktualizowanej linii (numeracja od 0) lub wartość `-1` (przy dodawaniu nowej linii). 
-> **Przykład:** Aktualizacja 1 linii i dodanie nowej z ilością. Skrypt który tworzy zmienna:
-> 
-> ```sql
-> Select 0 as SYS_LINEID, 4 as ILOSC
-> union 
-> Select -1,10 
-> ```
-##### Czyszczenie linii 
-Instrukcja kasująca wszystkie linie. Nie wymaga podania zmiennej.
+- **Aktualizacja linii** 
+  Zmiana lub dodanie nowej linii. Zmienna powinna być tablicą dwuwymiarowa z nazwami kolumn zgodnymi z atrybutami linii. Nie jest wymagane podanie wszystkich atrybutów. Wymagana jest   przynajmniej jedna kolumna o nazwie  `SYS_LINEID` gdzie rejestrowany jest numer aktualizowanej linii (numeracja od 0) lub wartość `-1` (przy dodawaniu nowej linii). 
+  > **Przykład:** Aktualizacja 1 linii i dodanie nowej z ilością. Skrypt który tworzy zmienna:
+  > 
+  > ```sql
+  > Select 0 as SYS_LINEID, 4 as ILOSC
+  > union 
+  > Select -1,10 
+  > ```
 
-##### Kasowanie linii 
-Instrukcja kasująca wybraną  linie. Numer linii w zmiennej w kolumnie `SYS_LINEID`
+- **Czyszczenie linii**
+  Instrukcja kasująca wszystkie linie. Nie wymaga podania zmiennej.
 
-##### Pobranie nagłówka
-Pobranie do zmiennej dane z nagłówka dokumentu. Zmienna jest tablica z jednym wierszem. Kolumny maja takie nazwy jak atrybuty nagłówka. Dodatkowe informacje zarejestrowane są w kolumnach systemowych:
+-  **Kasowanie linii**
+  Instrukcja kasująca wybraną  linie. Numer linii w zmiennej w kolumnie `SYS_LINEID`
 
-| Kolumna systemowa | Opis |
-| --- | --- |
-| SYS_ID | Id dokumentu |
-| SYS_USERID | Id użytkownika |
-| SYS_CLASSID | Id klasy |
-| SYS_COMPANYID | Id firmy |
-| SYS_TEMPLATEID | Id szablonu (na podst. którego został utworzony dokument)  |
-| SYS_NAME | Nazwa dokumentu  |
-| SYS_DESCRIPTION | Opis dokumentu |
-| SYS_DOCDATE | Data dokumentu |
-| SYS_ENTERDATE | Data wpływu dokumentu |
-| SYS_DOCNUM | Numer dokumentu |
+- **Pobranie nagłówka**
+  Pobranie do zmiennej dane z nagłówka dokumentu. Zmienna jest tablica z jednym wierszem. Kolumny maja takie nazwy jak atrybuty nagłówka. Dodatkowe informacje zarejestrowane są w kolumnach systemowych:
 
-##### Aktualizacja nagłówka
-Instrukcja zmienia wartości atrybutów nagłówka. Zmienna powinna być tablicą dwuwymiarowa z nazwami kolumn zgodnymi z atrybutami nagłówka. Nie jest wymagane podanie wszystkich własności , wystarczy  jedna kolumna. Oprócz atrybutów nagłówka można używać następujących własności systemowych:
+  | Kolumna systemowa | Opis |
+  | --- | --- |
+  | SYS_ID | Id dokumentu |
+  | SYS_USERID | Id użytkownika |
+  | SYS_CLASSID | Id klasy |
+  | SYS_COMPANYID | Id firmy |
+  | SYS_TEMPLATEID | Id szablonu (na podst. którego został utworzony dokument)  |
+  | SYS_NAME | Nazwa dokumentu  |
+  | SYS_DESCRIPTION | Opis dokumentu |
+  | SYS_DOCDATE | Data dokumentu |
+  | SYS_ENTERDATE | Data wpływu dokumentu |
+  | SYS_DOCNUM | Numer dokumentu |
 
-| Kolumna systemowa | Opis |
-| --- | --- |
-| SYS_NAME | Nazwa dokumentu  |
-| SYS_DESCRIPTION | Opis dokumentu |
-| SYS_DOCDATE | Data dokumentu |
-| SYS_ENTERDATE | Data wpływu dokumentu |
-| SYS_DOCNUM | Numer dokumentu |
+- **Aktualizacja nagłówka**
+  Instrukcja zmienia wartości atrybutów nagłówka. Zmienna powinna być tablicą dwuwymiarowa z nazwami kolumn zgodnymi z atrybutami nagłówka. Nie jest wymagane podanie wszystkich własności , wystarczy  jedna kolumna. Oprócz atrybutów nagłówka można używać następujących własności systemowych:
 
-##### Zapisz dokument
-Instrukcja zapisująca zmiany na dokumencie. Nie wymaga podania zmiennej.
+  | Kolumna systemowa | Opis |
+  | --- | --- |
+  | SYS_NAME | Nazwa dokumentu  |
+  | SYS_DESCRIPTION | Opis dokumentu |
+  | SYS_DOCDATE | Data dokumentu |
+  | SYS_ENTERDATE | Data wpływu dokumentu |
+  | SYS_DOCNUM | Numer dokumentu |
+
+- **Zapisz dokument**
+  Instrukcja zapisująca zmiany na dokumencie. Nie wymaga podania zmiennej.
 
 #### Instrukcja obsługi skryptu
-Instrukcja wywołująca zapytanie SQL i zwracająca jego wynik do podanej zmiennej tabelarycznej. Zapytania SQL są stosowane do wykonywania obliczeń, przygotowywania danych do zmiennych do  
+  Instrukcja wywołująca zapytanie SQL i zwracająca jego wynik do podanej zmiennej tabelarycznej. Zapytania SQL są stosowane do wykonywania obliczeń, przygotowywania danych do zmiennych do  
 
-##### Własności:
-- `Typ` - Rodzaj połączenia z bazą 
-- `DBNAME` - Nazwa bazy alternatywnej (np systemu ERP). Nazwa ta podstawiana jest do skryptu  do wyrażenia `$DBNAME`
-- `Skrypt` - Treść Zapytanie SQL.
+- **Własności:**
+  - `Typ` - Rodzaj połączenia z bazą 
+  - `DBNAME` - Nazwa bazy alternatywnej (np systemu ERP). Nazwa ta podstawiana jest do skryptu  do wyrażenia `$DBNAME`
+  - `Skrypt` - Treść Zapytanie SQL.
 
     > Przy tworzeniu zapytania należy pamiętać, że mamy dostęp do zmiennych całego procesu. Przechowywane są one w tablicach tymczasowych o nazwie `#nazwa_zmennej` (patrz [przykład](#procesy_ui_p1)).
 
 #### Instrukcja komunikatu
 Instrukcja generuje okienko z informacja lub prośba o decyzję. W wyniku działania zapisuje w zmiennej typu `Int` numer wybranego przycisku
-##### Własności:
-- `Komunikat` Tekst który zostanie wyświetlony. Można używać zmiennych w postaci `$nazwa_zmiennej` lub `$nazwa_zmiennej[kolumna]`
-- `Przycisk 1`, `Przycisk 2`, `Przycisk 3` : Etykiety na przyciskach. Jeśli wartość jest pusta przycisk się nie pojawi.
+- **Własności:**
+  - `Komunikat` Tekst który zostanie wyświetlony. Można używać zmiennych w postaci `$nazwa_zmiennej` lub `$nazwa_zmiennej[kolumna]`
+  - `Przycisk 1`, `Przycisk 2`, `Przycisk 3` : Etykiety na przyciskach. Jeśli wartość jest pusta przycisk się nie pojawi.
 
 #### Instrukcja DLL
 Instrukcja wywołuje funkcje podanej w parametrach biblioteki DLL. W wyniku jej działania, do zmiennej trafia  wygenerowany wynik. 
@@ -855,29 +855,28 @@ Instrukcja wywołuje funkcje podanej w parametrach biblioteki DLL. W wyniku jej 
 
 Ze standardowa instalacja systemu SPUMA dostarczana jest biblioteka `SAPB1Utils` która służy do wczytywania do SAP danych ze źródeł zewnętrznych. Poniższy opis wykorzystuje wywołanie tej biblioteki
 
-##### Własności:
-- `Typ zestawu` Rodzaj biblioteki. Obecnie dostępny jest jeden typ - `.NET DLL`
-- `Nazwa pliku DLL` - nazwa pliku z podkatalogu `Assemblies` 
- > **Przykład:** `SAPB1Utils.dll`
-- `Nazwa klasy` - nazwa klasy w której jest dana funkcja
- > **Przykład:** `SAPB1Utils` 
-- `Nazwa metody` - nazwa wywoływanej metody / funkcji 
- > **Przykład:** `UDICommand`  - metoda odpowiadająca za wczytanie danych do SAP za pomocą interfejsy SAP Data Interface
-- `Argument 1..4` - argumenty metody. Można używać zmiennych przygotowanych przez inne kroki (np skrypt). Zmienne należy podać w postaci `$nazwa_zmiennej` lub `$nazwa_zmiennej[kolumna]` 
- > **Przykład:** 
- > Wpisanie poniższego tekstu do `argument 1`  dodaje nowego klienta w SAP
- > ```xml
-> <transaction>
->  	<object type="2">
-> 			<actionafter method="Add"/>
-> 			<properties>
-> 				<CardCode>C00099</CardCode>
-> 				<CardName>Nazwa nowego klienta</CardName>
-> 			</properties> 
->      </object>
-> </transaction>
-> ```
-> 
+- **Własności:**
+  - `Typ zestawu` Rodzaj biblioteki. Obecnie dostępny jest jeden typ - `.NET DLL`
+  - `Nazwa pliku DLL` - nazwa pliku z podkatalogu `Assemblies` 
+   > **Przykład:** `SAPB1Utils.dll`
+  - `Nazwa klasy` - nazwa klasy w której jest dana funkcja
+   > **Przykład:** `SAPB1Utils` 
+  - `Nazwa metody` - nazwa wywoływanej metody / funkcji 
+   > **Przykład:** `UDICommand`  - metoda odpowiadająca za wczytanie danych do SAP za pomocą interfejsy SAP Data Interface
+  - `Argument 1..4` - argumenty metody. Można używać zmiennych przygotowanych przez inne kroki (np skrypt). Zmienne należy podać w postaci `$nazwa_zmiennej` lub `$nazwa_zmiennej[kolumna]` 
+   > **Przykład:** 
+   > Wpisanie poniższego tekstu do `argument 1`  dodaje nowego klienta w SAP
+   > ```xml
+   > <transaction>
+   >  	<object type="2">
+   > 			<actionafter method="Add"/>
+   > 			<properties>
+   > 				<CardCode>C00099</CardCode>
+   > 				<CardName>Nazwa nowego klienta</CardName>
+   > 			</properties> 
+   >      </object>
+   > </transaction>
+   > ```
 
 ### Warunki
 Warunki definiuje się pomiędzy krokami algorytmu.
@@ -930,7 +929,7 @@ W warunkach można  zdefiniować również specjalną funkcje `count()` która p
 #### Stałe
 Bezpośrednio wpisana wartość (zawsze w cudzysłowie)    
 
-#### Operatory:
+#### Operatory
 
 | operator | opis | typ argumentów|
 | --- | --- | --- |
@@ -1028,7 +1027,7 @@ Warunek 2: `SQL[SYS_LINEID] >= "0"`
 Raporty umożliwiają wykonanie analizy zarówno na bazie SPUMA jak i bazie systemu ERP. W kliencie WWW zaimplementowano  system grupowania , filtrowania i parametryzacji wyników.
 Istnieje również możliwość wykonywania raportów zagnieżdżonych. 
 
-#### Własności
+### Własności
 - `Organizacja` - Do jakiej organizacji należy raport. Ustawienie `(Wszystkie)` określa, że raport może być używany we  wszystkich organizacjach.
 - `Nazwa` - Nazwa (kod) raportu
     > **Uwaga:** Nazwa musi być unikatowa w ramach całej bazy 
@@ -1090,7 +1089,7 @@ Istnieje również możliwość wykonywania raportów zagnieżdżonych.
     
   Przy uruchamianiu  podraportu przez link, system automatycznie  wypełni parametr wartością kolumny.
  
-#### Przykłady
+### Przykłady
 **Zadanie:** Wykonać raport listujący klientów z bazy ERP wraz z liczbą dokumentów jakie maja zarejestrowane w systemie SPUMA. Po naciśnięciu w liczbę z dokumentami powinien pojawić się podraport z zestawieniem tych dokumentów i możliwością ich podglądu.
 
 **Założenia:**
@@ -1223,7 +1222,7 @@ Etapami schematu mogą być:
 - inne schematy autoryzacji
 
 
-#### Własności
+### Własności
 - `Organizacja` - Do jakiej organizacji należy autoryzacja. Ustawienie `(Wszystkie)` określa, że autoryzacja może być używana w obiektach wszystkich organizacji.
 - `Nazwa` - Nazwa (kod) autoryzacji
   > **Uwaga:** Nazwa musi być unikatowa w ramach całej bazy. Należy pamiętać że w bazie istnieją już schematy związane z grupami użytkowników (patrz [Grupy użytkowników](#grupy)) o takiej samej nazwie
@@ -1252,7 +1251,7 @@ Etapami schematu mogą być:
 - `Informacje dodatkowe` - tekst który jest widoczny na oknie zatwierdzania w aplikacji WWW w danym etapie.
 
 
-#### Przykłady
+### Przykłady
 
 - **Przykład 1:** Cała grupa
   - **Cel:**  Dokument mają zatwierdzić w jednym kroku, 3 osoby należące do grupy `DZIAL1`. Wszyscy muszą się zgodzić.
@@ -1451,7 +1450,7 @@ Parametry dodaje się do listy od razu określając ich typ:
 - **Własności  parametrów dla typu `Słownik użytkownika`**
   - `Dozwolone wartości` - lista wartości dla słownika
 - **Własności  parametrów dla typu `Wybór użytkownika`**
-  -`Typ`  - rodzaj wyboru użytkownika
+  - `Typ`  - rodzaj wyboru użytkownika
   
   | Typ | Opis |
   | ------- | ---- |
