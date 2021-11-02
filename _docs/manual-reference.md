@@ -1259,6 +1259,7 @@ Etapami schematu mogą być:
   - **Rozwiązanie 1:**
 
     Typ: Wszyscy z
+    
     Etapy:
     
     | Etap | Rodzaj | Obiekt |
@@ -1269,7 +1270,9 @@ Etapami schematu mogą być:
 
 
   - **Rozwiązanie 2:**
+ 
     Typ: Wszyscy z
+    
     Etapy:
     
     | Etap | Rodzaj | Obiekt |
@@ -1279,81 +1282,84 @@ Etapami schematu mogą być:
     >**Uwaga:** W rozwiązaniu 2 nie ma znaczenia typ (`Jeden z` czy `Wszyscy z`) ponieważ jest tylko jeden etap złożony z grupy. W takim przypadku system zakłada, że wszyscy użytkownicy grupy muszą zatwierdzić dokument
 
 - **Przykład 2:** Najpierw użytkownik, potem jeden z grupy
+  - **Cel:**  Dokument ma trafić najpierw do managera (`user1`). Po jego akceptacji musi zatwierdzić dokument jedna osoba z księgowości (grupa `KSIEGOWOSC`). 
+  - **Rozwiązanie:**
+  
+    Typ: Wszyscy z
+    
+    Etapy:
 
-**Cel:**  Dokument ma trafić najpierw do managera (`user1`). Po jego akceptacji musi zatwierdzić dokument jedna osoba z księgowości (grupa `KSIEGOWOSC`) . 
+    | Etap | Rodzaj | Obiekt |
+    | --- | --- | --- |
+    | 0 | użytkownik  |  `user1`
+    | 1 | schemat  |  `KSIEGOWOSC`
 
-**Rozwiązanie:**
+    > **Uwagi:**
+    >  - Typ `Wszyscy z` mówi że autoryzacja musi przejść przez wszystkie zdefiniowane etapy. Gdyby ustawić `Jeden z` dokument został by już zatwierdzony po 1 kroku  (etap 0)
+    >   - Na etapie 1 użyty został systemowy schemat `KSIEGOWOSC` (typu `Jeden z`), utworzony wraz z  grupą `KSIEGOWOSC`   ([patrz Grupy użytkowników](#grupy))
+    >   - Gdyby zamiast schematu na etapie 1 podać grupę `KSIEGOWOSC`,  wymagałoby to zatwierdzenia dokumentu przez wszystkie osoby z ww. grupy
+
+- **Przykład 3:** Najpierw użytkownik, potem obojętnie kto z 2 grup
+  - **Cel:**  Dokument ma trafić najpierw do managera (`user1`). Po jego akceptacji musi zatwierdzić dokument jedna osoba z księgowości (grupa `KSIEGOWOSC`)  lub działu HR (grupa  `HR` )
+  - **Rozwiązanie:**
+  
+    Najpierw należy utworzyć schemat pomocniczy:
+ 
+    Nazwa: `Pomocniczy`
+    
+    Typ: Jeden z
+    
+    Etapy:
+ 
+    | Etap | Rodzaj | Obiekt |
+    | --- | --- | --- |
+    | 0 | schemat  |  `KSIEGOWOSC`
+    | 0 | schemat  |  `HR`
+ 
+    Schemat finalny
+  
+    Typ: Wszyscy z 
+    
+    Etapy:
+  
+    | Etap | Rodzaj | Obiekt |
+    | --- | --- | --- |
+    | 0 | użytkownik  |  `user1`
+    | 1 | schemat  |  `Pomocniczy`
+ 
+    > **Uwagi:**
+    >  -  Gdyby założyć,  że na etapie 1 zatwierdzić ma jeden z grupy `KSIEGOWOSC` i jeden z grupy `HR` tworzenie pomocniczego schematu nie byłoby konieczne:
+    >  
+    >    | Etap | Rodzaj | Obiekt |
+    >    | --- | --- | --- |
+    >    | 0 | użytkownik  |  `user1`
+    >    | 1 | schemat  |  `KSIEGOWOSC`
+    >    | 1 | schemat  |  `HR`
+    >    
+
+- **Przykład 4** Najpierw cała grupa, potem użytkownik
+  - **Cel:**  Dokument ma trafić najpierw do osób z HR (grupa  `HR` ) i po zatwierdzeniu przez każdego z nich ma być zaakceptowany przez managera (`user1`).
+  - **Rozwiązanie 1:**
+  
+    Typ: Wszyscy z  
+    
+    Etapy:  
+  
+    | Etap | Rodzaj | Obiekt |
+    | --- | --- | --- |
+    | 0 | Grupa  |  `HR`
+    | 1 | użytkownik  |  `user1`
+
+  - **Rozwiązanie 2:**  
+
   Typ: Wszyscy z
-  Etapy:
-
-  | Etap | Rodzaj | Obiekt |
-  | --- | --- | --- |
-  | 0 | użytkownik  |  `user1`
-  | 1 | schemat  |  `KSIEGOWOSC`
-
-  > **Uwagi:**
-  >  - Typ `Wszyscy z` mówi że autoryzacja musi przejść przez wszystkie zdefiniowane etapy. Gdyby ustawić `Jeden z` dokument został by już zatwierdzony po 1 kroku  (etap 0)
-  >   - Na etapie 1 użyty został systemowy schemat `KSIEGOWOSC` (typu `Jeden z`), utworzony wraz z  grupą `KSIEGOWOSC`   ([patrz Grupy użytkowników](#grupy))
-  >   - Gdyby zamiast schematu na etapie 1 podać grupę `KSIEGOWOSC`,  wymagałoby to zatwierdzenia dokumentu przez wszystkie osoby z ww. grupy
-
-**Przykład 3:** Najpierw użytkownik, potem obojętnie kto z 2 grup
-
-**Cel:**  Dokument ma trafić najpierw do managera (`user1`). Po jego akceptacji musi zatwierdzić dokument jedna osoba z księgowości (grupa `KSIEGOWOSC`)  lub działu HR (grupa  `HR` )
-
-**Rozwiązanie:**
-  Najpierw należy utworzyć schemat pomocniczy:
- 
-  Nazwa: `Pomocniczy`
-  Typ: Jeden z
-  Etapy:
- 
-  | Etap | Rodzaj | Obiekt |
-  | --- | --- | --- |
-  | 0 | schemat  |  `KSIEGOWOSC`
-  | 0 | schemat  |  `HR`
- 
-  Schemat finalny
-  Typ: Wszyscy z 
-  Etapy:
   
-  | Etap | Rodzaj | Obiekt |
-  | --- | --- | --- |
-  | 0 | użytkownik  |  `user1`
-  | 1 | schemat  |  `Pomocniczy`
- 
-  > **Uwagi:**
-  >  -  Gdyby założyć,  że na etapie 1 zatwierdzić ma jeden z grupy `KSIEGOWOSC` i jeden z grupy `HR` tworzenie pomocniczego schematu nie byłoby konieczne:
-  >  
-  >    | Etap | Rodzaj | Obiekt |
-  >    | --- | --- | --- |
-  >    | 0 | użytkownik  |  `user1`
-  >    | 1 | schemat  |  `KSIEGOWOSC`
-  >    | 1 | schemat  |  `HR`
-  >    
-
-**Przykład 4** Najpierw cała grupa, potem użytkownik
-
-**Cel:**  Dokument ma trafić najpierw do osób z HR (grupa  `HR` ) i po zatwierdzeniu przez każdego z nich ma być zaakceptowany przez managera (`user1`).
-
-  **Rozwiązanie 1:**
-  Typ: Wszyscy z  
-  Etapy:  
-  
-  | Etap | Rodzaj | Obiekt |
-  | --- | --- | --- |
-  | 0 | Grupa  |  `HR`
-  | 1 | użytkownik  |  `user1`
-
-  **Rozwiązanie 2:**  
-  Typ: Wszyscy z
   Etapy:
-  
+    
   | Etap | Rodzaj | Obiekt |
   | --- | --- | --- |
   | 0 | Schemat|  `*HR`
   | 1 | użytkownik  |  `user1`
-
-
 
 ## <a id='procesy' href='procesy' hidden='true'></a> Procesy autoryzacji
 
