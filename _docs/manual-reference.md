@@ -1506,21 +1506,25 @@ Część dotycząca linii pozwala na definiowanie uprawnień edycji dla poszczeg
       | --- | --- | --- | --- |
       | Wybór schematu | Grupa własna | Lista schematów | `ETAP_1.PSCH`
 
-**Etap 2:**
-`Rodzaj`: Autoryzacja prosta
-`Typ`:  Schemat
-`Obiekt`: zmienna `ETAP_1.PSCH`
+  - **Etap 2:**
+  
+    `Rodzaj`: Autoryzacja prosta
+    `Typ`:  Schemat
+    `Obiekt`: zmienna `ETAP_1.PSCH`
 
-**Etap 3:**
-`Rodzaj`: Autoryzacja prosta
-`Typ`:  Schemat zdefiniowany
-`Obiekt`: schemat `DZIAL_FIN`
+  - **Etap 3:**
+  
+    `Rodzaj`: Autoryzacja prosta
+    `Typ`:  Schemat zdefiniowany
+    `Obiekt`: schemat `DZIAL_FIN`
 
-**Warunki**
-Warunek 1: `DOC._SUMAZ >= "5000"`
-Warunek 2: `DOC._SUMAZ < "5000"`
-> Uwagi:
->- `SUMAZ` - nazwa atrybutu nagłówka zawierającego sprawdzaną kwotę
+  - **Warunki**
+  
+    Warunek 1: `DOC._SUMAZ >= "5000"`
+    Warunek 2: `DOC._SUMAZ < "5000"`
+
+    > Uwagi:
+    >- `SUMAZ` - nazwa atrybutu nagłówka zawierającego sprawdzaną kwotę
 
 
 ## <a id='uprawnienia' href='uprawnienia' hidden='true'></a> Uprawnienia
@@ -1535,87 +1539,81 @@ Uprawnienia możemy edytować na następujących obiektach
 - Użytkownicy (wycofywane)
 
 Uprawnienia zależą również od statusu w jakim jest dokument. Wyróżnia się 4 statusy:
+
 | Status | Opis |
 | ------- | ---- |
-| Zatwierdzony   | Dokumenty które zostały zatwierdzone oraz tych, które nie wymagają zatwierdzania a opuściły sekretariat. |
-| W&nbsp;sekretariacie | Dokumenty które są jeszcze w sekretariacie
-| W autoryzacji | Dokumenty w statusie `oczekuje` |
-| Odrzucone | Dokumenty w statusie `odrzucone`  |
+| **Zatwierdzony**   | Dokumenty które zostały zatwierdzone oraz tych, które nie wymagają zatwierdzania a opuściły sekretariat. |
+| **W&nbsp;sekretariacie** | Dokumenty które są jeszcze w sekretariacie
+| **W autoryzacji** | Dokumenty w statusie `oczekuje` |
+| **Odrzucone** | Dokumenty w statusie `odrzucone`  |
 
 
 ### Rodzaje uprawnień
 System SPUMA pozwala na ustawienie uprawnień w różnych obszarach działań.  Miejsce ich występowania zależy od obiektu dla którego je definiujemy (firma, klasa schemat, proces, dziennik) Można wyszczególnić następujące rodzaje uprawnień:
 
-#### Główne
+- **Główne**
 
-- **Opis:** Odpowiada za możliwość wyszukiwania obiektu (dokumentu lub dziennika)  i edycji wszystkich jego własności i atrybutów (bez wyszczególniania)
-- **Występowanie**: Firma, Klasa, Dziennik
-- **Ustawienia:**
-	| Opcja | Opis |
-	| --- | --- |
-	| Zmień | Podgląd i Edycja obiektu i obiektów mu podległych (dokument + atrybuty, Dziennik + atrybuty) |
-	| Podgląd | Tylko podgląd obiektu.  |
-	| Wyłącz | Ukrycie obiektu (np dokumentu nie da się wyszukać i podejrzeć )  |
+  - **Opis:** Odpowiada za możliwość wyszukiwania obiektu (dokumentu lub dziennika)  i edycji wszystkich jego własności i atrybutów (bez wyszczególniania)
+  - **Występowanie**: Firma, Klasa, Dziennik
+  - **Ustawienia:**
 
-#### Dodanie folderu
+        | Opcja | Opis |
+        | --- | --- |
+        | Zmień | Podgląd i Edycja obiektu i obiektów mu podległych (dokument + atrybuty, Dziennik + atrybuty) |
+        | Podgląd | Tylko podgląd obiektu.  |
+        | Wyłącz | Ukrycie obiektu (np dokumentu nie da się wyszukać i podejrzeć )  |
 
-- **Opis:** Możliwość dodania nowego folderu w repozytorium
-- **Występowanie**: Firma
-- **Ustawienia:**: Włącz/ wyłącz
-*
-#### Zmiana folderu
-- **Opis:** Zmiana nazwy istniejącego folderu oraz kasowanie pustego
-- **Występowanie**: Firma
-- **Ustawienia:**: Włącz/ wyłącz
-*
-#### Zmiana miejsca folderu
-- **Opis:** Przeniesienie folderu w inne miejsce
-- **Występowanie**: Firma
-- **Ustawienia:**: Włącz/ wyłącz
-*
-#### Edycja obcych komentarzy
-- **Opis:** Możliwość zmiany lokalizacji i dodania wpisu do  komentarza dodanego przez innego użytkownika. 
-- **Występowanie**: Firma, Klasa
-- **Ustawienia:**: Włącz/ wyłącz
-*
-#### Przenaszalność
-- **Opis:** Przeniesienie dokumentu do innego katalogu. 
-- **Występowanie**: Firma, Klasa, Schemat (nagłówek), Proces autoryzacji (nagłówek)
-- **Ustawienia:**: Włącz/ wyłącz
-*
-#### Dodanie nowej strony
-- **Opis:** Możliwość dodania nowej strony do dokumentu 
-- **Występowanie**: Firma, Klasa, Schemat (nagłówek), Proces autoryzacji (nagłówek)
-- **Ustawienia:**: Zmień / Podgląd / Wyłącz
-*
-#### Edycja pola / kolumny
-- **Opis:** Możliwość edycji własności i  atrybutów dokumentu. 
-- **Występowanie**: Firma, Klasa, Schemat (nagłówek i linie), Proces autoryzacji (nagłówek i linie) , Dziennik
-- **Ustawienia:**: 
-	| Opcja | Opis |
-	| --- | --- |
-	| Zmień | Podgląd i Edycja określonych własności oraz atrybutów nagłówka i linii 
-	| Podgląd | Tylko podgląd w.w obiektów.  |
-	| Wyłącz | Ukrycie ww obiektów  |
+- **Dodanie folderu**
+  - **Opis:** Możliwość dodania nowego folderu w repozytorium
+  - **Występowanie**: Firma
+  - **Ustawienia:**: Włącz/ wyłącz
 
-> **Uwaga:** Uprawnienie nie blokuje działania auto-wyliczeń JS oraz procesów UI
+- **Zmiana folderu**
+  - **Opis:** Zmiana nazwy istniejącego folderu oraz kasowanie pustego
+  - **Występowanie**: Firma
+  - **Ustawienia:**: Włącz/ wyłącz
 
-#### Edycja obcych linii 
-- **Opis:** Uprawnienia do edycji linii dodanych przez innego użytkownika. 
-- **Występowanie**: Firma, Klasa, Schemat (nagłówek), Proces autoryzacji (nagłówek)
-- **Ustawienia:**: Włącz/ wyłącz
-*
+- **Zmiana miejsca folderu**
+  - **Opis:** Przeniesienie folderu w inne miejsce
+  - **Występowanie**: Firma
+  - **Ustawienia:**: Włącz/ wyłącz
 
-### Przykłady
-- **Przykład 1**: Ustawić uprawnienia podglądu  dokumentu  klasy `Umowa` tylko dla schematu `Zarzad` i `Dzial prawny` który jest zatwierdzony. 
+- **Edycja obcych komentarzy**
+  - **Opis:** Możliwość zmiany lokalizacji i dodania wpisu do  komentarza dodanego przez innego użytkownika. 
+  - **Występowanie**: Firma, Klasa
+  - **Ustawienia:**: Włącz/ wyłącz
 
+- **Przenaszalność**
+  - **Opis:** Przeniesienie dokumentu do innego katalogu. 
+  - **Występowanie**: Firma, Klasa, Schemat (nagłówek), Proces autoryzacji (nagłówek)
+  - **Ustawienia:**: Włącz/ wyłącz
+
+- **Dodanie nowej strony**
+  - **Opis:** Możliwość dodania nowej strony do dokumentu 
+  - **Występowanie**: Firma, Klasa, Schemat (nagłówek), Proces autoryzacji (nagłówek)
+  - **Ustawienia:**: Zmień / Podgląd / Wyłącz
+
+- **Edycja pola / kolumny**
+  - **Opis:** Możliwość edycji własności i  atrybutów dokumentu. 
+  - **Występowanie**: Firma, Klasa, Schemat (nagłówek i linie), Proces autoryzacji (nagłówek i linie) , Dziennik
+  **Ustawienia:**: 
+
+    | Opcja | Opis |
+    | --- | --- |
+    | Zmień | Podgląd i Edycja określonych własności oraz atrybutów nagłówka i linii 
+    | Podgląd | Tylko podgląd w.w obiektów.  |
+    | Wyłącz | Ukrycie ww obiektów  |
+
+  > **Uwaga:** Uprawnienie nie blokuje działania auto-wyliczeń JS oraz procesów UI
+
+- **Edycja obcych linii**
+  - **Opis:** Uprawnienia do edycji linii dodanych przez innego użytkownika. 
+  - **Występowanie**: Firma, Klasa, Schemat (nagłówek), Proces autoryzacji (nagłówek)
+  - **Ustawienia:**: Włącz/ wyłącz
 
 ### Uprawnienia specjalne  na schematach i procesach
 
-Istnieje możliwość ustawienia domyślnych uprawnień do edycji wszystkich atrybutów nagłówka i linii podczas autoryzacji dokumentu określonym schematem.  Odpowiada za to własność `Ogólnie` (dla atrybutów nagłówka)  i `Ogólnie(linie)` (dla atrybutów linii)  na zakładce `Uprawnienia specjalne` w definicji schematu i procesu autoryzacji. 
-Uprawnienia te są nadpisywane szczegółowymi wpisami   w tabelkach poniżej.
-
-
+Istnieje możliwość ustawienia domyślnych uprawnień do edycji wszystkich atrybutów nagłówka i linii podczas autoryzacji dokumentu określonym schematem.  Odpowiada za to własność `Ogólnie` (dla atrybutów nagłówka)  i `Ogólnie(linie)` (dla atrybutów linii)  na zakładce `Uprawnienia specjalne` w definicji schematu i procesu autoryzacji. Uprawnienia te są nadpisywane szczegółowymi wpisami   w tabelkach poniżej.
 
 ### Uprawnienia domyślne
 Bez podawania definicji uprawnień na firmie, klasie lub schemacie system korzysta z domyślnej konfiguracji uprawnień. Zależą one od stanu w jakim znajduje się dokument.
@@ -1624,44 +1622,47 @@ Bez podawania definicji uprawnień na firmie, klasie lub schemacie system korzys
 
 - W sekretariacie
 
-|  Uprawnienie | Kto | Co może zmienić |
-| --- | --- | --- |
-| Podgląd dokumentu | twórca|  |
-| Edycja nagłówka | twórca| wszystko |
-| Edycja linii | twórca| wszystko |
+  |  Uprawnienie | Kto | Co może zmienić |
+  | --- | --- | --- |
+  | Podgląd dokumentu | twórca|  |
+  | Edycja nagłówka | twórca| wszystko |
+  | Edycja linii | twórca| wszystko |
 
 - W obiegu
 
-|  Uprawnienie | Kto | Co może zmienić |
-| --- | --- | --- |
-| Podgląd dokumentu | twórca + autoryzujący |  |
-| Edycja nagłówka (schemat własny) | twórca + autoryzujący| wszystko |
-| Edycja nagłówka (schemat predefiniowany) | wszyscy| wg. ustawień schematu |
-| Edycja linii(schemat własny) | twórca + autoryzujący| wszystko |
-| Edycja linii (schemat predefiniowany) | wszyscy| wg. ustawień schematu|
+  |  Uprawnienie | Kto | Co może zmienić |
+  | --- | --- | --- |
+  | Podgląd dokumentu | twórca + autoryzujący |  |
+  | Edycja nagłówka (schemat własny) | twórca + autoryzujący| wszystko |
+  | Edycja nagłówka (schemat predefiniowany) | wszyscy| wg. ustawień schematu |
+  | Edycja linii(schemat własny) | twórca + autoryzujący| wszystko |
+  | Edycja linii (schemat predefiniowany) | wszyscy| wg. ustawień schematu|
 
 - Po zatwierdzeniu lub nie wymagający zatwierdzenia
 
-|  Uprawnienie | Kto | Co może zmienić |
-| --- | --- | --- |
-| Podgląd dokumentu | wszyscy |  |
-| Edycja nagłówka | wszyscy| nic |
-| Edycja linii | wszyscy| nic |
+  |  Uprawnienie | Kto | Co może zmienić |
+  | --- | --- | --- |
+  | Podgląd dokumentu | wszyscy |  |
+  | Edycja nagłówka | wszyscy| nic |
+  | Edycja linii | wszyscy| nic |
 
 - Po odrzuceniu
 
-|  Uprawnienie | Kto | Co może zmienić |
-| --- | --- | --- |
-| Podgląd dokumentu | twórca + autoryzujący|  |
-| Edycja nagłówka | twórca| wszystko |
-| Edycja linii | twórca| wszystko |
+  |  Uprawnienie | Kto | Co może zmienić |
+  | --- | --- | --- |
+  | Podgląd dokumentu | twórca + autoryzujący|  |
+  | Edycja nagłówka | twórca| wszystko |
+  | Edycja linii | twórca| wszystko |
 
  
 Wyjaśnienie pojęć
-- `Kto` - kolumna określająca kto wyłącznie może wykonać operację
-- `twórca` - twórca dokumentu (lub osoba ze współczłonek grupy typu Twórcy)
-- `autoryzujacy` - użytkownicy biorący udział w procesie autoryzacji. Niezależnie od tego czy autoryzowali dokument.
-- `wg. ustawień schematu` - ustawienia na definicji schematu określające domyślne uprawnienia dla edycji pól nagłówka i linii. 
+
+  | Pojęcie | Opis |
+  | ------- | ---- |
+  | **Kto** | kolumna określająca kto wyłącznie może wykonać operację |
+  | **twórca** | twórca dokumentu (lub osoba ze współczłonek grupy typu Twórcy) |
+  | **autoryzujacy** |  użytkownicy biorący udział w procesie autoryzacji. Niezależnie od tego czy autoryzowali dokument. |
+  | **wg. ustawień schematu** |  ustawienia na definicji schematu określające domyślne uprawnienia dla edycji pól nagłówka i linii. |
 
 
 ## <a id='funkcje_js' href='funkcje_js' hidden='true'></a>Auto-wyliczenie i Funkcje JS
@@ -1672,6 +1673,7 @@ Zależnie od rodzaj atrybutu dostępne są różne funkcje i zmienne systemowe
 
 Wyrażenie JS może być wpisane bezpośrednio w polu własności atrybutu ```Auto wyliczanie``` 
 > **Przykład**: Wypełnienie pola nazwą aktualnego użytkownika
+
 ```javascript
 'Wprowadził : ' + USERNAME;
 ```
@@ -1702,6 +1704,7 @@ SPUMA sprawdza czy kod wpisany w polu ```Autowyliczanie``` zawiera nazwy atrybut
 W definicji funkcji , jak i w jego wywołaniu możemy używać zmiennych reprezentujących atrybuty własne i  własności klasy dokumentu lub funkcje systemowe. 
 
 **Własności dokumentu:**
+
 | Wywołanie| Opis |
 | --- | ---|
 |`USERID` | Id użytkownika 
@@ -1716,6 +1719,7 @@ W definicji funkcji , jak i w jego wywołaniu możemy używać zmiennych repreze
 |`DOCDATE` | Data dokumentu
 
 Dodatkowe własności  których  można używać do uruchamiania obliczeń ( podawane w komentarzu) 
+
 | Wywołanie| Opis |
 | --- | ---|
 |`ENTERDATE` | Data zarejestrowania dokumentu 
@@ -1725,6 +1729,7 @@ Dodatkowe własności  których  można używać do uruchamiania obliczeń ( pod
 |`DOCSTATUS` | Zmiana statusu dokumentu
 
 **Atrybuty dokumentu** (podajemy z podkreśleniem)
+
 | Wywołanie | Opis |
 | --- | ---|
 |`_NAZWAATRYBUTU` | Wartość atrybutu klasy o nazwie `nazwaatrybutu`
@@ -1761,6 +1766,7 @@ Wyrażenie  i warunek wywoływane są w pętli dla  wystąpień tablicy ```L``` 
   
 ### Atrybuty linii
 Linie reprezentowane są w tabeli ```L``` . Numer aktualnie przeliczanej linii przechowywany jest w zmiennej ```LID```
+
 | Wywołanie | Opis |
 | --- | ---|
 |`LID` | numer linii dokumentu 
@@ -1774,14 +1780,13 @@ Linie reprezentowane są w tabeli ```L``` . Numer aktualnie przeliczanej linii p
 
 Przy konstruowaniu wyrażenia definiującego wyliczanie wartości na atrybutach linii należy pamiętać że proces uruchamiany jest zawsze dla każdej linii.  Niezależnie od tego czy jest to nowa linia czy już wpisana. 
 > **UWAGA:** Algorytm może zmienić wszystkie linie, niezależnie od ustawionych uprawnień. 
-
+> 
 > **Przykład:** Ustawienie inicjalne wartości atrybutu  ```Ilość``` przy dodaniu nowej linii
 > ```javascript
 > (L[LID][ILOSC] > 0) ? L[LID][ILOSC] : 1;
 > ```
-
-> **UWAGA:**  Błędem byłoby wpisanie  tylko wartość ```1``` w algorytmie.  Mechanizm zmieniłby wtedy wartość w każdej linii.
-
+> **UWAGA:** ❗  Błędem byłoby wpisanie  tylko wartość ```1``` w algorytmie.  Mechanizm zmieniłby wtedy wartość w każdej linii.
+> 
 > **Przykład:** Wyliczenie atrybutu ```wartość``` jako iloczynu atrybutów ```ilosc``` i ```cena``` 
 > ```javascript
 > L[LID][ILOSC] * L[LID][CENA];
@@ -1793,7 +1798,7 @@ Wyrażenie może korzystać również z atrybutów nagłówka.
 > ```javascript
 > L[LID][ILOSC] * L[LID][CENA] *_KURS;
 > ```
-
+>
 > **UWAGA:**  Zmiana wartości atrybutu nagłówka ```kurs``` spowoduje przeliczenie wartości w liniach.
 
  **Uwagi:** 
@@ -1809,7 +1814,7 @@ Dla aplikacji SPUMA realizuje dla rozpoznawanego dokumentu 2 główne funkcje :
  - rozpoznanie i zwrot wartość konkretnych pól (data , numer dokumentu , pozycje itp)  z dokumentów o określonej strukturze (faktura, zamówienie) za pomocą szablonu  FlexiLayout Template (`*.afl`)
 
 ### Schemat działania mechanizmu OCR
-```mermaid
+<div class="mermaid">
 sequenceDiagram
 participant o as OCR
 participant p as APR_BEFOREOCRFILL
@@ -1843,7 +1848,8 @@ deactivate p
 Note right of s: Przepisanie  wyników <br/> do  atrybutów 
 
 deactivate s
-```
+</div>
+
 ### Uwagi:
 - `APR_BEFOREOCRFILL` - Procedura SQL (baza SPUMA) modyfikująca opcjonalnie wyniki OCR (patrz [Procedury i funkcje SQL](funkcje_sql))
 - `Rozpoznanie warstwy tekstowej` - Mechanizm rozpoznaje słowa i symbole zawarte w dokumencie i łączy je w postać jednorodnego długiego tekstu
@@ -1851,7 +1857,7 @@ deactivate s
 - `Wybranie wzorca` - Mechanizm na podstawie rozpoznanych obszarów oraz  algorytmu  zawartego w pliku `spuma.cfl` wybiera najkorzystniejszy wzorzec rozpoznawania dla danego dokumentu.
 - `Rozpoznanie pól wg wzorca` - Mechanizm wyszukuje pola  i pozycje dokumentu  na podstawie rozpoznanych obszarów oraz algorytmu (wzorca rozpoznawania) zawartego w pliku `nazwawzorca.afl` , gdzie nazwa wzorca została określona w kroku `Wybranie wzorca`.
 
-`Wybranie właściwej klasy` - SPUMA  wyszukuje wyrażenia regularnego określonego we własności klasy `Dopasowanie` w warstwie tekstowej OCR. Wybiera pierwszą klasę dla której wyrażenie będzie spełnione.
+- `Wybranie właściwej klasy` - SPUMA  wyszukuje wyrażenia regularnego określonego we własności klasy `Dopasowanie` w warstwie tekstowej OCR. Wybiera pierwszą klasę dla której wyrażenie będzie spełnione.
 
 
 ### <a id='ocrtolines'  hidden='true'></a>Kopiowanie OCR do linii
@@ -1874,7 +1880,7 @@ Do każdej kolumny rozpoznanych linii możemy przyporządkować atrybut linii. K
 >  - Operacji `Zapamiętaj` tuz przed kopiowanie linii uruchamia procedurę `APR_FINDLINEVALUES` (patrz [Procedury i funkcje SQL](#funkcje_sql_findlinevalues)). Umożliwia ona zmianę zapamiętanych wartości na własne 
 
 
-```mermaid
+<div class="mermaid">
 sequenceDiagram
 participant w as Aplikacja WWW
 participant d as DataService
@@ -1906,4 +1912,4 @@ activate w
 Note left of w: Wczytanie danych <br/> do linii dokumentu
 deactivate w
 
-```
+</div>
