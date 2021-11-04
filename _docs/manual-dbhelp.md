@@ -322,14 +322,15 @@ Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomoc
 
 - **Uwagi** 
   Przed wywołanie procedury tworzona jest tabela tymczasowa o nazwie `#LINEVALUES` zawierająca wszystkie wartości wybranej kolumny
-  > **Przykład:** 
-  >
-  > | AttribCode | OldValue | NewValue |
-  > | --- | --- | --- |
-  > | Indeks | Ksero Kolorowe | MAT_BIUR |
-  > | Indeks | DYPLOM NA PODKŁADZIE DREWNIANYM | MAT_BIUR |
-  > | Indeks | Kurier DHL| U_TRANSPORT |
-  > 
+  
+  Przykład:
+  
+  | AttribCode | OldValue | NewValue |
+  | --- | --- | --- |
+  | Indeks | Ksero Kolorowe | MAT_BIUR |
+  | Indeks | DYPLOM NA PODKŁADZIE DREWNIANYM | MAT_BIUR |
+  | Indeks | Kurier DHL| U_TRANSPORT |
+   
   Gdzie
   - `Indeks` - nazwa kolumny (operację `Zapmiętaj` można wybrać dla więcej niż jednej kolumny)
   - `OldValue` - wartość z OCR
@@ -362,81 +363,81 @@ Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomoc
 
 
 ## AFN_SUGEST_PARTNERS - wyszukiwanie klienta
-**Działanie:** Funkcja zwraca tabele proponowanych dla dokumentu partnerów handlowych.
-> 
-**Obowiązkowa:** Tak
-**Opis:**
-Kiedy Partnerzy Handlowi rejestrowani są lokalnie (ustawienie `baza wewnętrzna` w   [konfiguracji firmy](#firmy1)) funkcja wywoływana jest z bazy `SPUMA`. W przypadku ustawienia `zewnętrzny SOAP` uruchamiany jest z bazy ERP (np SAP Business One) 
+- **Działanie:** Funkcja zwraca tabele proponowanych dla dokumentu partnerów handlowych.
+- **Obowiązkowa:** Tak
+- **Opis:**
+  Kiedy Partnerzy Handlowi rejestrowani są lokalnie (ustawienie `baza wewnętrzna` w   [konfiguracji firmy](#firmy1)) funkcja wywoływana jest z bazy `SPUMA`. W przypadku ustawienia `zewnętrzny SOAP` uruchamiany jest z bazy ERP (np SAP Business One) 
 
-**Parametry wejściowe:**
-- `@val` -  Tekst wyodrębniony przez mechanizm OCR
-- `@addkwords` - Pola rozpoznane  przez mechanizmu OCR. 
+- **Parametry wejściowe:**
+  - `@val` -  Tekst wyodrębniony przez mechanizm OCR
+  - `@addkwords` - Pola rozpoznane  przez mechanizmu OCR. 
 
-**Oczekiwane wyjście:**
-Tekst - 250 znaków
+- **Oczekiwane wyjście:**
+  Tekst - 250 znaków
+- **Uwagi:**
+  Parametr `addkwords` zwracany jest w postaci: 
+  
+  `pole:wartośc;pole2:wartosc` 
 
-**Uwagi:**
-Parametr `addkwords` zwracany jest w postaci:
-`pole:wartośc;pole2:wartosc` 
-> Przykład: 
-> ```
-> INVOICENUMBER:1711080067982;
-> NIP:527-10-37-727;
-> INVOICEDATE:11-10-2017;
-> DUEDATE:24.11.2017;
-> TOTALAMOUNT:1 973,94;
-> ACCOUNT:09 1240 6960 0601 0000 1407 6681
-> ```
+  Przykład: 
+  ```
+  INVOICENUMBER:1711080067982;
+  NIP:527-10-37-727;
+  INVOICEDATE:11-10-2017;
+  DUEDATE:24.11.2017;
+  TOTALAMOUNT:1 973,94;
+  ACCOUNT:09 1240 6960 0601 0000 1407 6681
+  ```
 
-***
 ## <a id='funkcje_sql_suggestocrmap' hidden='true'></a>AFN_SUGGESTOCRMAP - mapowanie pól OCR
-**Działanie:** Funkcja zwracająca propozycje mapowania kolumn do atrybutów linii
-**Obowiązkowa:** Tak
-**Opis:** 
+- **Działanie:** Funkcja zwracająca propozycje mapowania kolumn do atrybutów linii
+- **Obowiązkowa:** Tak
+- **Opis:** 
+- **Parametry wejściowe:**
+  - `@document_id` -  Identyfikator dokumentu
+  - `@class_id` -  Identyfikator klasy
+  - `@cardcode` -  kod klienta (jeśli klasa dokumentu ma atrybut własny)
+  - `@schemacode` -  kod schematu OCR
 
-**Parametry wejściowe:**
-- `@document_id` -  Identyfikator dokumentu
-- `@class_id` -  Identyfikator klasy
-- `@cardcode` -  kod klienta (jeśli klasa dokumentu ma atrybut własny)
-- `@schemacode` -  kod schematu OCR
-
-**Oczekiwane wyjście:**
-Tablica mapowania kolumn do atrybutów. Kolumny:
-- `OcrCode` - Nazwa kolumny 
-- `AttribCode` -  Nawa atrybutu
-- `MapType` -  Kod operacji:
-	- `0` - Nie kopiuj
-	- `1` - Kopiuj
-	- `2` - Wyszukaj
-	- `3` - Zapamiętaj
+- **Oczekiwane wyjście:**
+  Tablica mapowania kolumn do atrybutów. Kolumny:
+  - `OcrCode` - Nazwa kolumny 
+  - `AttribCode` -  Nawa atrybutu
+  - `MapType` -  Kod operacji:
+    
+    | MapType | Opis |
+    | --- | --- |
+    | `0` | Nie kopiuj |
+    | `1` | Kopiuj |
+    | `2` | Wyszukaj |
+    | `3` | Zapamiętaj |
 
 
-***
 ## AFN_USERDOCS - uprawnienia do dokumentów
-**Działanie:** Funkcja techniczna. Zwraca identyfikatory dokumentów do których użytkownik ma dostęp
->
-> **Obowiązkowa:** Nie
-> **Opis:**
-> Funkcja powinna być używana w zapytaniach i procedurach własnych aby zapewnić dostęp do dokumentów tylko dla uprawnionych użytkowników
-> **Parametry wejściowe:**
->
-> - `@userid` -  Identyfikator użytkownika
+- **Działanie:** Funkcja techniczna. Zwraca identyfikatory dokumentów do których użytkownik ma dostęp
+- **Obowiązkowa:** Nie
+- **Opis:**
+  Funkcja powinna być używana w zapytaniach i procedurach własnych aby zapewnić dostęp do dokumentów tylko dla uprawnionych użytkowników
+- **Parametry wejściowe:**
+  - `@userid` -  Identyfikator użytkownika
 
-**Oczekiwane wyjście:**
-Tabela identyfikatorów dokumentów (kolumna `id`)
+- **Oczekiwane wyjście:**
+  Tabela identyfikatorów dokumentów (kolumna `id`)
 
 ## AFN_SUGGEST_CARDCODE - kod klienta
-**Działanie:** Funkcja zwraca unikatowy kod używany podczas zakładania klienta przez atrybut własny z aplikacji WWW.
-> **Uwaga!!!:** Funkcja jest używana tylko gdy Partnerzy Handlowi rejestrowani są w  bazie SPUMA (ustawienie `baza wewnętrzna` w   [konfiguracji firmy](#firmy1))
->
-> **Obowiązkowa:** Tak
-> **Opis:**
-> Funkcja zwraca unikatowy kod (w ramach bazy SPUMA)  dla  nowego wpisu do tabeli `BUSINESSPARTNERDB`
-> **Parametry wejściowe:**
->
-> - `@dbname` -  Nazwa bazy zewnętrznej (z  [konfiguracji firmy](#firmy1) ).
-- `@cardtype` - Typ klienta (`S` - Dostawca `C`-Odbiorca )
+- **Działanie:** Funkcja zwraca unikatowy kod używany podczas zakładania klienta przez atrybut własny z aplikacji WWW.
+- **Uwaga!!!:** Funkcja jest używana tylko gdy Partnerzy Handlowi rejestrowani są w  bazie SPUMA (ustawienie `baza wewnętrzna` w   [konfiguracji firmy](#firmy1))
+- **Obowiązkowa:** Tak
+- **Opis:**
+  Funkcja zwraca unikatowy kod (w ramach bazy SPUMA)  dla  nowego wpisu do tabeli `BUSINESSPARTNERDB`
+- **Parametry wejściowe:**
+  - `@dbname` -  Nazwa bazy zewnętrznej (z  [konfiguracji firmy](#firmy1) ).
+  - `@cardtype` - Typ klienta 
 
-**Oczekiwane wyjście:**
-Tekst - 250 znaków
+    | cardtype | Opis |
+    | --- | --- |
+    | `S` | Dostawca |
+    | `C` | Odbiorca |
 
+- **Oczekiwane wyjście:**
+  Tekst - 250 znaków
