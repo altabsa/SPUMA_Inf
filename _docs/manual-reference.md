@@ -181,7 +181,7 @@ Zdefiniowanie organizacji. skutkuje brakiem możliwości użycia/ wyboru  danego
 
 > **Przykład:** Mamy zdefiniowane 2 organizacje: `US` i `Polska`. Jeśli w firmie `OEC Computers` ustawimy organizację `Polska` to użytkownik organizacji `US` nie będzie widział w liście firm  do wyboru firmy ```OEC Computers```
 
-## Firmy
+## <a id='firmy1' href='firmy1' hidden='true'></a>Firmy
 Na jednej instalacji systemu SPUMA można rejestrować dokumenty  kilku firm. Dostęp  do nich reguluje się uprawnieniami. Domyślnie wszyscy maja dostęp do dokumentów wszystkich firm. Firma w ramach jednej organizacji dziali wszystkie obiekty z innymi (klasy, słowniki, schematy itp)
 
 ### Ogólne
@@ -346,7 +346,7 @@ Klasy bazowe stosuje się jako szablony klas. Zapewniają one spójność nazewn
 - `Numer dokumentu wymagany` - Dokumenty tej klasy wymagać będą podania numeru 
 - `Automatyczne dodanie linii` - Przy dodawaniu linii w aplikacji WWW automatycznie po wypełnieniu ostatniej kolumny zostanie dodana nowa pusta linia.
 
-### <a id='klasy_atrybuty' hidden='true'></a> Atrybuty
+### <a id='klasy_atrybuty' href='klasy_atrybuty' hidden='true'></a> Atrybuty
 Atrybuty klasy dzielą się na atrybuty nagłówka i linii. Te pierwsze definiują jedną wartością per dokument. Atrybuty linii są kolumnami tabeli opisującej np. rozbite koszty  na działy, lub trasy wyjazdów (dla delegacji). 
 
 #### Własności
