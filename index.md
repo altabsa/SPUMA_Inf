@@ -25,9 +25,9 @@ feature_row:
     btn_label: "Więcej"
   - image_path: /assets/images/pan3.jpg
     alt: "samples"
-    title: "Przykłady"
-    excerpt: "Zbiór przykładowych procesów workflow stworzonych przy użyciu systemu SPUMA"
-    url: "/samples/"
+    title: "Instalacja"
+    excerpt: "Podręcznik instalacji"
+    url: "/docs/manual-install/"
     btn_class: "btn--primary"
     btn_label: "Więcej"
 ---
