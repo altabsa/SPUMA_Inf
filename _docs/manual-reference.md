@@ -148,7 +148,7 @@ Konfiguracja ogólna funkcji zewnętrznych
 ### <a id='konf_sbobusinesspartner' href='konf_sbobusinesspartner' hidden='true'></a>SBOBUSINESSPARTNER
 Konfiguracja  połączenia z  funkcjonalnością Partnerów Handlowych w systemie SAP Business One
 
-> Wpisy dotyczą sytuacji gdy na [konfiguracji firmy](#firmy1) mamy określony `Typ połączenia` jako `Zewnętrzny`
+> Wpisy dotyczą sytuacji gdy na [konfiguracji firmy](#firmy) mamy określony `Typ połączenia` jako `Zewnętrzny`
 
 - `SBOLICENSESERVER` –  adres licencji SAP
 - `SBODBTYPE` – wersja SQL serwera
@@ -174,7 +174,7 @@ Konfiguracja zewnętrznej biblioteki DLL SAPB1Utils. Biblioteka odpowiada za imp
 - `SBOPASSWORD` – hasło do SAP
 - `SBOLANG` – język komunikatów biblioteki SAP DI
 
-## Organizacje
+## [](#organizacje1)Organizacje
 Organizacje reprezentują jednostki nadrzędne nad firmami. Mogą reprezentować kraj lub grupę firm.
 Tworząc większość obiektów możemy zdefiniować, że są widoczne tylko dla danej organizacji.
 Zdefiniowanie organizacji. skutkuje brakiem możliwości użycia/ wyboru  danego obiektu w obiektach nadrzędnych powiązanych z innymi organizacjami.
@@ -187,11 +187,11 @@ Na jednej instalacji systemu SPUMA można rejestrować dokumenty  kilku firm. Do
 ### Ogólne
 - `Organizacja` - Do jakiej organizacji należy firma. Ustawienie `(Wszystkie)` określa, że firma jest dostępna dla wszystkich obiektów.
 - `Nazwa` - Nazwa firmy widoczna w systemie
-- `Baza`  - nazwa bazy sytemu ERP połączonego z daną firmą. Ustawienie używane w zapytaniach SQL (procesy UI, słowniki interaktywne, raporty , dzienniki). Podstawiane pod zmienna `$DBNAME`. Ważne również dla konfiguracji połączenia z systemem ERP (patrz [Konfiguracja/SBOBUSINESSPARTNERS](#konf_sbobusinesspartner) , [Konfiguracja/SapB1Utils](#konf_sapb1utils))
+- `Baza`  - nazwa bazy sytemu ERP połączonego z daną firmą. Ustawienie używane w zapytaniach SQL (procesy UI, słowniki interaktywne, raporty , dzienniki). Podstawiane pod zmienna `$DBNAME`. Ważne również dla konfiguracji połączenia z systemem ERP (patrz [Konfiguracja/SBOBUSINESSPARTNERS](#sbobusinesspartner) , [Konfiguracja/SapB1Utils](#sapb1utils))
 - `Katalog domyślny` - Określenie domyślnego  katalogu w repozytorium do którego  trafiają dokumenty po wyjściu z sekretariatu. Opcja nadpisywana przez analogiczne ustawienie na klasie.
     > **Uwaga:** ustawienie `(Brak)`  oznacza, ze dokumenty trafiać będą do katalogu głównego ( z nazwą firmy)
 
-`Słowniki` - Lista słowników systemowych skojarzonych z firmą. (patrz [Słowniki/Słowniki systemowe](#slowniki_systemowe))
+`Słowniki` - Lista słowników systemowych skojarzonych z firmą. (patrz [Słowniki/Słowniki systemowe](#-s%C5%82owniki-systemowe))
 
 ### Uprawnienia
 Definiowanie uprawnień na firmie (patrz [Uprawnienia](#uprawnienia))
@@ -589,7 +589,7 @@ Słowniki statyczne predefiniowane przypisany bezpośrednio do atrybutu / parame
     > | Y| Tak |
     > | N | Nie  |
 
-### <a id='slowniki_systemowe' href='slowniki_systemowe' hidden='true'></a> Słowniki systemowe
+### [](#slowniki_systemowe)Słowniki systemowe
 Słowniki dynamiczne. Wartości pobierane są poprzez zapytanie SQL. Służy do tego procedura  `APR_DICTIONARYVALUES` ([patrz Procedury SQL/APR_DICTIONARYVALUES](#proc_dictionaryvalues))
 
 Słowniki systemowe są wypełniane danymi podczas logowania do systemu SPUMA  (i tylko wtedy). Wartości przepisywane są do pamięci podręcznej co gwarantuje ich szybkie działanie. Dodatkowo słowniki mogą funkcjonować jako podpowiedzi przy edycji komentarzy i opisów.
