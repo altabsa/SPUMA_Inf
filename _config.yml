@@ -24,6 +24,7 @@ twitter_username: username
 github_username: username
 minimal_mistakes_skin: default
 search: true
+search_full_content: true
 logo: "/assets/images/88x88.png"
 
 # Build settings
