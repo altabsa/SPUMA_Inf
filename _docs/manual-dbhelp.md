@@ -269,7 +269,7 @@ Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomoc
 - **Działanie:** Procedura wywoływana jest przed przepisaniem pól rozpoznanych przez OCR do własności dokumentów.
 - **Obowiązkowa:** Nie
 - **Opis:**
-  SPUMA po przetworzeniu dokumentu przez mechanizm OCR sprawdza pola które ten mechanizm rozpoznał. Na podstawie definicji atrybutów klasy ( patrz `Pole schematu` [Klasy / Atrybuty](#klasy_atrybuty) ) przepisuje rozpoznane wartości do określonych pól. Zanim przepisze uruchamia ww procedurę. Umożliwia to zmianę wartości rozpoznanych przez OCR przed przepisaniem ich do atrybutów.
+  SPUMA po przetworzeniu dokumentu przez mechanizm OCR sprawdza pola które ten mechanizm rozpoznał. Na podstawie definicji atrybutów klasy ( patrz `Pole schematu` [Klasy / Atrybuty](../manual-reference#klasy_atrybuty) ) przepisuje rozpoznane wartości do określonych pól. Zanim przepisze uruchamia ww procedurę. Umożliwia to zmianę wartości rozpoznanych przez OCR przed przepisaniem ich do atrybutów.
 
 - **Parametry wejściowe:**
   - `@documents_id` -  id dokumentu
@@ -280,13 +280,15 @@ Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomoc
 
 - **Uwagi**
   Przed wywołanie procedury tworzona jest tabela tymczasowa o nazwie `#NVALUES`
-    > **Przykład:** 
-    > | pcode | pvalue |
-    > | --- | --- |
-    > | SYS_DOCNUM | 31/1/2/061190|
-    > | SYS_DOCDATE | 02-01-2012 |
-    > | PH| D102<!>ACME S.A<!>ul. Polna 32<!>Warszawa<!>02672<!>Poland |
-    > | Termin | 30-01-2012 |
+  
+  Przykład:
+  
+  | pcode | pvalue |
+  | --- | --- |
+  | SYS_DOCNUM | 31/1/2/061190|
+  | SYS_DOCDATE | 02-01-2012 |
+  | PH| D102<!>ACME S.A<!>ul. Polna 32<!>Warszawa<!>02672<!>Poland |
+  | Termin | 30-01-2012 |
 
   - Pola `SYS_DOCNUM ` i `SYS_DOCDATE`  są przekazywane zawsze
   - Pole `PH` jest przekazywane tylko wtedy kiedy klasa ma atrybut własny
@@ -366,7 +368,7 @@ Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomoc
 - **Działanie:** Funkcja zwraca tabele proponowanych dla dokumentu partnerów handlowych.
 - **Obowiązkowa:** Tak
 - **Opis:**
-  Kiedy Partnerzy Handlowi rejestrowani są lokalnie (ustawienie `baza wewnętrzna` w   [konfiguracji firmy](#firmy1)) funkcja wywoływana jest z bazy `SPUMA`. W przypadku ustawienia `zewnętrzny SOAP` uruchamiany jest z bazy ERP (np SAP Business One) 
+   Kiedy Partnerzy Handlowi rejestrowani są lokalnie (ustawienie `baza wewnętrzna` w   [konfiguracji firmy](../manual-reference#firmy1)) funkcja wywoływana jest z bazy `SPUMA`. W przypadku ustawienia `zewnętrzny SOAP` uruchamiany jest z bazy ERP (np SAP Business One) 
 
 - **Parametry wejściowe:**
   - `@val` -  Tekst wyodrębniony przez mechanizm OCR
@@ -426,12 +428,12 @@ Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomoc
 
 ## AFN_SUGGEST_CARDCODE - kod klienta
 - **Działanie:** Funkcja zwraca unikatowy kod używany podczas zakładania klienta przez atrybut własny z aplikacji WWW.
-- **Uwaga!!!:** Funkcja jest używana tylko gdy Partnerzy Handlowi rejestrowani są w  bazie SPUMA (ustawienie `baza wewnętrzna` w   [konfiguracji firmy](#firmy1))
+- **Uwaga!!!:** Funkcja jest używana tylko gdy Partnerzy Handlowi rejestrowani są w  bazie SPUMA (ustawienie `baza wewnętrzna` w   [konfiguracji firmy](../manual-reference#firmy1))
 - **Obowiązkowa:** Tak
 - **Opis:**
   Funkcja zwraca unikatowy kod (w ramach bazy SPUMA)  dla  nowego wpisu do tabeli `BUSINESSPARTNERDB`
 - **Parametry wejściowe:**
-  - `@dbname` -  Nazwa bazy zewnętrznej (z  [konfiguracji firmy](#firmy1) ).
+  - `@dbname` -  Nazwa bazy zewnętrznej (z  [konfiguracji firmy](../manual-reference#firmy1) ).
   - `@cardtype` - Typ klienta 
 
     | cardtype | Opis |
