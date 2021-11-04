@@ -145,7 +145,7 @@ Konfiguracja ogólna funkcji zewnętrznych
 
 - `ASSEMBLYPATH`  – ścieżka  gdzie przechowywane są biblioteki z funkcjami zewnętrznymi.
 
-### <a id='konf_sbobusinesspartner' href='konf_sbobusinesspartner' hidden='true'></a>SBOBUSINESSPARTNER
+### SBOBUSINESSPARTNER
 Konfiguracja  połączenia z  funkcjonalnością Partnerów Handlowych w systemie SAP Business One
 
 > Wpisy dotyczą sytuacji gdy na [konfiguracji firmy](#firmy) mamy określony `Typ połączenia` jako `Zewnętrzny`
@@ -165,7 +165,7 @@ Konfiguracja  połączenia z  funkcjonalnością Partnerów Handlowych w systemi
 - `SUGGESTCARDCODE` – Zapytanie SQL które proponuje nowy kod PH 
 
 
-### <a id='konf_sapb1utils' href='konf_sapb1utils' hidden='true'></a>SAPB1Utils
+### SAPB1Utils
 Konfiguracja zewnętrznej biblioteki DLL SAPB1Utils. Biblioteka odpowiada za import  danych do SAP Business One
 
 - `LICENSESERVER`  – adres licencji SAP 
@@ -181,7 +181,7 @@ Zdefiniowanie organizacji. skutkuje brakiem możliwości użycia/ wyboru  danego
 
 > **Przykład:** Mamy zdefiniowane 2 organizacje: `US` i `Polska`. Jeśli w firmie `OEC Computers` ustawimy organizację `Polska` to użytkownik organizacji `US` nie będzie widział w liście firm  do wyboru firmy ```OEC Computers```
 
-## <a id='firmy1' href='firmy1' hidden='true'></a>Firmy
+## Firmy
 Na jednej instalacji systemu SPUMA można rejestrować dokumenty  kilku firm. Dostęp  do nich reguluje się uprawnieniami. Domyślnie wszyscy maja dostęp do dokumentów wszystkich firm. Firma w ramach jednej organizacji dziali wszystkie obiekty z innymi (klasy, słowniki, schematy itp)
 
 ### Ogólne
@@ -236,7 +236,7 @@ Uprawnienia ustawiane w tym miejscu różnią się od głównego mechanizmu upra
 
 > **Uwaga:** Powyższe uprawnienia maja najwyższy priorytet. Po zmianie nalezy zrestartować usługę SPUMA_DataService
 
-## <a id='klasy' href='klasy' hidden='true'></a> Klasy
+## Klasy
 Klasa (używane zamiennie ze słowem Typ) jest podstawowym obiektem klasyfikującym dokumenty w firmie. Przy jej użyciu, można dla dokumentu:
  - definiować politykę uprawnień,
  - określać zestaw atrybutów własnych i wyzwalaczy , 
@@ -437,7 +437,7 @@ Wyzwalacze reprezentowane są w aplikacji WWW jako przyciski. Ich naciśnięcie 
 - `Etykieta` -  Etykieta przycisku,  widoczna w aplikacji WWW
 - `Pozycja` -  Miejsce gdzie ulokowany jest przycisk - nagłówek lub za wybrana kolumną (linie)
 
-## <a id='dzienniki' href='dzienniki' hidden='true'></a> Dzienniki korespondencji
+## Dzienniki korespondencji
 Dzienniki korespondencji służą do rejestracji pism wychodzących i przychodzących  w postaci cyfrowej (plików) jak i analogowej (poczta). Wpisy w takim dzienniku odwzorowują na przykład:    
 - zdarzenie wysyłania paczki do klienta ,
 - otrzymanie pisma od urzędu, 
@@ -501,7 +501,7 @@ Definicja dziennika korespondencji określa jego wygląd (raport) , dodatkowe at
     >    - `SYS_USERCODE`
  
 
-## <a id='grupy' href='grupy' hidden='true'></a> Grupy użytkowników
+## <a id='grupy' name 'grupy' href='grupy' hidden='true'></a> Grupy użytkowników
 Grupowanie użytkowników ma duże znaczenie w systemie SPUMA. Pozwala na definiowanie uprawnień *per grupa*.  W takim przypadku zmiana kadrowe nie powodują konieczności przeprojektowania systemu uprawnień, a tylko zarządzania członkostwem w grupie.
 Użytkownik może należeć do kilku grup naraz.
 
@@ -531,7 +531,7 @@ Więcej informacji na temat schematów autoryzacji ([patrz Schematy autoryzacji]
 - `Odbiorcy` - Lista członków grupy.
     > **Uwaga:** - grupa musi zawierać przynajmniej jednego użytkownika.
 
-## <a id='slowniki' href='slowniki' hidden='true'></a> Słowniki
+## Słowniki
 
 W systemie możemy zdefiniować słowniki które ułatwiają wprowadzanie danych. Słowniki używane są:
 - w definicjach atrybutów klas, linii i dzienników
@@ -547,7 +547,7 @@ Słowniki statyczne maja zadeklarowane stałe wartości.  Rejestracja słowików
 Słowniki dynamiczne na bieżąco pobierają dane ze źródła (może to być baza SPUMA , systemu ERP lub inne źródło danych). Zapewnia to zgodność z zewnętrznymi systemami i  umożliwia filtrowanie prezentowanych danych słownikowych.
 > Przykład słownika dynamicznego - indeksy towarowe
 
-### <a id='slowniki_statyczne' href='slowniki_statyczne' hidden='true'></a> Słowniki statyczne
+### Słowniki statyczne
 Słowniki statyczne  predefiniowane. Edycja wartości tylko z panelu administracyjnego z zakładki `Słowniki statyczne` 
 
 #### Własności
@@ -567,7 +567,7 @@ Słowniki statyczne  predefiniowane. Edycja wartości tylko z panelu administrac
     > | PROD | Produkcja |
     > | ZARZ | Zarząd |
 
-### <a id='slowniki_uzytkownika' href='slowniki_uzytkownika' hidden='true'></a> Słowniki użytkownika
+### Słowniki użytkownika
 Słowniki statyczne predefiniowane przypisany bezpośrednio do atrybutu / parametru. Edycja wartości tylko z panelu administracyjnego bezpośrednio na atrybucie klasy lub atrybucie raportu / dziennika.  
 
 #### Własności
