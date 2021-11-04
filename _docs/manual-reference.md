@@ -346,7 +346,7 @@ Klasy bazowe stosuje się jako szablony klas. Zapewniają one spójność nazewn
 - `Numer dokumentu wymagany` - Dokumenty tej klasy wymagać będą podania numeru 
 - `Automatyczne dodanie linii` - Przy dodawaniu linii w aplikacji WWW automatycznie po wypełnieniu ostatniej kolumny zostanie dodana nowa pusta linia.
 
-### <a id='klasy_atrybuty' href='#klasy_atrybuty' hidden='true'></a> Atrybuty
+### Atrybuty
 Atrybuty klasy dzielą się na atrybuty nagłówka i linii. Te pierwsze definiują jedną wartością per dokument. Atrybuty linii są kolumnami tabeli opisującej np. rozbite koszty  na działy, lub trasy wyjazdów (dla delegacji). 
 
 #### Własności
