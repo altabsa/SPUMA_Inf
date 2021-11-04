@@ -1112,7 +1112,7 @@ pl: &DEFAULT_PL
   comment_success_msg        : "Dziękuję za Twój komentarz! Zostanie dodany po akceptacji."
   comment_error_msg          : "Niestety wystąpił błąd. Proszę upewnij się, że wszystkie wymagane pola zostały wypełnione i spróbuj ponownie."
   loading_label              : "Trwa ładowanie strony..."
-  search_label_text          :
+  search_label_text          : "Szukany tekst"
   search_algolia_no_results  : "Brak wyników"
 pl-PL:
   <<: *DEFAULT_PL
