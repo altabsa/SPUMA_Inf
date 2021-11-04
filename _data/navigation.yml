@@ -3,8 +3,6 @@ main:
     url: /docs/manual-intro/
   - title: "Instalacja"
     url: /docs/manual-install/
-  - title: "Funkcje"
+  - title: "Podręcznik administratora"
     url: /docs/manual-reference/
-  - title: "Przykłady"
-    url: /samples/
- 
+  
