@@ -501,7 +501,7 @@ Definicja dziennika korespondencji określa jego wygląd (raport) , dodatkowe at
     >    - `SYS_USERCODE`
  
 
-## <a id='grupy' name 'grupy' href='grupy' hidden='true'></a> Grupy użytkowników
+## <a id='grupy' name='grupy' href='grupy' hidden='true'></a> Grupy użytkowników
 Grupowanie użytkowników ma duże znaczenie w systemie SPUMA. Pozwala na definiowanie uprawnień *per grupa*.  W takim przypadku zmiana kadrowe nie powodują konieczności przeprojektowania systemu uprawnień, a tylko zarządzania członkostwem w grupie.
 Użytkownik może należeć do kilku grup naraz.
 
