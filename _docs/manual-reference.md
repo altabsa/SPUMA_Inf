@@ -174,7 +174,7 @@ Konfiguracja zewnętrznej biblioteki DLL SAPB1Utils. Biblioteka odpowiada za imp
 - `SBOPASSWORD` – hasło do SAP
 - `SBOLANG` – język komunikatów biblioteki SAP DI
 
-## [](#organizacje1)Organizacje
+## Organizacje
 Organizacje reprezentują jednostki nadrzędne nad firmami. Mogą reprezentować kraj lub grupę firm.
 Tworząc większość obiektów możemy zdefiniować, że są widoczne tylko dla danej organizacji.
 Zdefiniowanie organizacji. skutkuje brakiem możliwości użycia/ wyboru  danego obiektu w obiektach nadrzędnych powiązanych z innymi organizacjami.
@@ -191,10 +191,10 @@ Na jednej instalacji systemu SPUMA można rejestrować dokumenty  kilku firm. Do
 - `Katalog domyślny` - Określenie domyślnego  katalogu w repozytorium do którego  trafiają dokumenty po wyjściu z sekretariatu. Opcja nadpisywana przez analogiczne ustawienie na klasie.
     > **Uwaga:** ustawienie `(Brak)`  oznacza, ze dokumenty trafiać będą do katalogu głównego ( z nazwą firmy)
 
-`Słowniki` - Lista słowników systemowych skojarzonych z firmą. (patrz [Słowniki/Słowniki systemowe](#-s%C5%82owniki-systemowe))
+`Słowniki` - Lista słowników systemowych skojarzonych z firmą. (patrz [Słowniki/Słowniki systemowe](#s%C5%82owniki-systemowe))
 
 ### Uprawnienia
-Definiowanie uprawnień na firmie (patrz [Uprawnienia](#uprawnienia))
+Definiowanie uprawnień na firmie (patrz [Uprawnienia](#-uprawnienia))
 
 ### Partnerzy handlowi
 Definiowanie sposobu rejestracji atrybutu typu  `Własny` przechowującego informacje o kliencie
@@ -203,7 +203,7 @@ Definiowanie sposobu rejestracji atrybutu typu  `Własny` przechowującego infor
 
     | Typ połączenia| Opis |
     | ------- | ---- |
-    | Zewnętrzny&nbsp;SOAP| Dane pobierane i zapisywane bezpośrednio w bazie ERP (patrz [Konfiguracja/SBOBUSINESSPARTNER](#konf_sbobusinesspartner))  |
+    | Zewnętrzny&nbsp;SOAP| Dane pobierane i zapisywane bezpośrednio w bazie ERP (patrz [Konfiguracja/SBOBUSINESSPARTNER](#sbobusinesspartner))  |
     | Baza&nbsp;wewnętrzna | Klienci rejestrowani są w bazie wewnętrznej SPUMA (tabela `BUSINESSPARTNERDB`)
 
 ## Użytkownicy
@@ -217,7 +217,7 @@ Definiowanie sposobu rejestracji atrybutu typu  `Własny` przechowującego infor
 - `SMTP address, SMTP user, SMTP port, SMTP password` - domyślne ustawienia konta email do wysyłki powiadomień. 
 - `Odpowiedź na` - Określenie adresu email z którego wysyłane są powiadomienia do innych użytkowników oraz na który  przychodzą wiadomości.
     > **Uwaga:**  email musi być unikatowy  w ramach całej bazy 
-- `Szablon e-mail` - Fragment tekstu dołączany do maili wysyłanych w powiadomieniach. Używany w procedurze `APR_FORMATEMAIL` [patrz Procedury SQL/APR_FORMATEMAIL](#proc_formatemail)
+- `Szablon e-mail` - Fragment tekstu dołączany do maili wysyłanych w powiadomieniach. Używany w procedurze `APR_FORMATEMAIL` [patrz Procedury SQL/APR_FORMATEMAIL](../manual-dbhelp/#apr_formatemail---wygląd-maili)
 - `Informacje o zdarzeniach` - Ustawienie które wiadomości powinien użytkownik otrzymywać (kolumna `Wyślij`) i które po otrzymaniu zaznacza automatycznie  jako przeczytane (kolumna `Zaznacz jako przeczytane`)
 - `Twórca` - Użytkownik który jest twórcą może dodawać nowe dokumenty w sekretariacie
 - `Administrator` - Użytkownik może logować się do panelu administracyjnego 
@@ -227,11 +227,11 @@ Definiowanie sposobu rejestracji atrybutu typu  `Własny` przechowującego infor
 - `Domyślny dziennik` - Który dziennik korespondencji proponowany jest domyślnie  dla danego użytkownika
 
 ### Uprawnienia
-Uprawnienia ustawiane w tym miejscu różnią się od głównego mechanizmu uprawnień ([patrz Uprawnienia](#uprawnienia)). W tym miejscu możemy można ustawić globalny dostęp do danej firmy. Zarówno do tworzenia jak i podglądu  dokumentów. 
+Uprawnienia ustawiane w tym miejscu różnią się od głównego mechanizmu uprawnień ([patrz Uprawnienia](#-uprawnienia)). W tym miejscu możemy można ustawić globalny dostęp do danej firmy. Zarówno do tworzenia jak i podglądu  dokumentów. 
 
 | Uprawnienie | Opis |
 | ------- | ---- |
-| Pełne| Użytkownik ma  domyślnie dostęp do każdej z firm. Uprawnienia szczegółowe brane są z głównego mechanizmu uprawnień ([patrz Uprawnienia](#uprawnienia))    |
+| Pełne| Użytkownik ma  domyślnie dostęp do każdej z firm. Uprawnienia szczegółowe brane są z głównego mechanizmu uprawnień ([patrz Uprawnienia](#-uprawnienia))    |
 | Wybrane  | Użytkownik ma  dostęp tylko do wybranych firm (tabela `BUSINESSPARTNERDB`)
 
 > **Uwaga:** Powyższe uprawnienia maja najwyższy priorytet. Po zmianie nalezy zrestartować usługę SPUMA_DataService
@@ -364,11 +364,11 @@ Atrybuty klasy dzielą się na atrybuty nagłówka i linii. Te pierwsze definiuj
     | Float |  Pole może zawierać liczby rzeczywiste |
     | Text |  Pole może zawierać dowolny text |
     | DateTime |  Pole jest typu data. Dostępny jest kalendarz do jej wyboru. |
-    | Własny |  Pole z danymi rozszerzonymi. W obecnej wersji programu przechowuje i zarządza danymi  Partnera Handlowego (patrz [Obsługa Partnerów Handlowych](#ph)). |
-    | Słownik systemowy |  Pole typu "lista rozwijana". Dane  pobierane są ze słownika systemowego określonego per firma w tabelce `Słownik` (szczegóły patrz [Słowniki systemowe](#slowniki_systemowe) |
-    | Słownik użytkownika |  Pole typu "lista rozwijana". Dane  pobierane są z  tabeli `Dozwolone wartości`  (szczegóły patrz [Słowniki użytkownika](#slowniki_uzytkownika) |
-    | Słownik interaktywny |  Pole typu "lista rozwijana". Dane  pobierane są z określonego  słownika interaktywnego  (szczegóły patrz [Słowniki interaktywne](#slowniki_interaktywne) |
-    | Słownik statyczny |  Pole typu "lista rozwijana". Dane  pobierane są z określonego  słownika statycznego(szczegóły patrz [Słowniki statyczne](#slowniki_statyczne) |
+    | Własny |  Pole z danymi rozszerzonymi. W obecnej wersji programu przechowuje i zarządza danymi  Partnera Handlowego. |
+    | Słownik systemowy |  Pole typu "lista rozwijana". Dane  pobierane są ze słownika systemowego określonego per firma w tabelce `Słownik` (szczegóły patrz [Słowniki systemowe](#słowniki-systemowe) |
+    | Słownik użytkownika |  Pole typu "lista rozwijana". Dane  pobierane są z  tabeli `Dozwolone wartości`  (szczegóły patrz [Słowniki użytkownika](#s%C5%82owniki-u%C5%BCytkownika) |
+    | Słownik interaktywny |  Pole typu "lista rozwijana". Dane  pobierane są z określonego  słownika interaktywnego  (szczegóły patrz [Słowniki interaktywne](#-słowniki-interaktywne) |
+    | Słownik statyczny |  Pole typu "lista rozwijana". Dane  pobierane są z określonego  słownika statycznego(szczegóły patrz [Słowniki statyczne](#słowniki-statyczne) |
     | Długi tekst |  Pole typu "memo". Pozwala na wpisanie długiego tekstu. W aplikacji WWW uruchamia oddzielne okienko do wpisania / podglądu zawartości |
 
 - `Wzór` - Wyrażenie regularne , określające poprawny format wpisywanej wartości (tylko dla typy `text`). Jeśli zawartość pola nie spełni wyrażenia, dokument nie będzie zapisany.
@@ -415,7 +415,7 @@ Atrybuty klasy dzielą się na atrybuty nagłówka i linii. Te pierwsze definiuj
 - `Kolejność` - Kolejność wyświetlania atrybutu w aplikacji WWW
 - `Szerokość` - Szerokość kolumny reprezentującej atrybut w aplikacji WWW. Wartość `0` oznacza automatyczne dobieranie rozmiaru.
     > **Uwaga:** Własność tylko dla atrybutów linii
-- `Auto wyliczanie` - Algorytm wyliczania wartości atrybutu. Szczegółowe informacje w rozdziale [Auto-wyliczanie i Funkcje JS](#funkcje_js)
+- `Auto wyliczanie` - Algorytm wyliczania wartości atrybutu. Szczegółowe informacje w rozdziale [Auto-wyliczanie i Funkcje JS](#auto-wyliczenie-i-funkcje-js)
 - `Dowolne wartości` - pozwala na wpisanie wartości spoza słownika
     > **Uwaga:** Własność tylko dla atrybutów typu `Słownik`
 - `Grupowanie` - Włącza możliwość grupowania wierszy  po atrybucie  
@@ -426,10 +426,10 @@ Atrybuty klasy dzielą się na atrybuty nagłówka i linii. Te pierwsze definiuj
 
 ### Uprawnienia
 Uprawnienia zdefiniowane na klasę przenoszą się na wszystkie dokumenty z nią związane.
-Więcej o uprawnieniach w rozdziale [Uprawnienia](#uprawnienia)
+Więcej o uprawnieniach w rozdziale [Uprawnienia](#-uprawnienia)
 
 ### Wyzwalacze
-Wyzwalacze reprezentowane są w aplikacji WWW jako przyciski. Ich naciśnięcie wywołuje określone zdarzenia zdefiniowane  w procesach UI (patrz rozdział [Procesy UI](#procesy_ui)).
+Wyzwalacze reprezentowane są w aplikacji WWW jako przyciski. Ich naciśnięcie wywołuje określone zdarzenia zdefiniowane  w procesach UI (patrz rozdział [Procesy UI](#-procesy-ui)).
 #### Właściwości
 - `Nazwa` - Nazwa (kod) wyzwalacza
     > **Uwaga:** Nazwa musi być unikatowa w ramach klasy.  Używana jest w algorytmach procesów UI
@@ -454,7 +454,7 @@ Definicja dziennika korespondencji określa jego wygląd (raport) , dodatkowe at
 - `Aktywny` - Czy dziennik jest widoczny w aplikacji WWW
 - `Prefix` - 2 znakowy kod unikatowy dziennika, używany przy tworzeniu unikatowych identyfikatorów wpisów.
     > **Uwaga:** Zmiana prefix'u nie zmieni numeracji dotychczasowych wpisów 
-- `Raport SQL, parametry SQL, Ustawienia kolumny` - Własny raport dziennika korespondencji. Zasady tworzenia raportu dla dziennika korespondencji są takie jak standardowych raportów (patrz [Raporty](#raporty)). 
+- `Raport SQL, parametry SQL, Ustawienia kolumny` - Własny raport dziennika korespondencji. Zasady tworzenia raportu dla dziennika korespondencji są takie jak standardowych raportów (patrz [Raporty](#-raporty)). 
     > **Uwaga:** Jeśli dane są niewypełnione, używany jest  raport domyślny
 
     Przykład zapytania SQL który generuje raport dziennika korespondencji:
@@ -511,7 +511,7 @@ Przy zakładaniu nowej grupy automatycznie tworzą się dwa systemowe schematy a
 >  -  `SERWIS`: typu `Jeden z` grupy `SERWIS`
 >  -  `*SERWIS`: typu `Wszyscy z` grupy `SERWIS`
 
-Więcej informacji na temat schematów autoryzacji ([patrz Schematy autoryzacji](#schematy))
+Więcej informacji na temat schematów autoryzacji ([patrz Schematy autoryzacji](#-schematy-autoryzacji))
 
 ### Własności
 - `Organizacja` - Do jakiej organizacji należy użytkownik. Ustawienie `(Wszystkie)` określa, że użytkownik ma dostęp do obiektów (klas, dokumentów itp ) wszystkich organizacji.
@@ -589,8 +589,8 @@ Słowniki statyczne predefiniowane przypisany bezpośrednio do atrybutu / parame
     > | Y| Tak |
     > | N | Nie  |
 
-### [](#slowniki_systemowe)Słowniki systemowe
-Słowniki dynamiczne. Wartości pobierane są poprzez zapytanie SQL. Służy do tego procedura  `APR_DICTIONARYVALUES` ([patrz Procedury SQL/APR_DICTIONARYVALUES](#proc_dictionaryvalues))
+### Słowniki systemowe
+Słowniki dynamiczne. Wartości pobierane są poprzez zapytanie SQL. Służy do tego procedura  `APR_DICTIONARYVALUES` ([patrz Procedury SQL/APR_DICTIONARYVALUES](..//manual-dbhelp/#apr_dictionaryvalues---słowniki-systemowe))
 
 Słowniki systemowe są wypełniane danymi podczas logowania do systemu SPUMA  (i tylko wtedy). Wartości przepisywane są do pamięci podręcznej co gwarantuje ich szybkie działanie. Dodatkowo słowniki mogą funkcjonować jako podpowiedzi przy edycji komentarzy i opisów.
 #### Własności
@@ -839,7 +839,7 @@ Czynności wykonywane przez instrukcję zależą  od typu rozkazu.
   - `DBNAME` - Nazwa bazy alternatywnej (np systemu ERP). Nazwa ta podstawiana jest do skryptu  do wyrażenia `$DBNAME`
   - `Skrypt` - Treść Zapytanie SQL.
 
-    > Przy tworzeniu zapytania należy pamiętać, że mamy dostęp do zmiennych całego procesu. Przechowywane są one w tablicach tymczasowych o nazwie `#nazwa_zmennej` (patrz [przykład](#procesy_ui_p1)).
+    > Przy tworzeniu zapytania należy pamiętać, że mamy dostęp do zmiennych całego procesu. Przechowywane są one w tablicach tymczasowych o nazwie `#nazwa_zmennej` (patrz [przykład](#przykłady)).
 
 #### Instrukcja komunikatu
 Instrukcja generuje okienko z informacja lub prośba o decyzję. W wyniku działania zapisuje w zmiennej typu `Int` numer wybranego przycisku
@@ -1211,7 +1211,7 @@ Schematy autoryzacji to lista etapów które musi przejść dokument  aby uzyska
 
 Schemat autoryzacji jest zdefiniowany od początku do końca i nie zakłada zmiany etapów  w trakcie jej trwania (tym się różni od procesów autoryzacji)
 
-Schematy paruje się z klasami dokumentów poprzez wpis w  definicji klasy [patrz Klasy/Ogólne](#klasy_ogolne)
+Schematy paruje się z klasami dokumentów poprzez wpis w  definicji klasy [patrz Klasy/Ogólne](#ogólne-3)
 
 
 Etapy wykonują się sekwencyjnie (od najniższego do najwyższego), poprzez wysłanie próśb o autoryzację. Aby etapy o następnym numerze się wykonały, trzeba najpierw spełnić warunek autoryzacji na aktualnym etapie. 
@@ -1225,7 +1225,7 @@ Etapami schematu mogą być:
 ### Własności
 - `Organizacja` - Do jakiej organizacji należy autoryzacja. Ustawienie `(Wszystkie)` określa, że autoryzacja może być używana w obiektach wszystkich organizacji.
 - `Nazwa` - Nazwa (kod) autoryzacji
-  > **Uwaga:** Nazwa musi być unikatowa w ramach całej bazy. Należy pamiętać że w bazie istnieją już schematy związane z grupami użytkowników (patrz [Grupy użytkowników](#grupy)) o takiej samej nazwie
+  > **Uwaga:** Nazwa musi być unikatowa w ramach całej bazy. Należy pamiętać że w bazie istnieją już schematy związane z grupami użytkowników (patrz [Grupy użytkowników](#-grupy-użytkowników)) o takiej samej nazwie
 - `Opis` - Opis schematu - widoczny przy wyborze schematu z listy (aplikacja WWW).
 - `Dodatkowe informacje` - tekst który jest widoczny na oknie zatwierdzania w aplikacji WWW. Widoczny tylko wtedy, jeśli schemat jest zdefiniowany jako etap w innym schemacie lub procesie. Ustawienie jest nadpisywane przez kolumnę `informacje dodatkowe` na definicji etapów.
 - `Typ` - Informacja ile etapów należy potwierdzić aby  zatwierdzić cały schemat.
@@ -1295,7 +1295,7 @@ Etapami schematu mogą być:
 
     > **Uwagi:**
     >  - Typ `Wszyscy z` mówi że autoryzacja musi przejść przez wszystkie zdefiniowane etapy. Gdyby ustawić `Jeden z` dokument został by już zatwierdzony po 1 kroku  (etap 0)
-    >   - Na etapie 1 użyty został systemowy schemat `KSIEGOWOSC` (typu `Jeden z`), utworzony wraz z  grupą `KSIEGOWOSC`   ([patrz Grupy użytkowników](#grupy))
+    >   - Na etapie 1 użyty został systemowy schemat `KSIEGOWOSC` (typu `Jeden z`), utworzony wraz z  grupą `KSIEGOWOSC`   ([patrz Grupy użytkowników](#-grupy-użytkowników))
     >   - Gdyby zamiast schematu na etapie 1 podać grupę `KSIEGOWOSC`,  wymagałoby to zatwierdzenia dokumentu przez wszystkie osoby z ww. grupy
 
 - **Przykład 3:** Najpierw użytkownik, potem obojętnie kto z 2 grup
@@ -1365,7 +1365,7 @@ Etapami schematu mogą być:
 Proces autoryzacji to  algorytm, opisujący etapy które musi przejść dokument  aby uzyskał status `Zatwierdzony`.
 Etapy mogą się zmieniać zależnie od atrybutów dokumentu, decyzji osób autoryzujących lub przebiegu dotychczasowej ścieżki autoryzacji.
 
-Procesy łączy się z klasami dokumentów poprzez wpis w  definicji klasy [patrz Klasy/Ogólne](#klasy)
+Procesy łączy się z klasami dokumentów poprzez wpis w  definicji klasy [patrz Klasy/Ogólne](#ogólne-3)
 
 ### Ogólne
 - `Organizacja` - Do jakiej organizacji należy proces. Ustawienie `(Wszystkie)` określa, że proces może być używany w obiektach wszystkich organizacji.
@@ -1851,7 +1851,7 @@ deactivate s
 </div>
 
 ### Uwagi:
-- `APR_BEFOREOCRFILL` - Procedura SQL (baza SPUMA) modyfikująca opcjonalnie wyniki OCR (patrz [Procedury i funkcje SQL](funkcje_sql))
+- `APR_BEFOREOCRFILL` - Procedura SQL (baza SPUMA) modyfikująca opcjonalnie wyniki OCR (patrz [Procedury i funkcje SQL](../manual-dbhelp/#apr_beforeocrfill---zarządzanie-wynikami-ocr))
 - `Rozpoznanie warstwy tekstowej` - Mechanizm rozpoznaje słowa i symbole zawarte w dokumencie i łączy je w postać jednorodnego długiego tekstu
 - `Rozpoznanie obszarów` - Mechanizm rozpoznaje obszary zawierające tekst. Wynik zwraca w postaci tabeli zawierającej dane o obszarze (rozmiar i położenie) oraz rozpoznany tekst 
 - `Wybranie wzorca` - Mechanizm na podstawie rozpoznanych obszarów oraz  algorytmu  zawartego w pliku `spuma.cfl` wybiera najkorzystniejszy wzorzec rozpoznawania dla danego dokumentu.
@@ -1865,7 +1865,7 @@ Mechanizm OCR, zaraz po  rozpoznaniu, wpływa tylko na  atrybuty nagłówka i w�
 
 Podczas operacji kopiowania linii aplikacja WWW wyświetla okno z pytaniem o przyporządkowanie  kolumn rozpoznanych przez OCR do atrybutów linii wybranej klasy,
 
-Przed wywołaniem tego okna uruchamiana jest funkcja `AFN_SUGGESTOCRMAP` (patrz [Procedury i funkcje SQL](#funkcje_sql_suggestocrmap))  która może zaproponować na podstawie klasy, klienta i wpisów historycznych własne przyporządkowanie.
+Przed wywołaniem tego okna uruchamiana jest funkcja `AFN_SUGGESTOCRMAP` (patrz [Procedury i funkcje SQL](..//manual-dbhelp/#afn_suggestocrmap---mapowanie-pól-ocr))  która może zaproponować na podstawie klasy, klienta i wpisów historycznych własne przyporządkowanie.
 
 Do każdej kolumny rozpoznanych linii możemy przyporządkować atrybut linii. Kolumna `Operacja` odpowiada za metodę kopiowania wartości:
 - `Nie kopiuj` - kolumna zostanie pominięta
@@ -1877,7 +1877,7 @@ Do każdej kolumny rozpoznanych linii możemy przyporządkować atrybut linii. K
 > **Uwagi:**
 >  - Przy operacji `Wyszukaj` można zdefiniować kilka kolumn - wtedy wyszukiwane będą wartości w wybranych kolumnach z kwantyfikatorem `AND`
 >  - Operacje `Kopiuj` i `Zapamiętaj` zawsze dodają nowe wiersze 
->  - Operacji `Zapamiętaj` tuz przed kopiowanie linii uruchamia procedurę `APR_FINDLINEVALUES` (patrz [Procedury i funkcje SQL](#funkcje_sql_findlinevalues)). Umożliwia ona zmianę zapamiętanych wartości na własne 
+>  - Operacji `Zapamiętaj` tuz przed kopiowanie linii uruchamia procedurę `APR_FINDLINEVALUES` (patrz [Procedury i funkcje SQL](../manual-dbhelp/#-apr_findlinevalues---modyfikacja-wyników-ocr-dla-linii)). Umożliwia ona zmianę zapamiętanych wartości na własne 
 
 
 <div class="mermaid">
