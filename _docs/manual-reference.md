@@ -1806,7 +1806,10 @@ Wyrażenie może korzystać również z atrybutów nagłówka.
   - Nazwy zmiennych reprezentujących atrybuty wpisujemy zawsze z
  wielkiej litery. Nazwy zmiennych również (```L```, ```LID``` ,```X```). Funkcja ```lsum``` pisana jest z małych liter
  - W wyrażeniach atrybutów linii również dopuszczalne jest używanie funkcji ```lsum```  jak i funkcji własnych zdefiniowanych w zakładce ```KONFIGURACJA```
- - W przypadku funkcji własnych nalezy pamiętać, że SPUMA sprawdza czy kod zawiera nazwy atrybutów lub własności. Jeśli chcemy wymusić uruchomienie wyliczania zależne od zmainy w polu linii, możemy wpisać jego nazwę  w komentarzu np: ` /* CENA */ wlasnaFunkcja()`
+ - W przypadku funkcji własnych nalezy pamiętać, że SPUMA sprawdza czy kod zawiera nazwy atrybutów lub własności. Jeśli chcemy wymusić uruchomienie wyliczania zależne od zmainy w polu linii, możemy wpisać jego nazwę  w komentarzu np: 
+ ```
+  /* CENA */ wlasnaFunkcja() 
+  ```
 
 
 ## <a id='ocr'  hidden='true'></a>Mechanizm OCR
