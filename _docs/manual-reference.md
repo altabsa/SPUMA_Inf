@@ -1686,7 +1686,8 @@ Auto-wyliczanie danego pola uruchamiane jest w  2 przypadkach:
  - Inicjalnie: przy tworzeniu dokumentu lub zmianie jego typu (klasy)
  - Przy każdej zmianie atrybutu / własności od której auto-wyliczanie zależy. 
 
-> **Uwaga**: SPUMA sprawdza czy kod wpisany w polu ```Autowyliczanie``` zawiera nazwy atrybutów lub własności. Dlatego jeśli chcemy wymusić uruchomienie auto-wyliczania, które bezpośrednio nie zależy od żadnego atrybutu / własności, możemy wpisać nazwę ww obiektu w komentarzu
+> **Uwaga**: SPUMA sprawdza czy kod wpisany w polu ```Autowyliczanie``` zawiera nazwy atrybutów lub własności. Jeśli chcemy wymusić uruchomienie auto-wyliczania, które bezpośrednio nie zależy od żadnego atrybutu / własności, możemy wpisać nazwę ww obiektu w komentarzu
+
 
 > **Przykład**: Funkcja dodająca 5 dni do dzisiejszej daty
 > ```
@@ -1805,6 +1806,8 @@ Wyrażenie może korzystać również z atrybutów nagłówka.
   - Nazwy zmiennych reprezentujących atrybuty wpisujemy zawsze z
  wielkiej litery. Nazwy zmiennych również (```L```, ```LID``` ,```X```). Funkcja ```lsum``` pisana jest z małych liter
  - W wyrażeniach atrybutów linii również dopuszczalne jest używanie funkcji ```lsum```  jak i funkcji własnych zdefiniowanych w zakładce ```KONFIGURACJA```
+ - W przypadku funkcji własnych nalezy pamiętać, że SPUMA sprawdza czy kod zawiera nazwy atrybutów lub własności. Jeśli chcemy wymusić uruchomienie wyliczania zależne od zmainy w polu linii, możemy wpisać jego nazwę  w komentarzu np: ` /* CENA */ wlasnaFunkcja()`
+
 
 ## <a id='ocr'  hidden='true'></a>Mechanizm OCR
 Mechanizm OCR jest oddzielna aplikacją / serwisem, bazującym na silniku ABBYY FlexiLayout.
