@@ -1686,7 +1686,7 @@ Auto-wyliczanie danego pola uruchamiane jest w  2 przypadkach:
  - Inicjalnie: przy tworzeniu dokumentu lub zmianie jego typu (klasy)
  - Przy każdej zmianie atrybutu / własności od której auto-wyliczanie zależy. 
 
-SPUMA sprawdza czy kod wpisany w polu ```Autowyliczanie``` zawiera nazwy atrybutów lub własności. Dlatego jeśli chcemy wymusić uruchomienie auto-wyliczania, które bezpośrednio nie zależy od żadnego atrybutu / własności, możemy wpisać nazwę ww obiektu w komentarzu
+> **Uwaga**: SPUMA sprawdza czy kod wpisany w polu ```Autowyliczanie``` zawiera nazwy atrybutów lub własności. Dlatego jeśli chcemy wymusić uruchomienie auto-wyliczania, które bezpośrednio nie zależy od żadnego atrybutu / własności, możemy wpisać nazwę ww obiektu w komentarzu
 
 > **Przykład**: Funkcja dodająca 5 dni do dzisiejszej daty
 > ```
