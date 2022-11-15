@@ -1,4 +1,9 @@
-# Log Zmian
+---
+title: "Log Zmian"
+permalink: /docs/changelog/
+excerpt: "Dokumetacja SPUMA - elektroniczny obieg dokumentów"
+---
+
 Wykaz zmian wprowadzonych w kolejnych wersjach programu
 
 ## 6.4.0 
