@@ -5,4 +5,6 @@ main:
     url: /docs/manual-install/
   - title: "Podręcznik administratora"
     url: /docs/manual-reference/
+  - title: "Log zmian"
+    url: /docs/changelog/
   
