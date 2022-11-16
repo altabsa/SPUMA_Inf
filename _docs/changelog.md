@@ -38,6 +38,7 @@ Wykaz zmian wprowadzonych w kolejnych wersjach programu
   - Gdy pola nie ma w pliku i jest przeliczane - przeliczamy wg algorytmu
 - `SPUMA ADMIN` Możliwość wskazania schematu ręcznego w definicji uprawnień 
 - Przejście do wpisów dziennika korespondencji z poziomu dokumentu.
+- Zmiana niektorych ikon na material-icons
      
 
 ### Poprawki
