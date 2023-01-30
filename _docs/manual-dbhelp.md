@@ -7,6 +7,131 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
 # Tabele systemowe
 > opis tabel systemowyxh
 
+   | Nazwa Tabeli | Opis |
+   | ------- | ---- |
+   | **ALLOWEDUSERS**| Uprawnienia użytkowników do dokumentów |
+   | **ATTRIBDICTS**| Słownik atrybutów powiązanych z klasami, dziennikiem korespondencji  |
+   | **AUTHSCHEMA_INSPARAMETERS**| Parametry dla autoryzacji parametryzowanych w procesie autoryzacji |
+   | **AUTHSCHEMA_INSTRUCTIONS**| Opis |
+   | **AUTHSCHEMA_PARVALUES**| Opis |
+   | **AUTHSCHEMA_PERMISSIONS**| Opis |
+   | **AUTHSCHEMA_RECIPIENTS**| Opis |
+   | **AUTHSCHEMAS**| Opis |
+   | **BUSINESSPARTNERDB**| Wewnętrzna baza klientów SPUM'a |
+   | **CLASS_SCHEMAS**| Opis |
+   | **CLASS_TRIGGERS**| Opis |
+   | **CLASSATTRIBS**| Opis |
+   | **CLASSES**| Klasy dokumentów |
+   | **COLUMNSFORMATS**| Formatowanie kolumn w raportach |
+   | **COLUMNSMAPPING**| Opis |
+   | **COMMENTENTRIES**| Opis |
+   | **COMPANIES**| Dane firmy |
+   | **COMPANIESDICTS**| Opis |
+   | **CONFIGURATION**| Opis |
+   | **COUNTRIES**| Opis |
+   | **CUSTOMPROCESS_DIALOGWND**| Opis |
+   | **CUSTOMPROCESS_EXCALLOP**| Opis |
+   | **CUSTOMPROCESS_LINEOP**| Opis |
+   | **CUSTOMPROCESS_SCRIPTOP**| Opis |
+   | **CUSTOMPROCESSES**| Opis |
+   | **DAILYCORR_PROPERTIES**| P |
+   | **DAILYCORR_REF**| Opis |
+   | **DAILYCORRCLASS**| Opis |
+   | **DAILYCORRESPONDENCE**| Opis |
+   | **DEFINITIONS**| Opis |
+   | **DESIGNERCONNECTIONS**| Opis |
+   | **DESIGNERITEMS**| Opis |
+   | **DICTIONARIES**| Opis |
+   | **DICTVALUES**| Opis |
+   | **DIRECTORIES**| Opis |
+   | **DOCUMENTOCRRESULTS**| Opis |
+   | **DOCUMENTPAGES**| Opis |
+   | **DOCUMENTREF**| Opis |
+   | **DOCUMENTREFLINES**| Opis |
+   | **DOCUMENTS**| Opis |
+   | **DOCUMENTS_ATTACHMENTS**| Opis |
+   | **DOCUMENTS_AUTHLOCKS**| Opis |
+   | **DOCUMENTS_AUTHRECIPIENTS**| Opis |
+   | **DOCUMENTS_AUTHSCHEMA**| Opis |
+   | **DOCUMENTS_AUTHVAR_BASIC**| Opis |
+   | **DOCUMENTS_AUTHVAR_SCHEMA**| Opis |
+   | **DOCUMENTS_AUTHVAR_SCHEMARCP**| Opis |
+   | **DOCUMENTS_LINES**| Opis |
+   | **DOCUMENTS_LINESOWNERS**| Opis |
+   | **DOCUMENTS_LINESREFS**| Opis |
+   | **DOCUMENTS_MODIFICATION**| Opis |
+   | **DOCUMENTS_OCRMAP**| Opis |
+   | **DOCUMENTS_PROPERTIES**| Opis |
+   | **DOCUMENTUSAGE**| Opis |
+   | **EXTERNALREFS**| Opis |
+   | **INTERACTIVEDICTS**| Opis |
+   | **MAILMONITORCFG**| Opis |
+   | **MESSAGE_RECIPIENTS**| Opis |
+   | **MESSAGES**| Opis |
+   | **MODIFICATIONENTRY**| Opis |
+   | **MODULECONFIG**| Opis |
+   | **OCRFIELDS**| Opis |
+   | **OCRLINES**| Opis |
+   | **OCRPROCESSLOG**| Opis |
+   | **OCRRESULTPAGES**| Opis |
+   | **OCRTEXTREGIONS**| Opis |
+   | **ORGANIZATIONS**| Opis |
+   | **PAGECOMMENTS**| Opis |
+   | **PERMISSIONS**| Opis |
+   | **PROCESS_ACTIONS**| Opis |
+   | **PROCESS_CNDFUNCTS**| Opis |
+   | **PROCESS_VARCOLUMNS**| Opis |
+   | **PROCESS_VARIABLES**| Opis |
+   | **RECONSCHEMA**| Opis |
+   | **RECONSCHEMAREQUESTADDCLASS**| Opis |
+   | **RECONSCHEMAREQUESTPAGES**| Opis |
+   | **RECONSCHEMAREQUESTS**| Opis |
+   | **RESOURCES**| Opis |
+   | **SIGNATURES**| Opis |
+   | **STATES**| Opis |
+   | **USERGROUPS**| Opis |
+   | **USERGROUPUSERS**| Opis |
+   | **USERS**| Opis |
+   | **USERS_EVENTRESTRICTIONS**| Opis |
+   | **USERS_FAVORITEDOCUMENTS**| Opis |
+   | **USERS_PERMISSIONS**| Opis |
+  > Opis kolumn:
+
+   ### Tablica **ALLOWEDUSERS**
+
+   | Kolumna | Typ danych  | Odwołanie| Opis |
+   | ------- | ---- | ----- | ------|
+   | **documents_id**| int | DOCUMENTS **id** | numer dokumentu |
+   | **users_id**| int | USERS **id**| kod użytkownika |
+
+   ### Tablica **ATTRIBDICTS**
+
+   | Kolumna | Typ danych  | Odwołanie| Opis |
+   | ------- | ---- | ----- | ------|
+   |**classattribs_id**| 	int | CLASSESS **id**| numer atrybuty klasy |
+   |**companies_id**| 	int | COMPANIES **id** | numer firmy |
+   |**companiesdicts_id**| 	int | COMPANIESDICTS **id** | kod słownika powiązanego z firmą|
+
+  ### Tablica **AUTHSCHEMA_INSPARAMETERS** 
+
+   | Kolumna          | Typ danych  | Odwołanie| Opis |
+   | -------          | ----        | ----- | ------|   
+   |**authschemas_id**| 	int | AUTHSCHEMAS **id**  | powiazanie ze schematem autoryzacji |
+   |**insintid**      | 	int |                     | numer kolejny instancji parametru |
+   |**intid**         | 	int |                     |             |
+   |**name**          | 	varchar | | nazwa parametru wejsciowego 
+   |**description**   | 	ntext | | opis parametru wejsciowego
+   |**type**          | 	int |                     | typ |
+   |**allownull**     | 	bit |                     | czy wymagany |
+   |**variable_id**   | 	int |                     | kod zmiennej |
+   |**objtype**       | 	int |                     | typ parametru: **0** - Wszyscy **1** - grupa zdefiniowana **2** Grupa własna |
+   |**objid**         | 	int | USERGROUPS **id** | kod obiektu powiązanego  |
+
+  ### Tablica **AUTHSCHEMA_INSTRUCTIONS** 
+
+   | Kolumna          | Typ danych  | Odwołanie| Opis |
+   | -------          | ----        | ----- | ------|  
+
 # Funkcje i procedury
 Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomocą procedur i funkcji SQL. 
 
