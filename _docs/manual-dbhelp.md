@@ -9,19 +9,19 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
 
    | Nazwa Tabeli | Opis |
    | ------- | ---- |
-   | **ALLOWEDUSERS**| Uprawnienia użytkowników do dokumentów |
-   | **ATTRIBDICTS**| Słownik atrybutów powiązanych z klasami, dziennikiem korespondencji  |
-   | **AUTHSCHEMA_INSPARAMETERS**| Parametry dla autoryzacji parametryzowanych w procesie autoryzacji |
-   | **AUTHSCHEMA_INSTRUCTIONS**| Opis |
-   | **AUTHSCHEMA_PARVALUES**| Opis |
-   | **AUTHSCHEMA_PERMISSIONS**| Opis |
-   | **AUTHSCHEMA_RECIPIENTS**| Opis |
-   | **AUTHSCHEMAS**| Opis |
-   | **BUSINESSPARTNERDB**| Wewnętrzna baza klientów SPUM'a |
-   | **CLASS_SCHEMAS**| Opis |
-   | **CLASS_TRIGGERS**| Opis |
-   | **CLASSATTRIBS**| Opis |
-   | **CLASSES**| Klasy dokumentów |
+   | **ALLOWEDUSERS**             | Uprawnienia użytkowników do dokumentów |
+   | **ATTRIBDICTS**              | Słownik atrybutów powiązanych z klasami, dziennikiem korespondencji  |
+   | **AUTHSCHEMA_INSPARAMETERS** | Proces autoryzacjia - parametry dla instrukcji (etapów) |
+   | **AUTHSCHEMA_INSTRUCTIONS**  | Proces autoryzacji - instrukcje (etapy) |
+   | **AUTHSCHEMA_PARVALUES**     | - |
+   | **AUTHSCHEMA_PERMISSIONS**   | Proces autoryzacji - uprawnienia specjalne|
+   | **AUTHSCHEMA_RECIPIENTS**    | Schemat autoryzacji - odbiorcy |
+   | **AUTHSCHEMAS**              | Schematy autoryzacji  oraz procesy zatwierdzania |
+   | **BUSINESSPARTNERDB**        | Wewnętrzna baza klientów SPUM'a |
+   | **CLASS_SCHEMAS**            | Klasa - powiązane schematy autoryzacji dla klasy |
+   | **CLASS_TRIGGERS**           | Klasa - powiązane wyzwalacze |
+   | **CLASSATTRIBS**             | Klasa - powiązane atrybuty |
+   | **CLASSES**                  | Klasa dokumentu |
    | **COLUMNSFORMATS**| Formatowanie kolumn w raportach |
    | **COLUMNSMAPPING**| Opis |
    | **COMMENTENTRIES**| Opis |
@@ -119,18 +119,185 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**authschemas_id**| 	int | AUTHSCHEMAS **id**  | powiazanie ze schematem autoryzacji |
    |**insintid**      | 	int |                     | numer kolejny instancji parametru |
    |**intid**         | 	int |                     |             |
-   |**name**          | 	varchar | | nazwa parametru wejsciowego 
+   |**name**          | 	varchar (100) | | nazwa parametru wejsciowego 
    |**description**   | 	ntext | | opis parametru wejsciowego
    |**type**          | 	int |                     | typ |
    |**allownull**     | 	bit |                     | czy wymagany |
    |**variable_id**   | 	int |                     | kod zmiennej |
-   |**objtype**       | 	int |                     | typ parametru: **0** - Wszyscy **1** - grupa zdefiniowana **2** Grupa własna |
+   |**objtype**       | 	int |                     | typ obiektu (parametru): **0** - Wszyscy **1** - grupa zdefiniowana **2** Grupa własna |
    |**objid**         | 	int | USERGROUPS **id** | kod obiektu powiązanego  |
 
   ### Tablica **AUTHSCHEMA_INSTRUCTIONS** 
 
    | Kolumna          | Typ danych  | Odwołanie| Opis |
    | -------          | ----        | ----- | ------|  
+   |**authschemas_id**| 	int       | AUTHSCHEMAS **id**|powiazanie ze schematem autoryzacji |
+   |**intid**         | 	int       |                   | numer kolejnej instrukcji w obrębie danego procesu autoryzacji |
+   |**name**          | 	nvarchar (100) |                   | nazwa instrukcji
+   |**description**   | 	ntext     |                   | opis instrukcji
+   |**type**          | 	int       |                   | rodzaj instrukcji **0** - autoryzacja podstawowa  **1** - autoryzacja parametryzowana
+   |**objid**         | 	int       | objtype=0: USERS **id** , objtype=1: AUTHSCHEMAS **id**   | kod powiązanego obiektu
+   |**objtype**       | 	int       |                   | typ obiektu: **0** - Użytkownik zdefiniowany  **1** - Schemat zdefiniowany **2** - Użytkownik (przekazana zmienna)
+   |**addinfo**       | 	nvarchar (max) |                   | dodatkowe informacje
+   |**variable_id**   | 	int       |                   |
+
+### Tablica **AUTHSCHEMA_PARVALUES** 
+
+   | Kolumna          | Typ danych  | Odwołanie| Opis |
+   | -------          | ----        | ----- | ------|  
+   |**authschemas_id**| 	int       |AUTHSCHEMAS **id**| powiazanie ze schematem autoryzacji
+   |**insintid**      | 	int       |                   |
+   |**prmintid**      | 	int       |                   | 
+   |**value**         | 	nvarchar (255) |                   | wartość
+   |**description**   | 	nvarchar (512) |                   | opis
+
+### Tablica **AUTHSCHEMA_PERMISSIONS** 
+
+   | Kolumna          | Typ danych  | Odwołanie| Opis |
+   | -------          | ----        | ----- | ------| 
+   |**authschemas_id**| 	int |AUTHSCHEMAS **id**| powiazanie ze schematem autoryzacji
+   |**documents_id**  | 	int | DOCUMENTS **id** | powiązanie z dokumentem
+   |**attribs_id**    | 	int | ATTRIBDICTS **id** | powiązanie z atrybutem klasy lub systemowymi polami: **-1** [nazwa], **-2** [opis], **-3** [numer], **-4** [klasa] **-5** [schemat zatwierdzania] , **-6** [data dokumentu] **-7** [data wejscia]
+   |**allow**         | 	bit |                    | **0** - zablokuj, **1** - zezwól 
+   |**objid**         | 	int |USERS **id**, USERGROUPS **id**, AUTHSCHEMAS **id** | odwołanie do powiązanego obiektu
+   |**objtype**       | 	int |                    |typ obiektu: **0** - użytkownik, **1** - grupa użytkowników, **2** - schemat autoryzacji **3** - numer etapu autoryzacji
+   |**authmode**      | 	int |                    | **0** - nagłówek **1** linie
+   |**authseq**       | 	int |                    | 
+   |**proptype**      | 	int |                    |**0** - główne, **1** - przenaszalność **7** - edycja obcych linii, **10** - dodanie nowej strony
+   |**order**         | 	int |                    | kolejność uprawnienia
+
+### Tablica **AUTHSCHEMA_RECIPIENTS** 
+
+   | Kolumna          | Typ danych  | Odwołanie| Opis |
+   | -------          | ----        | ----- | ------| 
+   |**authschemas_id**| 	int |AUTHSCHEMAS **id**  | powiazanie ze schematem autoryzacji
+   |**objid**         | 	int |USERS **id**, USERGROUPS **id**, AUTHSCHEMAS **id** | odwołanie do powiązanego obiektu
+   |**objtype**       | 	int |                    | Typ obiektu **0** - użytkownik, **1** - grupa użytkowników, **2** - schemat autoryzacji  
+   |**order**         | 	int |                    | kolejność
+   |**id**            | 	int |                    | numer kolejny
+   |**marktodel**     | 	bit |                    |
+   |**addinfo**       | 	nvarchar(max) |          | dodatkowe informacje
+
+### Tablica **AUTHSCHEMAS** 
+
+   | Kolumna            | Typ danych      |    Odwołanie       | Opis |
+   | -------            | ----            | -----              | ------| 
+   |**id**              | 	int           |                    |unikalny numer
+   |**name**            | 	nvarchar(100) |                    | nazwa schematu
+   |**description**     |  	ntext         |                    | opis schematu
+   |**authmethodtype**  | 	int           |                    | rodzacj schematu: **0** - wszyscy z, **1** - jeden z, **2** - (n) z, **3** - proces autoryzacji
+   |**CreatedAt**       | 	datetime      |                    | data utworzenia
+   |**UpdatedAt**       | 	datetime      |                    | data aktualizacji
+   |**authusrlimit**    | 	int           |                    | limit odbiorcow dla typu **2**
+   |**headereditmode**  | 	int           |                    | tryb edycji nagłówka dokumentu
+   |**lineseditmode**   | 	int           |                    | tryb edycji linii dokumentu
+   |**headereditmode1** | 	int           |                    |
+   |**lineseditmode1**  | 	int           |                    |
+   |**headereditmode2** | 	int           |                    |
+   |**lineseditmode2**  | 	int           |                    |
+   |**addinfo**         | 	nvarchar(max) |                    | dodatkowe informacje
+   |**organizations_id**| 	int           |ORGANIZATIONS **id**| powiązanie z organizacją
+   |**globalid**        | 	varchar(36)   |                    | unikalny identyfikator
+   |**usergroup_id**    | 	int           | USERGROUPS **id**  | powiązanie z grupą użytkowników (dla schematów utworzonych automatycznie na podstawie grupy)
+
+### Tablica **BUSINESSPARTNERDB** 
+
+   | Kolumna      | Typ danych      |    Odwołanie       | Opis |
+   | -------      | ----            | -----              | ------| 
+   |**DBName**    | 	varchar(128)  |                    | nazwa bazy danych
+   |**CardCode**  | 	nvarchar(256) |                    | kod klienta
+   |**CardType**  | 	varchar(1)    |                    | typ klienta
+   |**CardName**  | 	nvarchar(1024)|                    | nazwa klienta
+   |**CardFName** | 	nvarchar(1024)|                    | nazwa obca klienta
+   |**FTaxID**    | 	varchar(32)   |                    | numer NIP
+   |**FreeText**  | 	nvarchar(max) |                    |dodatkowe informacje o kliencie
+   |**DStreet**   | 	nvarchar(128) |                    |adres dostawy: nr ulicy z numerem
+   |**DCountry**  | 	varchar(32)   |                    |adres dostawy: państwo
+   |**DState**    | 	varchar(32)   |                    |adres dostawy: województwo
+   |**DZipCode**  | 	varchar(32)   |                    |adres dostawy: kod pocztowy
+   |**DCity**     | 	nvarchar(128) |                    |adres dostawy: miasto
+   |**BStreet**   | 	nvarchar(128) |                    |adres faktury: nr ulicy z numerem
+   |**BCountry**  | 	varchar(32)   |                    |adres faktury: państwo
+   |**BState**    | 	varchar(32)   |                    |adres faktury: województwo
+   |**BZipCode**  | 	varchar(32)   |                    |adres faktury: kod pocztowy
+   |**BCity**     | 	nvarchar(128) |                    |adres faktury: miasto
+   |**SyncStatus**| 	int           |                    |status synchronizacji
+
+### Tablica **CLASS_SCHEMAS** 
+
+   | Kolumna    | Typ danych  |    Odwołanie      | Opis |
+   | -------    | ----        | -----             | ------| 
+   |**classes_id**     | 	int | CLASSES **id**    | powiązanie z klasą
+   |**authschemas_id** | 	int |AUTHSCHEMAS **id** | powiązanie ze schematem autoryzacji
+
+### Tablica **CLASS_TRIGGERS** 
+
+   | Kolumna            | Typ danych     |    Odwołanie       | Opis |
+   | -------            | ----           | -----              | ------| 
+   |**classes_id**      | 	int          | CLASSES **id**     | powiązanie z klasą
+   |**name**            | 	varchar(100) |                    | nazwa 
+   |**description**     | 	ntext        |                    | opis
+   |**label**           | 	nvarchar(max)|                    | etykieta wyświetlana na formatce
+   |**order**           | 	int          |                    | kolejność
+   |**classattribs_id** | 	int          | ATTRIBDICTS **id** | powiązanie z atrybutem lub systemowo **-2** - nagłówek, **-1** - linie
+
+### Tablica **CLASSATTRIBS** 
+
+   | Kolumna                | Typ danych      |    Odwołanie       | Opis |
+   | -------                | ----            | -----              | ------| 
+   |**id**                  | 	int           |                    |numer unikalny
+   |**name**                | 	varchar(100)  |                    |nazwa atrybutu
+   |**description**         | 	ntext         |                    |opis atrybutu
+   |**regex**               | 	ntext         |                    |wzór dozwolonego wpisanego formatu tekstu w formie regex
+   |**datatype**            | 	int           |                    |typy danych: **1** - float, **2** - tekst, **3** - DataCzas, **4** - własny, **5** - słownik systemowy, **6** - słownik użytkownika, **7** - słownik interaktywny, **8** - słownik statyczny, **9** - Długi tekst
+   |**marktodel**           | 	bit           |                    |
+   |**extensions_id**       | 	int           |                    | powiązane rozszerzenie
+   |**order**               | 	int           |                    | kolejność
+   |**mandatory**           | 	bit           |                    | czy obowiązkowy
+   |**schemafcode**         | 	varchar(100)  |                    | pole schematu OCR
+   |**erpfcode**            | 	varchar(100)  |                    | powiązanie z polem DI ERP
+   |**iscolumn**            | 	bit           |                    | czy kolumna **0** - nie, **1** - tak
+   |**evalctx**             | 	varchar(1024) |                    |formuła auto wyliczania
+   |**allowcustomval**      | 	bit           |                    | dowolne wartości  **0** - nie, **1** - tak
+   |**interactivedicts_id** | 	int           |INTERACTIVEDICTS **id**| powiązanie ze słownikiem interaktywnym
+   |**label**               | 	nvarchar(max) |                    | etykieta
+   |**visorder**            | 	int           |                    | kolejność wyświetlania na formatce
+   |**defwidth**            | 	int           |                    | szerokość (atrybuty linii) 
+   |**adder**               | 	bit           |                    |
+   |**objtype**             | 	int           |                    | typ obiektu **0** - klasa dokumentu, **1** - dziennik korespondencji, **2** - raport
+   |**objid**               | 	int           |                    |kod powiązanego obiektu
+   |**cmp_classattribs_id** | 	int           |                    | sumator powiazanie z atrybutem liczbowym z nagłówka
+   |**allowgroup**          | 	bit           |                    | grupowanie
+
+### Tablica **CLASSES** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**id**                | 	int           |                    |numer unikalny
+   |**name**              | 	nvarchar(100) |                    | nazwa
+   |**description**       | 	ntext         |                    | opis
+   |**regex**             | 	ntext         |
+   |**allowcustomschema** | 	bit           |
+   |**CreatedAt**         | 	datetime      |
+   |**UpdatedAt**         | 	datetime      |
+   |**nameformat**        | 	nvarchar(255) |
+   |**authschemas_id**    | 	int           |
+   |**prmcpmthtype**      | 	int           |
+   |**authmandatory**     | 	bit           |
+   |**visibility**        | 	int           |
+   |**classes_id**        | 	int           |
+   |**issys**             | 	bit           |
+   |**uniqname**          | 	bit           |
+   |**checkformat**       | 	int           |
+   |**numrrequired**      | 	bit           |
+   |**uniqnum**           | 	bit           |
+   |**color**             | 	int           |
+   |**organizations_id**  | 	int           |
+   |**globalid**          | 	varchar(36)   |
+   |**autoaddrow**        | 	bit           |
+   |**att_classes_id**    | 	int           |
+   |**attsendtocr**       | 	bit           |
+   |**newdocpath**        | 	varchar(1024) |
 
 # Funkcje i procedury
 Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomocą procedur i funkcji SQL. 
