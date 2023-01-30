@@ -5,12 +5,12 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
 ---
 
 # Tabele systemowe
-> opis tabel systemowyxh
+  > opis tabel systemowych
 
-   | Nazwa Tabeli | Opis |
-   | ------- | ---- |
+   | Nazwa Tabeli                 | Opis |
+   | -------                      | ---- |
    | **ALLOWEDUSERS**             | Uprawnienia użytkowników do dokumentów |
-   | **ATTRIBDICTS**              | Słownik atrybutów powiązanych z klasami, dziennikiem korespondencji  |
+   | **ATTRIBDICTS**              | Słownik atrybutów powiązanych z: klasami, dziennikiem korespondencji  |
    | **AUTHSCHEMA_INSPARAMETERS** | Proces autoryzacjia - parametry dla instrukcji (etapów) |
    | **AUTHSCHEMA_INSTRUCTIONS**  | Proces autoryzacji - instrukcje (etapy) |
    | **AUTHSCHEMA_PARVALUES**     | - |
@@ -34,7 +34,7 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | **CUSTOMPROCESS_LINEOP**| Opis |
    | **CUSTOMPROCESS_SCRIPTOP**| Opis |
    | **CUSTOMPROCESSES**| Opis |
-   | **DAILYCORR_PROPERTIES**| P |
+   | **DAILYCORR_PROPERTIES**| Opis |
    | **DAILYCORR_REF**| Opis |
    | **DAILYCORRCLASS**| Opis |
    | **DAILYCORRESPONDENCE**| Opis |
@@ -95,16 +95,17 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | **USERS_EVENTRESTRICTIONS**| Opis |
    | **USERS_FAVORITEDOCUMENTS**| Opis |
    | **USERS_PERMISSIONS**| Opis |
+
   > Opis kolumn:
 
-   ### Tablica **ALLOWEDUSERS**
+### Tablica **ALLOWEDUSERS**
 
    | Kolumna | Typ danych  | Odwołanie| Opis |
    | ------- | ---- | ----- | ------|
    | **documents_id**| int | DOCUMENTS **id** | numer dokumentu |
    | **users_id**| int | USERS **id**| kod użytkownika |
 
-   ### Tablica **ATTRIBDICTS**
+### Tablica **ATTRIBDICTS**
 
    | Kolumna | Typ danych  | Odwołanie| Opis |
    | ------- | ---- | ----- | ------|
@@ -112,10 +113,10 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**companies_id**| 	int | COMPANIES **id** | numer firmy |
    |**companiesdicts_id**| 	int | COMPANIESDICTS **id** | kod słownika powiązanego z firmą|
 
-  ### Tablica **AUTHSCHEMA_INSPARAMETERS** 
+### Tablica **AUTHSCHEMA_INSPARAMETERS** 
 
-   | Kolumna          | Typ danych  | Odwołanie| Opis |
-   | -------          | ----        | ----- | ------|   
+   | Kolumna          | Typ danych | Odwołanie      | Opis |
+   | -------          | ----- | --------------------| ------|   
    |**authschemas_id**| 	int | AUTHSCHEMAS **id**  | powiazanie ze schematem autoryzacji |
    |**insintid**      | 	int |                     | numer kolejny instancji parametru |
    |**intid**         | 	int |                     |             |
@@ -125,9 +126,9 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**allownull**     | 	bit |                     | czy wymagany |
    |**variable_id**   | 	int |                     | kod zmiennej |
    |**objtype**       | 	int |                     | typ obiektu (parametru): **0** - Wszyscy **1** - grupa zdefiniowana **2** Grupa własna |
-   |**objid**         | 	int | USERGROUPS **id** | kod obiektu powiązanego  |
+   |**objid**         | 	int | USERGROUPS **id**   | kod obiektu powiązanego  |
 
-  ### Tablica **AUTHSCHEMA_INSTRUCTIONS** 
+### Tablica **AUTHSCHEMA_INSTRUCTIONS** 
 
    | Kolumna          | Typ danych  | Odwołanie| Opis |
    | -------          | ----        | ----- | ------|  
