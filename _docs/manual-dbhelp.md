@@ -17,27 +17,27 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | **AUTHSCHEMA_PERMISSIONS**   | Proces autoryzacji - uprawnienia specjalne|
    | **AUTHSCHEMA_RECIPIENTS**    | Schemat autoryzacji - odbiorcy |
    | **AUTHSCHEMAS**              | Schematy autoryzacji  oraz procesy zatwierdzania |
-   | **BUSINESSPARTNERDB**        | Wewnętrzna baza klientów SPUM'a |
+   | **BUSINESSPARTNERDB**        | Wewnętrzna baza klientów SPUM'a - definicje PH|
    | **CLASS_SCHEMAS**            | Klasa - powiązane schematy autoryzacji dla klasy |
    | **CLASS_TRIGGERS**           | Klasa - powiązane wyzwalacze |
    | **CLASSATTRIBS**             | Klasa - powiązane atrybuty |
    | **CLASSES**                  | Klasa dokumentu |
    | **COLUMNSFORMATS**           | Ustawienia kolumn - format kolumny dla: raporty, dziennik korespondencji|
    | **COLUMNSMAPPING**           | Ustawienia kolumn - mapowanie parametrów dla podraportu|
-   | **COMMENTENTRIES**           | Komentarze |
-   | **COMPANIES**                | Dane firmy |
-   | **COMPANIESDICTS**| Opis |
-   | **CONFIGURATION**| Opis |
-   | **COUNTRIES**| Opis |
-   | **CUSTOMPROCESS_DIALOGWND**| Opis |
-   | **CUSTOMPROCESS_EXCALLOP**| Opis |
-   | **CUSTOMPROCESS_LINEOP**| Opis |
-   | **CUSTOMPROCESS_SCRIPTOP**| Opis |
-   | **CUSTOMPROCESSES**| Opis |
-   | **DAILYCORR_PROPERTIES**| Opis |
-   | **DAILYCORR_REF**| Opis |
-   | **DAILYCORRCLASS**| Opis |
-   | **DAILYCORRESPONDENCE**| Opis |
+   | **COMMENTENTRIES**           | Dokument - Komentarze |
+   | **COMPANIES**                | Firmy - definicja podstawowa |
+   | **COMPANIESDICTS**           | Firmy - słowniki |
+   | **CONFIGURATION**            | Konfiguracja SPUMY |
+   | **COUNTRIES**                | Wewnętrzna baza klientów SPUM'a - definicje krajów |
+   | **CUSTOMPROCESS_DIALOGWND**  | Procesy UI - instrukcje typu komunikaty |
+   | **CUSTOMPROCESS_EXCALLOP**   | Procesy UI - instrukcje typu wykonanie DLL|
+   | **CUSTOMPROCESS_LINEOP**     | Procesy UI - instrukcje typu obsługa linii dokumentu |
+   | **CUSTOMPROCESS_SCRIPTOP**   | Procesy UI - instrukcje typu skrypt SQL|
+   | **CUSTOMPROCESSES**          | Procesy UI - definicja procesu |
+   | **DAILYCORR_PROPERTIES**     | Dziennik korespondencji - własności dokumentu |
+   | **DAILYCORR_REF**            | Dziennik korespondencji - referencje do dokumentów|
+   | **DAILYCORRCLASS**           | Dziennik korespondencji - definicja klasy |
+   | **DAILYCORRESPONDENCE**      | Dziennik korespondencji - wpisy dziennika |
    | **DEFINITIONS**| Opis |
    | **DESIGNERCONNECTIONS**| Opis |
    | **DESIGNERITEMS**| Opis |
@@ -109,7 +109,7 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
 
    | Kolumna | Typ danych  | Odwołanie| Opis |
    | ------- | ---- | ----- | ------|
-   |**classattribs_id**| 	int | CLASSESS **id**| numer atrybuty klasy |
+   |**classattribs_id**| 	int | CLASSESS **id**| numer atrybutu klasy |
    |**companies_id**| 	int | COMPANIES **id** | numer firmy |
    |**companiesdicts_id**| 	int | COMPANIESDICTS **id** | kod słownika powiązanego z firmą|
 
@@ -293,7 +293,7 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**numrrequired**      | 	bit           |                    | czy numer dokumentu wymagany
    |**uniqnum**           | 	bit           |                    | kotrola unikalności numeru
    |**color**             | 	int           |                    |kolor
-   |**organizations_id**  | 	int           |ORGANIZATIONS **id**| powiązana organizacja
+   |**organizations_id**  | 	int           |ORGANIZATIONS **id**| powiązana organizacją
    |**globalid**          | 	varchar(36)   |                    | unikalny kod
    |**autoaddrow**        | 	bit           |                    | automatycznie dodaj linie
    |**att_classes_id**    | 	int           |CLASSES **id**      |powiązana klasa załącznika
@@ -350,9 +350,178 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**CreatedAt**       | 	datetime       |                    |data utworzenia
    |**UpdatedAt**       | 	datetime       |                    |data ostatniej aktualizacji
    |**directories_id**  | 	int            |                    |katalog domyślny
-   |**organizations_id**| 	int            |ORGANIZATIONS **id**| powiązana organizacja
+   |**organizations_id**| 	int            |ORGANIZATIONS **id**| powiązana organizacją
    |**bpdbtype**        | 	int            |                    |rodzaj bazy PH: **0** - baza wewnętrzna SPUMA, **1** - zewnętrzny SOAP
    |**globalid**        | 	varchar(36)    |                    |unikalny kod firmy
+
+### Tablica **COMPANIESDICTS** 
+
+   | Kolumna            | Typ danych        |    Odwołanie       | Opis |
+   | -------            | ----              | -----              | ------|  
+   |**id**              | 	int             |                    |numer unikalny
+   |**companies_id**    | 	int             |COMPANIES **id**    | powiązana firma ze słownikiem
+   |**name**            | 	nvarchar(100)   |                    |nazwa słownika
+   |**description**     | 	ntext           |                    |opis słownika   
+   |**regex**           | 	nvarchar(1024)  |                    |wzór do podpowiedzi w formacie regex
+   |**marktodel**       | 	bit             |
+   |**displtips**       | 	bit             |                    |pokaż podpowiedzi w polach tekstowych
+   |**globalid**        | 	varchar(36)     |                    |unikalny kod firmy
+
+
+### Tablica **CONFIGURATION** 
+
+   | Kolumna            | Typ danych      |                    | Opis |
+   | -------            | ----            | -----              | ------|  
+   |**profile**         | 	varchar(100)  |                    |nazwa profilu
+   |**active**          | 	bit           |                    |czy aktywny
+   |**DefSMTPAddress**  | 	varchar(100)  |                    |Serwer SMTP - adres
+   |**DefSMTPPort**     | 	int           |                    |Serwer SMTP - port
+   |**DefSMTPUser**     | 	varchar(100)  |                    |Serwer SMTP - użytkownik
+   |**DefSMTPPassword** | 	nvarchar(100) |                    |Serwer SMTP - hasło
+   |**OCRInputPath**    | 	varchar(1024) |                    |OCR - ścieżka wejściowa
+   |**OCROutputPath**   | 	varchar(1024) |                    |OCR - ścieżka wyjściowa
+   |**SessionsFile**    | 	varchar(1024) |                    |ścieżka do pliku sessji
+   |**SecurityKey**     | 	varchar(1024) |                    |klucz bezpieczeństwa
+   |**SecurityIV**      | 	varchar(1024) |                    |klucz bezpieczeństwa IV
+   |**CentralService**  | 	varchar(1024) |                    |OCR - adres serwera usługi OCR
+   |**ClientID**        | 	nvarchar(100) |                    |OCR - nazwa klienta (CLient ID)
+   |**ServicePort**     | 	int           |                    |OCR - port usługi
+   |**OcrTaskMode**     | 	int           |                    |OCR - tryb - **0** - dysk, **1** - zewnętrzny web service
+   |**initscale**       | 	int           |                    |skala inicjalna: **<=0** - dopasuj dokument do szerokości strony, **>0** - procent powiększenia dokumentu
+   |**rescachelen**     | 	int           |                    |dłgugość cache - ilość dokumentów przechowywanych w historii
+   |**defsighours**     | 	int           |                    |ważnośc sygnatury w godzinach
+   |**jsfunct**         | 	ntext         |                    |funkcje JS
+   |**checkrefdelay**   | 	int           |                    |Automatyzacja interwał odczytu danych ze skrzynki pocztowej (POP3)
+   |**remoteaddress**   | 	nvarchar(max) |                    |Adres zdalny do SPUMY
+
+### Tablica **COUNTRIES** 
+
+   | Kolumna     | Typ danych     |    Opis|
+   | -------     | ----           | -----              |  
+   |**Code**     | 	varchar(32)   | kod kraju          |
+   |**Name**     | 	nvarchar(128) | nazwa kraju        |
+
+
+### Tablica **CUSTOMPROCESS_DIALOGWND** 
+
+   | Kolumna              | Typ danych      |   Odwołanie           | Opis |
+   | -------              | ----            | -----                 | -----|
+   |**customprocesses_id**| 	int           | CUSTOMPROCESSES **id**|odwołanie do procesu UI |
+   |**intid**             | 	int           |                       |numer kolejny instrukcji
+   |**name**              | 	nvarchar(100) |                       |nazwa instrukcji komunikatu
+   |**description**       | 	ntext         |                       |opis komunikatu
+   |**message**           | 	nvarchar(max) |                       |komunikat
+   |**btn1**              | 	nvarchar(100) |                       |tekst przycisku 1
+   |**btn2**              | 	nvarchar(100) |                       |tekst przycisku 2
+   |**btn3**              | 	nvarchar(100) |                       |tekst przycisku 3
+   |**variable_id**       | 	int           |                       |powiązanie ze zmienną wyjścia
+
+
+### Tablica **CUSTOMPROCESS_EXCALLOP** 
+
+   | Kolumna                | Typ danych      |   Odwołanie           | Opis |
+   | -------                | ----            | -----                 | -----|
+   |**customprocesses_id**  | 	int           | CUSTOMPROCESSES **id**|odwołanie do procesu UI |
+   |**intid**               | 	int           |                       |numer kolejny instrukcji
+   |**name**                | 	nvarchar(100) |                       |nazwa instrukcji
+   |**description**         | 	ntext         |                       |opis instrukcji
+   |**asmtype**             | 	int           |                       |typ **0** - .NET DLL
+   |**assembly**            | 	varchar(100)  |                       |nazwa pliku DLL
+   |**clstype**             | 	varchar(100)  |                       |nazwa klasy
+   |**method**              | 	varchar(100)  |                       |metoda
+   |**arg0**                | 	nvarchar(max) |                       |argument 1
+   |**arg1**                | 	nvarchar(max) |                       |argument 2
+   |**arg2**                | 	nvarchar(max) |                       |argument 3
+   |**arg3**                | 	nvarchar(max) |                       |argument 4
+   |**variable_id**         | 	int           |                       |powiązanie ze zmienną wyjścia
+
+### Tablica **CUSTOMPROCESS_LINEOP** 
+
+   | Kolumna                | Typ danych|   Odwołanie           | Opis |
+   | -------                | ----  | -----                | -----|
+   |**customprocesses_id**  | 	int |CUSTOMPROCESSES **id**|odwołanie do procesu UI |
+   |**intid**               | 	int |                      |numer kolejny instrukcji
+   |**name**                |  	nvarchar(100) |            |nazwa instrukcji
+   |**description**         | 	ntext |                    |opis instrukcji
+   |**type**                | 	int |                      |typ instrukcji: **0** - pobranie linii , **1** - aktualizacja linii , **2** - czyszczenie linii, **3** - dodanie linii, **4** - kasowanie linii, **5** - pobranie nagłówka, **6** - aktualizacja nagłówka, **7** - zapisz dokument
+   |**variable_id**         | 	int |                      |powiązanie ze zmienną wejścia/wyjścia
+
+### Tablica **CUSTOMPROCESS_SCRIPTOP** 
+
+   | Kolumna                | Typ danych      |   Odwołanie          | Opis |
+   | -------                | ----            | -----                | -----|
+   |**customprocesses_id**  | 	int           |CUSTOMPROCESSES **id**|odwołanie do procesu UI |
+   |**intid**               | 	int           |                      |numer kolejny instrukcji
+   |**name**                | 	nvarchar(100) |                      |nazwa instrukcji
+   |**description**         | 	ntext         |                      |opis instrukcji
+   |**type**                | 	int           |                      |typ instrukcji: **0** - MsSQL
+   |**content**             | 	ntext         |                      |treść zapytania
+   |**variable_id**         | 	int           |                      |powiązanie ze zmienną wyjścia
+
+
+### Tablica **CUSTOMPROCESSES** 
+
+   | Kolumna            | Typ danych      |   Odwołanie           | Opis |
+   | -------            | ----            | -----                 | -----| 
+   |**id**              | 	int           |                       | unikalny kod procesu UI
+   |**name**            | 	nvarchar(100) |                       | nazwa procesu UI
+   |**description**     | 	ntext         |                       | opis procesu UI
+   |**classes_id**      | 	int           |CLASSES **id**         |odwołanie do klasy dokumentu
+   |**organizations_id**| 	int           |ORGANIZATIONS **id**   | powiązanie z organizacją
+   |**CreatedAt**       | 	datetime      |                       |data utworzenia
+   |**UpdatedAt**       | 	datetime      |                       |data ostatniej aktualizacji
+   |**globalid**        | 	varchar(36)   |                       |unikalny kod procesu UI
+
+
+### Tablica **DAILYCORR_PROPERTIES** 
+
+   | Kolumna            | Typ danych      |   Odwołanie               | Opis |
+   | -------            | ----            | -----                     | -----|
+   |**dailycorr_id**    | 	int           |DAILYCORRESPONDENCE **id** |powiązanie z wpisem dziennika korespondencji
+   |**attribs_id**      | 	int           | CLASSATTRIBS **id**       | powiązanie z atrybutem klasy
+   |**value**           | 	nvarchar(max) |                           |przypisana wartość
+
+
+### Tablica **DAILYCORR_REF** 
+
+   | Kolumna            | Typ danych |   Odwołanie               | Opis |
+   | -------            | ----       | -----                     | -----|
+   |**dailycorr_id**    | 	int      |DAILYCORRESPONDENCE **id** |powiązanie z wpisem dziennika korespondencji
+   |**documents_id**    | 	int      |DOCUMENTS **id**           | powiązanie z dokumentem
+   |**users_id**        | 	int      |USERS **id**               |powiązanie z użytkownikiem
+   |**linkdate**        | 	datetime |                           |data i godzina utworzenia powiązania
+
+
+### Tablica **DAILYCORR_REF** 
+
+   | Kolumna              | Typ danych      |   Odwołanie           | Opis |
+   | -------              | ----            | -----                 | -----|
+   |**id**                | 	int           |                       | unikalny kod klasy dziennika korespondencji
+   |**organizations_id**  | 	int           |ORGANIZATIONS **id**   | powiązanie z organizacją
+   |**name**              | 	nvarchar(100) |                       |nazwa
+   |**enabled**           | 	bit           |                       |czy aktywny
+   |**description**       | 	ntext         |                       |opis
+   |**reportctx**         | 	ntext         |                       |raport SQL
+   |**CreatedAt**         | 	datetime      |                       |data utworzenia
+   |**UpdatedAt**         | 	datetime      |                       |data ostatniej aktualizacji
+   |**globalid**          | 	varchar(36)   |                       |unikalny kod klasy
+   |**numpfx**            | 	varchar(2)    |                       |prefix 
+
+
+### Tablica **DAILYCORR_REF** 
+
+   | Kolumna              | Typ danych    |   Odwołanie           | Opis |
+   | -------              | ----          | -----                 | -----|
+   |**id**                | 	int         |                       | unikalny numer wpisu
+   |**dailycorrclass_id** | 	int         |DAILYCORRCLASS **id**  |powiązanie z klasą dziennika korespondencji 
+   |**users_id**          | 	int         |USERS **id**           |powiązanie z użytkownikiem
+   |**companies_id**      | 	int         |COMPANIES **id**       |powiązanie z firmą
+   |**optype**            | 	int         |                       |typ operacji **0** - wejście, **1** - wyjście, **2** - inna
+   |**opdate**            | 	datetime    |                       |data operacji
+   |**description**       | 	ntext       |                       |opis
+   |**CreatedAt**         | 	datetime    |                       |data utworzenia wpisu dziennika
+   |**UpdatedAt**         | 	datetime    |                       |data ostatniej aktualizacji wpisu dziennika
+   |**docnum**            | 	varchar(32) |                       |numer wpisu
 
 # Funkcje i procedury
 Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomocą procedur i funkcji SQL. 
