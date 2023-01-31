@@ -22,10 +22,10 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | **CLASS_TRIGGERS**           | Klasa - powiązane wyzwalacze |
    | **CLASSATTRIBS**             | Klasa - powiązane atrybuty |
    | **CLASSES**                  | Klasa dokumentu |
-   | **COLUMNSFORMATS**| Formatowanie kolumn w raportach |
-   | **COLUMNSMAPPING**| Opis |
-   | **COMMENTENTRIES**| Opis |
-   | **COMPANIES**| Dane firmy |
+   | **COLUMNSFORMATS**           | Ustawienia kolumn - format kolumny dla: raporty, dziennik korespondencji|
+   | **COLUMNSMAPPING**           | Ustawienia kolumn - mapowanie parametrów dla podraportu|
+   | **COMMENTENTRIES**           | Komentarze |
+   | **COMPANIES**                | Dane firmy |
    | **COMPANIESDICTS**| Opis |
    | **CONFIGURATION**| Opis |
    | **COUNTRIES**| Opis |
@@ -266,7 +266,7 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**defwidth**            | 	int           |                    | szerokość (atrybuty linii) 
    |**adder**               | 	bit           |                    |
    |**objtype**             | 	int           |                    | typ obiektu **0** - klasa dokumentu, **1** - dziennik korespondencji, **2** - raport
-   |**objid**               | 	int           |                    |kod powiązanego obiektu
+   |**objid**               | 	int           |CLASSES **id**, DAILYCORRCLASS **id**, INTERACTIVEDICTS **id** |kod powiązanego obiektu
    |**cmp_classattribs_id** | 	int           |                    | sumator powiazanie z atrybutem liczbowym z nagłówka
    |**allowgroup**          | 	bit           |                    | grupowanie
 
@@ -275,30 +275,84 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | Kolumna              | Typ danych      |    Odwołanie       | Opis |
    | -------              | ----            | -----              | ------| 
    |**id**                | 	int           |                    |numer unikalny
-   |**name**              | 	nvarchar(100) |                    | nazwa
-   |**description**       | 	ntext         |                    | opis
-   |**regex**             | 	ntext         |
-   |**allowcustomschema** | 	bit           |
-   |**CreatedAt**         | 	datetime      |
-   |**UpdatedAt**         | 	datetime      |
-   |**nameformat**        | 	nvarchar(255) |
-   |**authschemas_id**    | 	int           |
-   |**prmcpmthtype**      | 	int           |
-   |**authmandatory**     | 	bit           |
-   |**visibility**        | 	int           |
-   |**classes_id**        | 	int           |
-   |**issys**             | 	bit           |
-   |**uniqname**          | 	bit           |
-   |**checkformat**       | 	int           |
-   |**numrrequired**      | 	bit           |
-   |**uniqnum**           | 	bit           |
-   |**color**             | 	int           |
-   |**organizations_id**  | 	int           |
-   |**globalid**          | 	varchar(36)   |
-   |**autoaddrow**        | 	bit           |
-   |**att_classes_id**    | 	int           |
-   |**attsendtocr**       | 	bit           |
-   |**newdocpath**        | 	varchar(1024) |
+   |**name**              | 	nvarchar(100) |                    | nazwa klasy
+   |**description**       | 	ntext         |                    | opis klasy
+   |**regex**             | 	ntext         |                    | dopasowanie
+   |**allowcustomschema** | 	bit           |                    |czy dostępny schemat własny
+   |**CreatedAt**         | 	datetime      |                    | data utworzenia
+   |**UpdatedAt**         | 	datetime      |                    | data aktualizacji
+   |**nameformat**        | 	nvarchar(255) |                    | format nazwy
+   |**authschemas_id**    | 	int           |AUTHSCHEMAS **id**  | domyślny schemat autoryzacji
+   |**prmcpmthtype**      | 	int           |                    | metoda kopiowania uprawnień: **0** - nigdy, **1** - zawsze, **2** - zapytaj
+   |**authmandatory**     | 	bit           |                    | schemat jest wymagany
+   |**visibility**        | 	int           |                    | widocznośc **0** - widoczna, **1** - ukryta
+   |**classes_id**        | 	int           |CLASSES **id**      | powiązana klasa bazowa
+   |**issys**             | 	bit           |                    | czy klasa systemowa
+   |**uniqname**          | 	bit           |                    | kontrola unikalności nazwy
+   |**checkformat**       | 	int           |                    |kontrola formatu nazwy: **0** - nie sprawdzaj, **1** - Pozwól edytować, **2** Automatycznie
+   |**numrrequired**      | 	bit           |                    | czy numer dokumentu wymagany
+   |**uniqnum**           | 	bit           |                    | kotrola unikalności numeru
+   |**color**             | 	int           |                    |kolor
+   |**organizations_id**  | 	int           |ORGANIZATIONS **id**| powiązana organizacja
+   |**globalid**          | 	varchar(36)   |                    | unikalny kod
+   |**autoaddrow**        | 	bit           |                    | automatycznie dodaj linie
+   |**att_classes_id**    | 	int           |CLASSES **id**      |powiązana klasa załącznika
+   |**attsendtocr**       | 	bit           |                    |wyślij załącznik do ocr
+   |**newdocpath**        | 	varchar(1024) |                    |ścieżka zapisu noweg dokumentu w repozytorium
+
+### Tablica **COLUMNSFORMATS** 
+
+   | Kolumna        | Typ danych     |    Odwołanie       | Opis |
+   | -------        | ----           | -----              | ------| 
+   |**id**          | 	int          |                    |numer unikalny
+   |**objtype**     | 	int          |                    |typ obiektu **1** - raport, **2** - dziennik korespondencji
+   |**objid**       | 	int          |INTERACTIVEDICTS **id**, DAILYCORRCLASS **id** |odwołanie do powiązanego obiektu
+   |**column**      | 	varchar(100) |                    |nazwa kolumny
+   |**label**       | 	varchar(254) |                    |etykieta kolumny
+   |**sortable**    | 	bit          |                    | czy sortowanie
+   |**target**      | 	int          |                    |typ odnośnika: **0** - brak, **1** - podraport, **2** - dokument, **3** wpis dziennika korespondencji
+   |**classes_id**  | 	int          |INTERACTIVEDICTS **id**| klasa odnośnika dla podraportu (inny raport)
+   |**marktodel**   | 	bit          |                    |
+   |**decscale**    | 	int          |                    |skala: **-1** - auto, **>0** tyle zer po przecinku (precyzja)
+   |**width**       | 	int          |                    |szerokość
+   |**group**       | 	int          |                    |grupowanie: **0** - brak, **>0** kolejność grupowania
+   |**groupasc**    | 	bit          |                    |czy sortować grupowanie rosnąco
+   |**alignright**  | 	bit          |                    |wyrównaj do prawej
+   |**sumable**     | 	bit          |                    |czy sumator
+
+### Tablica **COLUMNSMAPPING** 
+
+   | Kolumna              | Typ danych     |    Odwołanie         | Opis |
+   | -------              | ----           | -----                | ------| 
+   |**columnsformats_id** | 	int          |COLUMNSFORMATS **id** |odwołanie do ustawienia formatu kolumny
+   |**from**              | 	varchar(100) |                      |parametr z
+   |**to**                | 	varchar(100) |                      |parametr do
+
+### Tablica **COMMENTENTRIES** 
+
+   | Kolumna            | Typ danych |    Odwołanie       | Opis |
+   | -------            | ----       | -----              | ------| 
+   |**id**              | 	int      |                    |numer unikalny
+   |**pagecomments_id** | 	int      |PAGECOMMENTS **id** |odwołanie do powiązanej strony
+   |**users_id**        | 	int      |USERS **id**        | kod powiązanego użytkownika
+   |**entrynum**        | 	int      |                    | numer kolejny wpisu (komentarz do komentarza)
+   |**content**         | 	ntext    |                    | zawartość komentarza
+   |**createdat**       | 	datetime |                    |data utworzenia
+   |**marktodel**       | 	bit      |                    |
+
+### Tablica **COMPANIES** 
+
+   | Kolumna            | Typ danych       |    Odwołanie       | Opis |
+   | -------            | ----             | -----              | ------|  
+   |**id**              | 	int            |                    |numer unikalny
+   |**dbname**          | 	varchar(128)   |                    |nazwa bazy danych SAP (sql)
+   |**company**         | 	nvarchar(1000) |                    |nazwa firmy
+   |**CreatedAt**       | 	datetime       |                    |data utworzenia
+   |**UpdatedAt**       | 	datetime       |                    |data ostatniej aktualizacji
+   |**directories_id**  | 	int            |                    |katalog domyślny
+   |**organizations_id**| 	int            |ORGANIZATIONS **id**| powiązana organizacja
+   |**bpdbtype**        | 	int            |                    |rodzaj bazy PH: **0** - baza wewnętrzna SPUMA, **1** - zewnętrzny SOAP
+   |**globalid**        | 	varchar(36)    |                    |unikalny kod firmy
 
 # Funkcje i procedury
 Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomocą procedur i funkcji SQL. 
