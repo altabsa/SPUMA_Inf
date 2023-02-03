@@ -221,6 +221,7 @@ Definiowanie sposobu rejestracji atrybutu typu  `Własny` przechowującego infor
 - `Informacje o zdarzeniach` - Ustawienie które wiadomości powinien użytkownik otrzymywać (kolumna `Wyślij`) i które po otrzymaniu zaznacza automatycznie  jako przeczytane (kolumna `Zaznacz jako przeczytane`)
 - `Twórca` - Użytkownik który jest twórcą może dodawać nowe dokumenty w sekretariacie
 - `Administrator` - Użytkownik może logować się do panelu administracyjnego 
+- `Systemowy` - Użytkownik techniczny, zablokowana możliwość logowania do aplikacji przez stronę WWW 
 - `Zablokowany` - Odebranie uprawnień do logowania się w systemie (np pracownik zwolniony)
 - `Imię i nazwisko` - Używane w szablonach dokumentów oraz auto-wyliczeniach 
 - `Ostatnie dokumenty` - Ilość pamiętanych ostatnio otwieranych dokumentów. Dotyczy katalogu `Ostatni używane` w aplikacji WWW
