@@ -173,7 +173,7 @@ Konfiguracja zewnętrznej biblioteki DLL SAPB1Utils. Biblioteka odpowiada za imp
 - `SBOUSER` –użytkownik SAP
 - `SBOPASSWORD` – hasło do SAP
 - `SBOLANG` – język komunikatów biblioteki SAP DI
-
+ > **Uwaga:** w razie problemów z połączeniem do SAP należy utworzyć plik **c:\temp\sapb1utils.log** na serwerze gdzie uruchamiana jest usługa SPUMA_DataService  w którym zapisane będą logi tego komponentu.
 ## Organizacje
 Organizacje reprezentują jednostki nadrzędne nad firmami. Mogą reprezentować kraj lub grupę firm.
 Tworząc większość obiektów możemy zdefiniować, że są widoczne tylko dla danej organizacji.
