@@ -128,7 +128,7 @@ Konfiguracja połączenia pomiędzy klientem WWW a serwerem `SPUMA_DataService`
     > **Uwaga:**  Gdy zainstalowanych jest  więcej niż jedna usługa, wpis  ma znaczenie tylko w instalacji gdzie ustawiony jest POLICYPORT
 
 - `EXRESOURCEPATH` (nierozwijana) Ścieżka do katalogu tymczasowego dla zasobów dla innych dokumentów (Word, Excel itp)
-- `FORCEPREVQUALITY` - Nadpisanie jakości w jakiej przesyłany jest do aplikacji WWW podgląd pliku (0 - nie zmieniaj jakości). 
+- `FORCEPREVQUALITY` - Nadpisanie jakości w jakiej przesyłany jest do aplikacji WWW podgląd pliku (0 - nie zmieniaj jakości) zakres od 0 - 100%. 
     > **Uwaga:** Należy zmieniać tą wartość tylko w przypadku stwierdzenia wolnego generowania podglądu w na stronie,
 
 - `BUSINESSPARTNERIPC`: Port IPC po którym komunikujemy się z usługa dodawania PH do SAP
