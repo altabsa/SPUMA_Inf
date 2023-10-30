@@ -43,9 +43,9 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | **DESIGNERITEMS**| Opis |
    | **DICTIONARIES**             | Słowniki statyczne |
    | **DICTVALUES**               | Słowniki statyczne przypisane wartości |
-   | **DIRECTORIES**| Opis |
-   | **DOCUMENTOCRRESULTS**| Opis |
-   | **DOCUMENTPAGES**| Opis |
+   | **DIRECTORIES**		  | Katalogi dla dokumentów - definicja katalogów w firmie |
+   | **DOCUMENTOCRRESULTS**	  | Dokument - wyniki rozpoznawania danych przez OCR wskazania zastosowanego szablonu OCR|
+   | **DOCUMENTPAGES**		  | Dokument - powiązanie zasobów ze stronami dokumentu |
    | **DOCUMENTREF**| Opis |
    | **DOCUMENTREFLINES**| Opis |
    | **DOCUMENTS**| Opis |
@@ -562,13 +562,51 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
 
    | Kolumna              | Typ danych    |   Odwołanie            | Opis |
    | -------              | ----          | -----                  | -----|
-   |**id**              | int |                        | unikalny kod wpisu dla słownika
-   |**name**          | nvarchar(100) |                        |nazwa słownika
+   |**id**                | int |                                  | unikalny kod wpisu dla słownika
+   |**name**              | nvarchar(100) |                        |nazwa słownika
    |**description** 	  | 	ntext     |                        |opis słownika
    |**CreatedAt**         | 	datetime  |                        |data utworzenia wpisu
    |**UpdatedAt**         | 	datetime  |                        |data aktualizacji wpisu
-   |**organizations_id**  | int            |ORGANIZATIONS **id**   | powiązanie z organizacją
+   |**organizations_id**  | int           |ORGANIZATIONS **id**    | powiązanie z organizacją
    |**globalid**          | varchar(36) |                          |nadany unikalny kod wpisu dla słownika
+
+### Tablica **DIRECTORIES** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**id**                | int           |                        | unikalny kod wpisu dla katalogu
+   |**companies_id**      | int           | COMPANIES **id**       |powiązanie z firmą
+   |**directories_id** 	  | 	int       |  DIRECTORIES **id**    |powiązanie z katalogiem nadrzędnym
+   |**name**         	  | nvarchar(100) |                        |nazwa katalogu
+   |**description**       | 	ntext  	  |                        |opis katalogu
+   |**icontype**  	  | int           |                        |typ ikony katalogu
+   |**iconcolor**         | int 	  |                        |kolor ikony katalogu
+   |**CreatedAt**         | 	datetime  |                        |data utworzenia wpisu
+   |**UpdatedAt**         | 	datetime  |                        |data aktualizacji wpisu
+
+### Tablica **DOCUMENTOCRRESULTS** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**id**                | int           |                        |unikalny kod wpisu dla wyniku rozpoznawania OCR dla dokumentu
+   |**documents_id**      | int           | DOCUMENTS **id**       |powiązanie z dokumentem
+   |**schemacode** 	  | nvarchar(100) |  DIRECTORIES **id**    |kod wybranego schematu rozpoznawania OCR
+   |**title**         	  | nvarchar(255) |                        |Tytuł przypisany z OCR
+   |**comments**          | 	ntext  	  |                        |
+   |**marktodel**  	  | bit           |                        |
+
+### Tablica **DOCUMENTPAGES** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**id**                | int           |                        |unikalny kod wpisu dla strony dokumentu
+   |**documents_id**      | int           | DOCUMENTS **id**       |powiązanie z dokumentem
+   |**pagenum** 	  | int           |                        |numer strony dokumentu
+   |**resources_id**      | int           | RESOURCES **id**       |powiązanie z zasobem pliku
+   |**resources_pagenum** | int           |                        |numer strony w przypisanym zasobie
+   |**comments**          | 	bit  	  |                        |
+   |**marktodel**  	  | int           |                        |obrót strony (np:  **0** , **90**, **180**)
+
    
 # Funkcje i procedury
 Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomocą procedur i funkcji SQL. 
