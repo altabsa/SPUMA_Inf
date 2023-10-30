@@ -56,15 +56,15 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | **DOCUMENTS_AUTHVAR_BASIC**  | Dokument - autoryzacje: zmienne podstawowe  |
    | **DOCUMENTS_AUTHVAR_SCHEMA** | Dokument - autoryzacje: zmienne schema  |
    | **DOCUMENTS_AUTHVAR_SCHEMARCP**| Dokument - autoryzacje: zmienne schema odbiorca  |
-   | **DOCUMENTS_LINES**	  | Dokument - Linie dokumentu |
-   | **DOCUMENTS_LINESOWNERS**| Opis |
-   | **DOCUMENTS_LINESREFS**| Opis |
-   | **DOCUMENTS_MODIFICATION**| Opis |
-   | **DOCUMENTS_OCRMAP**| Opis |
-   | **DOCUMENTS_PROPERTIES**| Opis |
-   | **DOCUMENTUSAGE**| Opis |
-   | **EXTERNALREFS**| Opis |
-   | **INTERACTIVEDICTS**| Opis |
+   | **DOCUMENTS_LINES**	  | Dokument linie: podstawowe informacje|
+   | **DOCUMENTS_LINESOWNERS**	  | Dokument linie: uprawnienia do linii przypisanie właściciela linii |
+   | **DOCUMENTS_LINESREFS**	  | Dokument linie: mapowanie wyników dla linii z OCR do linii dokumentu |
+   | **DOCUMENTS_MODIFICATION**	  | Dokument - historia zmian |
+   | **DOCUMENTS_OCRMAP**	  | Dokument - mapowanie wyników z OCR do dokumentu |
+   | **DOCUMENTS_PROPERTIES**	  | Dokument - przypisane wartości do dodatkowych atrybutów klasy  |
+   | **DOCUMENTUSAGE**		  | Dokument - historia przeglądania danego dokumentu|
+   | **EXTERNALREFS**		  | Powiązanie dokumentuy SPUMA z dokumentem z zewnętrznych integracji np: IMAP, POP3, KSEF |
+   | **INTERACTIVEDICTS**	  | Słowniki interaktywne |
    | **MAILMONITORCFG**| Opis |
    | **MESSAGE_RECIPIENTS**| Opis |
    | **MESSAGES**| Opis |
@@ -745,7 +745,95 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**attribs_id**        | 	int       | CLASSATTRIBS **id**    | kod powiązanego atrybutu klasy
    |**linenum**           | 	int 	  |                    	   | numer linii dokumentu
    |**value**             |  nvarchar(max)|                        | przypisana wartośc dla atrybutu danej linii dokumentu
+
+### Tablica **DOCUMENTS_LINESOWNERS** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**documents_id**      | int           | DOCUMENTS **id**       |powiązanie z dokumentem 
+   |**linenum**           | 	int 	  |                    	   |numer linii dokumentu
+   |**users_id**       	  | int           | USERS **id**       	   |użytkownik - właściciel linii
+   |**createdat**         | 	datetime  |                        |data utworzenia danej linii dokumentu
    
+### Tablica **DOCUMENTS_LINESREFS** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**documents_id**      | int           | DOCUMENTS **id**       |powiązanie z dokumentem 
+   |**linenum**           | 	int 	  |                    	   |numer linii dokumentu
+   |**documentocrresults_id**| int        | DOCUMENTOCRRESULTS **id** |powiązanie z wynikami OCR dla danego dokumentu
+   |**ocrlinenum**        | int           |                        |numer linii odczytany przez OCR
+   |**attribs_id1**       | int           | CLASSATTRIBS **id**    |numer powiązanego atrybutu przypisanego w mapowaniu danych z OCR
+   |**ocrname1**          | nvarchar(128) |                        |nazwa kolumny w szablonie OCR
+   |**attribs_id2**       | int           | CLASSATTRIBS **id**    |numer powiązanego atrybutu przypisanego w mapowaniu danych z OCR
+   |**ocrname2**          | nvarchar(128) |                        |nazwa kolumny w szablonie OCR
+   |**attribs_id3**       | int           | CLASSATTRIBS **id**    |numer powiązanego atrybutu przypisanego w mapowaniu danych z OCR
+   |**ocrname3**          | nvarchar(128) |                        |nazwa kolumny w szablonie OCR
+   |**attribs_id4**       | int           | CLASSATTRIBS **id**    |numer powiązanego atrybutu przypisanego w mapowaniu danych z OCR
+   |**ocrname4**          | nvarchar(128) |                        |nazwa kolumny w szablonie OCR
+
+### Tablica **DOCUMENTS_MODIFICATION** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**documents_id**      | int           | DOCUMENTS **id**       |powiązanie z dokumentem 
+   |**users_id**       	  | int           | USERS **id**       	   |użytkownik wprowadzający aktualizację na dokumencie
+   |**CreatedAt**         | 	datetime  |                        |data utworzenia wpisu
+
+### Tablica **DOCUMENTS_OCRMAP** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**documents_id**      | int           | DOCUMENTS **id**       |powiązanie z dokumentem 
+   |**class_id** 	  | 	int       |CLASSESS **id**    	   |powiązanie z klasą dokumentu
+   |**cardcode**	  | nvarchar(128) |                        |kod dostawcy z systemu ERP
+   |**schemacode**	  | nvarchar(100) |                        |kod schematu rozpoznawania (wzorca OCR)
+   |**ocrname**	  	  | nvarchar(100) |                        | nazwa pola OCR zgodna z wzorcem OCR
+   |**attribs_id**        | int           | CLASSATTRIBS **id**    |numer powiązanego atrybutu przypisanego w mapowaniu danych z OCR
+   |**maptype** 	  | 	int       |                        |typ mapowania wynikó z OCR wartości: **1** - kopiuj, **2** - wyszukaj, **3** - zapamiętaj 
+
+### Tablica **DOCUMENTS_PROPERTIES** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**documents_id**      | int           | DOCUMENTS **id**       |powiązanie z dokumentem jako dokument główny
+   |**attribs_id**        | int           | CLASSATTRIBS **id**    |numer powiązanego atrybutu przypisanego w mapowaniu danych z OCR
+   |**value**             |  nvarchar(max)|                        | przypisana wartośc dla atrybutu danej linii dokumentu
+
+### Tablica **DOCUMENTUSAGE** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**documents_id**      | int           | DOCUMENTS **id**       |powiązanie z dokumentem jako dokument główny
+   |**users_id**       	  | int           | USERS **id**       	   |użytkownik wprowadzający aktualizację na dokumencie
+   |**openat**            | 	datetime  |                        |data otwarcia dokumentu
+   
+### Tablica **EXTERNALREFS** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**documents_id**      | int           | DOCUMENTS **id**       |powiązanie z dokumentem jako dokument główny
+   |**sourceid**       	  | varchar(255)  |                        |powiązanie z np.: id skrzynki POP3, IMAP, numer KSEF 
+   |**foldername**        |nvarchar(32)   |                        |nazwa katalogu
+
+### Tablica **INTERACTIVEDICTS** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**id**                | 	int           |                    |numer unikalny
+   |**name**              | 	nvarchar(100) |                    | nazwa słownika
+   |**description**       | 	ntext         |                    | opis słownika
+   |**scriptype**         | 	int           |                    | rodzaj skryptu wartości: **0** - MSSQL
+   |**scriptctx** 	  | 	ntext         |                    | skrypt zapisany w formie tekstowej
+   |**sqlconnstr**        | 	nvarchar(100) |                    | dodatkowy ciąg połączenia
+   |**allowcache**        | 	bit	      |                    | 
+   |**CreatedAt**        | 	datetime      |                    | data utworzenia
+   |**UpdatedAt**        | 	datetime      |                    | data aktualizacji
+   |**organizations_id** | 	int           |ORGANIZATIONS **id**| powiązanie z organizacją
+   |**report**           | 	bit	      |                    | czy to raport  **0** - nie,  **1** - tak
+   |**label**            | 	nvarchar(200) |                    | etykieta
+   |**visible**          | 	bit	      |                    | widoczny  **0** - nie,  **1** - tak
+   |**globalid**         | 	nvarchar(200) |                    | nadany numer unikalny
    
 # Funkcje i procedury
 Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomocą procedur i funkcji SQL. 
