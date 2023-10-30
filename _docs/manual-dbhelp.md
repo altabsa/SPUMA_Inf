@@ -46,9 +46,9 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | **DIRECTORIES**		  | Katalogi dla dokumentów - definicja katalogów w firmie |
    | **DOCUMENTOCRRESULTS**	  | Dokument - wyniki rozpoznawania danych przez OCR wskazania zastosowanego szablonu OCR|
    | **DOCUMENTPAGES**		  | Dokument - powiązanie zasobów ze stronami dokumentu |
-   | **DOCUMENTREF**| Opis |
-   | **DOCUMENTREFLINES**| Opis |
-   | **DOCUMENTS**| Opis |
+   | **DOCUMENTREF**		  | Dokument - powiązanie z dokumnentem w systemie ERP |
+   | **DOCUMENTREFLINES**	  | Dokument - powiązanie z pozycjami dokumentu w systemie ERP|
+   | **DOCUMENTS**		  | Dokument - podstawowe informacje dla dokumentu |
    | **DOCUMENTS_ATTACHMENTS**| Opis |
    | **DOCUMENTS_AUTHLOCKS**| Opis |
    | **DOCUMENTS_AUTHRECIPIENTS**| Opis |
@@ -604,9 +604,64 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**pagenum** 	  | int           |                        |numer strony dokumentu
    |**resources_id**      | int           | RESOURCES **id**       |powiązanie z zasobem pliku
    |**resources_pagenum** | int           |                        |numer strony w przypisanym zasobie
-   |**comments**          | 	bit  	  |                        |
-   |**marktodel**  	  | int           |                        |obrót strony (np:  **0** , **90**, **180**)
+   |**marktodel**  	  | bit           |                        |
+   |**rotation**  	  | int           |                        |obrót strony (np:  **0** , **90**, **180**, **270**)
 
+### Tablica **DOCUMENTREF** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**id**                | int           |                        |unikalny kod wpisu dla powiązania
+   |**documents_id**      | int           | DOCUMENTS **id**       |powiązanie z dokumentem
+   |**companies_id** 	  | int           | COMPANIES **id**       |powiązanie z firmą
+   |**objecttype**        | nvarchar(50)  |                        |powiązanie z obiektem w systemie ERP
+   |**objectid** 	  | nvarchar(50)  |                        |powiązanie z numerem wewnętrznym dokumentu w systemie ERP
+   |**marktodel**  	  | bit           |                        |
+
+### Tablica **DOCUMENTREFLINES** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**documentrefs_id**   | int           | DOCUMENTREF **id**     |powiązanie z referncją dokumentu
+   |**linenum** 	  | int           |                        |numer linii
+   |**columnid**          | int           |                        |numer kolumny
+   |**value** 	          | nvarchar(max) |                        |wartość
+
+### Tablica **DOCUMENTS** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**id**                | int           |                        |unikalny numer dokumentu
+   |**users_id** 	  | int           | USERS **id**    	   |właściciel - powiązanie z użytkownikiem SPUMA
+   |**classes_id**        | int           | CLASSESS **id**    	   |klasa - powiązanie z klasą dokumentu
+   |**companies_id** 	  | int           | COMPANIES **id**       |powiązanie z firmą
+   |**name** 	          | nvarchar(100) |                        |nazwa dokumentu
+   |**description** 	  | ntext         |                        |opis dokumentu
+   |**docdate**           | 	datetime  |                        |data dokumentu
+   |**docnum**            | nvarchar(100) |                        |numer dokumentu
+   |**IDDoc**             |   int         |                        |
+   |**CreatedAt**         | 	datetime  |                        |data utworzenia wpisu
+   |**UpdatedAt**         | 	datetime  |                        |data aktualizacji wpisu
+   |**authstatus**        |   int         |                        |status autoryzacji wartości: **0** - oczekuje, **1** - zatwierdzony, **2** - odrzucony
+   |**directories_id** 	  | int           | DIRECTORIES **id**     |powiązanie z katalogiem
+   |**docstatus** 	  | int           |                        |status dokumentu wartości: **0** - katalog wczytane, **1** - katalog rozpoznawane, **2** - katalog do sprawdzenia, **3** - katalog repozytorium
+   |**reconschemas_code** | nvarchar(100) |                        | 
+   |**enterdate**         | 	datetime  |                        |data wpływu
+   |**templates_id**      | 	int       | DOCUMENTS **id**       |powiązanie z dokumentem typu szablon
+   |**definition_code**   | varchar(100)  |                        |
+   |**ocr_code**          | varchar(100)  |                        |unikalny kod wygenerowany przez usługe OCR dla dokumentu
+   |**headereditmode**    |   int         |                        |uprawnienie do edycji nagłówka dokumentu wartości: **0** - blokada, **1** - odblokowane
+   |**lineseditmode**     |   int         |                        |uprawnienie do edycji linii dokumentu wartości: **0** - blokada, **1** - odblokowane
+   |**headereditmode1**   |   int         |                        |uprawnienie do edycji nagłówka1 dokumentu wartości: **0** - blokada, **1** - odblokowane
+   |**lineseditmode1**    |   int         |                        |uprawnienie do edycji linii1 dokumentu wartości: **0** - blokada, **1** - odblokowane
+   |**headereditmode2**   |   int         |                        |uprawnienie do edycji nagłówka2 dokumentu wartości: **0** - blokada, **1** - odblokowane
+   |**lineseditmode2**    |   int         |                        |uprawnienie do edycji linii2 dokumentu wartości: **0** - blokada, **1** - odblokowane
+   |**canchgres**         |   bit         |                        |uprawnienie do zmiany zasobu dokumentu (zmiana wersji pliku)wartości: **0** - blokada, **1** - odblokowane
+   |**sysdocnum** 	  | int           |                        |numer systemowy dokumentu nadany po wysłaniu dokumentu w obieg unikalny w obrębie firmy i klasy
+   |**rm_users_id**       |   int         |                        |
+   |**tmpwritemode**      |   int         |                        |uprawnienie do edycji dokumenty typu formularz wartości: **0** - blokada, **1** - odblokowane
+   |**autopublish**       |   bit         |                        |
+   |**grouping**          | varchar(max)  |                        |
    
 # Funkcje i procedury
 Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomocą procedur i funkcji SQL. 
