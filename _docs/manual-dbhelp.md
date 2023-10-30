@@ -38,11 +38,11 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | **DAILYCORR_REF**            | Dziennik korespondencji - referencje do dokumentów|
    | **DAILYCORRCLASS**           | Dziennik korespondencji - definicja klasy |
    | **DAILYCORRESPONDENCE**      | Dziennik korespondencji - wpisy dziennika |
-   | **DEFINITIONS**| Spis definicji wzorców OCR |
-   | **DESIGNERCONNECTIONS**| Opis |
+   | **DEFINITIONS**              | Spis definicji wzorców OCR |
+   | **DESIGNERCONNECTIONS**  | Opis |
    | **DESIGNERITEMS**| Opis |
-   | **DICTIONARIES**| Opis |
-   | **DICTVALUES**| Opis |
+   | **DICTIONARIES**             | Słowniki statyczne |
+   | **DICTVALUES**               | Słowniki statyczne przypisane wartości |
    | **DIRECTORIES**| Opis |
    | **DOCUMENTOCRRESULTS**| Opis |
    | **DOCUMENTPAGES**| Opis |
@@ -527,14 +527,49 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
 
    | Kolumna              | Typ danych    |   Odwołanie            | Opis |
    | -------              | ----          | -----                  | -----|
-   |**code**              | nvarchar(100) |                        | unikalny kod wpisu wzorca
+   |**code**              | nvarchar(100) |                        | unikalny kod wpisu dla wzorca OCR
    |**description** 	  | 	ntext     |                        |opis wzorca
    |**filename**          | nvarchar(100) |                        |nazwa pliku
    |**language**          | nvarchar(100) |                        |język wzorca
    |**CreatedAt**         | 	datetime  |                        |data utworzenia wpisu
    |**UpdatedAt**         | 	datetime  |                        |data aktualizacji wpisu
+   
+### Tablica **DESIGNERCONNECTIONS** 
 
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**dst_objid**         |      int      |                        | 
+   |**designeritmintid**  |      int      |                        | 
+   |**designeritmintid2** |      int      |                        | 
+   |**designerlpoint**    |      int      |                        | 
+   |**designerlpoint2**   |      int      |                        | 
+   |**dst_objtype**       |      int      |                        | 
+   
+### Tablica **DESIGNERITEMS** 
 
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**dst_objid**         |      int      |                        | 
+   |**insintid**          |      int      |                        | 
+   |**intid**             |      int      |                        | 
+   |**left**              |      float    |                        | 
+   |**top**               |      float    |                        | 
+   |**width**             |      float    |                        |
+   |**height**            |      float    |                        |
+   |**dst_objtype**       |      int      |                        | 
+
+### Tablica **DICTIONARIES** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**id**              | int |                        | unikalny kod wpisu dla słownika
+   |**name**          | nvarchar(100) |                        |nazwa słownika
+   |**description** 	  | 	ntext     |                        |opis słownika
+   |**CreatedAt**         | 	datetime  |                        |data utworzenia wpisu
+   |**UpdatedAt**         | 	datetime  |                        |data aktualizacji wpisu
+   |**organizations_id**  | int            |ORGANIZATIONS **id**   | powiązanie z organizacją
+   |**globalid**          | varchar(36) |                          |nadany unikalny kod wpisu dla słownika
+   
 # Funkcje i procedury
 Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomocą procedur i funkcji SQL. 
 
