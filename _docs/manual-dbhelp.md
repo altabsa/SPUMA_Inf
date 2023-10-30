@@ -38,7 +38,7 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | **DAILYCORR_REF**            | Dziennik korespondencji - referencje do dokumentów|
    | **DAILYCORRCLASS**           | Dziennik korespondencji - definicja klasy |
    | **DAILYCORRESPONDENCE**      | Dziennik korespondencji - wpisy dziennika |
-   | **DEFINITIONS**| Opis |
+   | **DEFINITIONS**| Spis definicji wzorców OCR |
    | **DESIGNERCONNECTIONS**| Opis |
    | **DESIGNERITEMS**| Opis |
    | **DICTIONARIES**| Opis |
@@ -522,6 +522,18 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**CreatedAt**         | 	datetime    |                       |data utworzenia wpisu dziennika
    |**UpdatedAt**         | 	datetime    |                       |data ostatniej aktualizacji wpisu dziennika
    |**docnum**            | 	varchar(32) |                       |numer wpisu
+
+### Tablica **DEFINITIONS** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**code**              | nvarchar(100) |                        | unikalny kod wpisu wzorca
+   |**description** 	  | 	ntext     |                        |opis wzorca
+   |**filename**          | nvarchar(100) |                        |nazwa pliku
+   |**language**          | nvarchar(100) |                        |język wzorca
+   |**CreatedAt**         | 	datetime  |                        |data utworzenia wpisu
+   |**UpdatedAt**         | 	datetime  |                        |data aktualizacji wpisu
+
 
 # Funkcje i procedury
 Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomocą procedur i funkcji SQL. 
