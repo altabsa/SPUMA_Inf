@@ -53,10 +53,10 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | **DOCUMENTS_AUTHLOCKS**	  | Dokument - autoryzacje: blokada autoryzacji |
    | **DOCUMENTS_AUTHRECIPIENTS** | Dokument - autoryzacje: przypisane osoby do obiegu dokumentu |
    | **DOCUMENTS_AUTHSCHEMA**	  | Dokument - autoryzacje: przypisany schemat zatwierdzania  |
-   | **DOCUMENTS_AUTHVAR_BASIC**| Opis |
-   | **DOCUMENTS_AUTHVAR_SCHEMA**| Opis |
-   | **DOCUMENTS_AUTHVAR_SCHEMARCP**| Opis |
-   | **DOCUMENTS_LINES**| Opis |
+   | **DOCUMENTS_AUTHVAR_BASIC**  | Dokument - autoryzacje: zmienne podstawowe  |
+   | **DOCUMENTS_AUTHVAR_SCHEMA** | Dokument - autoryzacje: zmienne schema  |
+   | **DOCUMENTS_AUTHVAR_SCHEMARCP**| Dokument - autoryzacje: zmienne schema odbiorca  |
+   | **DOCUMENTS_LINES**	  | Dokument - Linie dokumentu |
    | **DOCUMENTS_LINESOWNERS**| Opis |
    | **DOCUMENTS_LINESREFS**| Opis |
    | **DOCUMENTS_MODIFICATION**| Opis |
@@ -708,6 +708,44 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**subschema**         | 	bit       |                        | czy to podschemat wartości: **0** - nie, **1** - tak
    |**addinfo**           |  nvarchar(max)|                        | dodatkowe informacje dla użytkownika do etapu zatwierdzania
    |**insintid**          | 	int       |                        | numer instrukcji w procesie autoryzacji
+
+### Tablica **DOCUMENTS_AUTHVAR_BASIC** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**documents_authschemas_id**| 	int 	|DOCUMENTS_AUTHSCHEMA **id**  | powiazanie ze schematem autoryzacji powiązanym z dokumentem
+   |**variable_id**        	| 	int 	|                    	      | numer zmiennej
+   |**linenum**       		| 	int 	|                    	      | numer linii
+   |**value**         		|nvarchar(1024)|                   	      | wartość
+
+### Tablica **DOCUMENTS_AUTHVAR_SCHEMA** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**documents_authschemas_id**| 	int 	|DOCUMENTS_AUTHSCHEMA **id**  | powiazanie ze schematem autoryzacji powiązanym z dokumentem
+   |**variable_id**        	| 	int 	|                    	      | numer zmiennej
+   |**authmethodtype**    | 	int       |                        | rodzacj schematu: **0** - wszyscy z, **1** - jeden z, **2** - (n) z, **3** - proces autoryzacji
+   |**authusrlimit**      | 	int       |                        | limit odbiorcow dla etapu
+
+### Tablica **DOCUMENTS_AUTHVAR_SCHEMARCP** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**documents_authschemas_id**| 	int 	|DOCUMENTS_AUTHSCHEMA **id**  | powiazanie ze schematem autoryzacji powiązanym z dokumentem
+   |**variable_id**        	| 	int 	|                    	      | numer zmiennej
+   |**order**         		| 	int 	|                    		| kolejność
+   |**objid**        		| 	int 	|USERS **id**, USERGROUPS **id**, AUTHSCHEMAS **id** | odwołanie do powiązanego obiektu
+   |**objtype**       		| 	int 	|                    		| Typ obiektu **0** - użytkownik, **1** - grupa użytkowników, **2** - schemat autoryzacji  
+
+### Tablica **DOCUMENTS_LINES** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**documents_id**      | int           | DOCUMENTS **id**       |powiązanie z dokumentem jako dokument główny
+   |**attribs_id**        | 	int       | CLASSATTRIBS **id**    | kod powiązanego atrybutu klasy
+   |**linenum**           | 	int 	  |                    	   | numer linii dokumentu
+   |**value**             |  nvarchar(max)|                        | przypisana wartośc dla atrybutu danej linii dokumentu
+   
    
 # Funkcje i procedury
 Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomocą procedur i funkcji SQL. 
