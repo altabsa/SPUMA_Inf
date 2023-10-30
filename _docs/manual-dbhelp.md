@@ -49,10 +49,10 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | **DOCUMENTREF**		  | Dokument - powiązanie z dokumnentem w systemie ERP |
    | **DOCUMENTREFLINES**	  | Dokument - powiązanie z pozycjami dokumentu w systemie ERP|
    | **DOCUMENTS**		  | Dokument - podstawowe informacje dla dokumentu |
-   | **DOCUMENTS_ATTACHMENTS**| Opis |
-   | **DOCUMENTS_AUTHLOCKS**| Opis |
-   | **DOCUMENTS_AUTHRECIPIENTS**| Opis |
-   | **DOCUMENTS_AUTHSCHEMA**| Opis |
+   | **DOCUMENTS_ATTACHMENTS**	  | Dokument - powiązane załączniki |
+   | **DOCUMENTS_AUTHLOCKS**	  | Dokument - autoryzacje: blokada autoryzacji |
+   | **DOCUMENTS_AUTHRECIPIENTS** | Dokument - autoryzacje: przypisane osoby do obiegu dokumentu |
+   | **DOCUMENTS_AUTHSCHEMA**	  | Dokument - autoryzacje: przypisany schemat zatwierdzania  |
    | **DOCUMENTS_AUTHVAR_BASIC**| Opis |
    | **DOCUMENTS_AUTHVAR_SCHEMA**| Opis |
    | **DOCUMENTS_AUTHVAR_SCHEMARCP**| Opis |
@@ -662,6 +662,52 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**tmpwritemode**      |   int         |                        |uprawnienie do edycji dokumenty typu formularz wartości: **0** - blokada, **1** - odblokowane
    |**autopublish**       |   bit         |                        |
    |**grouping**          | varchar(max)  |                        |
+
+### Tablica **DOCUMENTS_ATTACHMENTS** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**documents_id**      | int           | DOCUMENTS **id**       |powiązanie z dokumentem jako dokument główny
+   |**att_documents_id**  | int           | DOCUMENTS **id**       |powiązanie z dokumentem jako załącznik
+   
+### Tablica **DOCUMENTS_AUTHLOCKS** 
+
+   | Kolumna                    | Typ danych    |   Odwołanie            	| Opis |
+   | -------                    | ----          | -----                  	| -----|
+   |**documents_authschemas_id**| int           | DOCUMENTS_AUTHSCHEMA **id**   |powiązanie ze dokumentem autoryzacji dla dokumentu
+   |**users_id**       		| int           | USERS **id**       		|użytkownik
+   |**lockat**         		| 	datetime  |                        |data zablokowania
+   |**unlockat**         	| 	datetime  |                        |data odblokowania
+
+### Tablica **DOCUMENTS_AUTHRECIPIENTS** 
+
+   | Kolumna         		| Typ danych  	| Odwołanie| Opis |
+   | -------          		| ----        	| ----- | ------| 
+   |**documents_authschemas_id**| 	int 	|DOCUMENTS_AUTHSCHEMA **id**  | powiazanie ze schematem autoryzacji powiązanym z dokumentem
+   |**objid**        		| 	int 	|USERS **id**, USERGROUPS **id**, AUTHSCHEMAS **id** | odwołanie do powiązanego obiektu
+   |**objtype**       		| 	int 	|                    		| Typ obiektu **0** - użytkownik, **1** - grupa użytkowników, **2** - schemat autoryzacji  
+   |**order**         		| 	int 	|                    | kolejność
+   |**authstatus**         	| 	int 	|                    | status akceptacji danego etapu wartości: **0** - oczekuje, **1** - zatwierdzony, **2** - odrzucony
+   |**comment**       		| nvarchar(1024)|          	     | dodatkowe informacje
+   |**visibility**            	| 	bit 	|                    | widoczność wartości: **0** - ukryj, **1** - pokaż
+   |**addinfo**     		|  nvarchar(max)|                    | dodatkowe informacje dla użytkownika do etapu zatwierdzania
+   |**auth_users_id**       	| 	int 	|USERS **id**	     | użytkownik który zautoryzował dany etap
+   |**srcinsintid**         	| 	int 	|                    | źródłowa instanacja schematu autoryzacji
+
+### Tablica **DOCUMENTS_AUTHSCHEMA** 
+
+   | Kolumna              | Typ danych    |   Odwołanie            | Opis |
+   | -------              | ----          | -----                  | -----|
+   |**id**                | int           |                        |unikalny numer wpisu
+   |**documents_id**      | int           | DOCUMENTS **id**       |powiązanie z dokumentem jako dokument główny
+   |**name**  		  | nvarchar(100) |                        |nazwa etapu schematu zatwierdzania
+   |**authmethodtype**    | 	int       |                        | rodzacj schematu: **0** - wszyscy z, **1** - jeden z, **2** - (n) z, **3** - proces autoryzacji
+   |**authusrlimit**      | 	int       |                        | limit odbiorcow dla etapu
+   |**authschema_id**     | 	int       | AUTHSCHEMAS **id**     | kod powiązanego schematu autoryzacji
+   |**authstatus**        | 	int 	  |                    	   | status akceptacji danego etapu wartości: **0** - oczekuje, **1** - zatwierdzony, **2** - odrzucony
+   |**subschema**         | 	bit       |                        | czy to podschemat wartości: **0** - nie, **1** - tak
+   |**addinfo**           |  nvarchar(max)|                        | dodatkowe informacje dla użytkownika do etapu zatwierdzania
+   |**insintid**          | 	int       |                        | numer instrukcji w procesie autoryzacji
    
 # Funkcje i procedury
 Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomocą procedur i funkcji SQL. 
