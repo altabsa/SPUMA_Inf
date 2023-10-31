@@ -94,7 +94,8 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | **USERGROUPS**		  | Grupy użytkowników - definicja|
    | **USERGROUPUSERS**		  | Grupy użytkowników - przypisanie osób |
    | **USERS**			  | Użytkownicy - definicja|
-   | **USERS_EVENTRESTRICTIONS**| Opis |
+   | **USERS_DOCINTERFACECONFIGS**| Wymiana EDokumentów Dodatkowe integracje |
+   | **USERS_EVENTRESTRICTIONS**  | Użytkownik - wyłączenie powiadomień |
    | **USERS_FAVORITEDOCUMENTS**| Opis |
    | **USERS_PERMISSIONS**| Opis |
 
@@ -1161,8 +1162,8 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**repl**			| bit             |                    |zastępwstwo dla użytkownika wartości: **0** - nie, **1** - tak
    |**replstart**		| 	datetime  |                    |zastępwstwo data od
    |**replend**			| 	datetime  |                    |zastępwstwo data do
-   |**rep_users_id**		| int             | USERS **id**       |zastępwstw użytkownik pierwszy  
-   |**rep_users_id2**		| int             | USERS **id**       |zastępwstw użytkownik drugi 
+   |**rep_users_id**		| int             | USERS **id**       |zastępwstwo użytkownik zastępujący - pierwszy  
+   |**rep_users_id2**		| int             | USERS **id**       |zastępwstwo użytkownik zastępujący - drugi 
    |**islocked**		| bit             |                    |zablokowany wartości: **0** - nie, **1** - tak
    |**visfldtp1**		| int             |                    |
    |**visfldtp2**		| int             |                    |
@@ -1180,7 +1181,26 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**imap_ssl**		| bit             |                    |IMAP - ssl wartości: **0** - nie, **1** - tak
    |**imap_vflds**		| varchar(255)    |                    |IMAP - folder
 
-      
+### Tablica **USERS_DOCINTERFACECONFIGS** 
+
+   | Kolumna      | Typ danych     |    Odwołanie       | Opis |
+   | -------      | ----           | -----              | ------| 
+   |**int_id** 	  |int             |                    | numer unikalny integracji	
+   |**users_id**  |int             |USERS **id**        | użytkownik przypisany do integracji            
+   |**name**	  |nvarchar(255)   |			|nazwa integracji
+   |**type**	  |int             |                    |typ integracji  wartości: **0** - KSeF             
+   |**company_id**|int             | COMPANIES **id**   |powiązanie z firmą              
+   |**userid**	  |nvarchar(128)   |			|login do integracji
+   |**password**  |nvarchar(128)   |			|hasło do integracji
+
+### Tablica **USERS_EVENTRESTRICTIONS** 
+
+   | Kolumna      	 | Typ danych     |    Odwołanie       | Opis |
+   | -------      	 | ----           | -----              | ------| 
+   |**users_id**  	 |int             |USERS **id**        | użytkownik            
+   |**eventtype** 	 | 	int        |                    |rodzaj powiadomienia wartości: **0** - wiadomość wewnętrzna, **1** - Prośba o autoryzację , **2** - Autoryzacja dokumentu, **3** - Odrzucenie dokumentu, **4** - Prośba o komentarz, **5** - Skomentowano, **6** - Zmiana na dokumencie obserwowanym, **7** - Zatwierdzenie finalne dokumentu
+    |**restrictiontype** |int             |                    |typ integracji  wartości: **0** - powiadomienie eMail, **1** - wiadomości wewnętrzne 
+   
 # Funkcje i procedury
 Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomocą procedur i funkcji SQL. 
 
