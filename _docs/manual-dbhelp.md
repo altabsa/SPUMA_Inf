@@ -77,7 +77,7 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | **OCRPROCESSLOG**		  | OCR - log błędów |
    | **OCRRESULTPAGES**		  | OCR - wyniki rozpoznawania dla strony dokumentu|
    | **OCRTEXTREGIONS**		  | OCR - rozpoznane regiony dla tekstu |
-   | **ORGANIZATIONS**| Opis |
+   | **ORGANIZATIONS**		  | Organizacje - definicja |
    | **PAGECOMMENTS**| Opis |
    | **PERMISSIONS**| Opis |
    | **PROCESS_ACTIONS**| Opis |
@@ -981,7 +981,27 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**width**        	  | 	int 	    |                    | szerokość strony
    |**height**        	  | 	int 	    |                    | wysokość strony
    
+### Tablica **OCRTEXTREGIONS** 
 
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**ocrresultpages_id**| 	int 	    |OCRRESULTPAGES **id**     | odwołanie do rozpoznanej strony dla dokumentu
+   |**pagenum**        	  | 	ntext 	    |                    | odczytane słowo przez OCR
+   |**posx**        	  | 	int 	    |                    | pozycja tekstu w osi x
+   |**posy**        	  | 	int 	    |                    | pozycja tekstu w osi y
+   |**width**        	  | 	int 	    |                    | szerokość regionu tekstowego
+   |**height**        	  | 	int 	    |                    | wysokość regionu tekstowego
+   
+### Tablica **ORGANIZATIONS** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**id**        	  | 	int 	    |                    | numer kolejny wpisu
+   |**code**        	  | varchar(128)    |                    | kod organizacji
+   |**CreatedAt**         | 	datetime    |                    | data utworzenia wpisu
+   |**UpdatedAt**         | 	datetime    |                    | data aktualizacji wpisu
+   |**globalid**          | 	varchar(36) |                    | unikalny identyfikator
+   
   
 # Funkcje i procedury
 Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomocą procedur i funkcji SQL. 
