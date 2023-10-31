@@ -94,10 +94,10 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | **USERGROUPS**		  | Grupy użytkowników - definicja|
    | **USERGROUPUSERS**		  | Grupy użytkowników - przypisanie osób |
    | **USERS**			  | Użytkownicy - definicja|
-   | **USERS_DOCINTERFACECONFIGS**| Wymiana EDokumentów Dodatkowe integracje |
+   | **USERS_DOCINTERFACECONFIGS**| Wymiana EDokumentów dodatkowe integracje |
    | **USERS_EVENTRESTRICTIONS**  | Użytkownik - wyłączenie powiadomień |
-   | **USERS_FAVORITEDOCUMENTS**| Opis |
-   | **USERS_PERMISSIONS**| Opis |
+   | **USERS_FAVORITEDOCUMENTS**  | Użytkownik - dokumenty ulubione lub obserwowany |
+   | **USERS_PERMISSIONS**	  | Użytkownik - uprawnienia do firm |
 
   > Opis kolumn:
 
@@ -1046,16 +1046,6 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**dst_objtype**       |      int        |                    |
    |**ptype**             |      int        |                    |
 
-### Tablica **PROCESS_ACTIONS** 
-
-   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
-   | -------              | ----            | -----              | ------| 
-   |**dst_objid**         |      int        |                    |
-   |**intid**             |      int        |                    | 
-   |**insintid**          |      int        |                    | 
-   |**insintid2**         |      int        |                    | 
-   |**dst_objtype**       |      int        |                    |
-   |**ptype**             |      int        |                    
 
 ### Tablica **PROCESS_CNDFUNCTS** 
 
@@ -1198,9 +1188,26 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | Kolumna      	 | Typ danych     |    Odwołanie       | Opis |
    | -------      	 | ----           | -----              | ------| 
    |**users_id**  	 |int             |USERS **id**        | użytkownik            
-   |**eventtype** 	 | 	int        |                    |rodzaj powiadomienia wartości: **0** - wiadomość wewnętrzna, **1** - Prośba o autoryzację , **2** - Autoryzacja dokumentu, **3** - Odrzucenie dokumentu, **4** - Prośba o komentarz, **5** - Skomentowano, **6** - Zmiana na dokumencie obserwowanym, **7** - Zatwierdzenie finalne dokumentu
-    |**restrictiontype** |int             |                    |typ integracji  wartości: **0** - powiadomienie eMail, **1** - wiadomości wewnętrzne 
-   
+   |**eventtype** 	 | 	int       |                    |rodzaj powiadomienia wartości: **0** - wiadomość wewnętrzna, **1** - Prośba o autoryzację , **2** - Autoryzacja dokumentu, **3** - Odrzucenie dokumentu, **4** - Prośba o komentarz, **5** - Skomentowano, **6** - Zmiana na dokumencie obserwowanym, **7** - Zatwierdzenie finalne dokumentu
+   |**restrictiontype**  |int             |                    |typ integracji  wartości: **0** - powiadomienie eMail, **1** - wiadomości wewnętrzne 
+
+### Tablica **USERS_EVENTRESTRICTIONS** 
+
+   | Kolumna      	 | Typ danych     |    Odwołanie       | Opis |
+   | -------      	 | ----           | -----              | ------| 
+   |**users_id**  	 |int             |USERS **id**        | użytkownik  
+   |**documents_id**     | int            | DOCUMENTS **id**   |powiązanie z dokumentem
+   |**type** 	 	 | 	int       |                    |typ wartości: **0** - ulubiony, **1** - obserwowany
+
+### Tablica **USERS_PERMISSIONS** 
+
+   | Kolumna      	 | Typ danych     |    Odwołanie       | Opis |
+   | -------      	 | ----           | -----              | ------| 
+   |**users_id**  	 |int             |USERS **id**        | użytkownik  
+   |**permtype**  	 |varchar(1)      |                    |typ uprawnienia wartości: **C** - firma
+   |**permvalue**  	 |int             |COMPANIES **id**    | w zależności od typu powiązana tabela obiektu 
+
+
 # Funkcje i procedury
 Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomocą procedur i funkcji SQL. 
 
