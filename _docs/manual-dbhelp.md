@@ -869,7 +869,7 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**Pesel**		  | varchar(32)     |                    | Pesel 
    |**Token**  		  | varchar(128)    |                    | Token
    |**SessionToken**   	  | varchar(128)    |                    | Token dla ustanowionej sesji
-   |**LastCheck**         | 	datetime    |                    |data i godzina ostatniego odświeżadani danych z KSEF
+   |**LastCheck**         | 	datetime    |                    |data i godzina ostatniego pobrania danych z KSEF
    
 
 
