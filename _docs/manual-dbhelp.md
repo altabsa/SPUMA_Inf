@@ -78,22 +78,22 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | **OCRRESULTPAGES**		  | OCR - wyniki rozpoznawania dla strony dokumentu|
    | **OCRTEXTREGIONS**		  | OCR - rozpoznane regiony dla tekstu |
    | **ORGANIZATIONS**		  | Organizacje - definicja |
-   | **PAGECOMMENTS**| Opis |
-   | **PERMISSIONS**| Opis |
-   | **PROCESS_ACTIONS**| Opis |
-   | **PROCESS_CNDFUNCTS**| Opis |
-   | **PROCESS_VARCOLUMNS**| Opis |
-   | **PROCESS_VARIABLES**| Opis |
-   | **RECONSCHEMA**| Opis |
-   | **RECONSCHEMAREQUESTADDCLASS**| Opis |
-   | **RECONSCHEMAREQUESTPAGES**| Opis |
-   | **RECONSCHEMAREQUESTS**| Opis |
-   | **RESOURCES**| Opis |
-   | **SIGNATURES**| Opis |
-   | **STATES**| Opis |
-   | **USERGROUPS**| Opis |
-   | **USERGROUPUSERS**| Opis |
-   | **USERS**| Opis |
+   | **PAGECOMMENTS**		  | Komentarze przypisane do strony |
+   | **PERMISSIONS**		  | Uprawnienia do dokumentów |
+   | **PROCESS_ACTIONS**	  | Proces UI - akcje |
+   | **PROCESS_CNDFUNCTS**	  | Proces UI - warunki |
+   | **PROCESS_VARCOLUMNS**	  | Proces UI - zmienne kolumnowe |
+   | **PROCESS_VARIABLES**	  | Proces UI - zmienne |
+   | **RECONSCHEMA**		  | Nie używane poprzednia generacja SPUMY |
+   | **RECONSCHEMAREQUESTADDCLASS**| Nie używane poprzednia generacja SPUMY|
+   | **RECONSCHEMAREQUESTPAGES**  | Nie używane poprzednia generacja SPUMY|
+   | **RECONSCHEMAREQUESTS**      | Nie używane poprzednia generacja SPUMY |
+   | **RESOURCES**		  | Źródła - zaimportowane pliki do SPUMY|
+   | **SIGNATURES**		  | Sygnatury nadane użytkownikowi dla dokumentu na określony czas |
+   | **STATES**			  | Wewnętrzna baza klientów SPUM'a - definicje  |
+   | **USERGROUPS**		  | Grupy użytkowników - definicja|
+   | **USERGROUPUSERS**		  | Grupy użytkowników - przypisanie osób |
+   | **USERS**			  | Użytkownicy - definicja|
    | **USERS_EVENTRESTRICTIONS**| Opis |
    | **USERS_FAVORITEDOCUMENTS**| Opis |
    | **USERS_PERMISSIONS**| Opis |
@@ -963,7 +963,7 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
 
    | Kolumna              | Typ danych      |    Odwołanie       | Opis |
    | -------              | ----            | -----              | ------| 
-   |**documents_id**      | int           | DOCUMENTS **id**       |powiązanie z dokumentem jako dokument główny
+   |**documents_id**      | int             | DOCUMENTS **id**   |powiązanie z dokumentem jako dokument główny
    |**order**        	  | 	int 	    |                    | kolejnośc komunikatu
    |**isread**	          | bit             |                    | czy komuikat została odczytany wartości: **0** - nie, **1** - tak
    |**message**        	  |  nvarchar(255)  |                    | treśc komunikatu błędu
@@ -1002,7 +1002,185 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**UpdatedAt**         | 	datetime    |                    | data aktualizacji wpisu
    |**globalid**          | 	varchar(36) |                    | unikalny identyfikator
    
-  
+### Tablica **PAGECOMMENTS** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**id**        	  | 	int 	    |                    | numer kolejny wpisu
+   |**documentpages_id**| 	int 	    |DOCUMENTPAGES **id**| odwołanie do strony dla dokumentu
+   |**commnum**        	  | 	int 	    |                    | numer kolejny komentarza
+   |**users_id**          | int             | USERS **id**       |użytkownik tworzący komentarz
+   |**posx**        	  | 	int 	    |                    | pozycja komentarza w osi x
+   |**posy**        	  | 	int 	    |                    | pozycja komentarza w osi y
+   |**width**        	  | 	int 	    |                    | szerokość komentarza
+   |**height**        	  | 	int 	    |                    | wysokość komentarza
+   |**marktodel**  	  | bit             |                    |
+
+
+### Tablica **PERMISSIONS** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**id**        	  | 	int 	    |                    | numer kolejny wpisu
+   |**dst_objtype**       |      int        |                    |
+   |**dst_objid**         |      int        |                    | 
+   |**proptype**          |      int        |                    | 
+   |**permtype**          |      int        |                    | 
+   |**objtype**       	  | 	int 	    |                    | 
+   |**objid**        	  | 	int 	    |                    | 
+   |**marktodel**  	  | bit             |                    |
+   |**classattribs_id**   | 	int         | ATTRIBDICTS **id** | uprawnienie do atrybutu
+   |**marktodel**  	  | int             |                    |
+   |**docstate** 	  | int             |                    |status dokumentu wartości: **0** - katalog wczytane, **1** - katalog rozpoznawane, **2** - katalog do sprawdzenia, **3** - katalog repozytorium
+   |**authschemas_id**    | 	int          |AUTHSCHEMAS **id**  | powiązany schemat autoryzacji
+   
+### Tablica **PROCESS_ACTIONS** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**dst_objid**         |      int        |                    |
+   |**intid**             |      int        |                    | 
+   |**insintid**          |      int        |                    | 
+   |**insintid2**         |      int        |                    | 
+   |**dst_objtype**       |      int        |                    |
+   |**ptype**             |      int        |                    |
+
+### Tablica **PROCESS_ACTIONS** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**dst_objid**         |      int        |                    |
+   |**intid**             |      int        |                    | 
+   |**insintid**          |      int        |                    | 
+   |**insintid2**         |      int        |                    | 
+   |**dst_objtype**       |      int        |                    |
+   |**ptype**             |      int        |                    
+
+### Tablica **PROCESS_CNDFUNCTS** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**dst_objid**         |      int        |                    |
+   |**actionsintid**      |      int        |                    |
+   |**intid**             |      int        |                    | 
+   |**type**              |      int        |                    | 
+   |**lvariable_id**      |      int        |                    | 
+   |**cndtype**           |      int        |                    | 
+   |**rvariable_id**      |      int        |                    |
+   |**rconst**            | nvarchar(1024)  |                    |
+   |**grptype**           |      int        |                    |
+   |**grpintid**          |      int        |                    |
+   |**dst_objtype**       |      int        |                    |
+   |**lcolumn**           |nvarchar(100)    |                    |
+
+### Tablica **PROCESS_VARCOLUMNS** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**dst_objid**         |      int        |                    |
+   |**dst_objtype**       |      int        |                    |
+   |**intid**             |      int        |                    | 
+   |**name**              | nvarchar(100)   |                    |
+   |**type**              |      int        |                    | 
+   
+### Tablica **PROCESS_VARIABLES** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**dst_objid**         |      int        |                    |
+   |**intid**             |      int        |                    | 
+   |**name**              | nvarchar(100)   |                    |
+   |**description**       |      ntext      |                    |
+   |**type**              |      int        |                    | 
+   |**evalcode**          | nvarchar(1024)  |                    |
+   |**dst_objtype**       |      int        |                    |
+
+### Tablica **SIGNATURES** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**id**        	  |  varchar(32)   |                     | numer unikalny dla sygnatury
+   |**documents_id**      | int             | DOCUMENTS **id**   |powiązanie z dokumentem
+   |**users_id**          | int             | USERS **id**       |użytkownik
+   |**sighours**          |      int        |                    | okres ważności sygnatury w godzinach
+   |**CreatedAt**         | 	datetime    |                    | data utworzenia wpisu
+   
+   
+### Tablica **STATES** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**Country**        	  |  varchar(32)    | COUNTRIES **code** | powiązany kraj
+   |**Code**        	  |  varchar(32)    |                    | kod województwa
+   |**Name**        	  | nvarchar(128)   |                    | nnazwa województwa
+    
+### Tablica **USERGROUPS** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**id**        	  |  varchar(32)   |                     |numer unikalny dla grupy
+   |**name**              | nvarchar(100)   |                    |nazwa grupy
+   |**description**       |      ntext      |                    |opis grupy
+   |**CreatedAt**         | 	datetime    |                    | data utworzenia wpisu
+   |**UpdatedAt**         | 	datetime    |                    | data aktualizacji wpisu
+   |**grouprole**         |      int        |                    | rola dla grupy wartości: **0** - ogólna, **1** - twórca, **2** - administratorzy
+   |**globalid**          | 	varchar(36) |                    | unikalny identyfikator
+   
+### Tablica **USERGROUPUSERS** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**usergroups_id**     |      int        |USERGROUPS **id**   | grupa użytkownikó
+   |**users_id**          | int             | USERS **id**       |użytkownik
+   
+### Tablica **USERS** 
+
+   | Kolumna              	| Typ danych      |    Odwołanie       | Opis |
+   | -------              	| ----            | -----              | ------| 
+   |**id**			| int             |                    |numer unikalny dla użytkownika
+   |**name**			|nvarchar(100)	  |                    |nazwa użytkownika
+   |**pass_md5**		|varchar(50)	  |                    |hasło zakodowane w md5
+   |**isadmin**			| bit             |                    |dostęp do administratora spumy wartości: **0** - nie, **1** - tak
+   |**smtp_address**		| nvarchar(100)   |                    |SMPT - adres serwera
+   |**smtp_port**		| int             |                    |SMPT - port
+   |**smtp_user**		|nvarchar(255)	  |                    |SMPT - użytkownik
+   |**smtp_password**		| varchar(255)    |                    |SMPT - hasło
+   |**email_reply**		| varchar(255)    |                    |adres email użytkownika
+   |**email_template**		|ntext		  |                    |adres email szablon stopki
+   |**cmppermtype**		| int             |                    |uprawnienia do firmy wartości: **0** - Wszystkie, **1** - brak, **2** - wybrane
+   |**usrpermtype**		| int             |                    |uprawnienia użytkownika nie używane stara funkcjonalność
+   |**clspermtype**		| int             |                    |uprawnienia klasy nie używane stara funkcjonalność
+   |**CreatedAt**		| 	datetime  |                    |data utworzenia wpisu
+   |**UpdatedAt**		| 	datetime  |                    |data aktualizacji wpisu
+   |**commentcolor**		| int             |                    |kolor komentarzy
+   |**authlevel**		| int             |                    |
+   |**iscreator**		| bit             |                    |twórca wartości: **0** - nie, **1** - tak
+   |**issys**			| bit             |                    |systemowy wartości: **0** - nie, **1** - tak
+   |**username**		| varchar(255)    |                    |imię i nazwisko
+   |**recent**			| int             |                    |ilośc ostatnich dokumentów
+   |**repl**			| bit             |                    |zastępwstwo dla użytkownika wartości: **0** - nie, **1** - tak
+   |**replstart**		| 	datetime  |                    |zastępwstwo data od
+   |**replend**			| 	datetime  |                    |zastępwstwo data do
+   |**rep_users_id**		| int             | USERS **id**       |zastępwstw użytkownik pierwszy  
+   |**rep_users_id2**		| int             | USERS **id**       |zastępwstw użytkownik drugi 
+   |**islocked**		| bit             |                    |zablokowany wartości: **0** - nie, **1** - tak
+   |**visfldtp1**		| int             |                    |
+   |**visfldtp2**		| int             |                    |
+   |**visfldtp3**		| int             |                    |
+   |**visfldtp4**		| int             |                    |
+   |**organizations_id**	| int             |ORGANIZATIONS **id**| powiązanie z organizacją
+   |**dailycorrclass_id**	| int             |DAILYCORRCLASS **id**|powiązanie z klasą dziennika korespondencji
+   |**signature**		|image		  |                    |zdjęcie podpisu użytkownika
+   |**globalid**		|varchar(36)	  |                    | unikalny identyfikator
+   |**lang**			| int             |                    |język **0** - angielski, **1** - polski
+   |**imap_address**		| varchar(255)    |                    |IMAP - host
+   |**imap_port**		| int             |                    |IMAP - port
+   |**imap_user**		|nvarchar(255)	  |                    |IMAP - użytkownik
+   |**imap_password**		| varchar(255)    |                    |IMAP - hasło
+   |**imap_ssl**		| bit             |                    |IMAP - ssl wartości: **0** - nie, **1** - tak
+   |**imap_vflds**		| varchar(255)    |                    |IMAP - folder
+
+      
 # Funkcje i procedury
 Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomocą procedur i funkcji SQL. 
 
