@@ -68,10 +68,10 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | **KSEF_DOCUMENTS**		  | KSEF - lista dokumentów pobranych z API |
    | **KSEF_SESSIONS**		  | KSEF - zapisane sesje logowania do API dla danego Tokena |
    | **MAILMONITORCFG**		  | Automatyzacje - Pobieranie automatyczne wiadomości z maila dla protokołu POP3 |
-   | **MESSAGE_RECIPIENTS**	  | Opis |
-   | **MESSAGES**| Opis |
-   | **MODIFICATIONENTRY**| Opis |
-   | **MODULECONFIG**| Opis |
+   | **MESSAGE_RECIPIENTS**	  | Wiadomości - powiązani odbiorcy dla danej wiadomości |
+   | **MESSAGES**		  | Wiadomości - zapisane powiadomienia wewnętrzne oraz Email wysłane ze SPUMA |
+   | **MODIFICATIONENTRY**	  | Historia zmian na dokumencie |
+   | **MODULECONFIG**		  | Konfiguracja modułów wykorzystywanych w SPUMA |
    | **OCRFIELDS**| Opis |
    | **OCRLINES**| Opis |
    | **OCRPROCESSLOG**| Opis |
@@ -844,31 +844,31 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
 
    | Kolumna              | Typ danych      |    Odwołanie       | Opis |
    | -------              | ----            | -----              | ------| 
-   |**Sess_Int_ID**       | 	int           |KSEF_SESSIONS **IntID**|Powiązanie z instancją sesji połączenia z API KSEF ustanowioną dla danego tokena
-   |**InvoiceReferenceNumber**| varchar(128)  |                    | Numer dokumentu
-   |**KsefReferenceNumber**   | varchar(128)  |                    | Numer referencyjny dokumentu w KSEF
-   |**InvoiceHash**       | varchar(128)      |                    | Hash dokumentu
-   |**InvoicingDate**      | varchar(32)      |                    | Data dokumentu
-   |**AcquisitionTimestamp**| varchar(32)     |                    | Data dodania dokumentu do KSEF
+   |**Sess_Int_ID**       | 	int           |KSEF_SESSIONS **IntID**|powiązanie z instancją sesji połączenia z API KSEF ustanowioną dla danego tokena
+   |**InvoiceReferenceNumber**| varchar(128)  |                    | numer dokumentu
+   |**KsefReferenceNumber**   | varchar(128)  |                    | numer referencyjny dokumentu w KSEF
+   |**InvoiceHash**       | varchar(128)      |                    | hash dokumentu
+   |**InvoicingDate**      | varchar(32)      |                    | data dokumentu
+   |**AcquisitionTimestamp**| varchar(32)     |                    | data dodania dokumentu do KSEF
    |**SubjectBy_NIP**  	  | varchar(32)       |                    | NIP dostawcy (wystawcy dokumentu)
-   |**SubjectBy_Name** 	  | varchar(128)      |                    | Nazwa Dostawcy
+   |**SubjectBy_Name** 	  | varchar(128)      |                    | nazwa Dostawcy
    |**SubjectTo_NIP** 	  | varchar(32)       |                    | NIP odbiorcy dokumentu
-   |**SubjectTo_Name** 	  |  varchar(128)     |                    | Nazwa odbiorcy
-   |**Net** 	  	  | numeric(19,2)     |                    | Kwota netto całego dokumentu
-   |**Vat** 	  	  | numeric(19,2)     |                    | Kwota VAT całego dokumentu
-   |**Gross** 	  	  | numeric(19,2)     |                    | Kwota brutto całego dokumentu
-   |**Currency** 	  |  varchar(32)      |                    | Waluta
-   |**XmlDta** 	  	  |  xml   	      |                    | Pobrany pełny XML ze strukturą dokumentu z KSEF
+   |**SubjectTo_Name** 	  |  varchar(128)     |                    | nazwa odbiorcy
+   |**Net** 	  	  | numeric(19,2)     |                    | kwota netto całego dokumentu
+   |**Vat** 	  	  | numeric(19,2)     |                    | kwota VAT całego dokumentu
+   |**Gross** 	  	  | numeric(19,2)     |                    | kwota brutto całego dokumentu
+   |**Currency** 	  |  varchar(32)      |                    | waluta
+   |**XmlDta** 	  	  |  xml   	      |                    | pobrany pełny XML ze strukturą dokumentu z KSEF
 
 ### Tablica **KSEF_SESSIONS** 
 
    | Kolumna              | Typ danych      |    Odwołanie       | Opis |
    | -------              | ----            | -----              | ------| 
-   |**IntID**       	  | 	int         |                    |Numer przyznanej instancji sesji dla Tonekna
+   |**IntID**       	  | 	int         |                    |numer przyznanej instancji sesji dla Tonekna
    |**NIP**		  | varchar(32)     |                    | NIP Firmy
-   |**Pesel**		  | varchar(32)     |                    | Pesel 
-   |**Token**  		  | varchar(128)    |                    | Token
-   |**SessionToken**   	  | varchar(128)    |                    | Token dla ustanowionej sesji
+   |**Pesel**		  | varchar(32)     |                    | pesel 
+   |**Token**  		  | varchar(128)    |                    | token
+   |**SessionToken**   	  | varchar(128)    |                    | token dla ustanowionej sesji
    |**LastCheck**         | 	datetime    |                    |data i godzina ostatniego pobrania danych z KSEF
    
 ### Tablica **MAILMONITORCFG** 
@@ -878,8 +878,8 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**profile**		  | varchar(100)    |CONFIGURATION  **profile** | nazwa profilu konfiguracji
    |**SPUMAuserid**       | int             | USERS **id**       |użytkownik przypisany do automatyzacji
    |**SPUMAcompanyid** 	  | int             | COMPANIES **id**   |powiązanie z firmą
-   |**SPUMAInputPath**	  | varchar(1024)   |                    | Monitorowana ścieżka wejścia
-   |**MonitoredPath**	  | varchar(1024)   |                    | Monitorowana ścieżka 
+   |**SPUMAInputPath**	  | varchar(1024)   |                    | monitorowana ścieżka wejścia
+   |**MonitoredPath**	  | varchar(1024)   |                    | monitorowana ścieżka 
    |**ArchivePath**	  | varchar(1024)   |                    | Ścieżka dla plików archiwum
    |**MailHost**	  | varchar(100)    |                    | POP3 Host
    |**MailUser**	  | varchar(100)    |                    | POP3 użytkownik
@@ -889,12 +889,57 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**MatchRx**	  	  | varchar(1024)   |                    | wyrażenie regularne użyte do filtrowania treści email
    |**docctype**	  | int             |                    | rodzaj dokumentu wartości: **1** - załączniki jako strony, **2** - załączniki jako dokumenty
    |**classes_id**        | int             | CLASSESS **id**    |klasa załącznika dla docelowego dokumentu powstałego przy tej automatyzacji
-   |**allowempty**	  | bit             |                    | Dodaj wiadomości bez załączników wartości: **0** - nie, **1** - tak
+   |**allowempty**	  | bit             |                    | dodaj wiadomości bez załączników wartości: **0** - nie, **1** - tak
    
+### Tablica **MESSAGE_RECIPIENTS** 
 
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**messages_id**       | 	int         | MESSAGES **id**    |numer powiązanej wiadomości
+   |**users_id**          | int             | USERS **id**       |użytkownik przypisany do wiadomości
+   |**email_adr**         | 	nvarchar(100) |                  | adres Email odbiorcy wiadomości
+   |**isread**	          | bit             |                    | Czy wiadomość została odczytana wartości: **0** - nie, **1** - tak
    
+### Tablica **MESSAGES** 
 
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**id**                | 	int         |                    |numer unikalny wiadomości
+   |**users_id**          | int             | USERS **id**       |użytkownik tworzący wiadomośc
+   |**dst_companies_id**  | int             | COMPANIES **id**   |powiązanie z firmą
+   |**dst_documents_id**  | int             | DOCUMENTS **id**   |powiązanie z dokumentem
+   |**subject**           | nvarchar(1024)  |                    | temat wiadomości
+   |**content**           | ntext  	    |                    | zawartość wiadomości
+   |**isread**	          | bit             |                    | Czy wiadomość została odczytana wartości: **0** - nie, **1** - tak
+   |**CreatedAt**         | 	datetime    |                    | data utworzenia wiadomości
+   |**UpdatedAt**         | 	datetime    |                    | data aktualizacji wiadomości
+   |**issent**	          | bit             |                    | Status wysłanej wiadomości wartości: **0** - oczekuje w kolejce, **1** - wysłano poprawnie , **2** - błąd wysyłki
+   |**att_document_id**   | int             | DOCUMENTS **id**   |powiązanie z dokumentem załącznika
+   |**eventtype**         | 	int         |                    |rodzaj powiadomienia wartości: **0** - wiadomość wewnętrzna, **1** - Prośba o autoryzację , **2** - Autoryzacja dokumentu, **3** - Odrzucenie dokumentu, **4** - Prośba o komentarz, **5** - Skomentowano, **6** - Zmiana na dokumencie obserwowanym, **7** - Zatwierdzenie finalne dokumentu
+   |**dst_documents_authschemas_id**| 	int 	|DOCUMENTS_AUTHSCHEMA **id**  | powiazanie ze schematem autoryzacji powiązanym z docelowym dokumentem
 
+### Tablica **MODIFICATIONENTRY** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**documentmodifications_id**| int    | DOCUMENTS_MODIFICATION **id**   |powiązanie z modyfikacją zapisaną dla dokumentu
+   |**objtype**       	  | 	int 	 |                     | Typ obiektu **0** - nagłówek dokumentu, **1** - strony dokumentu, **2** - zmienne systemowe , **5** - linie dokumentu
+   |**objid**        	  | 	int 	 |DOCUMENTS **id**     | odwołanie do powiązanego dokumentu,
+   |**fieldcode**         | nvarchar(32) |                     | nazwa pola
+   |**oldvalue**          |nvarchar(1024)|                     | wartość w polu była
+   |**newvalue**          |nvarchar(1024)|                     | zmieniono na wartość w polu
+   
+### Tablica **MODULECONFIG** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**module**		  |nvarchar(100) |                     |nazwa modułu 
+   |**property**  	  |nvarchar(100) |                     |parametr dla modułu
+   |**type**  	 	  | 	int 	 |                     |typ danych parametru dla modułu wartości: **0** - liczba całkowita, **1** - TAK/NIE, **2** - tekst, **3** - ścieżka do pliku, **4** - hasło
+   |**value**             |nvarchar(1024)|                     | wartość dla parametru
+   |**updateat**          | 	datetime |                     | data aktualizacji wpisu
+   
+  
   
 # Funkcje i procedury
 Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomocą procedur i funkcji SQL. 
