@@ -68,7 +68,7 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | **KSEF_DOCUMENTS**		  | KSEF - lista dokumentów pobranych z API |
    | **KSEF_SESSIONS**		  | KSEF - zapisane sesje logowania do API dla danego Tokena |
    | **MAILMONITORCFG**		  | Automatyzacje - Pobieranie automatyczne wiadomości z maila dla protokołu POP3 |
-   | **MESSAGE_RECIPIENTS**| Opis |
+   | **MESSAGE_RECIPIENTS**	  | Opis |
    | **MESSAGES**| Opis |
    | **MODIFICATIONENTRY**| Opis |
    | **MODULECONFIG**| Opis |
@@ -871,9 +871,31 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**SessionToken**   	  | varchar(128)    |                    | Token dla ustanowionej sesji
    |**LastCheck**         | 	datetime    |                    |data i godzina ostatniego pobrania danych z KSEF
    
+### Tablica **MAILMONITORCFG** 
 
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**profile**		  | varchar(100)    |CONFIGURATION  **profile** | nazwa profilu konfiguracji
+   |**SPUMAuserid**       | int             | USERS **id**       |użytkownik przypisany do automatyzacji
+   |**SPUMAcompanyid** 	  | int             | COMPANIES **id**   |powiązanie z firmą
+   |**SPUMAInputPath**	  | varchar(1024)   |                    | Monitorowana ścieżka wejścia
+   |**MonitoredPath**	  | varchar(1024)   |                    | Monitorowana ścieżka 
+   |**ArchivePath**	  | varchar(1024)   |                    | Ścieżka dla plików archiwum
+   |**MailHost**	  | varchar(100)    |                    | POP3 Host
+   |**MailUser**	  | varchar(100)    |                    | POP3 użytkownik
+   |**MailPass**	  | varchar(100)    |                    | POP3 hasło
+   |**MailPort**	  | int             |                    | POP3 port
+   |**UseSSL**	  	  | bit             |                    | POP3 czy SSL wartości: **0** - nie, **1** - tak
+   |**MatchRx**	  	  | varchar(1024)   |                    | wyrażenie regularne użyte do filtrowania treści email
+   |**docctype**	  | int             |                    | rodzaj dokumentu wartości: **1** - załączniki jako strony, **2** - załączniki jako dokumenty
+   |**classes_id**        | int             | CLASSESS **id**    |klasa załącznika dla docelowego dokumentu powstałego przy tej automatyzacji
+   |**allowempty**	  | bit             |                    | Dodaj wiadomości bez załączników wartości: **0** - nie, **1** - tak
+   
 
    
+
+
+  
 # Funkcje i procedury
 Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomocą procedur i funkcji SQL. 
 
