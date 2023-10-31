@@ -65,7 +65,9 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | **DOCUMENTUSAGE**		  | Dokument - historia przeglądania danego dokumentu|
    | **EXTERNALREFS**		  | Powiązanie dokumentuy SPUMA z dokumentem z zewnętrznych integracji np: IMAP, POP3, KSEF |
    | **INTERACTIVEDICTS**	  | Słowniki interaktywne |
-   | **MAILMONITORCFG**| Opis |
+   | **KSEF_DOCUMENTS**		  | KSEF - lista dokumentów pobranych z API |
+   | **KSEF_SESSIONS**		  | KSEF - zapisane sesje logowania do API dla danego Tokena |
+   | **MAILMONITORCFG**		  | Automatyzacje - Pobieranie automatyczne wiadomości z maila dla protokołu POP3 |
    | **MESSAGE_RECIPIENTS**| Opis |
    | **MESSAGES**| Opis |
    | **MODIFICATIONENTRY**| Opis |
@@ -353,6 +355,7 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**organizations_id**| 	int            |ORGANIZATIONS **id**| powiązana organizacją
    |**bpdbtype**        | 	int            |                    |rodzaj bazy PH: **0** - baza wewnętrzna SPUMA, **1** - zewnętrzny SOAP
    |**globalid**        | 	varchar(36)    |                    |unikalny kod firmy
+   |**taxid**           | 	varchar(32)    |                    |NIP firmy dla KSEF
 
 ### Tablica **COMPANIESDICTS** 
 
@@ -393,6 +396,8 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**jsfunct**         | 	ntext         |                    |funkcje JS
    |**checkrefdelay**   | 	int           |                    |Automatyzacja interwał odczytu danych ze skrzynki pocztowej (POP3)
    |**remoteaddress**   | 	nvarchar(max) |                    |Adres zdalny do SPUMY
+   |**ksef_apiurl**     | 	nvarchar(128) |                    |KSEF adres do API
+   |**ksef_pubkeyb64**  | 	nvarchar(max) |                    |KSEF klucz publiczny
 
 ### Tablica **COUNTRIES** 
 
@@ -834,6 +839,40 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    |**label**            | 	nvarchar(200) |                    | etykieta
    |**visible**          | 	bit	      |                    | widoczny  **0** - nie,  **1** - tak
    |**globalid**         | 	nvarchar(200) |                    | nadany numer unikalny
+
+### Tablica **KSEF_DOCUMENTS** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**Sess_Int_ID**       | 	int           |KSEF_SESSIONS **IntID**|Powiązanie z instancją sesji połączenia z API KSEF ustanowioną dla danego tokena
+   |**InvoiceReferenceNumber**| varchar(128)  |                    | Numer dokumentu
+   |**KsefReferenceNumber**   | varchar(128)  |                    | Numer referencyjny dokumentu w KSEF
+   |**InvoiceHash**       | varchar(128)      |                    | Hash dokumentu
+   |**InvoicingDate**      | varchar(32)      |                    | Data dokumentu
+   |**AcquisitionTimestamp**| varchar(32)     |                    | Data dodania dokumentu do KSEF
+   |**SubjectBy_NIP**  	  | varchar(32)       |                    | NIP dostawcy (wystawcy dokumentu)
+   |**SubjectBy_Name** 	  | varchar(128)      |                    | Nazwa Dostawcy
+   |**SubjectTo_NIP** 	  | varchar(32)       |                    | NIP odbiorcy dokumentu
+   |**SubjectTo_Name** 	  |  varchar(128)     |                    | Nazwa odbiorcy
+   |**Net** 	  	  | numeric(19,2)     |                    | Kwota netto całego dokumentu
+   |**Vat** 	  	  | numeric(19,2)     |                    | Kwota VAT całego dokumentu
+   |**Gross** 	  	  | numeric(19,2)     |                    | Kwota brutto całego dokumentu
+   |**Currency** 	  |  varchar(32)      |                    | Waluta
+   |**XmlDta** 	  	  |  xml   	      |                    | Pobrany pełny XML ze strukturą dokumentu z KSEF
+
+### Tablica **KSEF_SESSIONS** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**IntID**       	  | 	int         |                    |Numer przyznanej instancji sesji dla Tonekna
+   |**NIP**		  | varchar(32)     |                    | NIP Firmy
+   |**Pesel**		  | varchar(32)     |                    | Pesel 
+   |**Token**  		  | varchar(128)    |                    | Token
+   |**SessionToken**   	  | varchar(128)    |                    | Token dla ustanowionej sesji
+   |**LastCheck**         | 	datetime    |                    |data i godzina ostatniego odświeżadani danych z KSEF
+   
+
+
    
 # Funkcje i procedury
 Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomocą procedur i funkcji SQL. 
