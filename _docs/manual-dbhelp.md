@@ -72,11 +72,11 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | **MESSAGES**		  | Wiadomości - zapisane powiadomienia wewnętrzne oraz Email wysłane ze SPUMA |
    | **MODIFICATIONENTRY**	  | Historia zmian na dokumencie |
    | **MODULECONFIG**		  | Konfiguracja modułów wykorzystywanych w SPUMA |
-   | **OCRFIELDS**| Opis |
-   | **OCRLINES**| Opis |
-   | **OCRPROCESSLOG**| Opis |
-   | **OCRRESULTPAGES**| Opis |
-   | **OCRTEXTREGIONS**| Opis |
+   | **OCRFIELDS**		  | OCR - rozpoznane pola nagłówka |
+   | **OCRLINES**		  | OCR - rozpoznane pola linii |
+   | **OCRPROCESSLOG**		  | OCR - log błędów |
+   | **OCRRESULTPAGES**		  | OCR - wyniki rozpoznawania dla strony dokumentu|
+   | **OCRTEXTREGIONS**		  | OCR - rozpoznane regiony dla tekstu |
    | **ORGANIZATIONS**| Opis |
    | **PAGECOMMENTS**| Opis |
    | **PERMISSIONS**| Opis |
@@ -924,7 +924,7 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | -------              | ----            | -----              | ------| 
    |**documentmodifications_id**| int    | DOCUMENTS_MODIFICATION **id**   |powiązanie z modyfikacją zapisaną dla dokumentu
    |**objtype**       	  | 	int 	 |                     | Typ obiektu **0** - nagłówek dokumentu, **1** - strony dokumentu, **2** - zmienne systemowe , **5** - linie dokumentu
-   |**objid**        	  | 	int 	 |DOCUMENTS **id**     | odwołanie do powiązanego dokumentu,
+   |**objid**        	  | 	int 	 |DOCUMENTS **id**     | odwołanie do powiązanego dokumentu
    |**fieldcode**         | nvarchar(32) |                     | nazwa pola
    |**oldvalue**          |nvarchar(1024)|                     | wartość w polu była
    |**newvalue**          |nvarchar(1024)|                     | zmieniono na wartość w polu
@@ -935,11 +935,53 @@ excerpt: "Dokumetacja SPUMA - podręcznik bazy danych"
    | -------              | ----            | -----              | ------| 
    |**module**		  |nvarchar(100) |                     |nazwa modułu 
    |**property**  	  |nvarchar(100) |                     |parametr dla modułu
-   |**type**  	 	  | 	int 	 |                     |typ danych parametru dla modułu wartości: **0** - liczba całkowita, **1** - TAK/NIE, **2** - tekst, **3** - ścieżka do pliku, **4** - hasło
+   |**type**  	 	  | 	int 	 |                     |typ danych parametru dla modułu wartości: **0** - liczba całkowita, **1** - TAK/NIE, **2** - tekst, **3** - ścieżka do pliku lub katalogu, **4** - hasło
    |**value**             |nvarchar(1024)|                     | wartość dla parametru
    |**updateat**          | 	datetime |                     | data aktualizacji wpisu
    
-  
+### Tablica **OCRFIELDS** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**id**        	     | 	int 	    |                    | numer kolejny wpisu
+   |**documentocrresults_id**| 	int 	    |DOCUMENTOCRRESULTS **id**     | odwołanie do przypisanego schematu rozpoznawania dla dokumentu
+   |**name**                 |nvarchar(100)|                     | nazwa pola
+   |**type**                 | 	int 	    |                    | typ pola wartości: **0** - pole tekstowe, **1** - liczba całkowita, **2** - data, **3** - liczba zmienno przecinkowa, **4** - nazwa bloku z liniami dokumentu
+   |**value**                |nvarchar(max) |                     | wartość odczytana przez OCR
+   |**ocrfields_id**  	     | 	int 	    |DOCUMENTOCRRESULTS **id**| identyfikator pola OCR nadrzędnego dla bloku z liniami
+   |**marktodel**  	     | bit          |                     |
+
+### Tablica **OCRLINES** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**ocrfields_id**	  | 	int 	    |OCRFIELDS **id**    | powiązanie z odczytaneym polem OCR
+   |**linenum**        	  | 	int 	    |                    | numer linii
+   |**linenum**        	  |  nvarchar(max)  |                    | odczytana wartość przez OCR
+
+### Tablica **OCRPROCESSLOG** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**documents_id**      | int           | DOCUMENTS **id**       |powiązanie z dokumentem jako dokument główny
+   |**order**        	  | 	int 	    |                    | kolejnośc komunikatu
+   |**isread**	          | bit             |                    | czy komuikat została odczytany wartości: **0** - nie, **1** - tak
+   |**message**        	  |  nvarchar(255)  |                    | treśc komunikatu błędu
+   |**CreatedAt**         | 	datetime    |                    | data utworzenia wpisu
+   
+### Tablica **OCRRESULTPAGES** 
+
+   | Kolumna              | Typ danych      |    Odwołanie       | Opis |
+   | -------              | ----            | -----              | ------| 
+   |**id**        	  | 	int 	    |                    | numer kolejny wpisu
+   |**documentocrresults_id**| 	int 	    |DOCUMENTOCRRESULTS **id**     | odwołanie do przypisanego schematu rozpoznawania dla dokumentu
+   |**pagenum**        	  | 	int 	    |                    | numer strony
+   |**type**              | 	int 	    |                    | typ pola wartości: **1** - strona z liniami , **2** - standardowa strona , **3** - strona załącznika do faktury
+   |**marktodel**  	  | bit             |                    |
+   |**width**        	  | 	int 	    |                    | szerokość strony
+   |**height**        	  | 	int 	    |                    | wysokość strony
+   
+
   
 # Funkcje i procedury
 Część zaawansowanych funkcjonalności systemu SPUMA konfiguruje się za pomocą procedur i funkcji SQL. 
