@@ -36,6 +36,10 @@ Konfiguracja ta została częściowo opisana w rozdziale dot [instalacji](../man
 - `Skala inicjalna` - Skala powiększenia z jaką domyślnie wczytuje się podgląd dokumentów. (0 - na cały ekran)
 
 - `Długość cache` - Ilość dokumentów przechowywanych w historii
+  
+- `KSeF API` - adres do API KSeF - Krajowego systemu e-Faktur
+  
+- `KSeF klucz pub.` - klucz publiczny udostępniony przez ministerstwo
 
 ### OCR
 Konfiguracja mechanizmu OCR
@@ -139,6 +143,9 @@ Konfiguracja połączenia pomiędzy klientem WWW a serwerem `SPUMA_DataService`
 - `MAXHTTPTHREADS` – ilość jednoczesnych otwartych  wątków dla klienta WWW
 - `HTTPPORT`  – Port na którym usługa obsługuje klienta WWW 
 - `HTTPUSESLL`  – Informacja czy klient WWW korzysta z SSL (konfiguracja strony na serwerze WWW)
+- `BIRSERVICEURL`  – Adres webserwisu do obsługi pobierania danych z GUS
+- `SPUMALITEHTTPPATH`  – Katalog aplikacji Spuma Lite
+
 
 ### ADMIN
 Konfiguracja ogólna funkcji zewnętrznych
@@ -150,7 +157,12 @@ Konfiguracja  połączenia z  funkcjonalnością Partnerów Handlowych w systemi
 
 > Wpisy dotyczą sytuacji gdy na [konfiguracji firmy](#firmy) mamy określony `Typ połączenia` jako `Zewnętrzny`
 
-- `SBOLICENSESERVER` –  adres licencji SAP
+- `SBOLICENSESERVER` –  adres serwera licencji SAP
+- `SLDSERVER` –  adres serwera SLD SAP
+- `SQLSERVER` –  adres serwera SQL
+- `SBOSERVER` –  adres serwera SAP
+- `SQLUSER` –  użytkownik do połączenia z bazą danych SQL
+- `SQLPASSWORD` –  hasło użytkownika do połączenia z bazą danych SQL
 - `SBODBTYPE` – wersja SQL serwera
 - `DICREDENTIALS`  – loginy dla każdej z baz SAP połączonych z firmami w SPUMA. Każdy wpis reprezentuje jedną bazę 
     ```
@@ -168,10 +180,14 @@ Konfiguracja  połączenia z  funkcjonalnością Partnerów Handlowych w systemi
 ### SAPB1Utils
 Konfiguracja zewnętrznej biblioteki DLL SAPB1Utils. Biblioteka odpowiada za import  danych do SAP Business One
 
-- `LICENSESERVER`  – adres licencji SAP 
+- `LICENSESERVER`  – adres licencji SAP
+- `SLDSERVER` –  adres serwera SLD SAP
 - `SERVERVERSION` – wersja SQL serwera 
 - `SBOUSER` –użytkownik SAP
-- `SBOPASSWORD` – hasło do SAP
+- `SBOPASSWORD` – hasło do 
+- `SBOSERVER` – adres serwera SAP
+- `DBUSER` –użytkownik do połączenia SQL
+- `DBPASSWORD` – hasło do użytkownika SQL
 - `SBOLANG` – język komunikatów biblioteki SAP DI
  > **Uwaga:** w razie problemów z połączeniem do SAP należy utworzyć plik **c:\temp\sapb1utils.log** na serwerze gdzie uruchamiana jest usługa SPUMA_DataService  w którym zapisane będą logi tego komponentu.
 ## Organizacje
@@ -190,8 +206,10 @@ Na jednej instalacji systemu SPUMA można rejestrować dokumenty  kilku firm. Do
 - `Baza`  - nazwa bazy sytemu ERP połączonego z daną firmą. Ustawienie używane w zapytaniach SQL (procesy UI, słowniki interaktywne, raporty , dzienniki). Podstawiane pod zmienna `$DBNAME`. Ważne również dla konfiguracji połączenia z systemem ERP (patrz [Konfiguracja/SBOBUSINESSPARTNERS](#sbobusinesspartner) , [Konfiguracja/SapB1Utils](#sapb1utils))
 - `Katalog domyślny` - Określenie domyślnego  katalogu w repozytorium do którego  trafiają dokumenty po wyjściu z sekretariatu. Opcja nadpisywana przez analogiczne ustawienie na klasie.
     > **Uwaga:** ustawienie `(Brak)`  oznacza, ze dokumenty trafiać będą do katalogu głównego ( z nazwą firmy)
-
-`Słowniki` - Lista słowników systemowych skojarzonych z firmą. (patrz [Słowniki/Słowniki systemowe](#s%C5%82owniki-systemowe))
+    > 
+- `NIP` - NIP firmy na potrzeby integracji KSEF
+- `Słowniki` - Lista słowników systemowych skojarzonych z firmą. (patrz [Słowniki/Słowniki systemowe](#s%C5%82owniki-systemowe))
+- `Klasy` - Lista obsługiwanych klas dla danej firmy
 
 ### Uprawnienia
 Definiowanie uprawnień na firmie (patrz [Uprawnienia](#-uprawnienia))
@@ -214,11 +232,6 @@ Definiowanie sposobu rejestracji atrybutu typu  `Własny` przechowującego infor
 
 - `Nowe hasło`,`Nowe hasło2` - Miejsce do zmiany/ założenia nowego  hasła.
 - `Kolor komentarzy` - Określenie koloru tła komentarzy widocznych na dokumentach skanowanych.
-- `SMTP address, SMTP user, SMTP port, SMTP password` - domyślne ustawienia konta email do wysyłki powiadomień. 
-- `Odpowiedź na` - Określenie adresu email z którego wysyłane są powiadomienia do innych użytkowników oraz na który  przychodzą wiadomości.
-    > **Uwaga:**  email musi być unikatowy  w ramach całej bazy 
-- `Szablon e-mail` - Fragment tekstu dołączany do maili wysyłanych w powiadomieniach. Używany w procedurze `APR_FORMATEMAIL` [patrz Procedury SQL/APR_FORMATEMAIL](../manual-dbhelp/#apr_formatemail---wygląd-maili)
-- `Informacje o zdarzeniach` - Ustawienie które wiadomości powinien użytkownik otrzymywać (kolumna `Wyślij`) i które po otrzymaniu zaznacza automatycznie  jako przeczytane (kolumna `Zaznacz jako przeczytane`)
 - `Twórca` - Użytkownik który jest twórcą może dodawać nowe dokumenty w sekretariacie
 - `Administrator` - Użytkownik może logować się do panelu administracyjnego 
 - `Systemowy` - Użytkownik techniczny, zablokowana możliwość logowania do aplikacji przez stronę WWW 
@@ -236,7 +249,24 @@ Uprawnienia ustawiane w tym miejscu różnią się od głównego mechanizmu upra
 | Wybrane  | Użytkownik ma  dostęp tylko do wybranych firm (tabela `BUSINESSPARTNERDB`)
 
 > **Uwaga:** Powyższe uprawnienia maja najwyższy priorytet. Po zmianie nalezy zrestartować usługę SPUMA_DataService
+### Podpis
+Możliwośc wczytania obrazu z podpisem dla użytkownika który może być wykorzystywany na wydrukach autoryzacji dla dokumentów
 
+### EMail
+- `SMTP address, SMTP user, SMTP port, SMTP password` - domyślne ustawienia konta email do wysyłki powiadomień. 
+- `Odpowiedź na` - Określenie adresu email z którego wysyłane są powiadomienia do innych użytkowników oraz na który  przychodzą wiadomości.
+    > **Uwaga:**  email musi być unikatowy  w ramach całej bazy 
+- `Szablon e-mail` - Fragment tekstu dołączany do maili wysyłanych w powiadomieniach. Używany w procedurze `APR_FORMATEMAIL` [patrz Procedury SQL/APR_FORMATEMAIL](../manual-dbhelp/#apr_formatemail---wygląd-maili)
+- `Informacje o zdarzeniach` - Ustawienie które wiadomości powinien użytkownik otrzymywać (kolumna `Wyślij`) i które po otrzymaniu zaznacza automatycznie  jako przeczytane (kolumna `Zaznacz jako przeczytane`)
+- `IMAP host, IMAP userID, IMAP port, IMAP password, IMAP SSL, IMAP Folder` - domyślne ustawienia konta email do pobierania danych ze skrzynki pocztowej w trybie IMAP.
+### Wymiana EDok.
+- `Obsługiwane integracje` - Lista integracji przypiętych dla użytkownika.
+	-   `Nazwa` -  nazwa integracji
+   	-   `Typ` -  Typ integracji  (KSeF)
+   	-   `Firma` -  Przypisana firma SPUMA
+   	-   `Użytkownik` - użytkownik do autoryzacji z API
+  	-   `Hasło` - hasło lub token wygenerowany po stronie API
+  	-   `Czas odpytania (m)` - czas odpytania serwera w minutach (domyślnie 60 minut)
 ## Klasy
 Klasa (używane zamiennie ze słowem Typ) jest podstawowym obiektem klasyfikującym dokumenty w firmie. Przy jej użyciu, można dla dokumentu:
  - definiować politykę uprawnień,
@@ -1527,6 +1557,14 @@ Część dotycząca linii pozwala na definiowanie uprawnień edycji dla poszczeg
     > Uwagi:
     >- `SUMAZ` - nazwa atrybutu nagłówka zawierającego sprawdzaną kwotę
 
+## <a id='procesy' href='procesy' hidden='true'></a> Serwis
+Serwis to zakładka techniczna która umożliwia:
+- Wycofanie dokumentu z procesu OCR gdy on ulegnie awarii (napraw OCR)
+- Usunięcie dokumentów z kosza (Skasowane)
+- Usunięcie dokumentu ze spumy - tu wymagana jest uwaga i zachowanie ostrożności
+  
+## <a id='procesy' href='procesy' hidden='true'></a> Import/eksport
+Mechanizm ten umożliwia eksport funkcji składowych SPUMA do pliku w formacie JSon jak ich późniejszy import. Automat sprawdza powiązania ze strukturami zależnymi i podpowiada jakie dane należy dodatkowo wyeksportować aby dane były spójne.
 
 ## <a id='uprawnienia' href='uprawnienia' hidden='true'></a> Uprawnienia
 
