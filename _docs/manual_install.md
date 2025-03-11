@@ -178,7 +178,7 @@ Poprawność instalacji należy sprawdzić przez wpisanie w przeglądarkę adres
 
 # Czynności po instalacji
 Czynności które opcjonalnie można wykonać po instalacji systemu:
-- Zainstalować OCR  [instrukcja](../docs/manual-ocrinst/)
+- Zainstalować OCR  [instrukcja](../manual-ocrinst/)
 - Zainstalować DTSSERVICE (odrębny dokument)
 - W konfiguracji podpiąć się pod OCR Altab (adres `dc.serwis-altab.pl` port `1099`) 
 
